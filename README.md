@@ -39,6 +39,11 @@ mongo
 use erkma
 ```
 
+* On cree un repertoir "data" dans la racine du projet, pour que mongodb sauvegarde ses fichier
+```bash
+mkdir data
+```
+
 * Enfin, on lance le serveur nodejs
 ```bash
 npm start
