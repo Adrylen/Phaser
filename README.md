@@ -39,7 +39,7 @@ mongo
 use erkma
 ```
 
-* On cree un repertoir "data" dans la racine du projet, pour que mongodb sauvegarde ses fichier
+* On cree un repertoir "data" dans la racine du projet, pour que mongodb sauvegarde ses fichiers
 ```bash
 mkdir data
 ```
