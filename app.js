@@ -6,8 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/erkma');
+//var mongoose = require('mongoose');
+//var monk = require('monk');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/erkma');
+//var db = monk('localhost:27017/erkma');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log("we're connected!");
+});
+
+var passport = require('passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
