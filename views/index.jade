@@ -1,9 +1,13 @@
+doctype html
 html
-  head
-    title Our Phaser Game
-    script(src='javascripts/game.js')
-    script(src='javascripts/phaser.js')
-    script(src='javascripts/main.js')
-    
-    block content
-      h1= title
+	head
+	title Our Phaser Game
+		script(src='javascripts/phaser/phaser.js')
+		script(src='javascripts/game/states/menu.js')
+		script(src='javascripts/game/states/start.js')
+		script(src='javascripts/game/states/options.js')
+		script(src='javascripts/game/states/help.js')
+		script(src='javascripts/game/game.js')
+		
+		block content
+			h1= title
