@@ -53,8 +53,12 @@ npm start
 
 # Todo List
 
-* Interfaces html:  
-Arthur
+* Arthur
+  -Mongoose
+  -Passport
+  -IBM Bluemix
+
+  [doc](http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619)
 
 * Interface Phaser:  
 Kenneth
