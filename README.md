@@ -50,3 +50,17 @@ npm start
 ```
 
 * On se rend a l'adresse:  http://localhost:3000/
+
+# Todo List
+
+* Interfaces html:  
+Arthur
+
+* Interface Phaser:  
+Kenneth
+
+* Faire les textures  
+Gaëtane
+
+* Faire du bruit / Phaser   
+Adrien
