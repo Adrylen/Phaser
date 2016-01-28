@@ -6,18 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongo = require('mongodb');
-//var mongoose = require('mongoose');
-//var monk = require('monk');
+var mongoose = require('mongoose');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/erkma');
-//var db = monk('localhost:27017/erkma');
 
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-  console.log("we're connected!");
-});
+var Schema = mongoose.Schema;
 
 var passport = require('passport');
 
@@ -29,6 +23,13 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+var userSchema = new Schema({
+  user  : {
+    pseudo   : String,
+    password  : String
+  }
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -81,5 +82,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+exports.User = mongoose.model('User', userSchema);
 module.exports = app;
