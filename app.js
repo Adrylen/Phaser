@@ -4,16 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/erkma');
 
 var db = mongoose.connection;
 var Schema = mongoose.Schema;
 
-var passport = require('passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -23,13 +23,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-var userSchema = new Schema({
-  user  : {
-    pseudo   : String,
-    password  : String
-  }
-});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -82,5 +75,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-exports.User = mongoose.model('User', userSchema);
 module.exports = app;

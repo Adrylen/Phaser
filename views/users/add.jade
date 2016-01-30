@@ -4,5 +4,5 @@ block content
     h1= title
     form#formAddUser(name="addSubmit", method="post", action="/users/addSubmit")
         input#inputUserName(type="text", placeholder="username", name="username")
-        input#inputUserEmail(type="text", placeholder="useremail", name="useremail")
+        input#inputUserEmail(type="password", placeholder="password", name="password")
         button#btnSubmit(type="submit") submit
