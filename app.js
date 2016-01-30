@@ -4,10 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/erkma');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/erkma');
+
+var db = mongoose.connection;
+var Schema = mongoose.Schema;
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -68,6 +74,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
