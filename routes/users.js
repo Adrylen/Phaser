@@ -2,14 +2,26 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-/* GET users listing. */
+            /* GET */
+
 router.get('/', function(req, res, next) {
   res.redirect('users/add');
 });
-
 router.get('/add', function(req, res, next){
-  res.render('users/add', { title : 'Rentre dans nos rang!'});
+  res.render('users/add', { title : 'Rentre dans nos rangs!'});
 })
+router.get('/login', function(req, res, next){
+  res.render('users/login', { title : 'Reviens coloniser la galaxie!'});
+})
+router.get('/all', function(req, res) {
+  // get all the users
+  User.find({}, function(err, users) {
+    if (err) throw err;
+    res.render('users/all', {users : users});
+  });
+});
+
+          /* POST */
 
 router.post('/addSubmit', function(req, res){
   var newUser = new User({
@@ -24,16 +36,5 @@ router.post('/addSubmit', function(req, res){
   res.redirect('all');
 })
 
-router.get('/login', function(req, res, next){
-
-})
-
-router.get('/all', function(req, res) {
-  // get all the users
-  User.find({}, function(err, users) {
-    if (err) throw err;
-    res.render('users/all', {users : users});
-  });
-});
 
 module.exports = router;
