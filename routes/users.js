@@ -34,8 +34,6 @@ router.get('/all', function(req, res) {
     if (err) throw err;
     res.render('users/all', {users : users});
   });
-
-
 });
 
 module.exports = router;
