@@ -40,3 +40,8 @@ h1, legend {
   text-align: center;
   color: #ffffff;
 }
+
+canvas {
+	position: relative;
+	left: -2%;
+}

@@ -32,7 +32,7 @@ menu.prototype.create = function()
 
 menu.prototype.start = function()
 {
-	game.state.start('start');
+	document.location.href="/game";
 };
 
 
