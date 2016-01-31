@@ -21,6 +21,7 @@ var Schema = mongoose.Schema;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var tmp = require('./routes/tmp');
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/tmp', tmp);
 
 
 
