@@ -28,10 +28,24 @@ router.post('/addSubmit', function(req, res){
     username: req.body.username,
     password: req.body.password
   });
-
   newUser.save(function(err) {
     if (err) throw err;
     console.log('User saved successfully!');
+  });
+  res.redirect('all');
+})
+
+router.post('/loginSubmit', function(req, res){
+  User.find({ username: req.body.username }, function(err, user) {
+    if (err) throw err;
+    console.log('%s %s', user.username, user.password);
+    //console.log(user);
+    if(req.body.username == user.username){
+      //console.log("it works");
+      res.redirect('users/all');
+    }else{
+      //console.log("it doesn't work");
+    }
   });
   res.redirect('all');
 })

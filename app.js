@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
+var morgan = require('morgan');
+var session = require('express-session');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
@@ -31,6 +35,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
