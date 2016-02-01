@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
 
             /* GET */
 
@@ -20,10 +22,15 @@ router.get('/all', function(req, res) {
     res.render('users/all', {users : users});
   });
 });
+router.get('/logout',
+  function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
           /* POST */
 
-router.post('/addSubmit', function(req, res){
+router.post('/add', function(req, res){
   var newUser = new User({
     username: req.body.username,
     password: req.body.password
@@ -35,20 +42,12 @@ router.post('/addSubmit', function(req, res){
   res.redirect('all');
 })
 
-router.post('/loginSubmit', function(req, res){
-  User.find({ username: req.body.username }, function(err, user) {
-    if (err) throw err;
-    console.log('%s %s', user.username, user.password);
-    //console.log(user);
-    if(req.body.username == user.username){
-      //console.log("it works");
-      res.redirect('users/all');
-    }else{
-      //console.log("it doesn't work");
-    }
+router.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
   });
-  res.redirect('all');
-})
+
 
 
 module.exports = router;
