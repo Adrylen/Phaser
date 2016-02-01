@@ -41,23 +41,26 @@ app.use(function(req,res,next){
 });
 
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/tmp', tmp);
-
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
 // (`username` and `password`) submitted by the user.  The function must verify
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
+var User = require('./models/user');
+
 passport.use(new Strategy(
   function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
+    console.log(typeof User);
+    /*User.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
       if (user.password != password) { return cb(null, false); }
       return cb(null, user);
+    });*/
+    User.find({}, function(err, users) {
+      if (err) throw err;
+      console.log('bazzinga');
     });
   }));
 
@@ -92,6 +95,10 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 // session.
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', routes);
+app.use('/users', users);
+app.use('/tmp', tmp);
 
 
 // catch 404 and forward to error handler
