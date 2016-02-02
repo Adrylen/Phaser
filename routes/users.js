@@ -26,7 +26,12 @@ router.get('/logout',
   function(req, res){
     req.logout();
     res.redirect('/');
-  });
+});
+router.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.redirect('all');
+  })
 
           /* POST */
 
