@@ -45,7 +45,7 @@ router.post('/add', function(req, res){
 router.post('/login',
   passport.authenticate('local', { failureRedirect: 'login' }),
   function(req, res) {
-    res.redirect('/all');
+    res.redirect('all');
   });
 
 
