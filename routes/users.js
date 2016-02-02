@@ -17,7 +17,9 @@ router.get('/login', function(req, res, next){
 })
 router.get('/all', function(req, res) {
   // get all the users
-  User.find({ username : 'Arthur'}, function(err, users) {
+  User.find({
+    
+  }, function(err, users) {
     if (err) throw err;
     res.render('users/all', {users : users});
   });

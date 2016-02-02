@@ -9,6 +9,7 @@ var mongo = require('mongodb');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt');
 
 mongoose.connect('mongodb://localhost/erkma');
 
