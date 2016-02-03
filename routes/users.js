@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt');
 
             /* GET */
 
@@ -18,7 +19,7 @@ router.get('/login', function(req, res, next){
 router.get('/all', function(req, res) {
   // get all the users
   User.find({
-    
+
   }, function(err, users) {
     if (err) throw err;
     res.render('users/all', {users : users});
@@ -38,13 +39,14 @@ router.get('/profile',
           /* POST */
 
 router.post('/add', function(req, res){
-  var newUser = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
-  newUser.save(function(err) {
-    if (err) throw err;
-    console.log('User saved successfully!');
+  bcrypt.hash(req.body.password, 8, function(err, hash) {
+    var newUser = new User({
+      username: req.body.username,
+      password: hash
+    });
+    newUser.save(function(err) {
+      if (err) throw err;
+    });
   });
   res.redirect('all');
 })

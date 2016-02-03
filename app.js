@@ -54,9 +54,16 @@ passport.use(new Strategy(
   function(username, password, cb) {
     User.find({ username : username }, function(err, user) {
       if (err) return cb(err);
-      if (!user) return cb(null, false);
-      if (user[0].password != password ) return cb(null, false);
-      return cb(null, user[0]);
+      if (!user[0]){
+        return cb(null, false);
+      }
+      bcrypt.compare(password, user[0].password, function(err, res) {
+        if(res == true){
+          return cb(null, user[0]);
+        }else{
+          return cb(null, false);
+        }
+      });
     });
   }));
 
