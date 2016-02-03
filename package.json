@@ -25,6 +25,7 @@
     "passport-local": "^1.0.0",
     "purecss": "^0.6.0",
     "serve-favicon": "~2.3.0",
-    "should": "^8.2.1"
+    "should": "^8.2.1",
+    "socket.io": "^1.4.5"
   }
 }
