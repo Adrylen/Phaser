@@ -1,0 +1,5 @@
+applications:
+- name: erkma # Indiquez le nom de votre application sur Bluemix
+  host: erkma # À CHANGER - À quelle adresse retrouvera-t-on l'application ?
+  command: node app # Commande de lancement de l'application
+  memory: 128M # La mémoire dont vous avez besoin

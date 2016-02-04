@@ -1,7 +1,9 @@
 {
   "name": "erkma",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
+  "author": "ArthurTlprt <arthur.talpaert@isen-lille.fr>",
+  "description": "Un jeux video basique",
   "scripts": {
     "start": "node ./bin/www",
     "test": "node_modules/.bin/mocha -w"
@@ -15,11 +17,10 @@
     "express": "~4.13.1",
     "express-session": "^1.11.3",
     "jade": "~1.11.0",
-    "kerberos": "0.0.17",
+    "kerberos": "0.0.18",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.4",
     "mongoose": "^4.3.7",
-    "monk": "^1.0.1",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -27,5 +28,9 @@
     "serve-favicon": "~2.3.0",
     "should": "^8.2.1",
     "socket.io": "^1.4.5"
+  },
+  "engine": {
+    "node": ">=0.10.36",
+    "npm": ">=3.5.3"
   }
 }
