@@ -22,6 +22,13 @@ var users = require('./routes/users');
 var tmp = require('./routes/tmp');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+  socket.on('event', function(data){});
+  socket.on('disconnect', function(){});
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
