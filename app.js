@@ -1,5 +1,5 @@
-//var express = require('express');
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var path = require('path');
@@ -26,8 +26,7 @@ var tmp = require('./routes/tmp');
 
 
 io.on('connection', function(socket){
-  socket.on('event', function(data){});
-  socket.on('disconnect', function(){});
+  console.log('a user connected');
 });
 
 // view engine setup

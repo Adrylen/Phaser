@@ -1,3 +1,7 @@
+// start connection to the server
+var socket = io();
+
+
 // Create a new game
 var game = new Phaser.Game(1300, 550, Phaser.AUTO, 'test', null, true, false);
 
@@ -64,7 +68,7 @@ City.prototype.render = function () {
 };
 
 City.prototype.spawnTiles = function () {
-    var tile;
+  var tile;
 	var width = 19;
 	var height = 15;
 	var min = width, max = height;
@@ -85,4 +89,3 @@ City.prototype.spawnTiles = function () {
 
 game.state.add('city', City);
 game.state.start('city');
->>>>>>> Stashed changes
