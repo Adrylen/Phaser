@@ -1,5 +1,3 @@
-// start connection to the server
-var socket = io({path:'/CAH/socket.io'});
 
 
 // Create a new game
