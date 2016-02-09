@@ -1,4 +1,0 @@
-#git ne doit pas importer ces dossiers
-/node_modules
-/data
-npm-debug.log
