@@ -29,7 +29,7 @@
     "should": "^8.2.1",
     "socket.io": "latest"
   },
-  "engine": {
+  "engines": {
     "node": "0.10.36",
     "npm": "3.5.3"
   }
