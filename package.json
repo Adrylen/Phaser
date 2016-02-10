@@ -5,7 +5,7 @@
   "author": "ArthurTlprt <arthur.talpaert@isen-lille.fr>",
   "description": "Un jeux video basique",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node app.js",
     "test": "node_modules/.bin/mocha -w"
   },
   "dependencies": {
