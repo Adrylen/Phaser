@@ -32,7 +32,7 @@ menu.prototype.create = function()
 
 menu.prototype.start = function()
 {
-	document.location.href="/game";
+	document.location.href="/launcher";
 };
 
 

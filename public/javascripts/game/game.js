@@ -85,4 +85,3 @@ City.prototype.spawnTiles = function () {
 
 game.state.add('city', City);
 game.state.start('city');
->>>>>>> Stashed changes
