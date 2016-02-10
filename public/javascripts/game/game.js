@@ -15,6 +15,8 @@ City.prototype.init = function () {
 
 City.prototype.preload = function () {
 	game.load.image('tile', 'images/tile.png');
+	game.load.image('sideBar', 'images/side_bar.jpg');
+	game.load.image('topBar', 'images/top_bar.jpg');
 
 	game.time.advancedTiming = true;
 
@@ -23,11 +25,10 @@ City.prototype.preload = function () {
 
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
-	game.iso.anchor.setTo(0.5, -0.5);
+	game.iso.anchor.setTo(0.345, -0.45);
 };
 
 City.prototype.create = function () {
-
     // Create a group for our tiles.
     isoGroup = game.add.group();
 
@@ -36,6 +37,11 @@ City.prototype.create = function () {
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
+
+	// Interface
+	var topBar = game.add.image(0,0,'topBar');
+	var sideBar = game.add.image(900,0,'sideBar');
+
 };
 
 City.prototype.update = function () {
@@ -69,8 +75,8 @@ City.prototype.render = function () {
 
 City.prototype.spawnTiles = function () {
   var tile;
-	var width = 19;
-	var height = 15;
+	var width = 15;
+	var height = 17;
 	var min = width, max = height;
 	var size = width + height -1;
 
