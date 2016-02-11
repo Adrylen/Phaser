@@ -14,7 +14,7 @@
     "connect-ensure-login": "latest",
     "cookie-parser": "latest",
     "debug": "latest",
-    "express": "latest",
+    "express": "^4.13.4",
     "express-session": "latest",
     "jade": "latest",
     "kerberos": "latest",
@@ -27,7 +27,7 @@
     "purecss": "latest",
     "serve-favicon": "latest",
     "should": "latest",
-    "socket.io": "latest"
+    "socket.io": "^1.4.5"
   },
   "engines": {
     "node": "0.10.36",
