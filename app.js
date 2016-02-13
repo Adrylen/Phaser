@@ -140,8 +140,11 @@ app.use(function(err, req, res, next) {
 });
 
 //app.listen(port, host);
-http.listen(port, function(){
-  console.log('listening on *:3000');
+http.listen({
+  host: host,
+  port: port
+}, function(){
+  console.log('listening on *:' + port);
 });
 
 module.exports = app;

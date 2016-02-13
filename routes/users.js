@@ -10,12 +10,15 @@ var bcrypt = require('bcrypt');
 router.get('/', function(req, res, next) {
   res.redirect('users/add');
 });
+
 router.get('/add', function(req, res, next){
   res.render('users/add', { title : 'Rentre dans nos rangs!'});
 })
+
 router.get('/login', function(req, res, next){
   res.render('users/login', { title : 'Reviens coloniser la galaxie!'});
 })
+
 router.get('/all', function(req, res) {
   // get all the users
   User.find({
@@ -25,20 +28,28 @@ router.get('/all', function(req, res) {
     res.render('users/all', {users : users});
   });
 });
+
 router.get('/logout',
   function(req, res){
     req.logout();
     res.redirect('/');
 });
+
 router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
     res.redirect('all');
 })
+
 router.get('/chat', function(req, res){
   res.render('users/chat', {});
 })
 
+router.get('/start',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('users/start', {user : req.user});
+})
           /* POST */
 
 router.post('/add', function(req, res){
@@ -47,6 +58,7 @@ router.post('/add', function(req, res){
       username: req.body.username,
       password: hash
     });
+    newUser.initialize();
     newUser.save(function(err) {
       if (err) throw err;
     });
