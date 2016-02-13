@@ -139,6 +139,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(port, host);
+//app.listen(port, host);
+http.listen(port, function(){
+  console.log('listening on *:3000');
+});
 
 module.exports = app;
