@@ -34,7 +34,10 @@ router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
     res.redirect('all');
-  })
+})
+router.get('/chat', function(req, res){
+  res.render('users/chat', {});
+})
 
           /* POST */
 

@@ -1,4 +1,6 @@
 
+// start connection to the server
+var socket = io();
 
 // Create a new game
 var game = new Phaser.Game(1300, 550, Phaser.AUTO, 'test', null, true, false);
