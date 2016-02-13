@@ -1,7 +1,9 @@
 var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -12,7 +14,7 @@ var mongo = require('mongodb');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
@@ -27,11 +29,6 @@ var Schema = mongoose.Schema;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var tmp = require('./routes/tmp');
-
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,11 +50,6 @@ app.use(function(req,res,next){
 
 
 // Configure the local strategy for use by Passport.
-//
-// The local strategy require a `verify` function which receives the credentials
-// (`username` and `password`) submitted by the user.  The function must verify
-// that the password is correct and then invoke `cb` with a user object, which
-// will be set at `req.user` in route handlers after authentication.
 var User = require('./models/user');
 
 passport.use(new Strategy(
@@ -79,12 +71,6 @@ passport.use(new Strategy(
 
 
 // Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  The
-// typical implementation of this is as simple as supplying the user ID when
-// serializing, and querying the user record by ID from the database when
-// deserializing.
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
 });
@@ -114,6 +100,12 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/tmp', tmp);
+
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
 
 
 // catch 404 and forward to error handler
