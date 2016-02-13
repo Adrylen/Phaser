@@ -12,7 +12,7 @@ var mongo = require('mongodb');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt');
+//var bcrypt = require('bcrypt');
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
