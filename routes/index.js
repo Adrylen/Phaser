@@ -14,4 +14,10 @@ router.get('/launcher', function(req, res) {
 	res.render('launcher', { title: 'Launcher' });
 });
 
+/* POST */
+
+router.post('/start_game', function(req, res) {
+	res.redirect("game");
+});
+
 module.exports = router;

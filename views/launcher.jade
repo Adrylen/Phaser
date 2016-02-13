@@ -2,12 +2,6 @@ extends layoutgame
 
 block content
 	h1=title
-	form.pure-form.pure-form-stacked.launcher(name="start_game", method="post")
+	form.pure-form.pure-form-stacked.launcher(name="start_game", method="post" action="/start_game")
 		fieldset
-			input(type="text", placeholder="username", name="username")
-			input(type="password", placeholder="password", name="password")
-			select(name="civilisation")
-				-for(var i = 0; i < 6; i++) {
-					option(value="#{i}") Civilisation #{i}
-				-}
-			button.pure-button.pure-button-primary(type="submit") submit
+			button.pure-button.pure-button-primary(type="submit") Start

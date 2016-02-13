@@ -52,7 +52,7 @@ router.post('/add', function(req, res){
     });
   });
   res.redirect('all');
-})
+});
 
 router.post('/login',
   passport.authenticate('local', { failureRedirect: 'login' }),
