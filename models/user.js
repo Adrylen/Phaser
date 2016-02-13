@@ -10,7 +10,7 @@ var userSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   planets: Array,
-  solar_system: { type: Number, required: true }
+  solar_system: Number
 });
 
 // custom method to add string to end of name
