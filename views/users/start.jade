@@ -1,6 +1,18 @@
 extends ../layout
 
 block content
+  script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+  script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(type='text/javascript').
+    var socket = io();
+    var username='#{user.username}';
+    socket.emit('start', username );
+    socket.on('start connected', function(usernames){
+      console.log('Du nouveau!');
+      for(i in usernames) {
+        console.log(usernames[i]);
+      }
+    })
   h1 Welcome to  #{user.username}
   ul
     li #{user._id}

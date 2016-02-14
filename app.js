@@ -101,10 +101,16 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/tmp', tmp);
 
+var usernames = [];
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
+  socket.on('start', function(username){
+    usernames.push(username);
+    console.log(usernames);
+    socket.broadcast.emit('start connected', usernames);
+  })
 });
 
 

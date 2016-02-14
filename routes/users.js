@@ -69,7 +69,11 @@ router.post('/add', function(req, res){
 router.post('/login',
   passport.authenticate('local', { failureRedirect: 'login' }),
   function(req, res) {
-    res.redirect('start');
+    //console.log(req.user);
+    if(req.user.solar_system == 'void'){
+      res.redirect('start');
+    }
+    res.redirect('../game');
   });
 
 

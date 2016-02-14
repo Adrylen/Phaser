@@ -19,7 +19,10 @@ router.get('/launcher', function(req, res) {
 /* POST */
 
 router.post('/start_game', function(req, res) {
-	res.redirect("game");
+  if(req.user.solar_system == 'void') {
+    res.redirect('start');
+  }
+	res.redirect('game');
 });
 
 module.exports = router;

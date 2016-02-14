@@ -10,7 +10,7 @@ var userSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   planets: Array,
-  solar_system: String
+  solar_system: { type: String, required: false, default: 'void' }
 });
 
 // custom method to add string to end of name
@@ -23,9 +23,6 @@ userSchema.methods.findByUsername = function(username, password, cb) {
 };
 
 userSchema.methods.initialize = function() {
-  console.log('');
-  console.log('bazzinga');
-  console.log('');
   this.planets.push( {
     name: this.username + 'polis',
     pop: 10,
@@ -40,7 +37,7 @@ userSchema.methods.initialize = function() {
       }
     ]
   });
-  this.solar_system = "Milky Way"
+  this.solar_system = "void";
 };
 
 // on every save, add the date
