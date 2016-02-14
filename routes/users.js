@@ -63,13 +63,13 @@ router.post('/add', function(req, res){
       if (err) throw err;
     });
   });
-  res.redirect('all');
+  res.render('users/login', { title : 'Veuillez vous reconnecter pour valider'});
 });
 
 router.post('/login',
   passport.authenticate('local', { failureRedirect: 'login' }),
   function(req, res) {
-    res.redirect('all');
+    res.redirect('start');
   });
 
 
