@@ -108,7 +108,10 @@ io.on('connection', function(socket){
   });
   socket.on('start', function(username){
     usernames.push(username);
-    console.log(usernames);
+    socket.join('start room');
+    //socket.to('start room').emit('start connected', usernames);
+    //console.log(usernames);
+    socket.emit('start connected', usernames);
     socket.broadcast.emit('start connected', usernames);
   })
 });
