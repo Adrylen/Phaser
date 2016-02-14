@@ -10,10 +10,15 @@ block content
     socket.emit('start', username );
     socket.on('start connected', function(usernames){
       console.log('Du nouveau!');
+      $('#users').empty();  //  make sure the list is empty
       for(i in usernames) {
         console.log(usernames[i]);
         $('#users').append($('<li>').text(usernames[i]));
       }
+    })
+    socket.on('user disconnected', function(){
+      $('#users').empty();
+      socket.emit('start', username);
     })
   h1 Welcome to  #{user.username}
   ul

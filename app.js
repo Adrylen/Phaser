@@ -103,17 +103,20 @@ app.use('/tmp', tmp);
 
 var usernames = [];
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
+
   socket.on('start', function(username){
+
     usernames.push(username);
-    socket.join('start room');
-    //socket.to('start room').emit('start connected', usernames);
-    //console.log(usernames);
+
     socket.emit('start connected', usernames);
     socket.broadcast.emit('start connected', usernames);
+
+    socket.on('disconnect', function(){
+      usernames = [];
+      socket.broadcast.emit('user disconnected');
+    })
   })
+
 });
 
 
