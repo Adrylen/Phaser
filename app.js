@@ -16,6 +16,8 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
+var User = require('./models/user');
+
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
 
@@ -49,8 +51,6 @@ app.use(function(req,res,next){
 });
 
 
-// Configure the local strategy for use by Passport.
-var User = require('./models/user');
 
 passport.use(new Strategy(
   function(username, password, cb) {
@@ -115,6 +115,17 @@ io.on('connection', function(socket){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
+    if(usernames.length == 2) {
+      socket.emit('start ready');
+      socket.broadcast.emit('start ready');
+      var name = (Math.random()+1).toString(36).substring(7);
+      for(i in usernames){
+        User.findOneAndUpdate({ username : usernames[i] }, {solar_system : name}, function(err, user) {
+          if (err) throw err;
+            console.log(user.solar_system);
+        })
+      }
+    }
   })
 
 });

@@ -20,6 +20,9 @@ block content
       $('#users').empty();
       socket.emit('start', username);
     })
+    socket.on('start ready', function(){
+      $('body').append($('<h2>').text('Game ready!!'));
+    })
   h1 Welcome to  #{user.username}
   ul
     li #{user._id}

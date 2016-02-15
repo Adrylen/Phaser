@@ -40,6 +40,9 @@ userSchema.methods.initialize = function() {
   this.solar_system = "void";
 };
 
+userSchema.methods.editSolar_system = function(name){
+       this.solar_system = name;
+}
 // on every save, add the date
 userSchema.pre('save', function(next) {
   // get the current date
