@@ -118,7 +118,17 @@ io.on('connection', function(socket){
     if(usernames.length == 2) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
-      var name = (Math.random()+1).toString(36).substring(7);
+
+      var alphabet = "abcdefghijklmnopqrstuvwxyz";
+      var name = '';
+      for (var i = 0; i < 3; i++) {
+        name += alphabet[(Math.random() * alphabet.length)];
+      }
+      for (var i = 0; i < 4; i++) {
+        name += toString(Math.random() * 10));
+      }
+      
+      //var name = (Math.random()+1).toString(36).substring(3, 5);
       for(i in usernames){
         User.findOneAndUpdate({ username : usernames[i] }, {solar_system : name}, function(err, user) {
           if (err) throw err;
