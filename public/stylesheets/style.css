@@ -49,3 +49,8 @@ canvas {
 .button-success {
   background: rgb(28, 184, 65); /* this is a green */
 }
+
+.custom-restricted-width {
+  font-size: 2em;
+  display: inline-block;
+}

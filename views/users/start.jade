@@ -3,32 +3,36 @@ extends ../layout
 block content
   script(src='https://cdn.socket.io/socket.io-1.2.0.js')
   script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(src='/javascripts/jquery.loading.min.js')
+  link(rel='stylesheet', href='/stylesheets/jquery.loading.min.css')
   script(type='text/javascript').
     var username='#{user.username}';
+    
+    $('body').loading({
+      message: 'En recherche de joueur...',
+      theme: 'dark', 
+      stoppable: true
+    });
     
     var socket = io();
     socket.emit('start', username );
     socket.on('start connected', function(usernames){
       console.log('Du nouveau!');
-      $('#users').empty();  //  make sure the list is empty
+      $('.pure-menu-list').empty();  //  make sure the list is empty
       for(i in usernames) {
         console.log(usernames[i]);
-        $('#users').append($('<li>').text(usernames[i]));
+        $('.pure-menu-list').append($('<li class="pure-menu-item"></li>')).append($('<a href="#" class="pure-menu-link"></a>').text(usernames[i]));
       }
     })
     socket.on('user disconnected', function(){
-      $('#users').empty();
+      $('.pure-menu-list').empty();
       socket.emit('start', username);
     })
     socket.on('start ready', function(){
-      $('body').append($('<h2>').text('Game ready!!'));
-      $('body').append($('<a class="button-success pure-button" href="/game">Success Button</a>'))
+      $('body').append($('<a class="button-success pure-button" href="/game">Start game!</a>'))
+      $('body').loading('stop');
     })
-  h1 Welcome to  #{user.username}
-  ul
-    li #{user._id}
-    li #{user.created_at}
-    li #{user.password}
-    li #{user._id}
-    li #{user.planets}
-  ul#users
+    
+  .pure-menu.custom-restricted-width
+    span.pure-menu-heading Joueurs connectés
+    ul.pure-menu-list

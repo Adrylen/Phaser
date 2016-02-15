@@ -48,6 +48,9 @@ router.get('/chat', function(req, res){
 router.get('/start',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
+    if( req.user.solar_system != 'void') {
+      res.redirect('../game');
+    }
     res.render('users/start', {user : req.user});
 })
           /* POST */
