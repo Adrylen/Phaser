@@ -45,3 +45,7 @@ canvas {
 	position: relative;
 	left: -2%;
 }
+
+.button-success {
+  background: rgb(28, 184, 65); /* this is a green */
+}

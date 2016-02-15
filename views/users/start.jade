@@ -22,6 +22,7 @@ block content
     })
     socket.on('start ready', function(){
       $('body').append($('<h2>').text('Game ready!!'));
+      $('body').append($('<a class="button-success pure-button" href="/game">Success Button</a>'))
     })
   h1 Welcome to  #{user.username}
   ul
