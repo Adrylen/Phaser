@@ -25,6 +25,7 @@
     "passport": "latest",
     "passport-local": "latest",
     "purecss": "latest",
+    "randomstring": "^1.1.4",
     "serve-favicon": "latest",
     "should": "latest",
     "socket.io": "^1.4.5"

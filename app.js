@@ -15,6 +15,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
+var randomstring = require("randomstring");
 
 var User = require('./models/user');
 
@@ -119,16 +120,16 @@ io.on('connection', function(socket){
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
-      var alphabet = "abcdefghijklmnopqrstuvwxyz";
-      var name = '';
-      for (var i = 0; i < 3; i++) {
-        name += alphabet[(Math.random() * alphabet.length)];
-      }
-      for (var i = 0; i < 4; i++) {
-        name += toString(Math.random() * 10));
-      }
-      
-      //var name = (Math.random()+1).toString(36).substring(3, 5);
+      var name = randomstring.generate({
+        length: 3,
+        charset: 'alphabetic'
+      });
+      name += ' ';
+      name += randomstring.generate({
+        length: 4,
+        charset: 'numeric'
+      });
+
       for(i in usernames){
         User.findOneAndUpdate({ username : usernames[i] }, {solar_system : name}, function(err, user) {
           if (err) throw err;
