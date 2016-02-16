@@ -57,16 +57,22 @@ router.get('/start',
 
 router.post('/add', function(req, res){
   bcrypt.hash(req.body.password, 8, function(err, hash) {
+
     var newUser = new User({
       username: req.body.username,
       password: hash
     });
+
     newUser.initialize();
     newUser.save(function(err) {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        res.render('users/add', { title : "Champs incorrectes" });
+      }
+      res.render('users/login', { title : 'Veuillez vous reconnecter pour valider'});
     });
+
   });
-  res.render('users/login', { title : 'Veuillez vous reconnecter pour valider'});
 });
 
 router.post('/login',

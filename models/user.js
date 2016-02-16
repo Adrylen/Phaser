@@ -1,9 +1,10 @@
 // grab the things we need
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 // create a schema
-var userSchema = new Schema({
+var userPrototype = {
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   admin: Boolean,
@@ -11,22 +12,57 @@ var userSchema = new Schema({
   updated_at: Date,
   planets: Array,
   solar_system: { type: String, required: false, default: 'void' }
-});
-
-// custom method to add string to end of name
-// you can create more important methods like name validations or formatting
-// you can also do queries and find similar users
-userSchema.methods.findByUsername = function(username, password, cb) {
-  // add some stuff to the users name
-  /*this.name = this.name + '-dude';
-  return this.name;*/
 };
+
+var userSchema = new Schema( userPrototype );
+userSchema.plugin(uniqueValidator);
+
+userSchema.methods.check = function(){
+  /*
+  var attributes = Object.getOwnPropertyNames(userPrototype);
+  for( var k in attributes ) {
+    console.log(userPrototype[attributes[k]]);
+    //console.log( userPrototype.attributes[k] );
+  }*/
+/*
+  if( userPrototype.username.required == true ) {
+    User.find({ username : this.username }, function(err, user){
+      console.log('bazzinga');
+      if(user.length != 0) {
+        return "Ce nom d'utilisateur existe déjà";
+      } else {
+        return "";
+      }
+    })
+  }
+  */
+
+/*
+  for(k in userPrototype){
+     var value = userPrototype[k];
+     if(typeof value === 'object'){
+       for(var n in value){
+         var subValue = value[n];
+         console.log(subValue);
+       }
+     }else{
+       console.log(value);
+     }
+   }*/
+
+}
 
 userSchema.methods.initialize = function() {
   this.planets.push( {
     name: this.username + 'polis',
     pop: 10,
     ressources: { kaga: 100, iron: 50 },
+    buildings: [
+      {
+        name : 'QG',
+        type: 'qg'
+      }
+    ],
     ships: [
       {
         ship_dammage: 0,

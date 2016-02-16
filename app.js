@@ -78,8 +78,7 @@ passport.serializeUser(function(user, cb) {
 
 passport.deserializeUser(function(id, cb) {
   User.find({ _id : id }, function(err, user){
-    console.log('bazzinga');
-    console.log(JSON.stringify(user,null, 4));
+    //console.log(JSON.stringify(user,null, 4));
     if (err) { return cb(err); }
     cb(null, user[0]);
   })
@@ -116,7 +115,7 @@ io.on('connection', function(socket){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    if(usernames.length == 2) {
+    if(usernames.length == 4) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
@@ -133,7 +132,6 @@ io.on('connection', function(socket){
       for(i in usernames){
         User.findOneAndUpdate({ username : usernames[i] }, {solar_system : name}, function(err, user) {
           if (err) throw err;
-            console.log(user.solar_system);
         })
       }
     }
@@ -178,7 +176,9 @@ http.listen({
   host: host,
   port: port
 }, function(){
-  console.log('listening on *:' + port);
+  console.log('-----------------------------------');
+  console.log('   listening on *:' + port);
+  console.log('-----------------------------------');
 });
 
 module.exports = app;
