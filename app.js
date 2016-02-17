@@ -117,7 +117,7 @@ io.on('connection', function(socket){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    if(usernames.length == 4) {
+    if(usernames.length == 2) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
