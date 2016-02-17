@@ -8,10 +8,6 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Our Phaser Game' });
 });
 
-router.get('/game', require('connect-ensure-login').ensureLoggedIn('users/login'), function(req, res){
-  res.render('game', { title: 'Kenneth, ici est la page du jeu' });
-});
-
 router.get('/launcher', function(req, res) {
 	res.render('launcher', { title: 'Launcher' });
 });
@@ -19,10 +15,7 @@ router.get('/launcher', function(req, res) {
 /* POST */
 
 router.post('/start_game', function(req, res) {
-  if(req.user.solar_system == 'void') {
-    res.redirect('start');
-  }
-	res.redirect('game');
+	res.redirect('users/start');
 });
 
 module.exports = router;

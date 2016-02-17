@@ -31,6 +31,7 @@ var Schema = mongoose.Schema;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var game = require('./routes/game');
 var tmp = require('./routes/tmp');
 
 // view engine setup
@@ -99,6 +100,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/game', game);
 app.use('/tmp', tmp);
 
 var usernames = [];

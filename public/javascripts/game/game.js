@@ -14,7 +14,7 @@ City.prototype.init = function () {
 };
 
 City.prototype.preload = function () {
-	game.load.image('tile', 'images/tile.png');
+	game.load.image('tile', 'images/grass.png');
 	game.load.image('sideBar', 'images/side_bar.jpg');
 	game.load.image('topBar', 'images/top_bar.jpg');
 
