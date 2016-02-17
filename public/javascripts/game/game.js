@@ -3,7 +3,7 @@
 var socket = io();
 
 // Create a new game
-var game = new Phaser.Game(1300, 550, Phaser.AUTO, 'test', null, true, false);
+var game = new Phaser.Game(900, 530, Phaser.AUTO, 'test', null, true, false);
 
 var City = function (game) { };
 
@@ -14,9 +14,9 @@ City.prototype.init = function () {
 };
 
 City.prototype.preload = function () {
-	game.load.image('tile', 'images/grass.png');
-	game.load.image('sideBar', 'images/side_bar.jpg');
-	game.load.image('topBar', 'images/top_bar.jpg');
+	game.load.image('tile', '../images/grass.png');
+	game.load.image('sideBar', '../images/side_bar.jpg');
+	game.load.image('topBar', '../images/top_bar.jpg');
 
 	game.time.advancedTiming = true;
 
@@ -25,7 +25,7 @@ City.prototype.preload = function () {
 
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
-	game.iso.anchor.setTo(0.345, -0.45);
+	game.iso.anchor.setTo(0.5, -0.48);
 };
 
 City.prototype.create = function () {
@@ -39,8 +39,8 @@ City.prototype.create = function () {
     cursorPos = new Phaser.Plugin.Isometric.Point3();
 
 	// Interface
-	var topBar = game.add.image(0,0,'topBar');
-	var sideBar = game.add.image(900,0,'sideBar');
+	//var topBar = game.add.image(0,0,'topBar');
+	//var sideBar = game.add.image(900,0,'sideBar');
 
 };
 
