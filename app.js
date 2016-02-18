@@ -139,6 +139,15 @@ io.on('connection', function(socket){
     }
   })
 
+  socket.on('game', function(username){
+    //console.log(username);
+    User.find({ username : username }, function(err, user) {
+      if (err) return cb(err);
+      user.password = ''; //  otherwise security breach
+    socket.emit('data', user);
+    })
+  })
+
 });
 
 

@@ -7,6 +7,16 @@ block script
 	script(src='../javascripts/phaser/phaser.js')
 	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
 	script(src='../javascripts/game/game.js')
+	script(type='text/javascript').
+		// start connection to the server
+		var socket = io();
+
+		var username='#{username}';
+		socket.emit('game', username);
+		socket.on('data', function(user){
+				user = user;	//global
+				console.log(JSON.stringify(user,null, 4));	// so that the display is pretty
+		});
 	
 	.pure-g
 		.pure-u-4-5#parent

@@ -10,7 +10,7 @@ router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login')
 });
 
 router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
-  res.render('game/game', { title: 'Kenneth, ici est la page du jeu' });
+  res.render('game/game', { username: req.user.username });
 });
 
 module.exports = router;
