@@ -11,11 +11,13 @@ block script
 		// start connection to the server
 		var socket = io();
 
-		var username='#{username}';
-		socket.emit('game', username);
-		socket.on('data', function(user){
-				user = user;	//global
-				console.log(JSON.stringify(user,null, 4));	// so that the display is pretty
+		var username = '#{username}';
+		var solar_system = '#{solar_system}';
+		socket.emit('game', solar_system);
+		// load all users of the game
+		socket.on('data', function(users){
+				users = users;	//global
+				console.log(JSON.stringify(users,null, 4));	// so that the display is pretty
 		});
 	
 	.pure-g

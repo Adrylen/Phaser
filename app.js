@@ -139,12 +139,12 @@ io.on('connection', function(socket){
     }
   })
 
-  socket.on('game', function(username){
+  socket.on('game', function(username, solar_system){
     //console.log(username);
-    User.find({ username : username }, function(err, user) {
+    User.find({ solar_system : solar_system }, function(err, users) {
       if (err) return cb(err);
-      user.password = ''; //  otherwise security breach
-    socket.emit('data', user);
+      //user.password = ''; //  otherwise security breach
+    socket.emit('data', users);
     })
   })
 

@@ -10,7 +10,7 @@ router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login')
 });
 
 router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
-  res.render('game/game', { username: req.user.username });
+  res.render('game/game', { username: req.user.username, solar_system : req.user.solar_system });
 });
 
 module.exports = router;
