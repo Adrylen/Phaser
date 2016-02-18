@@ -140,9 +140,14 @@ io.on('connection', function(socket){
   })
 
   socket.on('game', function(username, solar_system){
-    //console.log(username);
+    console.log( solar_system );
+    // need to update session since solar_system is no more = 'void'
     User.find({ solar_system : solar_system }, function(err, users) {
       if (err) return cb(err);
+      console.log('from the server:');
+      for(var i in users) {
+        console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+      }
       //user.password = ''; //  otherwise security breach
     socket.emit('data', users);
     })

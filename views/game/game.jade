@@ -2,8 +2,8 @@ extends ../layouts/layoutgame
 
 h1= title
 block script
-	script(src='https://cdn.socket.io/socket.io-1.2.0.js')
-	script(src='http://code.jquery.com/jquery-1.11.1.js')
+	script(src='../javascripts/jquery.min.js')
+	script(src='../javascripts/socket.io.js')
 	script(src='../javascripts/phaser/phaser.js')
 	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
 	script(src='../javascripts/game/game.js')
@@ -17,7 +17,10 @@ block script
 		// load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
-				console.log(JSON.stringify(users,null, 4));	// so that the display is pretty
+				console.log(users.length);
+				for(var i in users) {
+					console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+				}
 		});
 	
 	.pure-g

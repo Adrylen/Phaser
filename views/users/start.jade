@@ -1,10 +1,12 @@
 extends ../layouts/layout
 
 block content
-  script(src='https://cdn.socket.io/socket.io-1.2.0.js')
-  script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(src='../javascripts/jquery.min.js')
+  script(src='../javascripts/socket.io.js')
   script(src='/javascripts/jquery.loading.min.js')
   link(rel='stylesheet', href='/stylesheets/jquery.loading.min.css')
+  //script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+  //script(src='http://code.jquery.com/jquery-1.11.1.js')
   script(type='text/javascript').
     var username='#{user.username}';
     
@@ -32,7 +34,7 @@ block content
       $('body').append($('<a class="button-success pure-button" href="/launcher">Start game!</a>'))
       $('body').loading('stop');
     })
-    
+  
   .pure-menu.custom-restricted-width
     span.pure-menu-heading Joueurs connectés
-    ul.pure-menu-list
+      ul.pure-menu-list
