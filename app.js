@@ -104,7 +104,7 @@ app.use('/game', game);
 app.use('/tmp', tmp);
 
 var usernames = [];
-io.on('connection', function(socket){
+io.on('connection', function(socket, req){
 
   socket.on('start', function(username){
 
@@ -131,9 +131,11 @@ io.on('connection', function(socket){
         charset: 'numeric'
       });
 
+      // updating solar_system field of all users from a same solar_system
       for(i in usernames){
         User.findOneAndUpdate({ username : usernames[i] }, {solar_system : name}, function(err, user) {
           if (err) throw err;
+          //req.login(req.user, function(){})
         })
       }
     }
@@ -141,16 +143,14 @@ io.on('connection', function(socket){
 
   socket.on('game', function(username, solar_system){
     console.log( solar_system );
-    // need to update session since solar_system is no more = 'void'
-    User.find({ solar_system : solar_system }, function(err, users) {
-      if (err) return cb(err);
-      console.log('from the server:');
-      for(var i in users) {
-        console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
-      }
-      //user.password = ''; //  otherwise security breach
-    socket.emit('data', users);
-    })
+      User.find({ solar_system : solar_system }, function(err, users) {
+          if (err) return cb(err);
+          for(var i in users) {
+            console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+            users[i].password = ''; //  otherwise security breach
+          }
+          socket.emit('data', users);
+      })
   })
 
 });

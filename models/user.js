@@ -81,6 +81,10 @@ userSchema.methods.editSolar_system = function(name){
 }
 // on every save, add the date
 userSchema.pre('save', function(next) {
+  /*
+  req.login(user, function(err) {
+    if (err) return next(err)
+  })*/
   // get the current date
   var currentDate = new Date();
 

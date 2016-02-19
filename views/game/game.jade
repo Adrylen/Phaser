@@ -13,7 +13,7 @@ block script
 
 		var username = '#{username}';
 		var solar_system = '#{solar_system}';
-		socket.emit('game', solar_system);
+		socket.emit('game', username, solar_system);
 		// load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
