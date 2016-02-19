@@ -1,5 +1,21 @@
 # Erkma
 
+## Todo List
+
+* Kenneth
+  Se dépecher de commencer à coder
+
+* Gaëtane
+Faire les textures 
+
+* Adrien
+Musique / Phaser   
+
+* Arthur
+-Refactoriser la bdd et les models [doc](http://stackoverflow.com/questions/15413630/what-is-the-proper-pattern-for-nested-schemas-in-mongoose-mongodb)
+[doc](http://mongoosejs.com/docs/populate.html)
+-Mettre le site sur IBM Bluemix
+
 ## Installation
 
 Je peux vous installer le projet, ou alors vous pouvez essayer par vous meme en suivant ce petit guide.
@@ -50,21 +66,3 @@ npm start
 ```
 
 * On se rend a l'adresse:  http://localhost:3000/
-
-# Todo List
-
-* Arthur
--Mongoose
--Passport
--IBM Bluemix
-
-  [doc](http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619)
-
-* Interface Phaser:  
-Kenneth
-
-* Faire les textures  
-Gaëtane
-
-* Faire du bruit / Phaser   
-Adrien
