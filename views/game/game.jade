@@ -4,9 +4,6 @@ h1= title
 block script
 	script(src='../javascripts/jquery.min.js')
 	script(src='../javascripts/socket.io.js')
-	script(src='../javascripts/phaser/phaser.js')
-	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
-	script(src='../javascripts/game/game.js')
 	script(type='text/javascript').
 		// start connection to the server
 		var socket = io();
@@ -31,6 +28,9 @@ block script
 					$('#players').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text(users[i].username));
 				}
 		});
+	script(src='../javascripts/phaser/phaser.js')
+	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
+	script(src='../javascripts/game/game.js')
 	
 	.pure-g
 		.pure-u-4-5#parent
