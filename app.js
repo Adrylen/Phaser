@@ -117,7 +117,7 @@ io.on('connection', function(socket, req){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    if(usernames.length == 2) {
+    if(usernames.length == 4) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
@@ -146,7 +146,7 @@ io.on('connection', function(socket, req){
       User.find({ solar_system : solar_system }, function(err, users) {
           if (err) return cb(err);
           for(var i in users) {
-            console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+            //console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
             users[i].password = ''; //  otherwise security breach
           }
           socket.emit('data', users);

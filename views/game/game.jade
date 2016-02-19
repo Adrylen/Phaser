@@ -17,40 +17,28 @@ block script
 		// load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
-				console.log(users.length);
 				for(var i in users) {
-					console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+					//console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+					//	display planets of the logged in user
+					if(users[i].username == username){
+						for( var k in users[i].planets ){
+							$('#planets').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text(users[i].planets[k].name));
+							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Kaga ' + users[i].planets[k].ressources.kaga));
+							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Iron ' + users[i].planets[k].ressources.iron));
+						}
+					}
+					//	display other players
+					$('#players').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text(users[i].username));
 				}
+				
 		});
 	
 	.pure-g
 		.pure-u-4-5#parent
 		.pure-u-1-5.pure-menu.custom-restricted-width
-				a.pure-menu-heading(href='/') Pure
-				ul.pure-menu-list
-					li.pure-menu-item
-						a.pure-menu-link(href='/start/') Get Started
-					li.pure-menu-item
-						a.pure-menu-link(href='/layouts/') Layouts
-					li.pure-menu-item.menu-item-divided
-						a.pure-menu-link(href='/base/') Base
-					li.pure-menu-item
-						a.pure-menu-link(href='/grids/') Grids
-					li.pure-menu-item
-						a.pure-menu-link(href='/forms/') Forms
-					li.pure-menu-item
-						a.pure-menu-link(href='/buttons/') Buttons
-					li.pure-menu-item
-						a.pure-menu-link(href='/tables/') Tables
-					li.pure-menu-item.pure-menu-selected
-						a.pure-menu-link(href='/menus/') Menus
-					li.pure-menu-item.menu-item-divided
-						a.pure-menu-link(href='/tools/') Tools
-					li.pure-menu-item
-						a.pure-menu-link(href='/customize/') Customize
-					li.pure-menu-item
-						a.pure-menu-link(href='/extend/') Extend
-					li.pure-menu-item
-						a.pure-menu-link(href='http://blog.purecss.io/') Blog
-					li.pure-menu-item
-						a.pure-menu-link(href='https://github.com/yahoo/pure/releases/') Releases	
+				ul.pure-menu-list#players
+					li.pure-menu-heading players
+				ul.pure-menu-list#planets
+					li.pure-menu-heading my planets
+				ul.pure-menu-list#ressources
+					li.pure-menu-heading my ressources
