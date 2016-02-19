@@ -30,6 +30,8 @@ block script
 		});
 	script(src='../javascripts/phaser/phaser.js')
 	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
+	script(src='../javascripts/game/states/city.js')
+	script(src='../javascripts/game/states/planets.js')
 	script(src='../javascripts/game/game.js')
 	
 	.pure-g
@@ -41,3 +43,4 @@ block script
 					li.pure-menu-heading my planets
 				ul.pure-menu-list#ressources
 					li.pure-menu-heading my ressources
+				button.pure-button(onclick="start('planets');") Planets
