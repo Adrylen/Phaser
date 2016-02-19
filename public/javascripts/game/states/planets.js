@@ -3,6 +3,7 @@ var Planets = function(game) {};
 var x = 0;
 var speedX = 0;
 var speedY = 9.6;
+var theta = 1;
 
 Planets.prototype.init = function () {
 	var planets = null;
@@ -18,6 +19,7 @@ Planets.prototype.create = function () {
 };
 
 Planets.prototype.update = function () {
+	/*
 	var mul = 1;
 	if(circle.x < 400)
 	{
@@ -52,6 +54,16 @@ Planets.prototype.update = function () {
 
 	circle.x += speedX;
 	circle.y += speedY;
+	*/
+
+	//	vitesse
+	theta += 0.01;
+	//	demi grand axe de l'ellipse
+	var a = 300, b = 150;
+	//	vient de l'équation d'une ellipse
+	circle.x = 400 + a * Math.cos(theta);
+	circle.y = 150 + b * Math.sin(theta);
+
 };
 
 Planets.prototype.render = function () {
