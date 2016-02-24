@@ -56,8 +56,8 @@ Planets.prototype.update = function () {
 	circle.y += speedY;
 	*/
 
-	//	vitesse
-	theta += 0.01;
+	//	vitesse de 0.01 / frame
+	theta += 0.0005;
 	//	demi grand axe de l'ellipse
 	var a = 300, b = 150;
 	//	vient de l'équation d'une ellipse

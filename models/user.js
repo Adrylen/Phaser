@@ -1,97 +1,67 @@
-// grab the things we need
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
-// create a schema
-var userPrototype = {
+var Solar = require('../models/solar');
+var Planet = require('../models/planet');
+
+var ressourceSchema = new Schema({
+  kaga: Number,
+  iron: Number,
+  watt: Number,
+  food: Number,
+  water: Number,
+  Oxygen: Number
+});
+
+var userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  admin: Boolean,
+  ressources: ressourceSchema,
   created_at: Date,
   updated_at: Date,
-  planets: Array,
-  solar_system: { type: String, required: false, default: 'void' }
-};
+  planets: [{ type : ObjectId, ref: 'planet' }],
+  play: Boolean,
+  solar_system: { type: ObjectId, ref: 'solar' }
+});
 
-var userSchema = new Schema( userPrototype );
 userSchema.plugin(uniqueValidator);
 
-userSchema.methods.check = function(){
-  /*
-  var attributes = Object.getOwnPropertyNames(userPrototype);
-  for( var k in attributes ) {
-    console.log(userPrototype[attributes[k]]);
-    //console.log( userPrototype.attributes[k] );
-  }*/
-/*
-  if( userPrototype.username.required == true ) {
-    User.find({ username : this.username }, function(err, user){
-      console.log('bazzinga');
-      if(user.length != 0) {
-        return "Ce nom d'utilisateur existe déjà";
-      } else {
-        return "";
-      }
-    })
-  }
-  */
-
-/*
-  for(k in userPrototype){
-     var value = userPrototype[k];
-     if(typeof value === 'object'){
-       for(var n in value){
-         var subValue = value[n];
-         console.log(subValue);
-       }
-     }else{
-       console.log(value);
-     }
-   }*/
-
-}
-
 userSchema.methods.initialize = function() {
-  this.planets.push( {
-    name: this.username + 'polis',
-    pop: 10,
-    ressources: { kaga: 100, iron: 50 },
-    buildings: [
-      {
-        name : 'QG',
-        type: 'qg'
-      }
-    ],
-    ships: [
-      {
-        ship_dammage: 0,
-        human_dammage: 0,
-        defence: 100,
-        cost: 20,
-        name: 'The ' + this.username
-      }
-    ]
-  });
-  this.solar_system = "void";
+    var motherPlanet = new Planet({
+      name: this.username + 'polis',
+      pop: 10,
+      buildings: [ { type: 'qg' } ],
+      spaceships: [ {
+          spaceship_dammage: 0,
+          human_dammage: 0,
+          defence: 100,
+          cost: 20,
+          name: 'The ' + this.username
+        } ],
+      civilized: true,
+      owner: this._id
+    });
+    motherPlanet.save(function(err){
+      if (err) throw err;
+    });
+
+  this.planets.push(motherPlanet._id);
+  this.solar_system = null;
 };
 
 userSchema.methods.editSolar_system = function(name){
        this.solar_system = name;
 }
+
 // on every save, add the date
 userSchema.pre('save', function(next) {
-  /*
-  req.login(user, function(err) {
-    if (err) return next(err)
-  })*/
-  // get the current date
+
+  console.log(JSON.stringify(this.planets[0].name, null, 4));
+
   var currentDate = new Date();
-
-  // change the updated_at field to current date
   this.updated_at = currentDate;
-
-  // if created_at doesn't exist, add to that field
   if (!this.created_at)
     this.created_at = currentDate;
 
@@ -99,9 +69,8 @@ userSchema.pre('save', function(next) {
 });
 
 
-// the schema is useless so far
 // we need to create a model using it
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('user', userSchema);
 
 // make this available to our users in our Node applications
 module.exports = User;

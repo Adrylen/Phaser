@@ -15,9 +15,8 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
-var randomstring = require("randomstring");
 
-var User = require('./models/user');
+
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
@@ -28,7 +27,12 @@ mongoose.connect('mongodb://localhost/erkma');
 var db = mongoose.connection;
 var Schema = mongoose.Schema;
 
+//    models
+var User = require('./models/user');
+var Solar = require('./models/solar');
+var Planet = require('./models/planet');
 
+//    routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var game = require('./routes/game');
@@ -51,8 +55,6 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
-
-
 
 passport.use(new Strategy(
   function(username, password, cb) {
@@ -121,19 +123,38 @@ io.on('connection', function(socket, req){
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
-      var name = randomstring.generate({
-        length: 3,
-        charset: 'alphabetic'
-      });
-      name += ' ';
-      name += randomstring.generate({
-        length: 4,
-        charset: 'numeric'
+
+      solar = new Solar({
       });
 
+      var planetsId = [];
+      //    let's add all civilized planet in our new solar system
+      for(var i in usernames){
+        User
+        .findOne({ username: usernames[i] })
+        .populate('planets')
+        .exec(function (err, user) {
+          if (err) throw err;
+          //console.log('populate');
+          //console.log(user.planets[0]._id);
+          planetsId.push(user.planets[0]._id);
+          //console.log('planetsId ' + planetsId);
+          if(i == 2)
+          solar.initialize(planetsId);
+        });
+      }
+
+      //console.log(JSON.stringify(solar, null, 4));
+
+      solar.save(function(err){
+        if (err) throw err;
+      })
+
+      solar.initialize(planetsId);
+
       // updating solar_system field of all users from a same solar_system
-      for(i in usernames){
-        User.findOneAndUpdate({ username : usernames[i] }, {solar_system : name}, function(err, user) {
+      for(var i in usernames){
+        User.findOneAndUpdate({ username : usernames[i] }, {solar_system : solar._id}, function(err, user) {
           if (err) throw err;
           //req.login(req.user, function(){})
         })
