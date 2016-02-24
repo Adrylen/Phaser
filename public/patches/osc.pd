@@ -1,0 +1,15 @@
+#N canvas 579 171 450 300 10;
+#X floatatom 35 44 0 0 0 0 - - -;
+#X obj 53 146 metro 500;
+#X obj 35 73 osc~ 1000;
+#X obj 53 121 loadbang;
+#X obj 36 171 tabwrite~ \$0-array;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array \$0-array 100 float 0;
+#X coords 0 -1 100 1 150 100 1;
+#X restore 201 78 graph;
+#X connect 0 0 2 0;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 3 0 1 0;
