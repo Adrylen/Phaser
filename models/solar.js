@@ -5,26 +5,51 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var User = require('../models/user');
-var Solar = require('../models/planet');
+//var Solar = require('../models/planet');
+
+
+var spaceshipSchema = new Schema({
+  spaceship_dammage: Number,
+  human_dammage: Number,
+  defence: Number,
+  cost: Number,
+  name: String
+});
+
+var buildingSchema = new Schema({
+  type: String
+})
+
+var planetSchema = new Schema({
+  name: String,
+  pop: Number,
+  buildings: [buildingSchema],
+  spaceships: [spaceshipSchema],
+  civilized: Boolean,
+  owner: { type: ObjectId, ref: 'user' }
+});
+
+var Planet = mongoose.model('planet', planetSchema);
 
 var solarSchema = new Schema({
   name: String,
-  planets : [{ type : ObjectId, ref: 'planet' }]
+  planets : [ type: mongoose.Schema.Types.ObjectId ]
 });
 
 solarSchema.methods.initialize = function(planetsId) {
-  thsis.name = randomstring.generate({
+  this.name = randomstring.generate({
     length: 3,
     charset: 'alphabetic'
   });
-  name += ' ';
-  name += randomstring.generate({
+  this.name += ' ';
+  this.name += randomstring.generate({
     length: 4,
     charset: 'numeric'
   });
   this.planets = planetsId;
   console.log('planetsId ' + JSON.stringify(planetsId, null, 4));
   console.log('this.planets' + JSON.stringify(this.planets, null, 4));
+  console.log(typeof this.planets[0]);
 }
 
 // we need to create a model using it

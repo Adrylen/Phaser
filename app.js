@@ -119,7 +119,8 @@ io.on('connection', function(socket, req){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    if(usernames.length == 2) {
+    var maxPlayer = 2;
+    if(usernames.length == maxPlayer) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
@@ -139,16 +140,13 @@ io.on('connection', function(socket, req){
           //console.log(user.planets[0]._id);
           planetsId.push(user.planets[0]._id);
           //console.log('planetsId ' + planetsId);
-          if(i == 2)
-          solar.initialize(planetsId);
+          if(i == maxPlayer-1) solar.initialize(planetsId);
         });
       }
 
       //console.log(JSON.stringify(solar, null, 4));
 
-      solar.save(function(err){
-        if (err) throw err;
-      })
+      solar.save();
 
       solar.initialize(planetsId);
 
