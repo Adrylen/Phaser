@@ -25,7 +25,7 @@ var buildingSchema = new Schema({
 * or in the case of ObjectIds, its hexString.
 */
 var planetSchema = new Schema({
-  _id: {type: mongoose.Schema.ObjectId},
+  //_id: {type: mongoose.Schema.ObjectId},
   name: String,
   pop: Number,
   buildings: [buildingSchema],
@@ -71,11 +71,11 @@ solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
               cost: 20,
               name: 'The ' + users[i].username
             } ],
-          civilized: true
-          //owner: users[i]._id
+          civilized: true,
+          owner: users[i]._id
         });
-      users[i].planets.push(motherPlanet._id);
-      //users[i].initialize(motherPlanet._id, this._id);
+      //users[i].planets.push(motherPlanet._id);
+      users[i].initialize(motherPlanet._id, this._id);
     }else{
 
     }
