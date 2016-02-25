@@ -30,7 +30,6 @@ var Schema = mongoose.Schema;
 //    models
 var User = require('./models/user');
 var Solar = require('./models/solar');
-var Planet = require('./models/planet');
 
 //    routes
 var routes = require('./routes/index');
@@ -120,44 +119,40 @@ io.on('connection', function(socket, req){
       socket.broadcast.emit('user disconnected');
     })
     var maxPlayer = 2;
+    var nPlanets = 8;
     if(usernames.length == maxPlayer) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
-
+      console.log(usernames);
       solar = new Solar({
       });
 
-      var planetsId = [];
-      //    let's add all civilized planet in our new solar system
+      var users = [];
       for(var i in usernames){
-        User
-        .findOne({ username: usernames[i] })
-        .populate('planets')
-        .exec(function (err, user) {
-          if (err) throw err;
-          //console.log('populate');
-          //console.log(user.planets[0]._id);
-          planetsId.push(user.planets[0]._id);
-          //console.log('planetsId ' + planetsId);
-          if(i == maxPlayer-1) solar.initialize(planetsId);
-        });
+        User.findOne({ username: usernames[i] }, function(err, user){
+          users.push(user);
+          console.log(user.username);
+          if(user.username == usernames[usernames.length-1]){
+            console.log('users');
+            console.log(JSON.stringify(users, null, 4));
+            solar.initialize(users, nPlanets, maxPlayer);
+            solar.save();
+            return;
+          }
+        })
       }
-
-      //console.log(JSON.stringify(solar, null, 4));
-
-      solar.save();
-
-      solar.initialize(planetsId);
+      //    let's add all civilized planet in our new solar system
 
       // updating solar_system field of all users from a same solar_system
-      for(var i in usernames){
+      /*for(var i in usernames){
         User.findOneAndUpdate({ username : usernames[i] }, {solar_system : solar._id}, function(err, user) {
           if (err) throw err;
           //req.login(req.user, function(){})
         })
-      }
+      }*/
     }
+
   })
 
   socket.on('game', function(username, solar_system){

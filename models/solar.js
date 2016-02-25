@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var User = require('../models/user');
-//var Solar = require('../models/planet');
 
 
 var spaceshipSchema = new Schema({
@@ -20,7 +19,13 @@ var buildingSchema = new Schema({
   type: String
 })
 
+/*
+* Mongoose assigns each of your schemas an id virtual getter
+* by default which returns the documents _id field cast to a string,
+* or in the case of ObjectIds, its hexString.
+*/
 var planetSchema = new Schema({
+  _id: {type: mongoose.Schema.ObjectId},
   name: String,
   pop: Number,
   buildings: [buildingSchema],
@@ -29,14 +34,16 @@ var planetSchema = new Schema({
   owner: { type: ObjectId, ref: 'user' }
 });
 
-var Planet = mongoose.model('planet', planetSchema);
+var planet = mongoose.model('planet', planetSchema);
 
 var solarSchema = new Schema({
   name: String,
-  planets : [ type: mongoose.Schema.Types.ObjectId ]
+  planets : [planetSchema]
 });
 
-solarSchema.methods.initialize = function(planetsId) {
+solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
+  console.log('solarSchema.methods.initialize');
+  console.log(JSON.stringify(users, null, 4));
   this.name = randomstring.generate({
     length: 3,
     charset: 'alphabetic'
@@ -46,10 +53,33 @@ solarSchema.methods.initialize = function(planetsId) {
     length: 4,
     charset: 'numeric'
   });
-  this.planets = planetsId;
-  console.log('planetsId ' + JSON.stringify(planetsId, null, 4));
-  console.log('this.planets' + JSON.stringify(this.planets, null, 4));
-  console.log(typeof this.planets[0]);
+  for(var i = 0; i < nPlanets; i++){
+    var _id = mongoose.Types.ObjectId();
+    console.log("_id");
+    console.log(typeof _id);
+    //this.planets.push(_id);
+    if(i < maxPlayer){
+      motherPlanet = new planet({
+          //_id: _id,
+          name: users[i].username + 'polis',
+          pop: 10,
+          buildings: [ { type: 'qg' } ],
+          spaceships: [ {
+              spaceship_dammage: 0,
+              human_dammage: 0,
+              defence: 100,
+              cost: 20,
+              name: 'The ' + users[i].username
+            } ],
+          civilized: true
+          //owner: users[i]._id
+        });
+      users[i].planets.push(motherPlanet._id);
+      //users[i].initialize(motherPlanet._id, this._id);
+    }else{
+
+    }
+  }
 }
 
 // we need to create a model using it

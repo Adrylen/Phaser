@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var Planet = require('../models/planet');
 var Solar = require('../models/solar');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
@@ -62,7 +61,7 @@ router.post('/add', function(req, res){
       password: hash
     });
 
-    newUser.initialize();
+    //newUser.initialize();
     newUser.save(function(err) {
       if (err) {
         console.log(err);

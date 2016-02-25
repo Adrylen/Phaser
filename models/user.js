@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var Solar = require('../models/solar');
-var Planet = require('../models/planet');
 
 var ressourceSchema = new Schema({
   kaga: Number,
@@ -21,34 +20,16 @@ var userSchema = new Schema({
   ressources: ressourceSchema,
   created_at: Date,
   updated_at: Date,
-  planets: [{ type : ObjectId, ref: 'planet' }],
+  planets: [{ type : ObjectId }],
   play: Boolean,
   solar_system: { type: ObjectId, ref: 'solar' }
 });
 
 userSchema.plugin(uniqueValidator);
 
-userSchema.methods.initialize = function() {
-    var motherPlanet = new Planet({
-      name: this.username + 'polis',
-      pop: 10,
-      buildings: [ { type: 'qg' } ],
-      spaceships: [ {
-          spaceship_dammage: 0,
-          human_dammage: 0,
-          defence: 100,
-          cost: 20,
-          name: 'The ' + this.username
-        } ],
-      civilized: true,
-      owner: this._id
-    });
-    motherPlanet.save(function(err){
-      if (err) throw err;
-    });
-
-  this.planets.push(motherPlanet._id);
-  this.solar_system = null;
+userSchema.methods.initialize = function(planet_id, solar_id) {
+  this.planets.push(_id);
+  this.solar_system = solar_id;
 };
 
 userSchema.methods.editSolar_system = function(name){
@@ -57,8 +38,6 @@ userSchema.methods.editSolar_system = function(name){
 
 // on every save, add the date
 userSchema.pre('save', function(next) {
-
-  console.log(JSON.stringify(this.planets[0].name, null, 4));
 
   var currentDate = new Date();
   this.updated_at = currentDate;
