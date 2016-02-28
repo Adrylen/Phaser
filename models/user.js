@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var Solar = require('../models/solar');
+var Planet = require('../models/planet');
 
 var ressourceSchema = new Schema({
   kaga: Number,
@@ -20,7 +21,7 @@ var userSchema = new Schema({
   ressources: ressourceSchema,
   created_at: Date,
   updated_at: Date,
-  planets: [{ type : ObjectId }],
+  planets : [{ type : ObjectId, ref: 'planet' }],
   play: Boolean,
   solar_system: { type: ObjectId, ref: 'solar' }
 });
@@ -28,7 +29,17 @@ var userSchema = new Schema({
 userSchema.plugin(uniqueValidator);
 
 userSchema.methods.initialize = function(planet_id, solar_id) {
-  this.planets.push(_id);
+  console.log('userSchema.methods.initialize');
+  /*console.log(JSON.stringify(planet_id, null, 4));
+  var id = mongoose.Types.ObjectId(planet_id);
+  console.log('id ' + mongoose.Types.ObjectId.isValid(id));
+  console.log(('planet_id' + mongoose.Types.ObjectId.isValid(planet_id)));
+  console.log('solar_id' + mongoose.Types.ObjectId.isValid(solar_id));
+  console.log(id.className);
+  this.update({ _id: this._id }, { $addToSet : { planets: planet_id }});
+  //this.solar_system = solar_id;
+  this.solar_system = null;*/
+  this.planets.push(planet_id);
   this.solar_system = solar_id;
 };
 

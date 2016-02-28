@@ -5,40 +5,11 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var User = require('../models/user');
-
-
-var spaceshipSchema = new Schema({
-  spaceship_dammage: Number,
-  human_dammage: Number,
-  defence: Number,
-  cost: Number,
-  name: String
-});
-
-var buildingSchema = new Schema({
-  type: String
-})
-
-/*
-* Mongoose assigns each of your schemas an id virtual getter
-* by default which returns the documents _id field cast to a string,
-* or in the case of ObjectIds, its hexString.
-*/
-var planetSchema = new Schema({
-  //_id: {type: mongoose.Schema.ObjectId},
-  name: String,
-  pop: Number,
-  buildings: [buildingSchema],
-  spaceships: [spaceshipSchema],
-  civilized: Boolean,
-  owner: { type: ObjectId, ref: 'user' }
-});
-
-var planet = mongoose.model('planet', planetSchema);
+var Planet = require('../models/planet');
 
 var solarSchema = new Schema({
   name: String,
-  planets : [planetSchema]
+  planets : [{ type : ObjectId, ref: 'planet' }]
 });
 
 solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
@@ -54,13 +25,8 @@ solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
     charset: 'numeric'
   });
   for(var i = 0; i < nPlanets; i++){
-    var _id = mongoose.Types.ObjectId();
-    console.log("_id");
-    console.log(typeof _id);
-    //this.planets.push(_id);
     if(i < maxPlayer){
-      motherPlanet = new planet({
-          //_id: _id,
+      motherPlanet = new Planet({
           name: users[i].username + 'polis',
           pop: 10,
           buildings: [ { type: 'qg' } ],
@@ -74,8 +40,16 @@ solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
           civilized: true,
           owner: users[i]._id
         });
+      motherPlanet.save();
       //users[i].planets.push(motherPlanet._id);
-      users[i].initialize(motherPlanet._id, this._id);
+      //  db.collection.findOneAndUpdate(filter, update, options)
+      console.log(User);
+      //User.findOneAndUpdate({ username : users[i].username }, { $push : {planets : motherPlanet._id}, $set : {solar_system : this._id} });
+      this.planets.push(motherPlanet._id);
+      console.log((this._id.className));
+      var _id = mongoose.Types.ObjectId(this._id);
+      console.log(mongoose.Types.ObjectId.isValid(_id));
+      //users[i].initialize(motherPlanet._id, this._id);
     }else{
 
     }
