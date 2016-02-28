@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Planet = require('../models/planet');
 var User = require('../models/user');
 var Solar = require('../models/solar');
 var passport = require('passport');
