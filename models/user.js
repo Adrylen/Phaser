@@ -22,25 +22,31 @@ var userSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   planets : [{ type : ObjectId, ref: 'planet' }],
-  play: Boolean,
-  solar_system: { type: ObjectId, ref: 'solar' }
+  solar_system : String,
+  play: Boolean
 });
 
 userSchema.plugin(uniqueValidator);
 
-userSchema.methods.initialize = function(planet_id, solar_id) {
+userSchema.methods.initialize = function(solar_system) {
   console.log('userSchema.methods.initialize');
-  /*console.log(JSON.stringify(planet_id, null, 4));
-  var id = mongoose.Types.ObjectId(planet_id);
-  console.log('id ' + mongoose.Types.ObjectId.isValid(id));
-  console.log(('planet_id' + mongoose.Types.ObjectId.isValid(planet_id)));
-  console.log('solar_id' + mongoose.Types.ObjectId.isValid(solar_id));
-  console.log(id.className);
-  this.update({ _id: this._id }, { $addToSet : { planets: planet_id }});
-  //this.solar_system = solar_id;
-  this.solar_system = null;*/
-  this.planets.push(planet_id);
-  this.solar_system = solar_id;
+  var motherPlanet = new Planet({
+      name: users[i].username + 'polis',
+      pop: 10,
+      buildings: [ { type: 'qg' } ],
+      spaceships: [ {
+          spaceship_dammage: 0,
+          human_dammage: 0,
+          defence: 100,
+          cost: 20,
+          name: 'The ' + users[i].username
+        } ],
+      civilized: true,
+      owner: users[i]._id
+    });
+  motherPlanet.save();
+  this.planets.push(motherPlanet._id);
+  this.solar_system = solar_system;
 };
 
 userSchema.methods.editSolar_system = function(name){

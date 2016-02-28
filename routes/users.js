@@ -58,7 +58,8 @@ router.post('/add', function(req, res){
   bcrypt.hash(req.body.password, 8, function(err, hash) {
     var newUser = new User({
       username: req.body.username,
-      password: hash
+      password: hash,
+      solar_system = 'void'
     });
 
     //newUser.initialize();
@@ -77,7 +78,7 @@ router.post('/login',
   passport.authenticate('local', { failureRedirect: 'login' }),
   function(req, res) {
     //console.log(req.user);
-    if(req.user.solar_system == null){
+    if(req.user.solar_system == 'void'){
       res.redirect('start');
     }
     res.redirect('../game');
