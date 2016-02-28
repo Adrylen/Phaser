@@ -10,7 +10,7 @@ IsometricTest.prototype.init = function () {
 };
 
 IsometricTest.prototype.preload = function () {
-	game.load.image('tile', 'images/tile.png');
+	game.load.image('tile', '../images/tile.png');
 
 	game.time.advancedTiming = true;
 

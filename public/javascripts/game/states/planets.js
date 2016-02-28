@@ -19,45 +19,9 @@ Planets.prototype.create = function () {
 };
 
 Planets.prototype.update = function () {
-	/*
-	var mul = 1;
-	if(circle.x < 400)
-	{
-		speedX += 1 / mul;
-		if(circle.y < 160)
-		{
-			speedY += 0.4 / mul;
-			console.log('y+');
-		}
-		else
-		{
-			speedY -= 0.4 / mul;
-			console.log('y-');
-		}
-		console.log('x+');
-	}
-	else
-	{
-		speedX -= 1 / mul;
-		if(circle.y < 160)
-		{
-			speedY += 0.4 / mul;
-			console.log('y+');
-		}
-		else
-		{
-			speedY -= 0.4 / mul;
-			console.log('y-');
-		}
-		console.log('x-');
-	}
 
-	circle.x += speedX;
-	circle.y += speedY;
-	*/
-
-	//	vitesse de 0.01 / frame
-	theta += 0.0005;
+	//	vitesse
+	theta += 0.01;
 	//	demi grand axe de l'ellipse
 	var a = 300, b = 150;
 	//	vient de l'équation d'une ellipse
