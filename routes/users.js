@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var Solar = require('../models/solar');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
@@ -47,7 +46,7 @@ router.get('/chat', function(req, res){
 router.get('/start',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    if( req.user.solar_system != null) {
+    if( req.user.solar_system != 'void') {
       res.redirect('../game');
     }
     res.render('users/start', {user : req.user});
@@ -59,7 +58,7 @@ router.post('/add', function(req, res){
     var newUser = new User({
       username: req.body.username,
       password: hash,
-      solar_system = 'void'
+      solar_system: 'void'
     });
 
     //newUser.initialize();

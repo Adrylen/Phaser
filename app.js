@@ -16,7 +16,7 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-
+var randomstring = require("randomstring");
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
@@ -29,7 +29,7 @@ var Schema = mongoose.Schema;
 
 //    models
 var User = require('./models/user');
-var Solar = require('./models/solar');
+var Planet = require('./models/planet');
 
 //    routes
 var routes = require('./routes/index');
@@ -125,30 +125,15 @@ io.on('connection', function(socket, req){
       socket.broadcast.emit('start ready');
 
       console.log(usernames);
-      name = randomstring.generate({
-        length: 3,
-        charset: 'alphabetic'
-      });
+      var name = randomstring.generate({ length: 3, charset: 'alphabetic'}); // lets generate a random name
       name += ' ';
-      name += randomstring.generate({
-        length: 4,
-        charset: 'numeric'
-      });
+      name += randomstring.generate({ length: 4, charset: 'numeric' });
 
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
-            user.initialize(name);
+            user.initialize(name);  // Lets add mother planet and solar name
         })
       }
-      //    let's add all civilized planet in our new solar system
-
-      // updating solar_system field of all users from a same solar_system
-      /*for(var i in usernames){
-        User.findOneAndUpdate({ username : usernames[i] }, {solar_system : solar._id}, function(err, user) {
-          if (err) throw err;
-          //req.login(req.user, function(){})
-        })
-      }*/
     }
 
   })
