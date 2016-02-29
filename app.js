@@ -132,6 +132,7 @@ io.on('connection', function(socket, req){
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
             user.initialize(name);  // Lets add mother planet and solar name
+            user.save();
         })
       }
     }
