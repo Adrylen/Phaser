@@ -34,7 +34,7 @@ userSchema.methods.initialize = function(solar_system){
   console.log('---------------------------------------------------');
 
   var planet = new Planet({
-    name: 'Ma planete, la Terre',
+    name: this.name + 'olia',
     pop: 1000,
     buildings: [{ type: 'ambassade'}],
     spaceships: [{
@@ -48,7 +48,7 @@ userSchema.methods.initialize = function(solar_system){
   });
   planet.save();
   this.planets.push(planet._id);
-  
+
   console.log(planet);
 
   this.solar_system = solar_system;

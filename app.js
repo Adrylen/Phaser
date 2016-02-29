@@ -118,7 +118,7 @@ io.on('connection', function(socket, req){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    var maxPlayer = 2;
+    var maxPlayer = 4;
     var nPlanets = 8;
     if(usernames.length == maxPlayer) {
       socket.emit('start ready');
