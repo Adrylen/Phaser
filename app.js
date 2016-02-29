@@ -124,7 +124,6 @@ io.on('connection', function(socket, req){
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
-      console.log(usernames);
       solar = new Solar({
       });
 
@@ -132,25 +131,13 @@ io.on('connection', function(socket, req){
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
           users.push(user);
-          console.log(user.username);
           if(user.username == usernames[usernames.length-1]){
-            console.log('users');
-            console.log(JSON.stringify(users, null, 4));
             solar.initialize(users, nPlanets, maxPlayer);
             solar.save();
             return;
           }
         })
       }
-      //    let's add all civilized planet in our new solar system
-
-      // updating solar_system field of all users from a same solar_system
-      /*for(var i in usernames){
-        User.findOneAndUpdate({ username : usernames[i] }, {solar_system : solar._id}, function(err, user) {
-          if (err) throw err;
-          //req.login(req.user, function(){})
-        })
-      }*/
     }
 
   })

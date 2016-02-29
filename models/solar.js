@@ -14,16 +14,12 @@ var solarSchema = new Schema({
 
 solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
   console.log('solarSchema.methods.initialize');
-  console.log(JSON.stringify(users, null, 4));
-  this.name = randomstring.generate({
-    length: 3,
-    charset: 'alphabetic'
-  });
+
+
+  this.name = randomstring.generate({length: 3, charset: 'alphabetic' });
   this.name += ' ';
-  this.name += randomstring.generate({
-    length: 4,
-    charset: 'numeric'
-  });
+  this.name += randomstring.generate({ length: 4, charset: 'numeric' });
+  
   for(var i = 0; i < nPlanets; i++){
     if(i < maxPlayer){
       motherPlanet = new Planet({
@@ -41,15 +37,9 @@ solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
           owner: users[i]._id
         });
       motherPlanet.save();
-      //users[i].planets.push(motherPlanet._id);
-      //  db.collection.findOneAndUpdate(filter, update, options)
-      console.log(User);
-      //User.findOneAndUpdate({ username : users[i].username }, { $push : {planets : motherPlanet._id}, $set : {solar_system : this._id} });
       this.planets.push(motherPlanet._id);
-      console.log((this._id.className));
-      var _id = mongoose.Types.ObjectId(this._id);
-      console.log(mongoose.Types.ObjectId.isValid(_id));
-      //users[i].initialize(motherPlanet._id, this._id);
+      users[i].initialize(motherPlanet._id, this._id);
+      users[i].save();
     }else{
 
     }
