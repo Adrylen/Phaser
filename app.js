@@ -16,7 +16,7 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-var randomstring = require("randomstring");
+
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
@@ -29,7 +29,7 @@ var Schema = mongoose.Schema;
 
 //    models
 var User = require('./models/user');
-var Planet = require('./models/planet');
+var Solar = require('./models/solar');
 
 //    routes
 var routes = require('./routes/index');
@@ -124,29 +124,18 @@ io.on('connection', function(socket, req){
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
-<<<<<<< HEAD
-      console.log(usernames);
-      var name = randomstring.generate({ length: 3, charset: 'alphabetic'}); // lets generate a random name
-      name += ' ';
-      name += randomstring.generate({ length: 4, charset: 'numeric' });
-=======
       solar = new Solar({
       });
->>>>>>> prod
 
+      var users = [];
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
-<<<<<<< HEAD
-            user.initialize(name);  // Lets add mother planet and solar name
-            user.save();
-=======
           users.push(user);
           if(user.username == usernames[usernames.length-1]){
             solar.initialize(users, nPlanets, maxPlayer);
             solar.save();
             return;
           }
->>>>>>> prod
         })
       }
     }
