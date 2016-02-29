@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Planet = require('../models/planet');
 var User = require('../models/user');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
