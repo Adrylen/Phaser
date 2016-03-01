@@ -13,14 +13,15 @@ block script
 		socket.emit('game', username, solar_system);  // load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
+				console.log(users.length);
 				for(var i in users) {
 					console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
 					//	display planets of the logged in user
 					if(users[i].username == username){
 						for( var k in users[i].planets ){
 							$('#planets').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text(users[i].planets[k].name));
-							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Kaga ' + users[i].planets[k].ressources.kaga));
-							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Iron ' + users[i].planets[k].ressources.iron));
+							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Kaga ' + users[i].ressources.kaga));
+							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Iron ' + users[i].ressources.iron));
 						}
 					}
 					//	display other players

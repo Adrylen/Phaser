@@ -29,7 +29,8 @@ var planetSchema = new Schema({
   pop: Number,
   buildings: [buildingSchema],
   spaceships: [spaceshipSchema],
-  civilized: Boolean
+  civilized: Boolean,
+  owner: { type: ObjectId, ref: 'user' }
 });
 
 var Planet = mongoose.model('planet', planetSchema);

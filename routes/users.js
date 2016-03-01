@@ -47,7 +47,7 @@ router.get('/chat', function(req, res){
 router.get('/start',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    if( req.user.solar_system != 'void') {
+    if( req.user.solar_system != null) {
       res.redirect('../game');
     }
     res.render('users/start', {user : req.user});
@@ -59,7 +59,7 @@ router.post('/add', function(req, res){
     var newUser = new User({
       username: req.body.username,
       password: hash,
-      solar_system: 'void'
+      solar_system: null
     });
 
     //newUser.initialize();
@@ -78,7 +78,7 @@ router.post('/login',
   passport.authenticate('local', { failureRedirect: 'login' }),
   function(req, res) {
     //console.log(req.user);
-    if(req.user.solar_system == 'void'){
+    if(req.user.solar_system == null){
       res.redirect('start');
     }
     res.redirect('../game');

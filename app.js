@@ -117,22 +117,20 @@ io.on('connection', function(socket, req){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    var maxPlayer = 4;
+    var maxPlayer = 2;
     var nPlanets = 8;
     if(usernames.length == maxPlayer) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
 
-      solar = new Solar({
-      });
-
+      solar = new Solar({});
+      solar.save();
       var users = [];
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
           users.push(user);
           if(user.username == usernames[usernames.length-1]){
             solar.initialize(users, nPlanets, maxPlayer); // create mother planet and so on...
-            solar.save();
             return;
           }
         })
@@ -143,16 +141,24 @@ io.on('connection', function(socket, req){
 
   socket.on('game', function(username, solar_system){
     console.log( solar_system );
-      User.find({ solar_system : solar_system }, function(err, users) {
+      /*User.find({ solar_system : solar_system }, function(err, users) {
           if (err) return cb(err);
           for(var i in users) {
             console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
             users[i].password = ''; //  otherwise security breach
           }
           socket.emit('data', users);
-      })
-  })
-
+      })*/
+      User.find({ solar_system : solar_system }).populate('planets').exec(function(err, users) {
+          if (err) throw err;
+          console.log('users.length' + users.length);
+          for(var i in users) {
+            console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+            users[i].password = ''; //  otherwise security breach
+          }
+          socket.emit('data', users);
+      });
+    });
 });
 
 
