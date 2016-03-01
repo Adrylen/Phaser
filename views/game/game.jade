@@ -19,13 +19,26 @@ block script
 					//	display planets of the logged in user
 					if(users[i].username == username){
 						for( var k in users[i].planets ){
-							$('#planets').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text(users[i].planets[k].name));
-							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Kaga ' + users[i].ressources.kaga));
-							$('#ressources').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text('Iron ' + users[i].ressources.iron));
+							console.log(JSON.stringify(users[i].planets[k].name,null, 4));
+							$('#planets')
+								.append($('<li class="pure-menu-item"></li>'))
+								.append($('<a class="pure-menu-link">')
+								.text(users[i].planets[k].name));
+							$('#ressources')
+								.append($('<li class="pure-menu-item"></li>'))
+								.append($('<a class="pure-menu-link">')
+								.text('Kaga ' + users[i].ressources.kaga));
+							$('#ressources')
+								.append($('<li class="pure-menu-item"></li>'))
+								.append($('<a class="pure-menu-link">')
+								.text('Iron ' + users[i].ressources.iron));
 						}
 					}
 					//	display other players
-					$('#players').append($('<li class="pure-menu-item"></li>')).append($('<a class="pure-menu-link">').text(users[i].username));
+					$('#players')
+						.append($('<li class="pure-menu-item"></li>'))
+						.append($('<a class="pure-menu-link">')
+						.text(users[i].username));
 				}
 		});
 	script(src='../javascripts/phaser/phaser.js')
