@@ -1,0 +1,54 @@
+#N canvas 687 135 617 536 10;
+#X obj -5 -89 cnv 15 300 100 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 248 165 qlist;
+#X obj 196 63 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 248 61 loadbang;
+#X obj -191 -87 r note;
+#X obj -110 -69 print note;
+#X msg 248 88 tempo 2;
+#X msg 311 89 clear;
+#X obj -179 101 mtof;
+#X obj -68 245 / 100;
+#X obj -179 356 *~;
+#X floatatom -145 41 5 0 0 0 - - -;
+#X obj -179 302 clip~ -1 1;
+#X obj -179 234 *~ 10000;
+#X msg -68 274 \$1 10;
+#X obj -179 -38 unpack 1 2 3;
+#X obj -179 386 *~ 0.5;
+#X obj -179 165 osc~;
+#X floatatom -179 41 5 0 0 0 - - -;
+#X obj -68 302 vline~;
+#X obj -178 416 dac~;
+#X msg 26 -68 add 0 note 32 100 0 \, add 560 note 32 0 0 \, add 480
+note 36 100 0 \, add 240 note 36 0 0 \, add 560 note 37 100 0 \, add
+240 note 37 0 0 \, add 240 note 37 100 0 \, add 240 note 37 0 0 \,
+;
+#X msg 35 -5 add 0 note 33 100 0 \, add 250 note 33 0 0 \, add 750
+note 33 100 0 \, add 250 note 33 0 0 \, add 750 note 33 100 0 \, add
+250 note 33 0 0 \, add 750 note 33 100 0 \, add 250 note 33 0 0 \,
+;
+#X connect 2 0 1 0;
+#X connect 3 0 6 0;
+#X connect 4 0 5 0;
+#X connect 4 0 15 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 8 0 17 0;
+#X connect 9 0 14 0;
+#X connect 10 0 16 0;
+#X connect 11 0 9 0;
+#X connect 12 0 10 0;
+#X connect 13 0 12 0;
+#X connect 14 0 19 0;
+#X connect 15 0 18 0;
+#X connect 15 1 11 0;
+#X connect 16 0 20 0;
+#X connect 16 0 20 1;
+#X connect 17 0 13 0;
+#X connect 18 0 8 0;
+#X connect 19 0 10 1;
+#X connect 21 0 1 0;
+#X connect 22 0 1 0;

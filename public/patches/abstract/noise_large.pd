@@ -1,0 +1,25 @@
+#N canvas 523 121 642 457 10;
+#X obj 125 277 noise~;
+#X obj 122 322 samphold~;
+#X obj 123 370 *~;
+#X obj 122 408 dac~;
+#X obj 192 40 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 192 68 trigger bang bang;
+#X obj 192 199 vline~;
+#X obj 291 281 vline~;
+#X obj 192 236 phasor~;
+#X msg 291 234 1 0 \, 0 1500;
+#X msg 192 152 700 100 \, 1200 2500;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 10 0;
+#X connect 5 1 9 0;
+#X connect 6 0 8 0;
+#X connect 7 0 2 1;
+#X connect 8 0 1 1;
+#X connect 9 0 7 0;
+#X connect 10 0 6 0;
