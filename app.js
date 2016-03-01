@@ -16,10 +16,6 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-var Moniker = require('./moniker');
-var planets = Moniker.generator([Moniker.planet]);
-console.log(planets.choose());
-
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;

@@ -4,6 +4,9 @@ var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
+var Moniker = require('../moniker');
+var planets = Moniker.generator([Moniker.planet]);  //  initialize planets generator
+
 var Planet = require('../models/planet');
 
 var ressourceSchema = new Schema({
@@ -34,7 +37,7 @@ userSchema.methods.initialize = function(solar_system){
   console.log('---------------------------------------------------');
 
   var planet = new Planet({
-    name: this.name + 'olia',
+    name: planets.choose(),
     pop: 1000,
     buildings: [{ type: 'ambassade'}],
     spaceships: [{
@@ -42,7 +45,7 @@ userSchema.methods.initialize = function(solar_system){
       human_dammage: 0,
       defence: 100,
       cost: 1000,
-      name: 'tartiflette'
+      name: 'space cruiser 1'
     }],
     civilized: true
   });
