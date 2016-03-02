@@ -1,8 +1,5 @@
 var Planets = function(game) {};
 
-var x = 0;
-var speedX = 0;
-var speedY = 9.6;
 var theta = 1;
 
 Planets.prototype.init = function () {
@@ -11,29 +8,50 @@ Planets.prototype.init = function () {
 };
 
 Planets.prototype.preload = function () {
-	game.load.image('circle', '../images/circle.png')
+	game.load.image('sun', '../images/sun.png');
+	game.load.image('planet1', '../images/planet1.png');
+	game.load.image('planet2', '../images/planet2.png');
+	game.load.image('planet3', '../images/planet3.png');
+	game.load.image('planet4', '../images/planet4.png');
+	game.load.image('planet5', '../images/planet5.png');
+	game.load.image('planet6', '../images/planet6.png');
+	game.load.image('galaxy', '../images/galaxy.jpg');
 };
 
 Planets.prototype.create = function () {
-	circle = game.add.image(50, 160, 'circle');
+	game.add.image(0, 30, 'galaxy');
+
+	sun = game.add.image(game.width/2-35, (game.height-30)/2-5, 'sun'); sun.width = 70; sun.height = 70;
+	planet1 = game.add.image(0, 0, 'planet1'); planet1.width = 32; planet1.height = 32;
+	planet2 = game.add.image(0, 0, 'planet2'); planet2.width = 32; planet2.height = 32;
+	planet3 = game.add.image(0, 0, 'planet3'); planet3.width = 32; planet3.height = 32;
+	planet4 = game.add.image(0, 0, 'planet4'); planet4.width = 32; planet4.height = 32;
+	planet5 = game.add.image(0, 0, 'planet5'); planet5.width = 32; planet5.height = 32;
+	planet6 = game.add.image(0, 0, 'planet6'); planet6.width = 32; planet6.height = 32;
 };
 
 Planets.prototype.update = function () {
-
 	//	vitesse
-	theta += 0.01;
+	theta += 0.05;
 	//	demi grand axe de l'ellipse
-	var a = 300, b = 150;
+	var a = 470, b = 220;
 	//	vient de l'équation d'une ellipse
-	circle.x = 400 + a * Math.cos(theta);
-	circle.y = 150 + b * Math.sin(theta);
-
+	planet1.x = this.moveX(planet1.width, a*1.00, (theta+1)*0.23); planet1.y = this.moveY(planet1.height, b*1.00, (theta+1)*0.23);
+	planet2.x = this.moveX(planet2.width, a*0.84, (theta-1.3)*0.39); planet2.y = this.moveY(planet2.height, b*0.84, (theta-1.3)*0.39);
+	planet3.x = this.moveX(planet3.width, a*0.70, (theta+1.6)*0.55); planet3.y = this.moveY(planet3.height, b*0.70, (theta+1.6)*0.55);
+	planet4.x = this.moveX(planet4.width, a*0.55, (theta-1.9)*0.70); planet4.y = this.moveY(planet4.height, b*0.55, (theta-1.9)*0.70);
+	planet5.x = this.moveX(planet5.width, a*0.39, (theta+2.2)*0.84); planet5.y = this.moveY(planet5.height, b*0.39, (theta+2.2)*0.84);
+	planet6.x = this.moveX(planet6.width, a*0.23, (theta-2.5)*1.00); planet6.y = this.moveY(planet6.height, b*0.23, (theta-2.5)*1.00);
 };
 
 Planets.prototype.render = function () {
 
 };
 
-Planets.prototype.move = function () {
+Planets.prototype.moveX = function (width, a, theta) {
+	return game.width/2 - width/2 + a*Math.cos(theta);
+};
 
+Planets.prototype.moveY = function (height, b, theta) {
+	return (game.height + 30)/2 - height/2 + b*Math.sin(theta);
 };
