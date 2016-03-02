@@ -22,7 +22,6 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
 
-  console.log(JSON.stringify(users[0], null, 4));
   for(var i = 0; i < maxPlayer; i++){
     motherPlanet = new Planet({
       name: planets.choose(),
@@ -37,6 +36,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
       }],
       a: 200 + i*50,
       b: 100 + i*25,
+      img: i+1,  // image num 1, 2, 3...
       owner: users[i]._id,
       civilized: true
     });

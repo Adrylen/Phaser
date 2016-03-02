@@ -30,9 +30,9 @@ var planetSchema = new Schema({
   buildings: [buildingSchema],
   spaceships: [spaceshipSchema],
   civilized: Boolean,
-  a: Number,
+  a: Number,  //  demis grands axes de l'ellipse
   b: Number,
-  img: Number,
+  img: Number,  // img de la planete
   owner: { type: ObjectId, ref: 'user' }
 });
 
