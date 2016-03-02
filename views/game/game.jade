@@ -1,9 +1,17 @@
 extends ../layouts/layoutgame
 
 h1= title
-block script
+
+block libs
 	script(src='../javascripts/jquery.min.js')
 	script(src='../javascripts/socket.io.js')
+	script(src='../javascripts/phaser/phaser.js')
+	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
+	script(src='../javascripts/webpd/webpd-latest.js')
+	script(src='../javascripts/webpd/pd-fileutils.js')
+
+block script
+	// Server
 	script(type='text/javascript').
 		// start connection to the server
 		var socket = io();
@@ -41,12 +49,16 @@ block script
 						.text(users[i].username));
 				}
 		});
-	script(src='../javascripts/phaser/phaser.js')
-	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
+		
+
+
+	// Phaser
 	script(src='../javascripts/game/states/city.js')
 	script(src='../javascripts/game/states/planets.js')
 	script(src='../javascripts/game/game.js')
-	
+
+block content
+	img#image
 	.pure-g
 		.pure-u-4-5#parent
 		.pure-u-1-5.pure-menu.custom-restricted-width
@@ -58,3 +70,5 @@ block script
 					li.pure-menu-heading my ressources
 				button.pure-button(onclick="start('planets');") Planets
 				button.pure-button(onclick="start('city');") City
+	// WebPd
+	script(src='../javascripts/webpd/loadPatches.js')

@@ -28,3 +28,9 @@ button
 {
 	margin-left: 5px;
 }
+
+#image {
+	position: absolute;
+	top: 1%;
+	right: 1%;
+}
