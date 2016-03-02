@@ -19,7 +19,7 @@ block script
 					//	display planets of the logged in user
 					if(users[i].username == username){
 						for( var k in users[i].planets ){
-							console.log(JSON.stringify(users[i].planets[k].name,null, 4));
+							//console.log(JSON.stringify(users[i].planets[k].name,null, 4));
 							$('#planets')
 								.append($('<li class="pure-menu-item"></li>'))
 								.append($('<a class="pure-menu-link">')

@@ -118,7 +118,6 @@ io.on('connection', function(socket, req){
       socket.broadcast.emit('user disconnected');
     })
     var maxPlayer = 2;
-    var nPlanets = 8;
     if(usernames.length == maxPlayer) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
@@ -130,7 +129,7 @@ io.on('connection', function(socket, req){
         User.findOne({ username: usernames[i] }, function(err, user){
           users.push(user);
           if(user.username == usernames[usernames.length-1]){
-            solar.initialize(users, nPlanets, maxPlayer); // create mother planet and so on...
+            solar.initialize(users, maxPlayer); // create mother planet and so on...
             return;
           }
         })

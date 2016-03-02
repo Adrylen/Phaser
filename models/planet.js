@@ -30,6 +30,9 @@ var planetSchema = new Schema({
   buildings: [buildingSchema],
   spaceships: [spaceshipSchema],
   civilized: Boolean,
+  a: Number,
+  b: Number,
+  img: Number,
   owner: { type: ObjectId, ref: 'user' }
 });
 

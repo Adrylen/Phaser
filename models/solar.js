@@ -15,36 +15,34 @@ var solarSchema = new Schema({
   planets : [{ type : ObjectId, ref: 'planet' }]
 });
 
-solarSchema.methods.initialize = function(users, nPlanets, maxPlayer) {
+solarSchema.methods.initialize = function(users, maxPlayer) {
   console.log('solarSchema.methods.initialize');
-
 
   this.name = randomstring.generate({length: 3, charset: 'alphabetic' });
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
 
-  for(var i = 0; i < nPlanets; i++){
-    if(i < maxPlayer){
-      motherPlanet = new Planet({
-        name: planets.choose(),
-        pop: 1000,
-        buildings: [{ type: 'ambassade'}],
-        spaceships: [{
-          spaceship_dammage: 0,
-          human_dammage: 0,
-          defence: 100,
-          cost: 1000,
-          name: 'space cruiser 1'
-        }],
-        owner: users[i],
-        civilized: true
-      });
-      motherPlanet.save();
-      this.planets.push(motherPlanet._id);
-      users[i].initialize(motherPlanet._id, this._id);
-    }else{
-
-    }
+  console.log(JSON.stringify(users[0], null, 4));
+  for(var i = 0; i < maxPlayer; i++){
+    motherPlanet = new Planet({
+      name: planets.choose(),
+      pop: 1000,
+      buildings: [{ type: 'ambassade'}],
+      spaceships: [{
+        spaceship_dammage: 0,
+        human_dammage: 0,
+        defence: 100,
+        cost: 1000,
+        name: 'space cruiser 1'
+      }],
+      a: 200 + i*50,
+      b: 100 + i*25,
+      owner: users[i]._id,
+      civilized: true
+    });
+    motherPlanet.save();
+    this.planets.push(motherPlanet._id);
+    users[i].initialize(motherPlanet._id, this._id);
   }
   this.save();
 }
