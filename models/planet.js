@@ -16,7 +16,10 @@ var spaceshipSchema = new Schema({
 });
 
 var buildingSchema = new Schema({
-  type: String
+  type: String,
+  level: Number
+  /*
+  mine iron, generator watt, farm food, factory , lumberjack, pump
 })
 
 /*
@@ -29,7 +32,6 @@ var planetSchema = new Schema({
   pop: Number,
   buildings: [buildingSchema],
   spaceships: [spaceshipSchema],
-  civilized: Boolean,
   a: Number,  //  demis grands axes de l'ellipse
   b: Number,
   direction: Boolean, // sens horaire ou sens trigo

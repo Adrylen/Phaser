@@ -12,7 +12,8 @@ var ressourceSchema = new Schema({
   watt: Number,
   food: Number,
   water: Number,
-  Oxygen: Number
+  tool: Number,
+  lumber: Number
 });
 
 var userSchema = new Schema({
@@ -39,7 +40,8 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
     watt: 100,
     food: 100,
     water: 100,
-    Oxygen: 100
+    tool: 100,
+    lumber: 100
   };
   this.planets.push(planet_id);
   this.solar_system = solar_system_id;
