@@ -36,6 +36,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
       }],
       a: 200 + i*50,
       b: 100 + i*25,
+      direction: i%2,
       img: i+1,  // image num 1, 2, 3...
       owner: users[i]._id,
       civilized: true

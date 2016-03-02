@@ -32,6 +32,7 @@ var planetSchema = new Schema({
   civilized: Boolean,
   a: Number,  //  demis grands axes de l'ellipse
   b: Number,
+  direction: Boolean, // sens horaire ou sens trigo
   img: Number,  // img de la planete
   owner: { type: ObjectId, ref: 'user' }
 });
