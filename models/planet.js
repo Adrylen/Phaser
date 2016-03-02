@@ -20,6 +20,7 @@ var buildingSchema = new Schema({
   level: Number
   /*
   mine iron, generator watt, farm food, factory , lumberjack, pump
+  */
 })
 
 /*
