@@ -5,10 +5,6 @@ h1= title
 block libs
 	script(src='../javascripts/jquery.min.js')
 	script(src='../javascripts/socket.io.js')
-	script(src='../javascripts/phaser/phaser.js')
-	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
-	script(src='../javascripts/webpd/webpd-latest.js')
-	script(src='../javascripts/webpd/pd-fileutils.js')
 
 block script
 	// Server
@@ -21,7 +17,6 @@ block script
 		socket.emit('game', username, solar_system);  // load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
-				console.log(users.length);
 				for(var i in users) {
 					console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
 					//	display planets of the logged in user
@@ -53,6 +48,10 @@ block script
 
 
 	// Phaser
+	script(src='../javascripts/phaser/phaser.js')
+	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
+	script(src='../javascripts/webpd/webpd-latest.js')
+	script(src='../javascripts/webpd/pd-fileutils.js')
 	script(src='../javascripts/game/states/city.js')
 	script(src='../javascripts/game/states/planets.js')
 	script(src='../javascripts/game/game.js')

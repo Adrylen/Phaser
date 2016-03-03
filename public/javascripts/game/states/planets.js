@@ -1,6 +1,30 @@
 var Planets = function(game) {};
 
+/*
+Une planète suit une orbite fermée autour du Soleil
+(une éclipse mais très peu aplatie : en gros, un cercle centré sur le Soleil)
+ parce qu'elle est en équilibre entre deux forces antagonistes : l'attraction
+gravitationnelle solaire qui tend à la faire tomber vers le Soleil,
+ et la force centrifuge qui tend à l'en écarter
+(la force centrifuge est celle que l'on ressent, par exemple,
+sur un manège ou dans une voiture qui vire ; elle tend vous éloigner de l'axe de rotation).
+
+L'intensité de la force gravitationnelle est proportionnelle à l'inverse
+ du carré de la distance D entre la planète et le Soleil.
+L'intensité de la force centrifuge est proportionnelle au rapport entre
+ le carré de la vitesse de la planète et la distance D.
+A chaque instant, ces forces sont opposées en direction et égale en intensité
+(leur somme est bien nulle). Du coup, la vitesse de la planète est proportionnelle
+ à l'inverse de la racine carrée de D : plus la planète est loin du Soleil,
+ moins elle va vite ; 4 fois plus loin, 2 fois moins vite.
+Cette relation se traduit aussi par la fameuse troisième
+ loi de Kepler qui stipule que le rapport entre le cube de la distance
+ et le carré de la période est une constante, indépendante de la planète
+*/
+
 var theta = 1;
+//console.log(JSON.stringify(users,null, 4));	// so that the display is pretty
+console.log('bazzinga =}');
 
 Planets.prototype.init = function () {
 	var planets = null;
