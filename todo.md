@@ -1,7 +1,6 @@
 ## TODOLIST
 
 * A faire:
-  * ajouter infos sur le joueur dans la sidebar
   * Planete dynamique
   * Placer batiments sur la carte
 
@@ -14,7 +13,9 @@
 
 
   * Adrien
-
+      * Switch entre planètes/cités avec envoi de données
+	  * Ajouter la top barre
+      * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
       * Envoyer un objet solar au client
