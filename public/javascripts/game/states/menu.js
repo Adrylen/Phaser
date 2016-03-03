@@ -10,9 +10,9 @@ menu.prototype.init = function()
 
 menu.prototype.preload = function()
 {
-	game.load.spritesheet('start', 'images/startButton.png', 204, 160);
-	game.load.spritesheet('options', 'images/optionsButton.png', 204, 160);
-	game.load.spritesheet('help', 'images/helpButton.png', 204, 160);
+	game.load.spritesheet('start', 'images/buttons/startButton.png', 204, 160);
+	game.load.spritesheet('options', 'images/buttons/optionsButton.png', 204, 160);
+	game.load.spritesheet('help', 'images/buttons/helpButton.png', 204, 160);
 };
 
 menu.prototype.create = function()

@@ -7,7 +7,7 @@ options.prototype.init = function()
 
 options.prototype.preload = function()
 {
-	game.load.spritesheet('back', 'images/backButton.png', 204, 160);
+	game.load.spritesheet('back', 'images/buttons/backButton.png', 204, 160);
 };
 
 options.prototype.create = function()

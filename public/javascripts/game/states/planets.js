@@ -32,14 +32,21 @@ Planets.prototype.init = function () {
 };
 
 Planets.prototype.preload = function () {
-	game.load.image('sun', '../images/sun.png');
-	game.load.image('planet1', '../images/planet1.png');
-	game.load.image('planet2', '../images/planet2.png');
-	game.load.image('planet3', '../images/planet3.png');
-	game.load.image('planet4', '../images/planet4.png');
-	game.load.image('planet5', '../images/planet5.png');
-	game.load.image('planet6', '../images/planet6.png');
-	game.load.image('galaxy', '../images/galaxy.jpg');
+	// Background
+	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
+
+	// Planets
+	game.load.image('sun', '../images/planets/sun.png');
+	game.load.image('planet1', '../images/planets/planet1.png');
+	game.load.image('planet2', '../images/planets/planet2.png');
+	game.load.image('planet3', '../images/planets/planet3.png');
+	game.load.image('planet4', '../images/planets/planet4.png');
+	game.load.image('planet5', '../images/planets/planet5.png');
+	game.load.image('planet6', '../images/planets/planet6.png');
+
+	// Bars
+	game.load.image('topBar', '../images/bars/top_bar.jpg');
+	game.load.image('coin', '../images/planets/circle.png');
 };
 
 Planets.prototype.create = function () {
@@ -52,6 +59,10 @@ Planets.prototype.create = function () {
 	planet4 = game.add.image(0, 0, 'planet4'); planet4.width = 32; planet4.height = 32;
 	planet5 = game.add.image(0, 0, 'planet5'); planet5.width = 32; planet5.height = 32;
 	planet6 = game.add.image(0, 0, 'planet6'); planet6.width = 32; planet6.height = 32;
+
+	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
+	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
+	text = game.add.text(32, 2, userForPhaser.ressources.kaga, {font: "bold 26px Arial", fill: "#ee0"});
 };
 
 Planets.prototype.update = function () {
