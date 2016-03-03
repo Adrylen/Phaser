@@ -9,6 +9,7 @@
 
 * Fait:
   * Envoyer un objet solar au client
+  * Affichage d'une topBar et des Kagas du joueur
 
 * Qui travaille sur quoi:
 
@@ -19,7 +20,9 @@
 
 
   * Adrien
-
+	  * Switch entre planètes/cités avec envoi de données
+	  * Ajouter la top barre
+	  * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
     * supprimer champ planets de l'objet solar
