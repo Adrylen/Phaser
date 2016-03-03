@@ -50,23 +50,17 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
   this.save();
 }
 
-userSchema.methods.getSolar = function(){
+userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');
   console.log('                getSolar');
   console.log('-----------------------------------------');
-  Solar.findById(this.solar_system).populate('planets').populate('users').exec(function(err, solar) {
+  Solar.findById(this.solar_system).populate('planets').populate('users', 'planets').exec(function(err, solar) {
       if (err) throw err;
       for(var i in solar.users) {
-        console.log('je suis hyper content!!!! :O==#');
-        console.log(JSON.stringify(solar.users[i],null, 4));	// so that the display is pretty
         solar.users[i].password = ''; //  otherwise security breach
       }
-      console.log(JSON.stringify(solar, null, 4));
-      var mySolar = JSON.parse(JSON.stringify(solar));
-      solar.name = 'mouche qui pete';
-      console.log(JSON.stringify(mySolar, null, 4));
-      console.log('zizi');
-      return mySolar;
+      var mySolar = JSON.parse(JSON.stringify(solar));  // copy object instead of reference
+      callback(mySolar);
   });
 }
 

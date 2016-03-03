@@ -12,13 +12,14 @@ block script
 		// start connection to the server
 		var socket = io();
 
-		var username = '#{username}';
-		var solar_system = '#{solar_system}';
+		username = '#{username}'; // all variable might be global so n "var"
+		solar_system = !{JSON.stringify(solar_system)};
+		console.log(JSON.stringify(solar_system, null, 4));
 		socket.emit('game', username, solar_system);  // load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
 				for(var i in users) {
-					console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
+					//console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
 					//	display planets of the logged in user
 					if(users[i].username == username){
 						for( var k in users[i].planets ){

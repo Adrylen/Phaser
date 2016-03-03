@@ -23,8 +23,8 @@ Cette relation se traduit aussi par la fameuse troisième
 */
 
 var theta = 1;
-//console.log(JSON.stringify(users,null, 4));	// so that the display is pretty
-console.log('bazzinga =}');
+
+console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
 Planets.prototype.init = function () {
 	var planets = null;

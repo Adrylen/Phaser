@@ -15,11 +15,12 @@ router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/log
   console.log('---------------------------------------------------');
   console.log('              routes/game.js /game');
   console.log('---------------------------------------------------');
-  var solar = req.user.getSolar(function(){
+  req.user.getSolar(function(solar){
     console.log(JSON.stringify(solar, null, 4));
     console.log('Stackanoviste pour la vie');
+    res.render('game/game', { username: req.user.username, solar_system : solar });
   });
-  res.render('game/game', { username: req.user.username, solar_system : req.user.solar_system });
+  console.log('                      Staliniste pour la vie!');
 });
 
 module.exports = router;
