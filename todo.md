@@ -4,6 +4,9 @@
   * Planete dynamique
   * Placer batiments sur la carte
 
+* Fait:
+  * Envoyer un objet solar au client
+
 * Qui travaille sur quoi:
 
   * Kenneth
@@ -18,4 +21,4 @@
       * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
-      * Envoyer un objet solar au client
+    * supprimer champ planets de l'objet solar

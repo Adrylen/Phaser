@@ -1,5 +1,88 @@
 # Erkma
 
+## Structure de donnée utilisée:
+
+* Sous forme d'exemple:
+```json
+{
+    "_id": "56d83354718890f51779d058",
+    "__v": 1,
+    "name": "YxV 5792",
+    "users": [
+        {
+            "password": "",
+            "_id": "56d83349718890f51779d056",
+            "planets": [
+                "56d83354718890f51779d059"
+            ]
+        },
+        {
+            "password": "",
+            "_id": "56d83352718890f51779d057",
+            "planets": [
+                "56d83354718890f51779d05c"
+            ]
+        }
+    ],
+    "planets": [
+        {
+            "_id": "56d83354718890f51779d059",
+            "name": "Dagobah",
+            "pop": 1000,
+            "a": 200,
+            "b": 100,
+            "direction": false,
+            "img": 1,
+            "owner": "56d83349718890f51779d056",
+            "__v": 0,
+            "spaceships": [
+                {
+                    "spaceship_dammage": 0,
+                    "human_dammage": 0,
+                    "defence": 100,
+                    "cost": 1000,
+                    "name": "space cruiser 1",
+                    "_id": "56d83354718890f51779d05a"
+                }
+            ],
+            "buildings": [
+                {
+                    "type": "ambassade",
+                    "_id": "56d83354718890f51779d05b"
+                }
+            ]
+        },
+        {
+            "_id": "56d83354718890f51779d05c",
+            "name": "Ithor",
+            "pop": 1000,
+            "a": 250,
+            "b": 125,
+            "direction": true,
+            "img": 2,
+            "owner": "56d83352718890f51779d057",
+            "__v": 0,
+            "spaceships": [
+                {
+                    "spaceship_dammage": 0,
+                    "human_dammage": 0,
+                    "defence": 100,
+                    "cost": 1000,
+                    "name": "space cruiser 1",
+                    "_id": "56d83354718890f51779d05d"
+                }
+            ],
+            "buildings": [
+                {
+                    "type": "ambassade",
+                    "_id": "56d83354718890f51779d05e"
+                }
+            ]
+        }
+    ]
+}
+```
+
 ## Installation
 
 Je peux vous installer le projet, ou alors vous pouvez essayer par vous meme en suivant ce petit guide.
