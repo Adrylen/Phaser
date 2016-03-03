@@ -12,7 +12,8 @@ var Planet = require('../models/planet');
 
 var solarSchema = new Schema({
   name: String,
-  planets : [{ type : ObjectId, ref: 'planet' }]
+  planets : [{ type : ObjectId, ref: 'planet' }],
+  users: [{ type : ObjectId, ref: 'user' }]
 });
 
 solarSchema.methods.initialize = function(users, maxPlayer) {
@@ -42,6 +43,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
       civilized: true
     });
     motherPlanet.save();
+    this.users.push(users[i]._id);
     this.planets.push(motherPlanet._id);
     users[i].initialize(motherPlanet._id, this._id);
   }

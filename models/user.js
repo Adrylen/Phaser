@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var Planet = require('../models/planet');
+var Solar = require('../models/solar');
 
 var ressourceSchema = new Schema({
   kaga: Number,
@@ -47,6 +48,26 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
   this.solar_system = solar_system_id;
 
   this.save();
+}
+
+userSchema.methods.getSolar = function(){
+  console.log('-----------------------------------------');
+  console.log('                getSolar');
+  console.log('-----------------------------------------');
+  Solar.findById(this.solar_system).populate('planets').populate('users').exec(function(err, solar) {
+      if (err) throw err;
+      for(var i in solar.users) {
+        console.log('je suis hyper content!!!! :O==#');
+        console.log(JSON.stringify(solar.users[i],null, 4));	// so that the display is pretty
+        solar.users[i].password = ''; //  otherwise security breach
+      }
+      console.log(JSON.stringify(solar, null, 4));
+      var mySolar = JSON.parse(JSON.stringify(solar));
+      solar.name = 'mouche qui pete';
+      console.log(JSON.stringify(mySolar, null, 4));
+      console.log('zizi');
+      return mySolar;
+  });
 }
 
 var User = mongoose.model('user', userSchema); // we need to create a model using it
