@@ -2,7 +2,7 @@
 
 ## Structure de donnée utilisée:
 
-* Sous forme d'exemple:
+* Exemple de solar_system envoyé au client:
 ```json
 {
     "_id": "56d83354718890f51779d058",
