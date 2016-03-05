@@ -54,7 +54,7 @@ userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');
   console.log('                getSolar');
   console.log('-----------------------------------------');
-  Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets'}}).exec(function(err, solar) {
+  Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
     if (err) throw err;
     console.log(JSON.stringify(solar, null, 4));
     for(var i in solar.users) {

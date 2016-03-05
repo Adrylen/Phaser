@@ -4,16 +4,16 @@
 
 * Sous forme d'exemple:
 ```json
-{{
-    "_id": "56daf8b044fb46dc2865cb36",
+{
+    "_id": "56daffaaf771fc972c761a90",
     "__v": 1,
-    "name": "oJt 5178",
+    "name": "USz 5662",
     "users": [
         {
-            "_id": "56daf8a244fb46dc2865cb34",
+            "_id": "56daff9df771fc972c761a8e",
             "username": "poop",
             "password": "",
-            "solar_system": "56daf8b044fb46dc2865cb36",
+            "solar_system": "56daffaaf771fc972c761a90",
             "__v": 1,
             "ressources": {
                 "kaga": 100,
@@ -25,14 +25,40 @@
                 "lumber": 100
             },
             "planets": [
-                "56daf8b044fb46dc2865cb37"
+                {
+                    "_id": "56daffaaf771fc972c761a91",
+                    "name": "Almania",
+                    "pop": 1000,
+                    "a": 200,
+                    "b": 100,
+                    "direction": false,
+                    "img": 1,
+                    "owner": "56daff9df771fc972c761a8e",
+                    "__v": 0,
+                    "spaceships": [
+                        {
+                            "spaceship_dammage": 0,
+                            "human_dammage": 0,
+                            "defence": 100,
+                            "cost": 1000,
+                            "name": "space cruiser 1",
+                            "_id": "56daffaaf771fc972c761a92"
+                        }
+                    ],
+                    "buildings": [
+                        {
+                            "type": "ambassade",
+                            "_id": "56daffaaf771fc972c761a93"
+                        }
+                    ]
+                }
             ]
         },
         {
-            "_id": "56daf8ad44fb46dc2865cb35",
+            "_id": "56daffa7f771fc972c761a8f",
             "username": "pee",
             "password": "",
-            "solar_system": "56daf8b044fb46dc2865cb36",
+            "solar_system": "56daffaaf771fc972c761a90",
             "__v": 1,
             "ressources": {
                 "kaga": 100,
@@ -44,7 +70,33 @@
                 "lumber": 100
             },
             "planets": [
-                "56daf8b044fb46dc2865cb3a"
+                {
+                    "_id": "56daffaaf771fc972c761a94",
+                    "name": "Klatooine",
+                    "pop": 1000,
+                    "a": 250,
+                    "b": 125,
+                    "direction": true,
+                    "img": 2,
+                    "owner": "56daffa7f771fc972c761a8f",
+                    "__v": 0,
+                    "spaceships": [
+                        {
+                            "spaceship_dammage": 0,
+                            "human_dammage": 0,
+                            "defence": 100,
+                            "cost": 1000,
+                            "name": "space cruiser 1",
+                            "_id": "56daffaaf771fc972c761a95"
+                        }
+                    ],
+                    "buildings": [
+                        {
+                            "type": "ambassade",
+                            "_id": "56daffaaf771fc972c761a96"
+                        }
+                    ]
+                }
             ]
         }
     ]
