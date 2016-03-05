@@ -1,8 +1,36 @@
 # Erkma
 
+## TODOLIST
+
+* A faire:
+  * ajouter infos sur le joueur dans la sidebar
+  * Planete dynamique
+  * Placer batiments sur la carte
+
+* Fait:
+  * Envoyer un objet solar au client
+  * Affichage d'une topBar et des Kagas du joueur
+
+* Qui travaille sur quoi:
+
+  * Kenneth
+
+
+  * Gaëtane
+
+
+  * Adrien
+	  * Switch entre planètes/cités avec envoi de données
+	  * Ajouter la top barre
+	  * Ajouter des patches définitifs (musiques et bruitages)
+
+  * Arthur
+    * supprimer champ planets de l'objet solar
+
+
 ## Structure de donnée utilisée:
 
-* Sous forme d'exemple:
+* Exemple de solar_system envoyé au client:
 ```json
 {
     "_id": "56daffaaf771fc972c761a90",

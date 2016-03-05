@@ -7,7 +7,7 @@ help.prototype.init = function()
 
 help.prototype.preload = function()
 {
-	game.load.spritesheet('back', 'images/backButton.png', 204, 160);
+	game.load.spritesheet('back', 'images/buttons/backButton.png', 204, 160);
 };
 
 help.prototype.create = function()
