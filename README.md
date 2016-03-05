@@ -25,7 +25,6 @@
 	  * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
-    * supprimer champ planets de l'objet solar
 
 
 ## Structure de donnée utilisée:
