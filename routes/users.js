@@ -62,7 +62,6 @@ router.post('/add', function(req, res){
       solar_system: null
     });
 
-    //newUser.initialize();
     newUser.save(function(err) {
       if (err) {
         console.log(err);

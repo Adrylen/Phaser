@@ -54,13 +54,14 @@ userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');
   console.log('                getSolar');
   console.log('-----------------------------------------');
-  Solar.findById(this.solar_system).populate('planets').populate('users', 'planets').exec(function(err, solar) {
-      if (err) throw err;
-      for(var i in solar.users) {
-        solar.users[i].password = ''; //  otherwise security breach
-      }
-      var mySolar = JSON.parse(JSON.stringify(solar));  // copy object instead of reference
-      callback(mySolar);
+  Solar.findById(this.solar_system).populate('users'/*{path: 'users', populate:{path: 'planets'}}*/).exec(function(err, solar) {
+    if (err) throw err;
+    console.log(JSON.stringify(solar, null, 4));
+    for(var i in solar.users) {
+      solar.users[i].password = ''; //  otherwise security breach
+    }
+    var mySolar = JSON.parse(JSON.stringify(solar));  // copy object instead of reference
+    callback(mySolar);
   });
 }
 

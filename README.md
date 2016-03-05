@@ -4,79 +4,47 @@
 
 * Sous forme d'exemple:
 ```json
-{
-    "_id": "56d83354718890f51779d058",
+{{
+    "_id": "56daf8b044fb46dc2865cb36",
     "__v": 1,
-    "name": "YxV 5792",
+    "name": "oJt 5178",
     "users": [
         {
+            "_id": "56daf8a244fb46dc2865cb34",
+            "username": "poop",
             "password": "",
-            "_id": "56d83349718890f51779d056",
+            "solar_system": "56daf8b044fb46dc2865cb36",
+            "__v": 1,
+            "ressources": {
+                "kaga": 100,
+                "iron": 100,
+                "watt": 100,
+                "food": 100,
+                "water": 100,
+                "tool": 100,
+                "lumber": 100
+            },
             "planets": [
-                "56d83354718890f51779d059"
+                "56daf8b044fb46dc2865cb37"
             ]
         },
         {
+            "_id": "56daf8ad44fb46dc2865cb35",
+            "username": "pee",
             "password": "",
-            "_id": "56d83352718890f51779d057",
+            "solar_system": "56daf8b044fb46dc2865cb36",
+            "__v": 1,
+            "ressources": {
+                "kaga": 100,
+                "iron": 100,
+                "watt": 100,
+                "food": 100,
+                "water": 100,
+                "tool": 100,
+                "lumber": 100
+            },
             "planets": [
-                "56d83354718890f51779d05c"
-            ]
-        }
-    ],
-    "planets": [
-        {
-            "_id": "56d83354718890f51779d059",
-            "name": "Dagobah",
-            "pop": 1000,
-            "a": 200,
-            "b": 100,
-            "direction": false,
-            "img": 1,
-            "owner": "56d83349718890f51779d056",
-            "__v": 0,
-            "spaceships": [
-                {
-                    "spaceship_dammage": 0,
-                    "human_dammage": 0,
-                    "defence": 100,
-                    "cost": 1000,
-                    "name": "space cruiser 1",
-                    "_id": "56d83354718890f51779d05a"
-                }
-            ],
-            "buildings": [
-                {
-                    "type": "ambassade",
-                    "_id": "56d83354718890f51779d05b"
-                }
-            ]
-        },
-        {
-            "_id": "56d83354718890f51779d05c",
-            "name": "Ithor",
-            "pop": 1000,
-            "a": 250,
-            "b": 125,
-            "direction": true,
-            "img": 2,
-            "owner": "56d83352718890f51779d057",
-            "__v": 0,
-            "spaceships": [
-                {
-                    "spaceship_dammage": 0,
-                    "human_dammage": 0,
-                    "defence": 100,
-                    "cost": 1000,
-                    "name": "space cruiser 1",
-                    "_id": "56d83354718890f51779d05d"
-                }
-            ],
-            "buildings": [
-                {
-                    "type": "ambassade",
-                    "_id": "56d83354718890f51779d05e"
-                }
+                "56daf8b044fb46dc2865cb3a"
             ]
         }
     ]

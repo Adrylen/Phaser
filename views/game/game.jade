@@ -15,6 +15,7 @@ block script
 		username = '#{username}'; // all variable might be global so n "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		console.log(JSON.stringify(solar_system, null, 4));
+	//
 		socket.emit('game', username, solar_system);  // load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
