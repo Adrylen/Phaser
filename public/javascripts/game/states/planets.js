@@ -1,34 +1,19 @@
 var Planets = function(game) {};
 
-/*
-Une planète suit une orbite fermée autour du Soleil
-(une éclipse mais très peu aplatie : en gros, un cercle centré sur le Soleil)
- parce qu'elle est en équilibre entre deux forces antagonistes : l'attraction
-gravitationnelle solaire qui tend à la faire tomber vers le Soleil,
- et la force centrifuge qui tend à l'en écarter
-(la force centrifuge est celle que l'on ressent, par exemple,
-sur un manège ou dans une voiture qui vire ; elle tend vous éloigner de l'axe de rotation).
+var theta = 1;	// or whatever...
 
-L'intensité de la force gravitationnelle est proportionnelle à l'inverse
- du carré de la distance D entre la planète et le Soleil.
-L'intensité de la force centrifuge est proportionnelle au rapport entre
- le carré de la vitesse de la planète et la distance D.
-A chaque instant, ces forces sont opposées en direction et égale en intensité
-(leur somme est bien nulle). Du coup, la vitesse de la planète est proportionnelle
- à l'inverse de la racine carrée de D : plus la planète est loin du Soleil,
- moins elle va vite ; 4 fois plus loin, 2 fois moins vite.
-Cette relation se traduit aussi par la fameuse troisième
- loi de Kepler qui stipule que le rapport entre le cube de la distance
- et le carré de la période est une constante, indépendante de la planète
-*/
-
-var theta = 1;
-
-//*************************
 var planet = [];
-var values = [1.00, 0.84, 0.70, 0.55, 0.39, 0.23];
+//var values = [1.00, 0.84, 0.70, 0.55, 0.39, 0.23];
+var demi_axes = [];
 var nb_of_player = 6;
-//*************************
+var path = '../images/planets/planet';
+
+for(var i in solar_system.users){
+	for(var j in solar_system.users[i].planets){
+			//console.log(JSON.stringify(solar_system.users[i].planets[j], null, 4));
+			demi_axes.push({a: solar_system.users[i].planets[j].a, b: solar_system.users[i].planets[j].b})
+	}
+}
 
 console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
@@ -60,15 +45,6 @@ Planets.prototype.create = function () {
 
 	sun = game.add.image(game.width/2-35, (game.height-30)/2-5, 'sun'); sun.width = 70; sun.height = 70;
 
-	/*
-	planet1 = game.add.image(0, 0, 'planet1'); planet1.width = 32; planet1.height = 32;
-	planet2 = game.add.image(0, 0, 'planet2'); planet2.width = 32; planet2.height = 32;
-	planet3 = game.add.image(0, 0, 'planet3'); planet3.width = 32; planet3.height = 32;
-	planet4 = game.add.image(0, 0, 'planet4'); planet4.width = 32; planet4.height = 32;
-	planet5 = game.add.image(0, 0, 'planet5'); planet5.width = 32; planet5.height = 32;
-	planet6 = game.add.image(0, 0, 'planet6'); planet6.width = 32; planet6.height = 32;
-	*/
-
 	//*************************
 	for (var i = 0; i < nb_of_player; i++) {
 		var name = 'planet'.concat((i+1).toString());
@@ -85,24 +61,14 @@ Planets.prototype.create = function () {
 };
 
 Planets.prototype.update = function () {
-	//	vitesse
-	theta += 0.05;
+	theta += 0.05; //	vitesse radian/frame
 	//	demi grand axe de l'ellipse
-	var a = 470, b = 220;
-	//	vient de l'équation d'une ellipse
-	/*
-	planet1.x = this.moveX(planet1.width, a*1.00, (theta+1)*0.23); planet1.y = this.moveY(planet1.height, b*1.00, (theta+1)*0.23);
-	planet2.x = this.moveX(planet2.width, a*0.84, (theta-1.3)*0.39); planet2.y = this.moveY(planet2.height, b*0.84, (theta-1.3)*0.39);
-	planet3.x = this.moveX(planet3.width, a*0.70, (theta+1.6)*0.55); planet3.y = this.moveY(planet3.height, b*0.70, (theta+1.6)*0.55);
-	planet4.x = this.moveX(planet4.width, a*0.55, (theta-1.9)*0.70); planet4.y = this.moveY(planet4.height, b*0.55, (theta-1.9)*0.70);
-	planet5.x = this.moveX(planet5.width, a*0.39, (theta+2.2)*0.84); planet5.y = this.moveY(planet5.height, b*0.39, (theta+2.2)*0.84);
-	planet6.x = this.moveX(planet6.width, a*0.23, (theta-2.5)*1.00); planet6.y = this.moveY(planet6.height, b*0.23, (theta-2.5)*1.00);
-	*/
+	var a = 470, b = 220; //	demi grand axe de l'ellipse
 
 	//*************************
 	for (var i = 0; i < planet.length; i++) {
-	planet[i].x = this.moveX(planet[i].width, a*values[i], (theta+1)*values[5-i]);
-	planet[i].y = this.moveY(planet[i].height, b*values[i], (theta+1)*values[5-i]);
+		planet[i].x = this.moveX(planet[i].width, a*values[i], (theta+1)*values[5-i]);
+		planet[i].y = this.moveY(planet[i].height, b*values[i], (theta+1)*values[5-i]);
 	}
 	//*************************
 
