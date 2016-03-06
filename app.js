@@ -117,7 +117,8 @@ io.on('connection', function(socket, req){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    var maxPlayer = 2;
+
+    var maxPlayer = 6;
     if(usernames.length == maxPlayer) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
@@ -125,6 +126,7 @@ io.on('connection', function(socket, req){
       solar = new Solar({});
       solar.save();
       var users = [];
+      console.log(usernames);
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
           users.push(user);
