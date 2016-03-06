@@ -35,8 +35,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
         cost: 1000,
         name: 'space cruiser 1'
       }],
-      a: 200 + i*50,
-      b: 100 + i*25,
+      coeff: 1.00 - (i*0.15),  // coeff demis grand axe ellipse
       direction: i%2,
       img: i+1,  // image num 1, 2, 3...
       owner: users[i]._id,
