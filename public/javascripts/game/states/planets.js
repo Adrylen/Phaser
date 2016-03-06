@@ -8,6 +8,7 @@ var planet = [];
 //var demi_axes = [1.00, 0.84];
 //var nb_of_planet = 2;
 var demi_axes = [];
+var sens = [];
 var nb_of_planet = 0;
 //*************************
 
@@ -34,6 +35,8 @@ Planets.prototype.preload = function () {
 				name = 'planet' + solar_system.users[i].planets[j].img;
 				console.log(demi_axes);
 				game.load.image(name, path + name + '.png');
+				if(solar_system.users[i].planets[j].direction == true) {sens.push(1);}
+				else {sens.push(-1);}
 				nb_of_planet++;
 		}
 	}
@@ -70,8 +73,9 @@ Planets.prototype.update = function () {
 
 	//*************************
 	for (var i = 0; i < planet.length; i++) {
-		planet[i].x = this.moveX(planet[i].width, a*demi_axes[i], (theta+1)*demi_axes[5-i]);
-		planet[i].y = this.moveY(planet[i].height, b*demi_axes[i], (theta+1)*demi_axes[5-i]);
+		console.log(sens[i]);
+		planet[i].x = this.moveX(planet[i].width, a*demi_axes[i], sens[i] * (theta+1)*demi_axes[5-i]);
+		planet[i].y = this.moveY(planet[i].height, b*demi_axes[i], sens[i] * (theta+1)*demi_axes[5-i]);
 	}
 	//*************************
 
