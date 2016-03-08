@@ -22,6 +22,8 @@
   * Gaëtane
 	* Placements des bâtiments
 	* Refaire les personnages 
+	* Liens entre les parties
+	* Intérieur de help et de option
 
 
   * Adrien
