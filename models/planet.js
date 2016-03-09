@@ -33,8 +33,7 @@ var planetSchema = new Schema({
   pop: Number,
   buildings: [buildingSchema],
   spaceships: [spaceshipSchema],
-  a: Number,  //  demis grands axes de l'ellipse
-  b: Number,
+  coeff: Number,  //  demis grands axes de l'ellipse
   direction: Boolean, // sens horaire ou sens trigo
   img: Number,  // img de la planete
   owner: { type: ObjectId, ref: 'user' }

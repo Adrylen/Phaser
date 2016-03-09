@@ -12,7 +12,6 @@ var Planet = require('../models/planet');
 
 var solarSchema = new Schema({
   name: String,
-  planets : [{ type : ObjectId, ref: 'planet' }],
   users: [{ type : ObjectId, ref: 'user' }]
 });
 
@@ -24,6 +23,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
 
   for(var i = 0; i < maxPlayer; i++){
+    console.log('how much loop i do?');
     motherPlanet = new Planet({
       name: planets.choose(),
       pop: 1000,
@@ -35,8 +35,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
         cost: 1000,
         name: 'space cruiser 1'
       }],
-      a: 200 + i*50,
-      b: 100 + i*25,
+      coeff: 1.00 - (i*0.15),  // coeff demis grand axe ellipse
       direction: i%2,
       img: i+1,  // image num 1, 2, 3...
       owner: users[i]._id,
@@ -44,7 +43,6 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
     });
     motherPlanet.save();
     this.users.push(users[i]._id);
-    this.planets.push(motherPlanet._id);
     users[i].initialize(motherPlanet._id, this._id);
   }
   this.save();

@@ -3,28 +3,19 @@ extends ../layouts/layoutgame
 h1= title
 
 block libs
-	// Server
 	script(src='../javascripts/jquery.min.js')
 	script(src='../javascripts/socket.io.js')
-
-	// Phaser
-	script(src='../javascripts/phaser/phaser.js')
-	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
-	
-	// WebPd
-	script(src='../javascripts/webpd/webpd-latest.js')
-	script(src='../javascripts/webpd/pd-fileutils.js')
 
 block script
 	// Server
 	script(type='text/javascript').
 		// start connection to the server
 		var socket = io();
-		var userForPhaser;
 
 		username = '#{username}'; // all variable might be global so n "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		console.log(JSON.stringify(solar_system, null, 4));
+	//
 		socket.emit('game', username, solar_system);  // load all users of the game
 		socket.on('data', function(users){
 				users = users;	//global
@@ -32,17 +23,16 @@ block script
 					//console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
 					//	display planets of the logged in user
 					if(users[i].username == username){
-						userForPhaser = users[i];
 						for( var k in users[i].planets ){
 							//console.log(JSON.stringify(users[i].planets[k].name,null, 4));
 							$('#planets')
 								.append($('<li class="pure-menu-item"></li>'))
 								.append($('<a class="pure-menu-link">')
 								.text(users[i].planets[k].name));
-							//$('#ressources')
-							//	.append($('<li class="pure-menu-item"></li>'))
-							//	.append($('<a class="pure-menu-link">')
-							//	.text('Kaga ' + users[i].ressources.kaga));
+							$('#ressources')
+								.append($('<li class="pure-menu-item"></li>'))
+								.append($('<a class="pure-menu-link">')
+								.text('Kaga ' + users[i].ressources.kaga));
 							$('#ressources')
 								.append($('<li class="pure-menu-item"></li>'))
 								.append($('<a class="pure-menu-link">')
@@ -56,12 +46,16 @@ block script
 						.text(users[i].username));
 				}
 		});
+		
 
-	// States phaser for game.js
+
+	// Phaser
+	script(src='../javascripts/phaser/phaser.js')
+	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
+	script(src='../javascripts/webpd/webpd-latest.js')
+	script(src='../javascripts/webpd/pd-fileutils.js')
 	script(src='../javascripts/game/states/city.js')
 	script(src='../javascripts/game/states/planets.js')
-	
-	// Boot Phaser
 	script(src='../javascripts/game/game.js')
 
 block content

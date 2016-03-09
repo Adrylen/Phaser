@@ -117,7 +117,8 @@ io.on('connection', function(socket, req){
       usernames = [];
       socket.broadcast.emit('user disconnected');
     })
-    var maxPlayer = 2;
+
+    var maxPlayer = 6;
     if(usernames.length == maxPlayer) {
       socket.emit('start ready');
       socket.broadcast.emit('start ready');
@@ -125,6 +126,7 @@ io.on('connection', function(socket, req){
       solar = new Solar({});
       solar.save();
       var users = [];
+      console.log(usernames);
       for(var i in usernames){
         User.findOne({ username: usernames[i] }, function(err, user){
           users.push(user);
@@ -137,17 +139,9 @@ io.on('connection', function(socket, req){
     }
 
   })
-
+  /*
   socket.on('game', function(username, solar_system){
     console.log( solar_system );
-      /*User.find({ solar_system : solar_system }, function(err, users) {
-          if (err) return cb(err);
-          for(var i in users) {
-            console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
-            users[i].password = ''; //  otherwise security breach
-          }
-          socket.emit('data', users);
-      })*/
       User.find({ solar_system : solar_system }).populate('planets').exec(function(err, users) {
           if (err) throw err;
           console.log('users.length' + users.length);
@@ -157,7 +151,7 @@ io.on('connection', function(socket, req){
           }
           socket.emit('data', users);
       });
-    });
+    });*/
 });
 
 
