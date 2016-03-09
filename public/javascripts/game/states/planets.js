@@ -12,14 +12,13 @@ var sens = [];
 var nb_of_planet = 0;
 //*************************
 
-// ressources
-var kaga;
-
 console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
 Planets.prototype.init = function () {
 	var planets = null;
 	var circle;
+	// ressources
+	var kaga;
 };
 
 Planets.prototype.preload = function () {
@@ -69,7 +68,8 @@ Planets.prototype.create = function () {
 
 	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
-	text = game.add.text(32, 2, kaga, {font: "bold 26px Arial", fill: "#ee0"});
+	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
+	text.height = 33;
 };
 
 Planets.prototype.update = function () {
