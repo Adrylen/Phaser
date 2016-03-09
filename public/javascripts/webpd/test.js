@@ -1,23 +1,11 @@
 var patch;
 
-$.get('../patches/test.pd', function(patchStr) {
-	patch = Pd.loadPatch(patchStr);
-	Pd.start();
-});
+Pd.start();
 
-$("#image").attr('src', '../images/sound.jpg');
-$("#image").attr('width', '32');
-$("#image").attr('height', '32');
-
-$("#image").click( function () {
-	if( $(this).attr('src') == '../images/sound.jpg') {
-		$(this).attr('src', '../images/mute.jpg');
-		$("#music").text("Off");
-		Pd.send('sound', [parseFloat(0)]);
-	}
-	else {
-		$(this).attr('src', '../images/sound.jpg');
-		$("#music").text("On");
+$.get('../patches/space4.pd', function(patchStr) {
+	$.get('../patches/oscsp2.pd', function(abs) {
+		Pd.registerAbstraction('oscsp2', abs)
+		patch = Pd.loadPatch(patchStr);
 		Pd.send('sound', [parseFloat(1)]);
-	}
+	});
 });

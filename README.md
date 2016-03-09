@@ -14,6 +14,7 @@
   * Demi axe ellipse chargés depuis la bdd
   * Sens rotation  des planetes chargés depuis la bdd
   * Graphisme bâtiments, planète, accesoires ( boutons, pièce etc ...)
+  * Ajouter la top barre
 
 * Qui travaille sur quoi:
 
@@ -29,7 +30,6 @@
 
   * Adrien
 	  * Switch entre planètes/cités avec envoi de données
-	  * Ajouter la top barre
 	  * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
