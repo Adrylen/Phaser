@@ -68,7 +68,7 @@ Planets.prototype.create = function () {
 };
 
 Planets.prototype.update = function () {
-	theta += 0.05; //	vitesse radian/frame
+	theta += 0.1; //	vitesse radian/frame
 	var a = 470, b = 220; //	demi grand axe de l'ellipse
 
 	//*************************

@@ -15,38 +15,6 @@ block script
 		username = '#{username}'; // all variable might be global so n "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		console.log(JSON.stringify(solar_system, null, 4));
-	//
-		socket.emit('game', username, solar_system);  // load all users of the game
-		socket.on('data', function(users){
-				users = users;	//global
-				for(var i in users) {
-					//console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
-					//	display planets of the logged in user
-					if(users[i].username == username){
-						for( var k in users[i].planets ){
-							//console.log(JSON.stringify(users[i].planets[k].name,null, 4));
-							$('#planets')
-								.append($('<li class="pure-menu-item"></li>'))
-								.append($('<a class="pure-menu-link">')
-								.text(users[i].planets[k].name));
-							$('#ressources')
-								.append($('<li class="pure-menu-item"></li>'))
-								.append($('<a class="pure-menu-link">')
-								.text('Kaga ' + users[i].ressources.kaga));
-							$('#ressources')
-								.append($('<li class="pure-menu-item"></li>'))
-								.append($('<a class="pure-menu-link">')
-								.text('Iron ' + users[i].ressources.iron));
-						}
-					}
-					//	display other players
-					$('#players')
-						.append($('<li class="pure-menu-item"></li>'))
-						.append($('<a class="pure-menu-link">')
-						.text(users[i].username));
-				}
-		});
-		
 
 
 	// Phaser
