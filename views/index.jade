@@ -1,14 +1,9 @@
 extends layouts/layout
 
 block content
-	script(src='javascripts/phaser/phaser.js')
-	script(src='javascripts/game/states/menu.js')
-	script(src='javascripts/game/states/start.js')
-	script(src='javascripts/game/states/options.js')
-	script(src='javascripts/game/states/help.js')
-	script(src='javascripts/game/boot.js')
+	.divtitle
+		img.title(src='/images/assets/erkma.png')
 	a.button(href='/users/login') Login
 	a.button(href='/users/add') Add
-	
-	footer
-		#gg Périples futurs ... Victoire prochaine !
+	footer.footer
+		p.pfooter Périples futures ... Victoires prochaines !
