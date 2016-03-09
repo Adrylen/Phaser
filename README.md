@@ -6,13 +6,14 @@
   * ajouter infos sur le joueur dans la sidebar
   * Planete dynamique
   * Placer batiments sur la carte
-  * Partie graphisme à adapter au jeu 
+  * Partie graphisme à adapter au jeu
 
 * Fait:
   * Envoyer un objet solar au client
   * Affichage d'une topBar et des Kagas du joueur
   * Demi axe ellipse chargés depuis la bdd
   * Graphisme bâtiments, planète, accesoires ( boutons, pièce etc ...)
+  * Ajouter la top barre
 
 * Qui travaille sur quoi:
 
@@ -21,14 +22,13 @@
 
   * Gaëtane
 	* Placements des bâtiments
-	* Refaire les personnages 
+	* Refaire les personnages
 	* Liens entre les parties
 	* Intérieur de help et de option
 
 
   * Adrien
 	  * Switch entre planètes/cités avec envoi de données
-	  * Ajouter la top barre
 	  * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
