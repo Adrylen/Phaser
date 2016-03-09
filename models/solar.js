@@ -16,12 +16,11 @@ var solarSchema = new Schema({
 });
 
 solarSchema.methods.initialize = function(users, maxPlayer) {
-  console.log('solarSchema.methods.initialize');
 
   this.name = randomstring.generate({length: 3, charset: 'alphabetic' });
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
-
+  console.log(JSON.stringify(users, null, 4));
   for(var i = 0; i < maxPlayer; i++){
     console.log('how much loop i do?');
     motherPlanet = new Planet({
