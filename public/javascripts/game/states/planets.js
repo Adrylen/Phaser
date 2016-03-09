@@ -1,5 +1,11 @@
 var Planets = function(game) {};
 
+var TopBar = function(game) {};
+TopBar.prototype = {
+	init: function() {
+		game.load.image('topBar', '../images/bars/top_bar.jpg');
+	}
+};
 
 var theta = 1;
 
@@ -12,13 +18,13 @@ var sens = [];
 var nb_of_planet = 0;
 //*************************
 
-console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
+//console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
 Planets.prototype.init = function () {
 	var planets = null;
 	var circle;
-	// ressources
 	var kaga;
+	// ressources
 };
 
 Planets.prototype.preload = function () {
