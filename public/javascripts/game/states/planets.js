@@ -12,6 +12,9 @@ var sens = [];
 var nb_of_planet = 0;
 //*************************
 
+// ressources
+var kaga;
+
 console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
 Planets.prototype.init = function () {
@@ -29,6 +32,8 @@ Planets.prototype.preload = function () {
 	game.load.image('sun', '../images/planets/sun.png');
 	var name;
 	for(var i in solar_system.users){
+		if (solar_system.users[i].username == username)
+			kaga = solar_system.users[i].ressources.kaga;
 		for(var j in solar_system.users[i].planets){
 				//console.log(JSON.stringify(solar_system.users[i].planets[j], null, 4));
 				demi_axes.push(solar_system.users[i].planets[j].coeff);
@@ -40,11 +45,11 @@ Planets.prototype.preload = function () {
 				nb_of_planet++;
 		}
 	}
-	console.log(nb_of_planet);
+	//console.log(nb_of_planet);
 
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
-	game.load.image('coin', '../images/planets/circle.png');
+	game.load.image('coin', '../images/assets/coin.png');
 };
 
 Planets.prototype.create = function () {
@@ -64,16 +69,16 @@ Planets.prototype.create = function () {
 
 	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
-	//text = game.add.text(32, 2, userForPhaser.ressources.kaga, {font: "bold 26px Arial", fill: "#ee0"});
+	text = game.add.text(32, 2, kaga, {font: "bold 26px Arial", fill: "#ee0"});
 };
 
 Planets.prototype.update = function () {
-	theta += 0.05; //	vitesse radian/frame
+	theta += 0.0005; //	vitesse radian/frame
 	var a = 470, b = 220; //	demi grand axe de l'ellipse
 
 	//*************************
 	for (var i = 0; i < planet.length; i++) {
-		console.log(sens[i]);
+		//console.log(sens[i]);
 		planet[i].x = this.moveX(planet[i].width, a*demi_axes[i], sens[i] * (theta+1)*demi_axes[5-i]);
 		planet[i].y = this.moveY(planet[i].height, b*demi_axes[i], sens[i] * (theta+1)*demi_axes[5-i]);
 	}
