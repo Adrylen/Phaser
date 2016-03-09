@@ -34,3 +34,9 @@ button
 	top: 1%;
 	right: 1%;
 }
+
+.list
+{
+	color: rgb(134, 134, 134);
+	margin-left: 2em;
+}
