@@ -1,12 +1,5 @@
 var Planets = function(game) {};
 
-var TopBar = function(game) {};
-TopBar.prototype = {
-	init: function() {
-		game.load.image('topBar', '../images/bars/top_bar.jpg');
-	}
-};
-
 var theta = 1;
 
 //*************************
@@ -58,16 +51,18 @@ Planets.prototype.preload = function () {
 };
 
 Planets.prototype.create = function () {
-	game.add.image(0, 30, 'galaxy');
+	var galaxy = game.add.image(0, 30, 'galaxy');
+	galaxy.width = 1087;
+	galaxy.height = 620;
 
-	sun = game.add.image(game.width/2-35, (game.height-30)/2-5, 'sun'); sun.width = 70; sun.height = 70;
+	sun = game.add.image(game.width/2-35, (game.height-30)/2-15, 'sun'); sun.width = 90; sun.height = 90;
 
 	//*************************
 	for (var i = 0; i < nb_of_planet; i++) {
 		var name = 'planet'.concat((i+1).toString());
 		planet[i] = game.add.image(0, 0, name);
-		planet[i].width = 32;
-		planet[i].height = 32;
+		planet[i].width = 38;
+		planet[i].height = 38;
 	}
 	//console.log(game);
 	//*************************
@@ -79,8 +74,8 @@ Planets.prototype.create = function () {
 };
 
 Planets.prototype.update = function () {
-	theta += 0.0005; //	vitesse radian/frame
-	var a = 470, b = 220; //	demi grand axe de l'ellipse
+	theta += 0.01; //	vitesse radian/frame
+	var a = 520, b = 290; //	demi grand axe de l'ellipse
 
 	//*************************
 	for (var i = 0; i < planet.length; i++) {

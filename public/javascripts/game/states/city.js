@@ -10,6 +10,9 @@ City.prototype.preload = function () {
 	game.load.image('tile', '../images/backgrounds/grass.png');
 	game.load.image('sideBar', '../images/bars/side_bar.jpg');
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
+	// Bars
+	game.load.image('topBar', '../images/bars/top_bar.jpg');
+	game.load.image('coin', '../images/assets/coin.png');
 
 	game.time.advancedTiming = true;
 
@@ -18,7 +21,7 @@ City.prototype.preload = function () {
 
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
-	game.iso.anchor.setTo(0.5, -0.52);
+	game.iso.anchor.setTo(0.5, -0.40);
 };
 
 City.prototype.create = function () {
@@ -32,9 +35,10 @@ City.prototype.create = function () {
     cursorPos = new Phaser.Plugin.Isometric.Point3();
 
 	// Interface
-	//var topBar = game.add.image(0,0,'topBar');
-	//var sideBar = game.add.image(900,0,'sideBar');
-
+	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
+	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
+	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
+	text.height = 33;
 };
 
 City.prototype.update = function () {
@@ -68,8 +72,8 @@ City.prototype.render = function () {
 
 City.prototype.spawnTiles = function () {
   var tile;
-	var width = 16;
-	var height = 17;
+	var width = 17;
+	var height = 20;
 	var min = width, max = height;
 	var size = width + height -1;
 

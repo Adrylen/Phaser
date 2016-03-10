@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Arista';
+    src: url('/fonts/arista_2_0/Arista2.0 light.ttf');
+}
+
 body {
   background-image: ;
   padding: 40px;
@@ -50,8 +55,48 @@ canvas {
 .button-success {
   background: rgb(28, 184, 65); /* this is a green */
 }
+margin-left: auto;
 
 .custom-restricted-width {
   font-size: 2em;
   display: inline-block;
+}
+
+ #g {
+   font-size: 2em;
+   margin-right: auto;
+   min-height: 100% ;
+
+ }
+
+.footer{
+  display: inline-block;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding-left: 0%;
+}
+
+.pfooter{
+  font-family: "Arista";
+  max-width: 100%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding-left: 0px;
+  text-align: left;
+  font-size: 3em;
+  color: rgba(140, 200, 255, 0.7);
+}
+
+.divtitle{
+  margin: auto;
+  width: 70%;
+}
+
+.title{
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  margin: 5%;
+  width: 90%;
 }
