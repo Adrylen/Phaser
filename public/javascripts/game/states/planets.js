@@ -9,6 +9,9 @@ var planet = [];
 var demi_axes = [];
 var sens = [];
 var nb_of_planet = 0;
+var planet_selected = -1;
+var planet_list = [];
+var planet_text;
 //*************************
 
 //console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
@@ -38,8 +41,9 @@ Planets.prototype.preload = function () {
 				name = 'planet' + solar_system.users[i].planets[j].img;
 				console.log(demi_axes);
 				game.load.image(name, path + name + '.png');
-				if(solar_system.users[i].planets[j].direction == true) {sens.push(1);}
+				if(solar_system.users[i].planets[j].direction === true) {sens.push(1);}
 				else {sens.push(-1);}
+				planet_list.push(solar_system.users[i].planets[j]);
 				nb_of_planet++;
 		}
 	}
@@ -48,6 +52,9 @@ Planets.prototype.preload = function () {
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	game.load.image('coin', '../images/assets/coin.png');
+
+	//selection
+	game.load.image('selection', '../images/assets/planetSelected.png');
 };
 
 Planets.prototype.create = function () {
@@ -60,18 +67,43 @@ Planets.prototype.create = function () {
 	//*************************
 	for (var i = 0; i < nb_of_planet; i++) {
 		var name = 'planet'.concat((i+1).toString());
-		planet[i] = game.add.image(0, 0, name);
+		planet[i] = game.add.sprite(0, 0, name);
 		planet[i].width = 38;
 		planet[i].height = 38;
+		for (var j = 0; j < nb_of_planet; j++) {
+			if (planet_list[j].img == i+1) {
+				var temp = planet_list[j];
+				planet_list[j] = planet_list[i];
+				planet_list[i] = temp;
+			}
+		}
+
 	}
-	//console.log(game);
 	//*************************
 
 	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
 	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
+
+	for (i = 0; i < nb_of_planet; i++) {
+		planet[i].inputEnabled = true;
+		planet[i].events.onInputDown.add(listener, {'i': i} );
+	}
+
+	selection = game.add.image(0, 0, 'selection');
+	selection.width = 38;
+	selection.height = 38;
+	selection.visible = false;
+	console.log(selection.width);
+	planet_text = game.add.text(0, 0, '', { fill: '#ffffff' });
 };
+
+function listener () {
+	planet_selected = this.i;
+	planet_text.text = planet_list[this.i].name;
+	//console.log(this.i);
+}
 
 Planets.prototype.update = function () {
 	theta += 0.01; //	vitesse radian/frame
@@ -85,6 +117,13 @@ Planets.prototype.update = function () {
 	}
 	//*************************
 
+	if (planet_selected != -1) {
+		selection.visible = true;
+		selection.x = planet[planet_selected].x;
+		selection.y = planet[planet_selected].y;
+		planet_text.x = planet[planet_selected].x;
+		planet_text.y = planet[planet_selected].y -38;
+	}
 };
 
 Planets.prototype.render = function () {
