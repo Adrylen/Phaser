@@ -57,11 +57,14 @@ userSchema.methods.getSolar = function(callback){
   Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
     if (err) throw err;
     console.log(JSON.stringify(solar, null, 4));
+    if(solar == undefined){
+        callback(mySolar, false); //  unAuthorized to ask for the page
+    }
     for(var i in solar.users) {
       solar.users[i].password = ''; //  otherwise security breach
     }
-    var mySolar = JSON.parse(JSON.stringify(solar));  // copy object instead of reference
-    callback(mySolar);
+    var mySolar = JSON.parse(JSON.stringify(solar, err));  // copy object instead of reference
+    callback(mySolar, true);
   });
 }
 

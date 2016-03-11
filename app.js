@@ -139,19 +139,6 @@ io.on('connection', function(socket, req){
     }
 
   })
-  /*
-  socket.on('game', function(username, solar_system){
-    console.log( solar_system );
-      User.find({ solar_system : solar_system }).populate('planets').exec(function(err, users) {
-          if (err) throw err;
-          console.log('users.length' + users.length);
-          for(var i in users) {
-            console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
-            users[i].password = ''; //  otherwise security breach
-          }
-          socket.emit('data', users);
-      });
-    });*/
 });
 
 

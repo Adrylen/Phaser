@@ -1,0 +1,1 @@
+var patch;Pd.start(),$.get("../patches/space4.pd",function(t){$.get("../patches/oscsp2.pd",function(s){Pd.registerAbstraction("oscsp2",s),patch=Pd.loadPatch(t),Pd.send("sound",[parseFloat(1)])})});

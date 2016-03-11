@@ -1,0 +1,1 @@
+function start(a){game.state.start(a)}var game=new Phaser.Game(1087,650,Phaser.AUTO,"parent",null,!0,!1);game.state.add("city",City),game.state.add("planets",Planets),start("planets");
