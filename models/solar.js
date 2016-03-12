@@ -4,7 +4,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var Moniker = require('../moniker');
+var Moniker = require('../utils/moniker');
 var planets = Moniker.generator([Moniker.planet]);  //  initialize planets generator
 
 var User = require('../models/user');

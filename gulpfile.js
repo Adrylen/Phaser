@@ -1,18 +1,27 @@
-var gulp        = require('gulp');
+var gulp = require('gulp');
 var uglify = require('gulp-uglify');
+var gds = require('gulp-dev-server');
 
 // process JS files and return the stream.
-gulp.task('js', function () {
-    return gulp.src('public/javascripts//**/*js')
-        .pipe(uglify())
-        .pipe(gulp.dest('public/javascripts/dist/js'));
+gulp.task('compress', function () {
+  return gulp.src('public/javascripts//**/*js')
+    .pipe(uglify())
+    .pipe(gulp.dest('public/dist/js'));
 });
 
-// create a task that ensures the `js` task is complete before
-// reloading browsers
-gulp.task('js-watch', ['js']);
+// start and stop server for each save
+gulp.task('dev', function () {
+  gds.task({
+    restart: ['lib/**/*.js'],
+    notify: ['static/**/*.js'],
+    server: {
+      environment: 'development',
+      script: { path: 'app.js' }
+    }
+  })
+});
 
-// use default task to launch Browsersync and watch JS files
+gulp.task('js-watch', ['compress']);
 
 
-gulp.task('default', ['js']);
+gulp.task('default', ['compress', 'dev']);

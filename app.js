@@ -16,7 +16,6 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
 
@@ -54,6 +53,7 @@ app.use(function(req,res,next){
     next();
 });
 
+//  Configure type of connection
 passport.use(new Strategy(
   function(username, password, cb) {
     User.find({ username : username }, function(err, user) {
@@ -70,13 +70,10 @@ passport.use(new Strategy(
       });
     });
   }));
-
-
 // Configure Passport authenticated session persistence.
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
 });
-
 passport.deserializeUser(function(id, cb) {
   User.find({ _id : id }, function(err, user){
     //console.log(JSON.stringify(user,null, 4));
@@ -102,6 +99,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/game', game);
 app.use('/tmp', tmp);
+
 
 var usernames = [];
 io.on('connection', function(socket, req){

@@ -12,7 +12,7 @@ block script
 		// start connection to the server
 		var socket = io();
 
-		username = '#{username}'; // all variable might be global so n "var"
+		username = '#{username}'; // all variable might be global so no "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		console.log(JSON.stringify(solar_system, null, 4));
 
