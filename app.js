@@ -108,8 +108,8 @@ io.on('connection', function(socket, req){
 
     usernames.push(username);
 
-    socket.emit('start connected', usernames);
-    socket.broadcast.emit('start connected', usernames);
+    socket.emit('user connected', usernames);
+    socket.broadcast.emit('user connected', usernames);
 
     socket.on('disconnect', function(){
       usernames = [];

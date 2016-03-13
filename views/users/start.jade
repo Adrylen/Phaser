@@ -18,7 +18,7 @@ block content
     
     var socket = io();
     socket.emit('start', username );
-    socket.on('start connected', function(usernames){
+    socket.on('user connected', function(usernames){
       console.log('Du nouveau!');
       $('.pure-menu-list').empty();  //  make sure the list is empty
       for(i in usernames) {

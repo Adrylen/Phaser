@@ -21,28 +21,32 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
   console.log(JSON.stringify(users, null, 4));
-  for(var i = 0; i < maxPlayer; i++){
-    console.log('how much loop i do?');
-    motherPlanet = new Planet({
-      name: planets.choose(),
-      pop: 1000,
-      buildings: [{ type: 'ambassade'}],
-      spaceships: [{
-        spaceship_dammage: 0,
-        human_dammage: 0,
-        defence: 100,
-        cost: 1000,
-        name: 'space cruiser 1'
-      }],
-      coeff: 1.00 - (i*0.15),  // coeff demis grand axe ellipse
-      direction: i%2,
-      img: i+1,  // image num 1, 2, 3...
-      owner: users[i]._id,
-      civilized: true
-    });
-    motherPlanet.save();
-    this.users.push(users[i]._id);
-    users[i].initialize(motherPlanet._id, this._id);
+  try {
+    for(var i = 0; i < maxPlayer; i++){
+      console.log('how much loop i do?');
+      motherPlanet = new Planet({
+        name: planets.choose(),
+        pop: 1000,
+        buildings: [{ type: 'ambassade'}],
+        spaceships: [{
+          spaceship_dammage: 0,
+          human_dammage: 0,
+          defence: 100,
+          cost: 1000,
+          name: 'space cruiser 1'
+        }],
+        coeff: 1.00 - (i*0.15),  // coeff demis grand axe ellipse
+        direction: i%2,
+        img: i+1,  // image num 1, 2, 3...
+        owner: users[i]._id,
+        civilized: true
+      });
+      motherPlanet.save();
+      this.users.push(users[i]._id);
+      users[i].initialize(motherPlanet._id, this._id);
+    }
+  } catch (e) {
+    console.log("users is not defined");
   }
   this.save();
 }

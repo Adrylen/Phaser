@@ -61,15 +61,16 @@ router.post('/add', function(req, res){
       password: hash,
       solar_system: null
     });
-
     newUser.save(function(err) {
       if (err) {
         console.log(err);
-        res.render('users/add', { title : "Champs incorrectes" });
+        res.render('users/add', { title : "username existant" });
       }
-      res.render('users/login', { title : 'Veuillez vous reconnecter pour valider'});
     });
-
+    req.login(newUser, function(err){
+      if(err) throw err;
+      res.redirect('start');
+    });
   });
 });
 
