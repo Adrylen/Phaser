@@ -27,5 +27,7 @@ for(var k in users){
   user1
     .post('http://localhost:3000/users/add')
     .send(users[k])
-    .end(function(err, res) {});
+    .end(function(err, res) {
+      if(err) throw err;
+    });
 }

@@ -33,7 +33,7 @@ block content
     socket.on('start ready', function(){
       ready = true;
       if(!$('.button-success pure-button').length){
-        $('body').append($('<a class="button-success pure-button" href="/launcher">Start game!</a>'))
+        $('body').append($('<a class="button-success pure-button" href="/game/game">Start game!</a>'))
         $('body').loading('stop');
       }
     })

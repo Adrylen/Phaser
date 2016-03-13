@@ -29,6 +29,8 @@ var Schema = mongoose.Schema;
 var User = require('./models/user');
 var Solar = require('./models/solar');
 
+var Game = require('./utils/Game');
+
 //    routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -101,45 +103,7 @@ app.use('/game', game);
 app.use('/tmp', tmp);
 
 
-var usernames = [];
-io.on('connection', function(socket, req){
-
-  socket.on('start', function(username){
-
-    if(usernames.indexOf(username) == -1){
-      usernames.push(username);
-    }
-
-    socket.emit('user connected', usernames);
-    socket.broadcast.emit('user connected', usernames);
-
-    socket.on('disconnect', function(){
-      usernames = [];
-      socket.broadcast.emit('user disconnected');
-    })
-
-    var maxPlayer = 6;
-    if(usernames.length == maxPlayer) {
-      socket.emit('start ready');
-      socket.broadcast.emit('start ready');
-
-      solar = new Solar({});
-      solar.save();
-      var users = [];
-      console.log(usernames);
-      for(var i in usernames){
-        User.findOne({ username: usernames[i] }, function(err, user){
-          users.push(user);
-          if(user.username == usernames[usernames.length-1]){
-            solar.initialize(users, maxPlayer); // create mother planet and so on...
-            return;
-          }
-        })
-      }
-    }
-
-  })
-});
+Game.prototype.initialize(io);
 
 
 // catch 404 and forward to error handler
