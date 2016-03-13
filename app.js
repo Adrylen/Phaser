@@ -106,7 +106,9 @@ io.on('connection', function(socket, req){
 
   socket.on('start', function(username){
 
-    usernames.push(username);
+    if(usernames.indexOf(username) == -1){
+      usernames.push(username);
+    }
 
     socket.emit('user connected', usernames);
     socket.broadcast.emit('user connected', usernames);
