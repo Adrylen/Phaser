@@ -24,10 +24,18 @@ Planets.prototype.init = function () {
 };
 
 Planets.prototype.preload = function () {
+	planet = [];
+	demi_axes = [];
+	sens = [];
+	nb_of_planet = 0;
+	planet_selected = -1;
+	planet_list = [];
+	planet_text = 0;
 	// Background
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
 
 	var path = '../images/planets/';
+	console.log(nb_of_planet);
 
 	// Planets
 	game.load.image('sun', '../images/planets/sun.png');
@@ -48,6 +56,7 @@ Planets.prototype.preload = function () {
 		}
 	}
 	//console.log(nb_of_planet);
+	console.log(nb_of_planet);
 
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
