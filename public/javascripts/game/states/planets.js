@@ -55,7 +55,6 @@ Planets.prototype.preload = function () {
 				nb_of_planet++;
 		}
 	}
-	//console.log(nb_of_planet);
 	console.log(nb_of_planet);
 
 	// Bars

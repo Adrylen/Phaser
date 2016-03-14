@@ -15,17 +15,30 @@ var solarSchema = new Schema({
   users: [{ type : ObjectId, ref: 'user' }]
 });
 
+function inTab(tab, item){
+  for(var i in tab){
+    if(tab[i] == item){
+      return true;
+    }
+  }
+  return false;
+}
+
 solarSchema.methods.initialize = function(users, maxPlayer) {
 
   this.name = randomstring.generate({length: 3, charset: 'alphabetic' });
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
   console.log(JSON.stringify(users, null, 4));
+  planetNames = [];
   try {
     for(var i = 0; i < maxPlayer; i++){
-      console.log('how much loop i do?');
+      do {
+        var pName = planets.choose();
+      } while (inTab(planetNames, pName));
+      planetNames.push();
       motherPlanet = new Planet({
-        name: planets.choose(),
+        name: pName,
         pop: 1000,
         buildings: [{ type: 'ambassade'}],
         spaceships: [{
