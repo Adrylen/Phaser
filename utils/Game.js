@@ -3,11 +3,20 @@
 * Contains erverything about initialization of the game
 */
 
+var Planet = require('../models/planet');
 var User = require('../models/user');
 var Solar = require('../models/solar');
 
 function Game(){
-
+  this.coeff = 10;
+  this.generators = [
+    {building: 'mine', ressource: 'iron'},
+    {building: 'generator', ressource: 'watt'},
+    {building: 'farm', ressource: 'food'},
+    {building: 'factory', ressource: 'tool'},
+    {building: 'lumberjack', ressource: 'lumber'},
+    {building: 'pump', ressource: 'water'}
+  ];
 }
 
 /*
@@ -40,7 +49,6 @@ Game.prototype.initialize = function (io) {
         solar = new Solar({});
         solar.save();
         var users = [];
-        console.log(usernames);
         for(var i in usernames){
           User.findOne({ username: usernames[i] }, function(err, user){
             try {
@@ -61,12 +69,14 @@ Game.prototype.initialize = function (io) {
   });
 }
 
-/*
-* Method to update ressources of all players of the game
-*
-*/
-Game.prototype.update = function (solar) {
-
+Game.prototype.updateGames = function(){
+  Solar.find({}, function(err, solars){
+    if (err) throw err;
+    for(var i in solars){
+      solars[i].update(1);
+    }
+  })
 }
+
 
 module.exports = Game;

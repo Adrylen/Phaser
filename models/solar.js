@@ -40,7 +40,15 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
       motherPlanet = new Planet({
         name: pName,
         pop: 1000,
-        buildings: [{ type: 'ambassade'}],
+        buildings: [
+          { type: 'ambassade', level: 1},
+          { type: 'mine', level: 1},
+          { type: 'generator', level: 1},
+          { type: 'farm', level: 1},
+          { type: 'factory', level: 1},
+          { type: 'lumberjack', level: 1},
+          { type: 'pump', level: 1}
+        ],
         spaceships: [{
           spaceship_dammage: 0,
           human_dammage: 0,
@@ -62,6 +70,41 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
     console.log("users is not defined");
   }
   this.save();
+}
+
+solarSchema.methods.update = function (coeff) {
+  Solar.findById(this._id).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
+    for(var i in solar.users){
+      for(var j in solar.users[i].planets){
+        for(var k in solar.users[i].planets[j].buildings){
+          //console.log(solar.users[i].planets[j].buildings[k].type);
+          switch (solar.users[i].planets[j].buildings[k].type) {
+            case 'ambassade':
+              solar.users[i].ressources.kaga += solar.users[i].planets[j].buildings[k].level * coeff;
+            case 'mine':
+              solar.users[i].ressources.iron += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
+            case 'generator':
+              solar.users[i].ressources.watt += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
+            case 'farm':
+              solar.users[i].ressources.food += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
+            case 'factory':
+              solar.users[i].ressources.tool += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
+            case 'lumberjack':
+              solar.users[i].ressources.lumber += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
+            case 'pump':
+              solar.users[i].ressources.water += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
+          }
+        }
+      }
+      solar.users[i].save();
+    }
+  })
 }
 
 // we need to create a model using it
