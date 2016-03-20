@@ -16,7 +16,6 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-
 var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
 
@@ -29,6 +28,8 @@ var Schema = mongoose.Schema;
 //    models
 var User = require('./models/user');
 var Solar = require('./models/solar');
+
+var Game = require('./utils/Game');
 
 //    routes
 var routes = require('./routes/index');
@@ -54,6 +55,7 @@ app.use(function(req,res,next){
     next();
 });
 
+//  Configure type of connection
 passport.use(new Strategy(
   function(username, password, cb) {
     User.find({ username : username }, function(err, user) {
@@ -70,13 +72,10 @@ passport.use(new Strategy(
       });
     });
   }));
-
-
 // Configure Passport authenticated session persistence.
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
 });
-
 passport.deserializeUser(function(id, cb) {
   User.find({ _id : id }, function(err, user){
     //console.log(JSON.stringify(user,null, 4));
@@ -103,57 +102,15 @@ app.use('/users', users);
 app.use('/game', game);
 app.use('/tmp', tmp);
 
-var usernames = [];
-io.on('connection', function(socket, req){
 
-  socket.on('start', function(username){
+Game.prototype.initialize(io);
 
-    usernames.push(username);
+var a;
+function realTime(){
+  a = setInterval(Game.prototype.updateGames, 10000);
+}
 
-    socket.emit('start connected', usernames);
-    socket.broadcast.emit('start connected', usernames);
-
-    socket.on('disconnect', function(){
-      usernames = [];
-      socket.broadcast.emit('user disconnected');
-    })
-
-    var maxPlayer = 6;
-    if(usernames.length == maxPlayer) {
-      socket.emit('start ready');
-      socket.broadcast.emit('start ready');
-
-      solar = new Solar({});
-      solar.save();
-      var users = [];
-      console.log(usernames);
-      for(var i in usernames){
-        User.findOne({ username: usernames[i] }, function(err, user){
-          users.push(user);
-          if(user.username == usernames[usernames.length-1]){
-            solar.initialize(users, maxPlayer); // create mother planet and so on...
-            return;
-          }
-        })
-      }
-    }
-
-  })
-  /*
-  socket.on('game', function(username, solar_system){
-    console.log( solar_system );
-      User.find({ solar_system : solar_system }).populate('planets').exec(function(err, users) {
-          if (err) throw err;
-          console.log('users.length' + users.length);
-          for(var i in users) {
-            console.log(JSON.stringify(users[i],null, 4));	// so that the display is pretty
-            users[i].password = ''; //  otherwise security breach
-          }
-          socket.emit('data', users);
-      });
-    });*/
-});
-
+realTime();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

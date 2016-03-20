@@ -1,0 +1,1 @@
+var socket=io();$("form").submit(function(){return socket.emit("chat message",$("#m").val()),$("#m").val(""),!1});

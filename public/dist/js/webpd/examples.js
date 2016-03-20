@@ -1,0 +1,1 @@
+webPdExamples={init:function(){var t=/iPad|iPhone|iPod/.test(navigator.platform),n=t?"touchend":"click";$("#startButton").on(n,function(){$(this).fadeOut(200,function(){$("#controls").fadeIn(200)}),Pd.start()})},patchLoaded:function(t){$("#svg").html(pdfu.renderSvg(pdfu.parse(t),{svgFile:!1,ratio:1.5})),$("#loading").fadeOut(200,function(){$("#startButton").fadeIn()})}};

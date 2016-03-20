@@ -15,24 +15,27 @@ block content
       theme: 'dark', 
       stoppable: true
     });
-    
+    var ready = false;
     var socket = io();
-    socket.emit('start', username );
-    socket.on('start connected', function(usernames){
-      console.log('Du nouveau!');
-      $('.pure-menu-list').empty();  //  make sure the list is empty
-      for(i in usernames) {
-        console.log(usernames[i]);
-        $('.pure-menu-list').append($('<li class="pure-menu-item"></li>')).append($('<a href="#" class="pure-menu-link"></a>').text(usernames[i]));
-      }
-    })
-    socket.on('user disconnected', function(){
-      $('.pure-menu-list').empty();
-      socket.emit('start', username);
-    })
+    if(!ready){
+      socket.emit('start', username );
+      socket.on('user connected', function(usernames){
+        $('.pure-menu-list').empty();  //  make sure the list is empty
+        for(i in usernames) {
+          $('.pure-menu-list').append($('<li class="pure-menu-item"></li>')).append($('<a href="#" class="pure-menu-link"></a>').text(usernames[i]));
+        }
+      })
+      socket.on('user disconnected', function(){
+        $('.pure-menu-list').empty();
+        socket.emit('start', username);
+      })
+    }
     socket.on('start ready', function(){
-      $('body').append($('<a class="button-success pure-button" href="/launcher">Start game!</a>'))
-      $('body').loading('stop');
+      ready = true;
+      if(!$('.button-success pure-button').length){
+        $('body').append($('<a class="button-success pure-button" href="/game/game">Start game!</a>'))
+        $('body').loading('stop');
+      }
     })
   
   .pure-menu.custom-restricted-width

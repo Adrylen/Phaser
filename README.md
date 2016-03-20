@@ -15,6 +15,7 @@
   * Sens rotation  des planetes chargés depuis la bdd
   * Graphisme bâtiments, planète, accesoires ( boutons, pièce etc ...)
   * Ajouter la top barre
+  * Update des ressources en temps réel
 
 * Qui travaille sur quoi:
 
