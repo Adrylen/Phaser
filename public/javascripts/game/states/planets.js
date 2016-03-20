@@ -86,16 +86,18 @@ Planets.prototype.create = function () {
 	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
 
-	for (i = 0; i < nb_of_planet; i++) {
-		planet[i].inputEnabled = true;
-		planet[i].events.onInputDown.add(listener, {'i': i} );
-	}
+	//for (i = 0; i < nb_of_planet; i++) {
+	//	planet[i].inputEnabled = true;
+	//	planet[i].events.onInputDown.add(listener, {'i': i} );
+	//}
+
+	game.input.onTap.add(this.listener);
 
 	selection = game.add.image(0, 0, 'selection');
 	selection.width = 38;
 	selection.height = 38;
 	selection.visible = false;
-	console.log(selection.width);
+	//console.log(selection.width);
 	planet_text = game.add.text(0, 0, '', { fill: '#ffffff' });
 };
 
@@ -103,6 +105,21 @@ function listener () {
 	planet_selected = this.i;
 	planet_text.text = planet_list[this.i].name;
 	//console.log(this.i);
+}
+
+Planets.prototype.listener = function () {
+	planet_selected = -1;
+	for (var i in planet) {
+		if ( game.input.x < planet[i].x+planet[i].width &&
+			game.input.x > planet[i].x &&
+			game.input.y < planet[i].y+planet[i].height &&
+			game.input.x > planet[i].y
+		) {
+			planet_selected = i;
+			planet_text.text = planet_list[i].name;
+			break;
+		}
+	}
 }
 
 Planets.prototype.update = function () {
@@ -119,10 +136,15 @@ Planets.prototype.update = function () {
 
 	if (planet_selected != -1) {
 		selection.visible = true;
+		planet_text.visible = true;
 		selection.x = planet[planet_selected].x;
 		selection.y = planet[planet_selected].y;
 		planet_text.x = planet[planet_selected].x;
 		planet_text.y = planet[planet_selected].y -38;
+	}
+	else {
+		selection.visible = false;
+		planet_text.visible = false;
 	}
 };
 
