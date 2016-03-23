@@ -14,6 +14,14 @@ var planet_list = [];
 var planet_text;
 //*************************
 
+/*
+attaquer :
+planete attaquante
+planete attaquée
+confirmer	reset
+*/
+
+
 //console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
 Planets.prototype.init = function () {
