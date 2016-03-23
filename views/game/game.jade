@@ -9,8 +9,6 @@ block libs
 block script
 	// Server
 	script(type='text/javascript').
-		// start connection to the server
-		var socket = io();
 
 		username = '#{username}'; // all variable might be global so no "var"
 		solar_system = !{JSON.stringify(solar_system)};
@@ -22,6 +20,23 @@ block script
 		}
 		//console.log(JSON.stringify(solar_system.users[i], null, 2));
 
+		// start connection to the server
+		var socket = io();
+		function askUpdate(){
+			socket.emit('game', solar_system._id);
+		}
+		var a;
+		function realTime(){
+		  a = setInterval(askUpdate, 1000);
+		}
+		
+		realTime();
+		
+		socket.on('gameSend', function(solar_system){
+			solar_system = solar_system;
+			//console.log(JSON.stringify(solar_system, null, 4));
+		})
+		
 	// Phaser
 	script(src='../javascripts/phaser/phaser.js')
 	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
@@ -30,6 +45,8 @@ block script
 	script(src='../javascripts/game/db/map.js')
 	script(src='../javascripts/game/states/city.js')
 	script(src='../javascripts/game/states/planets.js')
+	script(src='../javascripts/game/states/attaque.js')
+	script(src='../javascripts/game/states/commerce.js')
 	script(src='../javascripts/game/game.js')
 
 block content
@@ -44,8 +61,15 @@ block content
 				ul.pure-menu-list#planets
 				span.pure-menu-heading my ressources
 				ul.pure-menu-list#ressources
-				button.pure-button(onclick="start('planets');") Planets
+
+					//li.pure-menu-heading my ressources
+				button.pure-button(onclick="start('planets');") Planets 
 				button.pure-button(onclick="start('city');") City
+				br
+				button.pure-button(onclick="start('attaque');") Attaque 
+				button.pure-button(onclick="start('commerce');") Commerce
+				
+				
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')
 	script(type='text/javascript').

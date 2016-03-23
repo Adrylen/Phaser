@@ -14,6 +14,17 @@ var planet_list = [];
 var planet_text;
 //*************************
 
+// var global
+
+
+/*
+attaquer :
+planete attaquante
+planete attaquée
+confirmer	reset
+*/
+
+
 //console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
 
 Planets.prototype.init = function () {
@@ -114,7 +125,7 @@ function listener () {
 	planet_text.text = planet_list[this.i].name;
 	//console.log(this.i);
 }
-
+/*
 Planets.prototype.listener = function () {
 	planet_selected = -1;
 	for (var i in planet) {
@@ -128,8 +139,8 @@ Planets.prototype.listener = function () {
 			break;
 		}
 	}
-}
-
+};
+*/
 Planets.prototype.update = function () {
 	theta += 0.01; //	vitesse radian/frame
 	var a = 520, b = 290; //	demi grand axe de l'ellipse
