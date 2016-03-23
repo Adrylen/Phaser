@@ -35,7 +35,7 @@ Planets.prototype.preload = function () {
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
 
 	var path = '../images/planets/';
-	console.log(nb_of_planet);
+	//console.log(nb_of_planet);
 
 	// Planets
 	game.load.image('sun', '../images/planets/sun.png');
@@ -47,7 +47,7 @@ Planets.prototype.preload = function () {
 				//console.log(JSON.stringify(solar_system.users[i].planets[j], null, 4));
 				demi_axes.push(solar_system.users[i].planets[j].coeff);
 				name = 'planet' + solar_system.users[i].planets[j].img;
-				console.log(demi_axes);
+				//console.log(demi_axes);
 				game.load.image(name, path + name + '.png');
 				if(solar_system.users[i].planets[j].direction === true) {sens.push(1);}
 				else {sens.push(-1);}
@@ -55,7 +55,7 @@ Planets.prototype.preload = function () {
 				nb_of_planet++;
 		}
 	}
-	console.log(nb_of_planet);
+	//console.log(nb_of_planet);
 
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
@@ -94,12 +94,12 @@ Planets.prototype.create = function () {
 	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
 
-	//for (i = 0; i < nb_of_planet; i++) {
-	//	planet[i].inputEnabled = true;
-	//	planet[i].events.onInputDown.add(listener, {'i': i} );
-	//}
+	for (i = 0; i < nb_of_planet; i++) {
+		planet[i].inputEnabled = true;
+		planet[i].events.onInputDown.add(listener, {'i': i} );
+	}
 
-	game.input.onTap.add(this.listener);
+	//game.input.onTap.add(this.listener);
 
 	selection = game.add.image(0, 0, 'selection');
 	selection.width = 38;

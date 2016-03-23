@@ -9,4 +9,4 @@ function start(state)
 
 game.state.add('city', City);
 game.state.add('planets', Planets);
-start('planets');
+$(function () { start('planets'); });
