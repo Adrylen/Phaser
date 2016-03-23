@@ -14,7 +14,13 @@ block script
 
 		username = '#{username}'; // all variable might be global so no "var"
 		solar_system = !{JSON.stringify(solar_system)};
-		console.log(JSON.stringify(solar_system, null, 4));
+		for (i in solar_system.users) {
+			if (solar_system.users[i].username == '#{username}') {
+				player = solar_system.users[i];
+				break;
+			}
+		}
+		//console.log(JSON.stringify(solar_system.users[i], null, 2));
 
 	// Phaser
 	script(src='../javascripts/phaser/phaser.js')
@@ -33,14 +39,26 @@ block content
 				span.pure-menu-heading players
 				ul.pure-menu-list#players
 					li.pure-menu-item.list #{username}
+				span.pure-menu-heading my planets
 				ul.pure-menu-list#planets
-					li.pure-menu-heading my planets
+				span.pure-menu-heading my ressources
 				ul.pure-menu-list#ressources
+
 					li.pure-menu-heading my ressources
 				button.pure-button(onclick="start('planets');") Planets 
+
 				button.pure-button(onclick="start('city');") City
 				br
 				button.pure-button(onclick="start('attaque');") Attaque 
 				button.pure-button(onclick="start('commerce');") Commerce
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')
+	script(type='text/javascript').
+		$(function () {
+			for(i in player.planets) {
+				$('#planets').append('<li class="pure-menu-item list">'+player.planets[i].name+'</li>');
+			}
+			for(i in player.ressources) {
+				$('#ressources').append('<li class="pure-menu-item list">'+i+' : '+player.ressources[i]+'</li>');
+			}
+		});

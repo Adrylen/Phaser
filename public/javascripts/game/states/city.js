@@ -9,15 +9,19 @@ City.prototype.init = function () {
 City.prototype.preload = function () {
 	game.load.image('tile', '../images/backgrounds/grass.png');
 	game.load.image('sideBar', '../images/bars/side_bar.jpg');
-	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	game.load.image('coin', '../images/assets/coin.png');
+	//Buildings
+	game.load.image('war', '../images/building/guerre.png');
 
 	game.time.advancedTiming = true;
 
 	// Add and enable the plug-in.
 	game.plugins.add(new Phaser.Plugin.Isometric(game));
+
+	// Start the IsoArcade physics system.
+	game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
 
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
@@ -30,6 +34,13 @@ City.prototype.create = function () {
 
     // Let's make a load of tiles on a grid.
     this.spawnTiles();
+
+		war = game.add.sprite(400, 200, 'war');
+		war.width = 128;
+		war.height = 110;
+		war.angle = 5;
+		war.inputEnabled = true;
+		war.input.enableDrag(true);
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
