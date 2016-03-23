@@ -102,14 +102,16 @@ app.use('/users', users);
 app.use('/game', game);
 app.use('/tmp', tmp);
 
-
+  //          Start
 Game.prototype.initialize(io);
 
+//            Game update ressources from mongo
+Game.prototype.sendData(io);
 var a;
 function realTime(){
   a = setInterval(Game.prototype.updateGames, 10000);
 }
-
+//          Update database 
 realTime();
 
 // catch 404 and forward to error handler

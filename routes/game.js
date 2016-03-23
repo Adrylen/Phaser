@@ -23,6 +23,7 @@ router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/log
       res.redirect('../users/start');
     }
   });
+  
 });
 
 module.exports = router;
