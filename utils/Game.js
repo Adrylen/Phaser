@@ -81,8 +81,6 @@ Game.prototype.updateGames = function(){
 Game.prototype.sendData = function(io){
   io.on('connection', function(socket, req){
     socket.on('game', function(solar_id){
-      console.log('       hello you');
-      console.log(solar_id);
       Solar.findById(solar_id).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
         socket.emit('gameSend', solar);
       });
