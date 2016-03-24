@@ -4,6 +4,11 @@ City.prototype.init = function () {
 	var isoGroup = null;
 	var cursorPos = null;
 	var cursor = null;
+
+	// Buildings
+	var war = null;
+	var townHome = null;
+	var house = null;
 };
 
 City.prototype.preload = function () {
@@ -14,6 +19,8 @@ City.prototype.preload = function () {
 	game.load.image('coin', '../images/assets/coin.png');
 	//Buildings
 	game.load.image('war', '../images/building/guerre.png');
+	//game.load.image('townHome', '../images/building/mairie.png');
+	//game.load.image('house', '../images/building/maison.png');
 
 	game.time.advancedTiming = true;
 
@@ -34,13 +41,10 @@ City.prototype.create = function () {
 
     // Let's make a load of tiles on a grid.
     this.spawnTiles();
+	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
 
-		war = game.add.sprite(400, 200, 'war');
-		war.width = 128;
-		war.height = 110;
-		war.angle = 5;
-		war.inputEnabled = true;
-		war.input.enableDrag(true);
+	//mairie = this.addBuilding(400, 200, 128, 190, 0, 'townHome');
+	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -59,7 +63,7 @@ City.prototype.update = function () {
     game.iso.unproject(game.input.activePointer.position, cursorPos);
 
     // Loop through all tiles and test to see if the 3D position from above intersects with the automatically generated IsoSprite tile bounds.
-    isoGroup.forEach(function (tile) {
+/*    isoGroup.forEach(function (tile) {
         var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
         // If it does, do a little animation and tint change.
         if (!tile.selected && inBounds) {
@@ -73,7 +77,7 @@ City.prototype.update = function () {
             tile.tint = 0xffffff;
             game.add.tween(tile).to({ isoZ: 0 }, 200, Phaser.Easing.Quadratic.InOut, true);
         }
-    });
+    });*/
 };
 
 City.prototype.render = function () {
@@ -81,8 +85,16 @@ City.prototype.render = function () {
     //game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
 };
 
+City.prototype.addBuilding = function (x, y, width, height, angle, name) {
+	var building = game.add.sprite(x, y, name);
+	building.width = width;
+	building.height = height;
+	building.angle = angle;
+	return building;
+};
+
 City.prototype.spawnTiles = function () {
-  var tile;
+	var tile;
 	var width = 17;
 	var height = 20;
 	var min = width, max = height;
@@ -96,7 +108,12 @@ City.prototype.spawnTiles = function () {
             // Create a tile using the new game.add.isoSprite factory method at the specified position.
             // The last parameter is the group you want to add it to (just like game.add.sprite)
 			tile = game.add.isoSprite(xx*38, yy*38, 0, 'tile', 0, isoGroup);
+			console.log(tile.isoPosition.x);
 			tile.anchor.set(0.5, 0);
+			if(map[yy][xx] == 1) {
+				tile.tint = 0x86bfda;
+				console.log("XX:"+xx+"|YY:"+yy+"|map:"+map[yy][xx]);
+			}
         }
     }
 };

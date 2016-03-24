@@ -42,8 +42,11 @@ block script
 	script(src='../javascripts/phaser/phaser-plugin-isometric.js')
 	script(src='../javascripts/webpd/webpd-latest.js')
 	script(src='../javascripts/webpd/pd-fileutils.js')
+	script(src='../javascripts/game/db/map.js')
 	script(src='../javascripts/game/states/city.js')
 	script(src='../javascripts/game/states/planets.js')
+	script(src='../javascripts/game/states/attaque.js')
+	script(src='../javascripts/game/states/commerce.js')
 	script(src='../javascripts/game/game.js')
 
 block content
@@ -59,13 +62,21 @@ block content
 				span.pure-menu-heading my ressources
 				ul.pure-menu-list#ressources
 
-					li.pure-menu-heading my ressources
-				button.pure-button(onclick="start('planets');") Planets 
-
-				button.pure-button(onclick="start('city');") City
+					//li.pure-menu-heading my ressources
+					
+					
+				
+				button.pure-button(id="planet" onclick="start('planets');") Planets
+				button.pure-button(id="city" onclick="start('city');") City
 				br
-				button.pure-button(onclick="start('attaque');") Attaque 
-				button.pure-button(onclick="start('commerce');") Commerce
+				button.pure-button(id="attaque" onclick="start('attaque');") Attaque
+				br
+				button.pure-button(id="commerce" onclick="start('commerce');") Commerce
+				script(type="text/javascript").
+					document.getElementById('attaque').style.visibility = "hidden";
+					
+				
+				
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')
 	script(type='text/javascript').
