@@ -74,11 +74,18 @@ block content
 				ul.pure-menu-list#ressources
 
 					//li.pure-menu-heading my ressources
-				button.pure-button(onclick="start('planets');") Planets 
-				button.pure-button(onclick="start('city');") City
+					
+					
+				
+				button.pure-button(id="planet" onclick="start('planets');") Planets
+				button.pure-button(id="city" onclick="start('city');") City
 				br
-				button.pure-button(onclick="start('attaque');") Attaque 
-				button.pure-button(onclick="start('commerce');") Commerce
+				button.pure-button(id="attaque" onclick="start('attaque');") Attaque
+				br
+				button.pure-button(id="commerce" onclick="start('commerce');") Commerce
+				script(type="text/javascript").
+					document.getElementById('attaque').style.visibility = "hidden";
+					
 				
 				
 	// WebPd
