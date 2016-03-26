@@ -15,7 +15,7 @@ block script
 		for (i in solar_system.users) {
 			if (solar_system.users[i].username == '#{username}') {
 				player = solar_system.users[i];
-				break;
+				id_user = i;
 			}
 		}
 		//console.log(JSON.stringify(solar_system.users[i], null, 2));
@@ -30,11 +30,22 @@ block script
 		  a = setInterval(askUpdate, 1000);
 		}
 		
+		function displayMenu(id) {
+			player = solar_system.users[id];
+			var s1 = '';
+			var s2 = '';
+			for(i in player.planets) { s1 += '<li class="pure-menu-item list">'+player.planets[i].name+'</li>'; }
+			for(i in player.ressources) { s2 += '<li class="pure-menu-item list">'+i+' : '+player.ressources[i]+'</li>'; }
+			$('#planets').html(s1);
+			$('#ressources').html(s2);
+		}
+		
 		realTime();
 		
-		socket.on('gameSend', function(solar_system){
-			solar_system = solar_system;
-			//console.log(JSON.stringify(solar_system, null, 4));
+		socket.on('gameSend', function(new_solar_system){
+			solar_system = new_solar_system;
+			displayMenu(id_user);
+			//console.log(JSON.stringify(player.ressources.kaga, null, 4));
 		})
 		
 	// Phaser
@@ -74,10 +85,5 @@ block content
 	script(src='../javascripts/webpd/loadPatches.js')
 	script(type='text/javascript').
 		$(function () {
-			for(i in player.planets) {
-				$('#planets').append('<li class="pure-menu-item list">'+player.planets[i].name+'</li>');
-			}
-			for(i in player.ressources) {
-				$('#ressources').append('<li class="pure-menu-item list">'+i+' : '+player.ressources[i]+'</li>');
-			}
+			displayMenu(id_user);
 		});
