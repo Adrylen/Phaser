@@ -4,7 +4,7 @@ var theta = 1;
 
 //*************************
 var planet = [];
-//var demi_axes = [1.00, 0.84];
+var demi_axes = [1.00, 0.84];
 //var nb_of_planet = 2;
 var demi_axes = [];
 var sens = [];
@@ -30,7 +30,6 @@ confirmer	reset
 Planets.prototype.init = function () {
 	var planets = null;
 	var circle;
-	var kaga;
 	// ressources
 };
 
@@ -51,9 +50,8 @@ Planets.prototype.preload = function () {
 	// Planets
 	game.load.image('sun', '../images/planets/sun.png');
 	var name;
+	//yconsole.log(JSON.stringify(player, null, 4));
 	for(var i in solar_system.users){
-		if (solar_system.users[i].username == username)
-			kaga = solar_system.users[i].ressources.kaga;
 		for(var j in solar_system.users[i].planets){
 				//console.log(JSON.stringify(solar_system.users[i].planets[j], null, 4));
 				demi_axes.push(solar_system.users[i].planets[j].coeff);
@@ -102,7 +100,7 @@ Planets.prototype.create = function () {
 
 	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
-	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
+	text = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
 
 	for (i = 0; i < nb_of_planet; i++) {
@@ -125,22 +123,7 @@ function listener () {
 	planet_text.text = planet_list[this.i].name;
 	//console.log(this.i);
 }
-/*
-Planets.prototype.listener = function () {
-	planet_selected = -1;
-	for (var i in planet) {
-		if ( game.input.x < planet[i].x+planet[i].width &&
-			game.input.x > planet[i].x &&
-			game.input.y < planet[i].y+planet[i].height &&
-			game.input.x > planet[i].y
-		) {
-			planet_selected = i;
-			planet_text.text = planet_list[i].name;
-			break;
-		}
-	}
-};
-*/
+
 Planets.prototype.update = function () {
 	theta += 0.01; //	vitesse radian/frame
 	var a = 520, b = 290; //	demi grand axe de l'ellipse
@@ -165,6 +148,9 @@ Planets.prototype.update = function () {
 		selection.visible = false;
 		planet_text.visible = false;
 	}
+
+	//console.log(player.ressources.kaga);
+	text.text = player.ressources.kaga;
 };
 
 Planets.prototype.render = function () {
