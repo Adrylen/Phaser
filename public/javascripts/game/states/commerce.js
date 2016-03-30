@@ -18,7 +18,7 @@ Commerce.prototype.create = function () {
 	galaxy.height = 620;
 	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
-	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
+	text = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
 
 };
