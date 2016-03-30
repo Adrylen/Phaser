@@ -1,20 +1,8 @@
 extends layouts/layout
 
-block libs
-	script(src='../javascripts/jquery.min.js')
-
 block content
 	.divtitle
-		img.title(src='/images/assets/erkma.png')
-		.pure-g
-			.pure-u-1-2
-				a.button(href='/users/login')
-					img#login(src='/images/buttons/log1.png')
-			.pure-u-2-2
-				a.button(href='/users/add')
-					img#add(src='/images/buttons/add1.png')
-	script(type='text/javascript').
-		$('#login').attr('src') = 'src';
-		console.log($('#login').attr('src'));
-	footer.footer
-		p.pfooter Périples futures ... Victoires prochaines !
+	img.title(src='/images/assets/erkma.png')
+	a#Addbutton(type='button', name='Add')
+	a#Loginbutton(type='button', name='Login')
+	p.pfooter Périples futures ... Victoires prochaines !
