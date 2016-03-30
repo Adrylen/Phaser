@@ -66,6 +66,11 @@ Game.prototype.initialize = function (io) {
         }
       }
     })
+
+    socket.on('AskCommerce', function(building_id)){
+      
+    }
+
   });
 }
 
