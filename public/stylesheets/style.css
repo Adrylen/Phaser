@@ -52,10 +52,22 @@ canvas {
 	left: -2%;
 }
 
+.buttons
+{
+    width: 100%;
+    text-align: center;
+}
+
+.buttons a
+{
+    display: inline-block;
+    margin: 0 15.6% 0 15.6%;
+}
+
 .button-success {
   background: rgb(28, 184, 65); /* this is a green */
 }
-margin-left: auto;
+/*margin-left: auto;*/
 
 .custom-restricted-width {
   font-size: 2em;

@@ -9,6 +9,7 @@ City.prototype.init = function () {
 	var war = null;
 	var townHome = null;
 	var house = null;
+	var usine = null;
 };
 
 City.prototype.preload = function () {
@@ -19,8 +20,9 @@ City.prototype.preload = function () {
 	game.load.image('coin', '../images/assets/coin.png');
 	//Buildings
 	game.load.image('war', '../images/building/guerre.png');
-	//game.load.image('townHome', '../images/building/mairie.png');
-	//game.load.image('house', '../images/building/maison.png');
+	game.load.image('townHome', '../images/building/mairie.png');
+	game.load.image('house', '../images/building/maison.png');
+	game.load.image('usine', '../images/building/usine.png');
 
 	game.time.advancedTiming = true;
 
@@ -42,9 +44,9 @@ City.prototype.create = function () {
     // Let's make a load of tiles on a grid.
     this.spawnTiles();
 	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
-
-	//mairie = this.addBuilding(400, 200, 128, 190, 0, 'townHome');
+	mairie = this.addBuilding(400, 200, 128, 190, 0, 'townHome');
 	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
+	usine = this.addBuilding(277, 90, 140, 190, 0, 'usine');
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -52,7 +54,7 @@ City.prototype.create = function () {
 	// Interface
 	topBar = game.add.image(0, 0, 'topBar'); topBar.height = 30;
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
-	text = game.add.text(32, 0, kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
+	text = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
 };
 
@@ -78,6 +80,7 @@ City.prototype.update = function () {
             game.add.tween(tile).to({ isoZ: 0 }, 200, Phaser.Easing.Quadratic.InOut, true);
         }
     });*/
+	text.text = player.ressources.kaga;
 };
 
 City.prototype.render = function () {
@@ -108,11 +111,9 @@ City.prototype.spawnTiles = function () {
             // Create a tile using the new game.add.isoSprite factory method at the specified position.
             // The last parameter is the group you want to add it to (just like game.add.sprite)
 			tile = game.add.isoSprite(xx*38, yy*38, 0, 'tile', 0, isoGroup);
-			console.log(tile.isoPosition.x);
 			tile.anchor.set(0.5, 0);
 			if(map[yy][xx] == 1) {
 				tile.tint = 0x86bfda;
-				console.log("XX:"+xx+"|YY:"+yy+"|map:"+map[yy][xx]);
 			}
         }
     }

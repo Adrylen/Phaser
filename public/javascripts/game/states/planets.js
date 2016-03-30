@@ -16,7 +16,6 @@ var planet_text;
 
 // var global
 
-
 /*
 attaquer :
 planete attaquante
