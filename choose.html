@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE HTML>
+
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8"/>
+	<title> Choose your espece </title>
+	<link rel="stylesheet" href="choose.css" type="text/css"/>
+	<script type="text/javascript" src="jquery-2.2.1.js"></script>
+
+</head>
+<body>
+<h1> Choose your espece </h1>
+	<table border="0" name="choisir" align="center">
+	<tr>
+		<td>	<img id="Glurps"src="/home/rlicornes/Projet_Father/Personnages/Glurps.png"> </td>
+		<td> 	<img id="Hatburg"src="/home/rlicornes/Projet_Father/Personnages/Hatburg.png"> </td>
+		<td>	<img id="Laistar"src="/home/rlicornes/Projet_Father/Personnages/Laistar.png"> </td>
+	</tr>
+	<tr>
+		<td> <img id="Larva" src="/home/rlicornes/Projet_Father/Personnages/Larva.png"> </img> </td>
+		<td> <img id="MrMustach" src="/home/rlicornes/Projet_Father/Personnages/MrMustach.png"> </img></td>
+		<td> <img id="Mrsur"src="/home/rlicornes/Projet_Father/Personnages/Mrsur.png"> </img></td>
+	</tr>
+	<tr>
+		<td> <img id="Orzren"src="/home/rlicornes/Projet_Father/Personnages/Orzren.png"> </img> </td>
+		<td> <img id="Runorpox"src="/home/rlicornes/Projet_Father/Personnages/Runorpox.png"></img> </td>
+		<td> <img id="Vaex"src="/home/rlicornes/Projet_Father/Personnages/Vaex.png"></img> </td>
+	</tr>
+	<input type=button name='valid' value="Valid your choise" onClick="receive();"/>
+
+
+<script>
+
+	function receive(){
+		var select = $(this).attr("id"); // IDEA: recuperation de l'id n'est pas réussi
+		alert(selected);
+	}
+
+var selected = null;
+
+	$(function() {
+		$('p').hide();
+
+		$("img").click(function(){
+			console.log($(this).attr("id"));
+			$("img").not($($(this).attr("id"))).css({
+					width:'200px',
+					height:'200px',
+			});
+
+			selected = $(this).attr("id");
+		});
+
+		function selectPerso(){
+			console.log(this);
+			$(this).css({
+				width :'300px',
+				height : '300px',
+			});
+			var select = $(this).attr("id")+"text";
+			$('p').hide();
+			$('#'+select).show();
+
+		};
+
+		$(function(){
+			$("#Glurps").click(selectPerso);
+			$("#Hatburg").click(selectPerso);
+			$("#Laistar").click(selectPerso);
+			$("#Larva").click(selectPerso);
+			$("#MrMustach").click(selectPerso);
+			$("#Mrsur").click(selectPerso);
+			$("#Orzren").click(selectPerso);
+			$("#Runorpox").click(selectPerso);
+			$("#Vaex").click(selectPerso);
+		});
+	});
+
+</script>
+<p id="Glurpstext"> Glurps,
+										Muni de grande corne et de dents pointus ils ont évolué en devorant tout sur leur passage
+										plantes, arbres, animaux ... Les marecages de leurs planetes sont d'un vert vaseux d'où leurs
+										couleurs a faire vomir des limaces. </p>
+<p id="Hatburgtext"> Hatburg,
+										Leur monde est beauté et harmonie, par manque de cheveux, ils décidèrent de se mettre des
+									  noeud sur les cornes pour donnée à leurs look un aspect de paye et d'amour. Leurs consomations
+								     execif de champignons leurs donne les points blancs sur leurs peau. </p>
+<p id="Laistartext"> Laistar, </p>
+<p id="Larvatext"> </p>
+<p id="MrMustachtext"> </p>
+<p id="Mrsurtext"> </p>
+<p id="Orzrentext"> </p>
+<p id="Runorpoxtext"> </p>
+<p id="Vaextext"> </p>
+
+</body>
+</html>

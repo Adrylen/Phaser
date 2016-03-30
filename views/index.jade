@@ -2,11 +2,7 @@ extends layouts/layout
 
 block content
 	.divtitle
-		img.title(src='/images/assets/erkma.png')
-	div.buttons
-		a#login(href='/users/login')
-			img(src='/images/buttons/loginButton.png')
-		a#add(href='/users/add')
-			img(src='/images/buttons/addButton.png')
-	footer.footer
-		p.pfooter Périples futures ... Victoires prochaines !
+	img.title(src='/images/assets/erkma.png')
+	a#Addbutton(type='button', name='Add')
+	a#Loginbutton(type='button', name='Login')
+	p.pfooter Périples futures ... Victoires prochaines !

@@ -111,7 +111,7 @@ var a;
 function realTime(){
   a = setInterval(Game.prototype.updateGames, 10000);
 }
-//          Update database 
+//          Update data
 realTime();
 
 // catch 404 and forward to error handler
