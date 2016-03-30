@@ -52,10 +52,54 @@ canvas {
 	left: -2%;
 }
 
+.buttons
+{
+    width: 100%;
+    text-align: center;
+}
+
+.buttons a
+{
+    display: inline-block;
+    margin: 0 15.6% 0 15.6%;
+}
+
 .button-success {
   background: rgb(28, 184, 65); /* this is a green */
 }
-margin-left: auto;
+/*margin-left: auto;*/
+
+#Addbutton:hover
+{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-image: url(../images/buttons/add2.png);
+}
+
+#Addbutton
+{
+  background-image: url(../images/buttons/add1.png) ;
+  border: none;
+  padding: 75px 100px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 23%;
+}
+
+#Loginbutton:hover
+{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-image: url(../images/buttons/log2.png);
+}
+
+#Loginbutton
+{
+  background-image: url(../images/buttons/log1.png) ;
+  border: none;
+  padding: 75px 100px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 25%;
+}
 
 .custom-restricted-width {
   font-size: 2em;
