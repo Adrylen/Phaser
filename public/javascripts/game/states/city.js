@@ -38,6 +38,8 @@ City.prototype.preload = function () {
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
 	game.iso.anchor.setTo(0.5, -0.40);
+
+	upgrade.preload();
 };
 
 City.prototype.create = function () {
@@ -71,6 +73,8 @@ City.prototype.create = function () {
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
 	text = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
+
+	upgrade.create();
 };
 
 City.prototype.update = function () {
