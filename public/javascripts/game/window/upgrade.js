@@ -9,17 +9,9 @@ Upgrade.prototype = {
     },
 
     //Update server
-    /* Attention ask_for et against sont des objets de la forme:
-    *  var o = { ressource : nom_de_la_ressource, quantity: quantite };
-    */
-    update: function(from_user_id, ask_for, to_user_id, against) {
+    update: function(building_id) {
         /* ARTHUR */
-        var data = {
-          from_user_id = from_user_id,
-          ask_for = ask_for,
-          to_user_id = to_user_id,
-          against = against
-        }
+        var data = building_id;
         socket.emit('AskCommerce', data);
     }
 };
