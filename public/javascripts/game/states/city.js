@@ -12,6 +12,7 @@ City.prototype.init = function () {
 	var usine = null;
 
 	var warHitbox = null;
+	var usineHitbox = null;
 };
 
 City.prototype.preload = function () {
@@ -55,6 +56,12 @@ City.prototype.create = function () {
 	mairie = this.addBuilding(500, 170, 220, 350, 0, 'townHome');
 	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
 	usine = this.addBuilding(277, 90, 140, 190, 0, 'usine');
+		usine.inputEnabled=true;
+		usine.events.onInputOver.add(function () { usineHitbox = true; }, this);
+		usine.events.onInputOut.add(function () { usineHitbox = false; }, this);
+		usine.events.onInputDown.add(function () { upgrade.display(); }, this);
+		usineHitbox = false;
+		game.physics.arcade.enable(usine);
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -91,14 +98,12 @@ City.prototype.update = function () {
 	text.text = player.ressources.kaga;
 };
 
-City.prototype.show = function () {
-
-};
-
 City.prototype.render = function () {
     //game.debug.text("Move your mouse around!", 2, 36, "#ffffff");
     //game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
 	if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
+	else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+	if(usineHitbox == true) game.debug.body(usine, "rgba(255, 0, 0, 1)", false);
 	else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
 };
 
