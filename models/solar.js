@@ -81,6 +81,7 @@ solarSchema.methods.update = function (coeff) {
           switch (solar.users[i].planets[j].buildings[k].type) {
             case 'ambassade':
               solar.users[i].ressources.kaga += solar.users[i].planets[j].buildings[k].level * coeff;
+              break;
             case 'mine':
               solar.users[i].ressources.iron += solar.users[i].planets[j].buildings[k].level * coeff;
               break;
