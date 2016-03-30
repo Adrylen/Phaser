@@ -10,6 +10,9 @@ City.prototype.init = function () {
 	var townHome = null;
 	var house = null;
 	var usine = null;
+
+	var warHitbox = null;
+	var usineHitbox = null;
 };
 
 City.prototype.preload = function () {
@@ -38,15 +41,27 @@ City.prototype.preload = function () {
 };
 
 City.prototype.create = function () {
+	game.physics.startSystem(Phaser.Physics.ARCADE);
     // Create a group for our tiles.
     isoGroup = game.add.group();
 
     // Let's make a load of tiles on a grid.
     this.spawnTiles();
 	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
-	mairie = this.addBuilding(400, 200, 128, 190, 0, 'townHome');
+		war.inputEnabled=true;
+		war.events.onInputOver.add(function () { warHitbox = true; }, this);
+		war.events.onInputOut.add(function () { warHitbox = false; }, this);
+		warHitbox = false;
+		game.physics.arcade.enable(war);
+	mairie = this.addBuilding(500, 170, 220, 350, 0, 'townHome');
 	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
 	usine = this.addBuilding(277, 90, 140, 190, 0, 'usine');
+		usine.inputEnabled=true;
+		usine.events.onInputOver.add(function () { usineHitbox = true; }, this);
+		usine.events.onInputOut.add(function () { usineHitbox = false; }, this);
+		usine.events.onInputDown.add(function () { upgrade.display(); }, this);
+		usineHitbox = false;
+		game.physics.arcade.enable(usine);
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -62,7 +77,7 @@ City.prototype.update = function () {
     // Update the cursor position.
     // It's important to understand that screen-to-isometric projection means you have to specify a z position manually, as this cannot be easily
     // determined from the 2D pointer position without extra trickery. By default, the z position is 0 if not set.
-    game.iso.unproject(game.input.activePointer.position, cursorPos);
+    //game.iso.unproject(game.input.activePointer.position, cursorPos);
 
     // Loop through all tiles and test to see if the 3D position from above intersects with the automatically generated IsoSprite tile bounds.
 /*    isoGroup.forEach(function (tile) {
@@ -86,6 +101,10 @@ City.prototype.update = function () {
 City.prototype.render = function () {
     //game.debug.text("Move your mouse around!", 2, 36, "#ffffff");
     //game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
+	if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
+	else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+	if(usineHitbox == true) game.debug.body(usine, "rgba(255, 0, 0, 1)", false);
+	else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
 };
 
 City.prototype.addBuilding = function (x, y, width, height, angle, name) {
