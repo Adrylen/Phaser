@@ -97,7 +97,19 @@ Game.prototype.event = function(io){
                   against = against
               }
               */
-          User.findById(data.to_user_id, function(err, user){
+             if(data.res){
+                 // le quemendeur
+                 User.findById(data.to_user_id, function(err, user){
+                     user.editRessource(ask_for.type, -ask_for.amount); // on retire
+                     user.editRessource(against.type, against.amount);  // on ajoute
+                 });
+                 // le demandeur
+                 User.findById(data.from_user_id, function(err, user){
+                     user.editRessource(against.type, -against.amount); // on retire
+                     user.editRessource(ask_for.type, ask_for.amount);  // on ajoute
+                 });
+             }
+          User.findById(data.from_user_id, function(err, user){
               user.addMessage("ResCommerce", data);
           });
       });

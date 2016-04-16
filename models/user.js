@@ -58,6 +58,11 @@ userSchema.methods.addMessage = function(type, data){
     this.save();
 }
 
+userSchema.methods.editRessource = function(type, amount){
+    this.ressources.type += amount;
+    this.save();
+}
+
 userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');
   console.log('                getSolar');
