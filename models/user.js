@@ -6,6 +6,7 @@ var ObjectId = Schema.ObjectId;
 
 var Planet = require('../models/planet');
 var Solar = require('../models/solar');
+var Message = require('../models/message');
 
 var ressourceSchema = new Schema({
   kaga: Number,
@@ -23,6 +24,7 @@ var userSchema = new Schema({
   ressources: ressourceSchema,
   created_at: Date,
   updated_at: Date,
+  messages : [{ type : ObjectId, ref: 'message' }],
   planets : [{ type : ObjectId, ref: 'planet' }],
   solar_system : { type: ObjectId },
   play: Boolean
@@ -48,6 +50,12 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
   this.solar_system = solar_system_id;
 
   this.save();
+}
+
+userSchema.methods.addMessage = function(type, data){
+    nMessage = new Message({type: type, data: data});
+    this.messages.push(nMessage);
+    this.save();
 }
 
 userSchema.methods.getSolar = function(callback){
