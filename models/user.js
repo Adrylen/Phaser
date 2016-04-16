@@ -8,6 +8,14 @@ var Planet = require('../models/planet');
 var Solar = require('../models/solar');
 var Message = require('../models/message');
 
+var spaceshipSchema = new Schema({
+  spaceship_dammage: Number,
+  human_dammage: Number,
+  defence: Number,
+  cost: Number,
+  name: String
+});
+
 var ressourceSchema = new Schema({
   kaga: Number,
   iron: Number,
@@ -24,6 +32,7 @@ var userSchema = new Schema({
   ressources: ressourceSchema,
   created_at: Date,
   updated_at: Date,
+  spaceships: [spaceshipSchema],
   messages : [{ type : ObjectId, ref: 'message' }],
   planets : [{ type : ObjectId, ref: 'planet' }],
   solar_system : { type: ObjectId },
@@ -46,6 +55,13 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
     tool: 100,
     lumber: 100
   };
+  this.spaceships.push ({
+    spaceship_dammage: 0,
+    human_dammage: 0,
+    defence: 100,
+    cost: 1000,
+    name: 'space cruiser 1'
+  });
   this.planets.push(planet_id);
   this.solar_system = solar_system_id;
 
@@ -62,6 +78,7 @@ userSchema.methods.editRessource = function(type, amount){
     this.ressources.type += amount;
     this.save();
 }
+
 
 userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');

@@ -98,7 +98,7 @@ Game.prototype.event = function(io){
               }
               */
              if(data.res){
-                 // le quemendeur
+                 // l'aquiesceur
                  User.findById(data.to_user_id, function(err, user){
                      user.editRessource(ask_for.type, -ask_for.amount); // on retire
                      user.editRessource(against.type, against.amount);  // on ajoute

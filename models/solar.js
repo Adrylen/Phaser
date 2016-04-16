@@ -49,13 +49,6 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
           { type: 'lumberjack', level: 1},
           { type: 'pump', level: 1}
         ],
-        spaceships: [{
-          spaceship_dammage: 0,
-          human_dammage: 0,
-          defence: 100,
-          cost: 1000,
-          name: 'space cruiser 1'
-        }],
         coeff: 1.00 - (i*0.15),  // coeff demis grand axe ellipse
         direction: i%2,
         img: i+1,  // image num 1, 2, 3...
