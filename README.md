@@ -7,6 +7,7 @@
     * Acheter vaisseau
     * Attaquer
     * Commerce
+    * gestionnaire de message
   * bonus
    
 
