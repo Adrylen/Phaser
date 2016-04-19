@@ -6,15 +6,6 @@ var ObjectId = Schema.ObjectId;
 
 var User = require('../models/user');
 
-
-var spaceshipSchema = new Schema({
-  spaceship_dammage: Number,
-  human_dammage: Number,
-  defence: Number,
-  cost: Number,
-  name: String
-});
-
 var buildingSchema = new Schema({
   type: String,
   level: Number
@@ -32,7 +23,6 @@ var planetSchema = new Schema({
   name: String,
   pop: Number,
   buildings: [buildingSchema],
-  spaceships: [spaceshipSchema],
   coeff: Number,  //  demis grands axes de l'ellipse
   direction: Boolean, // sens horaire ou sens trigo
   img: Number,  // img de la planete

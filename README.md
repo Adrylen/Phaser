@@ -3,10 +3,13 @@
 ## TODOLIST
 
 * A faire:
-  * ajouter infos sur le joueur dans la sidebar
-  * Planete dynamique
-  * Placer batiments sur la carte
-  * Partie graphisme à adapter au jeu
+  * URGENT
+    * Acheter vaisseau
+    * Attaquer
+    * Commerce
+    * gestionnaire de message
+  * bonus
+   
 
 * Fait:
   * Envoyer un objet solar au client
@@ -16,6 +19,8 @@
   * Graphisme bâtiments, planète, accesoires ( boutons, pièce etc ...)
   * Ajouter la top barre
   * Update des ressources en temps réel
+  * ajouter infos sur le joueur dans la sidebar
+  * Planete dynamique
 
 * Qui travaille sur quoi:
 
