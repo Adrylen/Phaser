@@ -149,7 +149,24 @@ Game.prototype.iWin = function(user_id){
     console.log('--------------------------------------------------');
     console.log(user_id);
     console.log('--------------------------------------------------');
+    User.findById(user_id, function(err, user)){
+      if (user.planets.length == 6) {
+        return true;
+      }
+      return false;
+    }
 }
 
+Game.prototype.iLoose = function(user_id){
+    console.log('--------------------------------------------------');
+    console.log(user_id);
+    console.log('--------------------------------------------------');
+    User.findById(user_id, function(err, user)){
+      if (user.planets.length == 0) {
+        return true;
+      }
+      return false;
+    }
+}
 
 module.exports = Game;
