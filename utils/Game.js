@@ -145,5 +145,11 @@ Game.prototype.sendData = function(io){
   })
 }
 
+Game.prototype.iWin = function(user_id){
+    console.log('--------------------------------------------------');
+    console.log(user_id);
+    console.log('--------------------------------------------------');
+}
+
 
 module.exports = Game;

@@ -4,11 +4,16 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var Solar = require('../models/solar');
 var User = require('../models/user');
+var Game = require('../utils/Game.js');
 
 /* GET home page. */
 
 router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
-  res.redirect('game/game');
+    //Game.iWin(req.user._id);
+    Game.iWin('pouet');
+    console.log('##############################################################');
+    console.log(Game);
+    res.redirect('game/game');
 });
 
 router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
@@ -23,7 +28,10 @@ router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/log
       res.redirect('../users/start');
     }
   });
-  
+});
+
+router.get('/win', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
+    res.render('game/win', {});
 });
 
 module.exports = router;
