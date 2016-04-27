@@ -32,10 +32,10 @@ var Solar = require('./models/solar');
 var Game = require('./utils/Game');
 
 //    routes
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var game = require('./routes/game');
+var routes = require('./routes/index');
 var tmp = require('./routes/tmp');
+var users = require('./routes/users');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

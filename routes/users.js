@@ -69,7 +69,7 @@ router.post('/add', function(req, res){
     });
     req.login(newUser, function(err){
       if(err) throw err;
-      res.redirect('start');
+      res.render('users/start', {user : req.user});
     });
   });
 });

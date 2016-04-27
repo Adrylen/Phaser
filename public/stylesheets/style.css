@@ -135,12 +135,12 @@ canvas {
 
 .divtitle{
   margin: auto;
+  padding: 2% 0 2% 0; 
   width: 70%;
 }
 
 .title{
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 3px;
-  margin: 5%;
-  width: 90%;
+  width: 100%;
 }
