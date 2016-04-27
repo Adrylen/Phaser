@@ -105,7 +105,7 @@ City.prototype.update = function () {
 City.prototype.render = function () {
     //game.debug.text("Move your mouse around!", 2, 36, "#ffffff");
     //game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
-	console.log(upgrade.popUp());
+	//console.log(upgrade.popUp());
 	if(upgrade.popUp() == false) {
 		if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
 		else game.debug.body(war, "rgba(0, 0, 0, 0)", false);

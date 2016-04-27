@@ -1,6 +1,7 @@
 var Planets = function(game) {};
 
-var theta = 1;
+var theta = [];
+var a = 520, b = 290; //	demi grand axe de l'ellipse
 
 //*************************
 var planet = [];
@@ -86,6 +87,7 @@ Planets.prototype.create = function () {
 		planet[i] = game.add.sprite(0, 0, name);
 		planet[i].width = 38;
 		planet[i].height = 38;
+		theta.push(Math.random() * 2.0 * Math.PI);
 		for (var j = 0; j < nb_of_planet; j++) {
 			if (planet_list[j].img == i+1) {
 				var temp = planet_list[j];
@@ -124,14 +126,12 @@ function listener () {
 }
 
 Planets.prototype.update = function () {
-	theta += 0.01; //	vitesse radian/frame
-	var a = 520, b = 290; //	demi grand axe de l'ellipse
-
 	//*************************
 	for (var i = 0; i < planet.length; i++) {
 		//console.log(sens[i]);
-		planet[i].x = this.moveX(planet[i].width, a*demi_axes[i], sens[i] * (theta+1)*demi_axes[5-i]);
-		planet[i].y = this.moveY(planet[i].height, b*demi_axes[i], sens[i] * (theta+1)*demi_axes[5-i]);
+		theta[i] += 0.01; //	vitesse radian/frame
+		planet[i].x = this.moveX(planet[i].width, a*demi_axes[i], sens[i] * (theta[i]+1)*demi_axes[5-i]);
+		planet[i].y = this.moveY(planet[i].height, b*demi_axes[i], sens[i] * (theta[i]+1)*demi_axes[5-i]);
 	}
 	//*************************
 
