@@ -60,9 +60,9 @@ Upgrade.prototype = {
         var data = {user_id: user_id, building_id: building_id};
         socket.emit('AskCommerce', data);
     },
-
-    upgrade: function(str) {
-        //console.log(str);
+    //data = { planet_id, building_id }
+    upgrade: function(data) {
+      socket.emit('buildingUpgrade', data);
     }
 };
 

@@ -130,6 +130,10 @@ Game.prototype.event = function(io){
 
       })
     })
+
+    socket.on('buildingUpgrade', function(data){
+      console.log(data);
+    })
 }
 
 Game.prototype.updateGames = function(){
