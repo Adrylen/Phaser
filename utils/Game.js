@@ -132,7 +132,11 @@ Game.prototype.event = function(io){
     })
 
     socket.on('buildingUpgrade', function(data){
+      console.log('---------------------------------------------');
+      console.log('');
       console.log(data);
+      console.log('');
+      console.log('---------------------------------------------');
     })
 }
 
