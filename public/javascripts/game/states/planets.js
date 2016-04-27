@@ -1,4 +1,4 @@
-var Planets = function(game) {};
+cdvar Planets = function(game) {};
 
 var theta = [];
 var a = 520, b = 290; //	demi grand axe de l'ellipse
@@ -84,7 +84,14 @@ Planets.prototype.create = function () {
 	//*************************
 	for (var i = 0; i < nb_of_planet; i++) {
 		var name = 'planet'.concat((i+1).toString());
-		planet[i] = game.add.sprite(0, 0, name);
+
+	//	if(player.planets == ) {
+	//		planet[i] = game.add.sprite(0, 0, name).arc(0,0, 42,0 ,Math.PI *2).addColorStop(0, '#1791a7').addColorStop(1, 'white');
+	//	}
+	//	else {
+			planet[i] = game.add.sprite(0, 0, name);
+	//	}
+
 		planet[i].width = 38;
 		planet[i].height = 38;
 		theta.push(Math.random() * 2.0 * Math.PI);
