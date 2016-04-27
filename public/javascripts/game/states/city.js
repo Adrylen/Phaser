@@ -38,6 +38,8 @@ City.prototype.preload = function () {
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
 	game.iso.anchor.setTo(0.5, -0.40);
+
+	upgrade.preload();
 };
 
 City.prototype.create = function () {
@@ -59,7 +61,7 @@ City.prototype.create = function () {
 		usine.inputEnabled=true;
 		usine.events.onInputOver.add(function () { usineHitbox = true; }, this);
 		usine.events.onInputOut.add(function () { usineHitbox = false; }, this);
-		usine.events.onInputDown.add(function () { upgrade.display(); }, this);
+		usine.events.onInputDown.add(function () { usineHitbox = false; upgrade.display(); }, this);
 		usineHitbox = false;
 		game.physics.arcade.enable(usine);
 
@@ -71,6 +73,8 @@ City.prototype.create = function () {
 	coin = game.add.image(3, 2, 'coin'); coin.width = 26; coin.height = 26;
 	text = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
+
+	upgrade.create();
 };
 
 City.prototype.update = function () {
@@ -101,10 +105,17 @@ City.prototype.update = function () {
 City.prototype.render = function () {
     //game.debug.text("Move your mouse around!", 2, 36, "#ffffff");
     //game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
-	if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
-	else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
-	if(usineHitbox == true) game.debug.body(usine, "rgba(255, 0, 0, 1)", false);
-	else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+	console.log(upgrade.popUp());
+	if(upgrade.popUp() == false) {
+		if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
+		else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+		if(usineHitbox == true) game.debug.body(usine, "rgba(255, 0, 0, 1)", false);
+		else game.debug.body(usine, "rgba(0, 0, 0, 0)", false);
+	}
+	else {
+		game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+		game.debug.body(usine, "rgba(0, 0, 0, 0)", false);
+	}
 };
 
 City.prototype.addBuilding = function (x, y, width, height, angle, name) {
