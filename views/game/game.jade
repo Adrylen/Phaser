@@ -35,7 +35,21 @@ block script
 			var s1 = '';
 			var s2 = '';
 			for(i in player.planets) { s1 += '<li class="pure-menu-item list">'+player.planets[i].name+'</li>'; }
-			for(i in player.ressources) { s2 += '<li class="pure-menu-item list">'+i+' : '+player.ressources[i]+'</li>'; }
+			for(i in player.ressources) {
+				var str;
+				switch(i) {
+					case 'iron': str = 'Iron'; break;
+					case 'watt': str = 'Energy'; break;
+					case 'food': str = 'Food'; break;
+					case 'water': str = 'Water'; break;
+					case 'tool': str = 'Tool'; break;
+					case 'lumber': str = 'Lumber'; break;
+					default:
+						str = '';
+				}
+				if(str != '')
+					s2 += '<li class="pure-menu-item list">'+str+' : '+player.ressources[i]+'</li>';
+			}
 			$('#planets').html(s1);
 			$('#ressources').html(s2);
 			$('#player').html('<li class="pure-menu-item list">' + username + '</li>');
@@ -78,13 +92,14 @@ block content
 					//li.pure-menu-heading my ressources
 					
 					
-				
+				br
+				br 
 				button.pure-button(id="planet" onclick="start('planets');") Planets
 				button.pure-button(id="city" onclick="start('city');") City
 				br
 				button.pure-button(id="attaque" onclick="start('attaque');") Attaque
 				br
-				button.pure-button(id="commerce" onclick="commerce.display();") Commerce
+				button.pure-button(id="commerce" onclick="start('commerce');") Commerce
 				script(type="text/javascript").
 					document.getElementById('attaque').style.visibility = "hidden";
 					

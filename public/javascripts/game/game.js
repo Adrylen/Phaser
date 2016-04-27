@@ -8,4 +8,4 @@ game.state.add('city', City);
 game.state.add('planets', Planets);
 game.state.add('attaque', Attaque);
 game.state.add('commerce', Commerce);
-start('city');
+start('planets');
