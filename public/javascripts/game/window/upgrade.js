@@ -1,6 +1,8 @@
 var Upgrade = function(game) {
     var cadre = null;
     var cross = null;
+
+    var popUp = null;
 };
 
 Upgrade.prototype = {
@@ -15,6 +17,7 @@ Upgrade.prototype = {
         cross.events.onInputDown.add(function () {
             cadre.visible = false;
             cross.visible = false;
+            popUp = false;
         }, this);
         cross.visible = false;
 
@@ -31,12 +34,16 @@ Upgrade.prototype = {
         cadre.endFill();
 
         cadre.visible = false;
+        popUp = false;
     },
 
     display: function() {
         cadre.visible = true;
         cross.visible = true;
+        popUp = true;
     },
+
+    popUp: function() { return popUp; },
 
     //Update server
     update: function(user_id, building_id) {
