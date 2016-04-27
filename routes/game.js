@@ -9,11 +9,9 @@ var Game = require('../utils/Game.js');
 /* GET home page. */
 
 router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
-    //Game.iWin(req.user._id);
-    Game.iWin('pouet');
-    console.log('##############################################################');
-    console.log(Game);
-    res.redirect('game/game');
+  console.log(req.user._id);
+  //console.log(Game.prototype.iWin(req.user._id));
+  res.redirect('game/game');
 });
 
 router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
