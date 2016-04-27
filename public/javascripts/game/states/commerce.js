@@ -1,15 +1,28 @@
 var Commerce = function(game) {};
 
-var from_user_id;
-var ask_for = {ressource : "", amount : 0};
-var to_user_id;
-var against = {ressource : "", amount : 0};
+var from_user_id_args;
+var ask_for_args = {ressource : "", amount : 0};
+var to_user_id_args;
+var against_args = {ressource : "", amount : 0};
 
+Commerce.prototype.preload = function() {
+	game.load.spritesheet('start', '../../images/buttons/startButton.png', 204, 160);
 
+};
+
+var button;
+var background;
 Commerce.prototype.create = function() {
+
 	game.stage.backgroundColor = '#182d3b';
 
-	bouh = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
+	start = game.add.button(game.world.centerX - 102, 250, 'start', this.actionOnClick, this, 1, 0, 2);
+	start.height *= 0.2;
+	start.width *= 0.5;
+
+	// -----
+
+	bouh = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#005c70"});
 	bouh.height = 33;
 	//confirmer = game.add.button(game.world.centerX - 95, 400, confirmed, this);
 	//button = game.add.button(game.world.centerX - 95, 400, 'button', confirmed, this, 2, 1, 0);
@@ -33,7 +46,7 @@ function confirmed() {
 	//socket.emit('AskCommerce', data);
 }
 
-Planets.prototype.update = function () {
+Commerce.prototype.update = function () {
 	/* ARTHUR */
 	var data = [
 		from_user_id = from_user_id_args,
