@@ -33,7 +33,7 @@ function confirmed() {
 	//socket.emit('AskCommerce', data);
 }
 
-Planets.prototype.update = function () {
+Commerce.prototype.update = function () {
 	/* ARTHUR */
 	var data = [
 		from_user_id = from_user_id_args,
