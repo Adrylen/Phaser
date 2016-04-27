@@ -1,8 +1,9 @@
 /*
 * Class Game
-* Contains erverything about initialization of the game
+* Contains erverything about initialization and updating of the game
 */
 
+var app = require ('../app');
 var Planet = require('../models/planet');
 var User = require('../models/user');
 var Solar = require('../models/solar');
@@ -126,17 +127,44 @@ Game.prototype.event = function(io){
               attacked_ships = attacked_ships
           }
            */
+
       })
+    })
+
+    socket.on('buildingUpgrade', function(data){
+      console.log('---------------------------------------------');
+      console.log('');
+      console.log(data);
+      console.log('');
+      console.log('---------------------------------------------');
     })
 }
 
 Game.prototype.updateGames = function(){
-  Solar.find({}, function(err, solars){
+  /**
+   * ressource update
+   * Check if player is defeated
+   * Check if player won
+   */
+  Solar.find({}).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solars) {
     if (err) throw err;
     for(var i in solars){
-      solars[i].update(1);
+
+      solars[i].update(1);  // update ressource of each solar system
+      /**
+       * Vérifier dans les routes que l'utilisateur a bien gagné ou perdu
+       */
+      for(var j in solars[i].users){
+        if(Game.prototype.iWin(solars[i].users[j]._id)){
+          app.redirect('../game/win');
+        }
+        if(Game.prototype.iLoose(solars[i].users[j]._id)){
+          app.redirect('../game/over');
+          console.log('pouet');
+        }
+      }
     }
-  })
+  });
 }
 
 Game.prototype.sendData = function(io){
@@ -149,5 +177,32 @@ Game.prototype.sendData = function(io){
   })
 }
 
+Game.prototype.iWin = function(user_id){
+    console.log('--------------------------------------------------');
+    console.log(user_id);
+    console.log('--------------------------------------------------');
+    User.findById(user_id, function(err, user){
+      if (user != undefined) {
+        if (user.planets.length == 6) {
+          return true;
+        }
+        return false;
+      }
+    })
+}
+
+Game.prototype.iLoose = function(user_id){
+    console.log('--------------------------------------------------');
+    console.log(user_id);
+    console.log('--------------------------------------------------');
+    User.findById(user_id, function(err, user){
+      if(user != undefined){
+        if (user.planets.length == 0) {
+          return true;
+        }
+        return false;
+      }
+    })
+}
 
 module.exports = Game;

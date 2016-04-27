@@ -16,8 +16,8 @@ var mongoose = require('mongoose');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-var host = process.env.VCAP_APP_HOST || process.env.HOST || 'localhost';
-var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
+var host = process.env.VCAP_APP_HOST || process.env.HOST || '0.0.0.0';
+var port = process.env.VCAP_APP_PORT || process.env.PORT || 8080;
 
 
 mongoose.connect('mongodb://localhost/erkma');
@@ -146,7 +146,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-//app.listen(port, host);
+
 http.listen({
   host: host,
   port: port
