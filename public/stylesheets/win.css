@@ -1,0 +1,37 @@
+#hG{
+  position: absolute;
+  margin-top: 2%;
+  margin-left: 5%;
+  width: 200px;
+  height: 100px;
+}
+
+#bD{
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  margin-left: 75%;
+  margin-top: 20%;
+}
+
+#victoire{
+  position: absolute;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 700px;
+  height: auto;
+  margin-top: 5%;
+}
+
+#text{
+  position: absolute;
+  margin-left: 2%;
+  margin-top: 31%;
+  color: white;
+  width: 500px;
+  height: 350px;
+}
+
+body{
+  background-color:#030000;
+}

@@ -29,7 +29,7 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
   this.name = randomstring.generate({length: 3, charset: 'alphabetic' });
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
-  console.log(JSON.stringify(users, null, 4));
+  //console.log(JSON.stringify(users, null, 4));
   planetNames = [];
   try {
     for(var i = 0; i < maxPlayer; i++){

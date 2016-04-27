@@ -4,10 +4,13 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var Solar = require('../models/solar');
 var User = require('../models/user');
+var Game = require('../utils/Game.js');
 
 /* GET home page. */
 
 router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
+  console.log(req.user._id);
+  //console.log(Game.prototype.iWin(req.user._id));
   res.redirect('game/game');
 });
 
@@ -23,7 +26,10 @@ router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/log
       res.redirect('../users/start');
     }
   });
-  
+});
+
+router.get('/win', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
+    res.render('game/win', {});
 });
 
 module.exports = router;
