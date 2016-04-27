@@ -38,6 +38,7 @@ block script
 			for(i in player.ressources) { s2 += '<li class="pure-menu-item list">'+i+' : '+player.ressources[i]+'</li>'; }
 			$('#planets').html(s1);
 			$('#ressources').html(s2);
+			$('#player').html('<li class="pure-menu-item list">' + username + '</li>');
 		}
 		
 		realTime();
@@ -68,8 +69,7 @@ block content
 		.pure-u-4-5#parent
 		.pure-u-1-5.pure-menu.custom-restricted-width
 				span.pure-menu-heading players
-				ul.pure-menu-list#players
-					li.pure-menu-item.list #{username}
+				ul.pure-menu-list#player
 				span.pure-menu-heading my planets
 				ul.pure-menu-list#planets
 				span.pure-menu-heading my ressources

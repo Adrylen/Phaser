@@ -34,6 +34,12 @@ function confirmed() {
 }
 
 Planets.prototype.update = function () {
-	bouh.text = player.ressources.kaga;
-	bouh.visible = false;
+	/* ARTHUR */
+	var data = [
+		from_user_id = from_user_id_args,
+		ask_for = ask_for_args,
+		to_user_id = to_user_id_args,
+		against = against_args
+	];
+	socket.emit('AskCommerce', data);
 };
