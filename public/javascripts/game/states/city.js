@@ -15,9 +15,12 @@ City.prototype.init = function () {
 	var usineHitbox = null;
 };
 
+/* Loading of images */
 City.prototype.preload = function () {
+	/* General interface */
 	game.load.image('tile', '../images/backgrounds/grass.png');
 	game.load.image('sideBar', '../images/bars/side_bar.jpg');
+
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	game.load.image('coin', '../images/assets/coin.png');
