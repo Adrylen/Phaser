@@ -1,7 +1,7 @@
 #git ne doit pas importer ces dossiers
 /data
-/build
-npm-debug.log
 /bower_components
-/trash
+/build
 /node_modules
+/trash
+npm-debug.log
