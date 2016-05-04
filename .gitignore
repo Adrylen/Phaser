@@ -3,4 +3,5 @@
 /build
 npm-debug.log
 /bower_components
+/tools
 /trash
