@@ -155,13 +155,8 @@ Game.prototype.updateGames = function(){
        * Vérifier dans les routes que l'utilisateur a bien gagné ou perdu
        */
       for(var j in solars[i].users){
-        if(Game.prototype.iWin(solars[i].users[j]._id)){
-          app.redirect('../game/win');
-        }
-        if(Game.prototype.iLoose(solars[i].users[j]._id)){
-          app.redirect('../game/over');
-          console.log('pouet');
-        }
+        Game.prototype.iWin(solars[i].users[j]);
+        Game.prototype.iLoose(solars[i].users[j]);
       }
     }
   });
@@ -177,32 +172,34 @@ Game.prototype.sendData = function(io){
   })
 }
 
-Game.prototype.iWin = function(user_id){
+Game.prototype.iWin = function(user){
     console.log('--------------------------------------------------');
-    console.log(user_id);
+    console.log('did ' + user.username + ' win?');
     console.log('--------------------------------------------------');
-    User.findById(user_id, function(err, user){
-      if (user != undefined) {
+    if (user != undefined) {
+      if(user.play == true){
         if (user.planets.length == 6) {
-          return true;
+          user.setWon(true);
+        }else{
+          user.setWon(false);
         }
-        return false;
       }
-    })
+    }
 }
 
-Game.prototype.iLoose = function(user_id){
+Game.prototype.iLoose = function(user){
     console.log('--------------------------------------------------');
-    console.log(user_id);
+    console.log('did ' + user.username + ' lose?');
     console.log('--------------------------------------------------');
-    User.findById(user_id, function(err, user){
-      if(user != undefined){
+    if (user != undefined) {
+      if(user.play == true){
         if (user.planets.length == 0) {
-          return true;
+          user.setOver(true);
+        }else{
+          user.setOver(false);
         }
-        return false;
       }
-    })
+    }
 }
 
 module.exports = Game;

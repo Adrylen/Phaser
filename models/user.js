@@ -36,7 +36,9 @@ var userSchema = new Schema({
   messages : [{ type : ObjectId, ref: 'message' }],
   planets : [{ type : ObjectId, ref: 'planet' }],
   solar_system : { type: ObjectId },
-  play: Boolean
+  play: Boolean,
+  over: Boolean,
+  won: Boolean
 });
 
 userSchema.plugin(uniqueValidator);
@@ -47,13 +49,13 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
   console.log('---------------------------------------------------');
 
   this.ressources = {
-    kaga: 100,
-    iron: 100,
-    watt: 100,
-    food: 100,
-    water: 100,
-    tool: 100,
-    lumber: 100
+    kaga: 10000,
+    iron: 10000,
+    watt: 10000,
+    food: 10000,
+    water: 10000,
+    tool: 10000,
+    lumber: 10000
   };
   this.spaceships.push ({
     spaceship_dammage: 0,
@@ -65,6 +67,20 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
   this.planets.push(planet_id);
   this.solar_system = solar_system_id;
 
+  this.play = true;
+  this.over = false;
+  this.won = false;
+
+  this.save();
+}
+
+userSchema.methods.setOver = function(bool){
+  this.over = bool;
+  this.save();
+}
+
+userSchema.methods.setWon = function(bool){
+  this.won = bool;
   this.save();
 }
 
