@@ -67,7 +67,7 @@ router.post('/add', function(req, res){
     });
     newUser.save(function(err) {
       if (err) {
-        console.log(err);
+        //console.log(err);
         res.render('users/add', { title : "username existant" });
       }
     });
