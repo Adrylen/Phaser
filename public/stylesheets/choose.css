@@ -18,13 +18,13 @@ img{
   text-decoration: none;
   display: inline-block;
   font-size: 40px;
-  background-image: url(CHOIX1.png) ;
+  background-image: url(../images/buttons/CHOIX1.png) ;
 
 }
 
 #bouton:hover{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  background-image: url(CHOIX2.png);
+  background-image: url(../images/buttons/CHOIX2.png);
 }
 
 aside {

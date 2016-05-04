@@ -29,7 +29,7 @@ router.get('/all', function(req, res) {
 });
 
 router.get('/choose', function(req, res, next){
-    res.render('tools/choose',{title : 'Choisit ton espèce !'});
+    res.render('users/choose',{title : 'Choisis ton espèce !'});
 })
 
 router.get('/logout',
@@ -73,7 +73,8 @@ router.post('/add', function(req, res){
     });
     req.login(newUser, function(err){
       if(err) throw err;
-      res.render('users/start', {user : req.user});
+      //res.render('users/start', {user : req.user});
+      res.render('users/choose', {user : req.user});
     });
   });
 });

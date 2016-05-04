@@ -1,0 +1,36 @@
+#loose{
+  width: 1000px;
+  height: 600px;
+  margin-left: 10%;
+  margin-top: 3%;
+}
+
+p{
+  color: white;
+  font-size: 28px;
+  margin-left: 2%;
+  float: right;
+}
+
+.ensemble{
+  margin-top: 0%;
+  margin-right: auto;
+
+}
+
+#planete1{
+  width: 200px;
+  height: 125px;
+  float: right;
+}
+
+#planete2{
+  width: 100px;
+  height: 100px;
+  margin-top: 34%;
+  float: left;
+}
+
+body{
+  background: #1A1919;
+}
