@@ -1,38 +1,38 @@
 var City = function (game) { };
 
 City.prototype.init = function () {
-	var isoGroup = null;
-	var cursorPos = null;
-	var cursor = null;
+	var isoGroup = null;	// Isometric group for map
+	var cursorPos = null;	// Position of the cursor
 
-	// Buildings
+	/* Buildings */
 	var war = null;
 	var townHome = null;
 	var house = null;
-	var usine = null;
+	var factory = null;
 
+	/* Hitboxes */
 	var warHitbox = null;
-	var usineHitbox = null;
+	var factoryHitbox = null;
 };
 
+/* Loading of images */
 City.prototype.preload = function () {
+	/* General interface */
 	game.load.image('tile', '../images/backgrounds/grass.png');
-	game.load.image('sideBar', '../images/bars/side_bar.jpg');
-	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	game.load.image('coin', '../images/assets/coin.png');
-	//Buildings
-	game.load.image('war', '../images/building/guerre.png');
-	game.load.image('townHome', '../images/building/mairie.png');
-	game.load.image('house', '../images/building/maison.png');
-	game.load.image('usine', '../images/building/usine.png');
 
-	game.time.advancedTiming = true;
+	//Buildings
+	game.load.image('factory', '../images/building/factory.png');
+	game.load.image('house', '../images/building/maison.png');
+	game.load.image('townHome', '../images/building/mairie.png');
+	game.load.image('war', '../images/building/guerre.png');
 
 	// Add and enable the plug-in.
 	game.plugins.add(new Phaser.Plugin.Isometric(game));
 
-	// Start the IsoArcade physics system.
+	// Start the physics system.
+	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
 
 	// This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
@@ -43,27 +43,31 @@ City.prototype.preload = function () {
 };
 
 City.prototype.create = function () {
-	game.physics.startSystem(Phaser.Physics.ARCADE);
     // Create a group for our tiles.
     isoGroup = game.add.group();
 
-    // Let's make a load of tiles on a grid.
+    // Load of tiles on a grid.
     this.spawnTiles();
+
+	/* Building display */
 	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
+	warHitbox = false;
 		war.inputEnabled=true;
 		war.events.onInputOver.add(function () { warHitbox = true; }, this);
 		war.events.onInputOut.add(function () { warHitbox = false; }, this);
-		warHitbox = false;
 		game.physics.arcade.enable(war);
+
 	mairie = this.addBuilding(500, 170, 220, 350, 0, 'townHome');
+
 	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
-	usine = this.addBuilding(277, 90, 140, 190, 0, 'usine');
-		usine.inputEnabled=true;
-		usine.events.onInputOver.add(function () { usineHitbox = true; }, this);
-		usine.events.onInputOut.add(function () { usineHitbox = false; }, this);
-		usine.events.onInputDown.add(function () { usineHitbox = false; upgrade.display(); }, this);
-		usineHitbox = false;
-		game.physics.arcade.enable(usine);
+
+	factory = this.addBuilding(277, 90, 140, 190, 0, 'factory');
+		factory.inputEnabled=true;
+		factory.events.onInputOver.add(function () { factoryHitbox = true; }, this);
+		factory.events.onInputOut.add(function () { factoryHitbox = false; }, this);
+		factory.events.onInputDown.add(function () { factoryHitbox = false; upgrade.display(); }, this);
+		factoryHitbox = false;
+		game.physics.arcade.enable(factory);
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -109,12 +113,12 @@ City.prototype.render = function () {
 	if(upgrade.popUp() == false) {
 		if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
 		else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
-		if(usineHitbox == true) game.debug.body(usine, "rgba(255, 0, 0, 1)", false);
-		else game.debug.body(usine, "rgba(0, 0, 0, 0)", false);
+		if(factoryHitbox == true) game.debug.body(factory, "rgba(255, 0, 0, 1)", false);
+		else game.debug.body(factory, "rgba(0, 0, 0, 0)", false);
 	}
 	else {
 		game.debug.body(war, "rgba(0, 0, 0, 0)", false);
-		game.debug.body(usine, "rgba(0, 0, 0, 0)", false);
+		game.debug.body(factory, "rgba(0, 0, 0, 0)", false);
 	}
 };
 
