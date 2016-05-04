@@ -18,7 +18,6 @@ block script
 				id_user = i;
 			}
 		}
-		//console.log(JSON.stringify(solar_system.users[i], null, 2));
 
 		// start connection to the server
 		var socket = io();
@@ -82,29 +81,27 @@ block content
 	.pure-g
 		.pure-u-4-5#parent
 		.pure-u-1-5.pure-menu.custom-restricted-width
-				span.pure-menu-heading players
-				ul.pure-menu-list#player
-				span.pure-menu-heading my planets
-				ul.pure-menu-list#planets
-				span.pure-menu-heading my ressources
-				ul.pure-menu-list#ressources
+			span.pure-menu-heading players
+			ul.pure-menu-list#player
+			span.pure-menu-heading my planets
+			ul.pure-menu-list#planets
+			span.pure-menu-heading my ressources
+			ul.pure-menu-list#ressources
 
-					//li.pure-menu-heading my ressources
-					
-					
-				br
-				br 
-				button.pure-button(id="planet" onclick="start('planets');") Planets
-				button.pure-button(id="city" onclick="start('city');") City
-				br
-				button.pure-button(id="attaque" onclick="start('attaque');") Attaque
-				br
-				button.pure-button(id="commerce" onclick="start('commerce');") Commerce
-				script(type="text/javascript").
-					document.getElementById('attaque').style.visibility = "hidden";
-					
+				//li.pure-menu-heading my ressources
 				
 				
+			br
+			br 
+			button.pure-button(id="planet" onclick="start('planets');") Planets
+			button.pure-button(id="city" onclick="start('city');") City
+			br
+			button.pure-button(id="attaque" onclick="start('attaque');") Attaque
+			br
+			button.pure-button(id="commerce" onclick="start('commerce');") Commerce
+			script(type="text/javascript").
+				document.getElementById('attaque').style.visibility = "hidden";
+
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')
 	script(type='text/javascript').

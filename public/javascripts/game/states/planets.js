@@ -1,4 +1,4 @@
-cdvar Planets = function(game) {};
+var Planets = function(game) {};
 
 var theta = [];
 var a = 520, b = 290; //	demi grand axe de l'ellipse
@@ -6,11 +6,8 @@ var a = 520, b = 290; //	demi grand axe de l'ellipse
 //*************************
 var planet = [];
 var demi_axes = [1.00, 0.84];
-//var nb_of_planet = 2;
 var demi_axes = [];
 var sens = [];
-var nb_of_planet = 0;
-var planet_selected = -1;
 var planet_list = [];
 var planet_text;
 //*************************
@@ -30,6 +27,9 @@ confirmer	reset
 Planets.prototype.init = function () {
 	var planets = null;
 	var circle;
+
+	var nb_of_planet = 0;
+	var planet_selected = -1;
 	// ressources
 };
 
@@ -37,40 +37,33 @@ Planets.prototype.preload = function () {
 	planet = [];
 	demi_axes = [];
 	sens = [];
-	nb_of_planet = 0;
-	planet_selected = -1;
+
 	planet_list = [];
 	planet_text = 0;
 	// Background
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
 
-	var path = '../images/planets/';
-	//console.log(nb_of_planet);
-
 	// Planets
 	game.load.image('sun', '../images/planets/sun.png');
-	var name;
-	//yconsole.log(JSON.stringify(player, null, 4));
 	for(var i in solar_system.users){
 		for(var j in solar_system.users[i].planets){
-				//console.log(JSON.stringify(solar_system.users[i].planets[j], null, 4));
-				demi_axes.push(solar_system.users[i].planets[j].coeff);
-				name = 'planet' + solar_system.users[i].planets[j].img;
-				//console.log(demi_axes);
-				game.load.image(name, path + name + '.png');
-				if(solar_system.users[i].planets[j].direction === true) {sens.push(1);}
-				else {sens.push(-1);}
-				planet_list.push(solar_system.users[i].planets[j]);
-				nb_of_planet++;
+			demi_axes.push(solar_system.users[i].planets[j].coeff);
+			var name = 'planet' + solar_system.users[i].planets[j].img;
+			game.load.image(name, '../images/planets/' + name + '.png');
+			if(solar_system.users[i].planets[j].direction === true)
+				sens.push(1);
+			else
+				sens.push(-1);
+			planet_list.push(solar_system.users[i].planets[j]);
+			nb_of_planet++;
 		}
 	}
-	//console.log(nb_of_planet);
 
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	game.load.image('coin', '../images/assets/coin.png');
 
-	//selection
+	// Selection
 	game.load.image('selection', '../images/assets/planetSelected.png');
 };
 
@@ -113,7 +106,7 @@ Planets.prototype.create = function () {
 
 	for (i = 0; i < nb_of_planet; i++) {
 		planet[i].inputEnabled = true;
-		planet[i].events.onInputDown.add(listener, {'i': i} );
+		planet[i].events.onInputDown.add(this.listener, {'i': i} );
 	}
 
 	//game.input.onTap.add(this.listener);
@@ -126,7 +119,7 @@ Planets.prototype.create = function () {
 	planet_text = game.add.text(0, 0, '', { fill: '#ffffff' });
 };
 
-function listener () {
+Planets.prototype.listener = function () {
 	planet_selected = this.i;
 	planet_text.text = planet_list[this.i].name;
 	//console.log(this.i);

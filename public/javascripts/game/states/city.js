@@ -11,8 +11,8 @@ City.prototype.init = function () {
 	var factory = null;
 
 	/* Hitboxes */
-	var warHitbox = null;
-	var factoryHitbox = null;
+	//var warHitbox = null;
+	//var factoryHitbox = null;
 };
 
 /* Loading of images */
@@ -51,23 +51,23 @@ City.prototype.create = function () {
 
 	/* Building display */
 	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
-	warHitbox = false;
-		war.inputEnabled=true;
-		war.events.onInputOver.add(function () { warHitbox = true; }, this);
-		war.events.onInputOut.add(function () { warHitbox = false; }, this);
-		game.physics.arcade.enable(war);
+		////warHitbox = false;
+		//war.inputEnabled=true;
+		//war.events.onInputOver.add(function () { warHitbox = true; }, this);
+		//war.events.onInputOut.add(function () { warHitbox = false; }, this);
+		//game.physics.arcade.enable(war);
 
 	mairie = this.addBuilding(500, 170, 220, 350, 0, 'townHome');
 
 	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
 
 	factory = this.addBuilding(277, 90, 140, 190, 0, 'factory');
-		factory.inputEnabled=true;
-		factory.events.onInputOver.add(function () { factoryHitbox = true; }, this);
-		factory.events.onInputOut.add(function () { factoryHitbox = false; }, this);
-		factory.events.onInputDown.add(function () { factoryHitbox = false; upgrade.display(); }, this);
-		factoryHitbox = false;
-		game.physics.arcade.enable(factory);
+		//factory.inputEnabled=true;
+		//factory.events.onInputOver.add(function () { factoryHitbox = true; }, this);
+		//factory.events.onInputOut.add(function () { factoryHitbox = false; }, this);
+		//factory.events.onInputDown.add(function () { factoryHitbox = false; upgrade.display(); }, this);
+		//factoryHitbox = false;
+		//game.physics.arcade.enable(factory);
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -78,43 +78,27 @@ City.prototype.create = function () {
 	text = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#f19010"});
 	text.height = 33;
 
+	/* Pop-Up */
 	upgrade.create();
 };
 
 City.prototype.update = function () {
-    // Update the cursor position.
-    // It's important to understand that screen-to-isometric projection means you have to specify a z position manually, as this cannot be easily
-    // determined from the 2D pointer position without extra trickery. By default, the z position is 0 if not set.
-    //game.iso.unproject(game.input.activePointer.position, cursorPos);
-
-    // Loop through all tiles and test to see if the 3D position from above intersects with the automatically generated IsoSprite tile bounds.
-/*    isoGroup.forEach(function (tile) {
-        var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
-        // If it does, do a little animation and tint change.
-        if (!tile.selected && inBounds) {
-            tile.selected = true;
-            tile.tint = 0x86bfda;
-            game.add.tween(tile).to({ isoZ: 0 }, 200, Phaser.Easing.Quadratic.InOut, true);
-        }
-        // If not, revert back to how it was.
-        else if (tile.selected && !inBounds) {
-            tile.selected = false;
-            tile.tint = 0xffffff;
-            game.add.tween(tile).to({ isoZ: 0 }, 200, Phaser.Easing.Quadratic.InOut, true);
-        }
-    });*/
+	/* Update ressources */
 	text.text = player.ressources.kaga;
 };
 
 City.prototype.render = function () {
-    //game.debug.text("Move your mouse around!", 2, 36, "#ffffff");
-    //game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
-	//console.log(upgrade.popUp());
+	/* Display Pop-Up */
 	if(upgrade.popUp() == false) {
-		if(warHitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
-		else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
-		if(factoryHitbox == true) game.debug.body(factory, "rgba(255, 0, 0, 1)", false);
-		else game.debug.body(factory, "rgba(0, 0, 0, 0)", false);
+		if(war.hitbox == true)
+			game.debug.body(war, "rgba(255, 0, 0, 1)", false);
+		else
+			game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+
+		if(factory.hitbox == true)
+			game.debug.body(factory, "rgba(255, 0, 0, 1)", false);
+		else
+			game.debug.body(factory, "rgba(0, 0, 0, 0)", false);
 	}
 	else {
 		game.debug.body(war, "rgba(0, 0, 0, 0)", false);
@@ -124,9 +108,18 @@ City.prototype.render = function () {
 
 City.prototype.addBuilding = function (x, y, width, height, angle, name) {
 	var building = game.add.sprite(x, y, name);
+
 	building.width = width;
 	building.height = height;
 	building.angle = angle;
+	building.hitbox = false;
+
+	building.inputEnabled = true;
+	building.event.onInputOver.add(function () { building.hitbox = true; }, this);
+	building.event.onInputOut.add(function () { building.hitbox = false; }, this);
+
+	game.physics.arcade.enable(building);
+
 	return building;
 };
 
