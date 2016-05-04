@@ -28,6 +28,10 @@ router.get('/all', function(req, res) {
   });
 });
 
+router.get('/choose', function(req, res, next){
+    res.render('tools/choose',{title : 'Choisit ton espèce !'});
+})
+
 router.get('/logout',
   function(req, res){
     req.logout();
