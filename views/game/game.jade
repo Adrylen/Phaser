@@ -21,12 +21,12 @@ block script
 
 		// start connection to the server
 		var socket = io();
-		function askUpdate(){
+		function askUpdate() {
 			socket.emit('game', solar_system._id);
 		}
 		var a;
 		function realTime(){
-		  a = setInterval(askUpdate, 1000);
+			a = setInterval(askUpdate, 1000);
 		}
 		
 		function displayMenu(id) {
