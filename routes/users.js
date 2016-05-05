@@ -67,14 +67,14 @@ router.post('/add', function(req, res){
     });
     newUser.save(function(err) {
       if (err) {
-        //console.log(err);
+				console.log(err);
         res.render('users/add', { title : "username existant" });
       }
     });
     req.login(newUser, function(err){
       if(err) throw err;
-      //res.render('users/start', {user : req.user});
-      res.render('users/choose', {user : req.user});
+      res.render('users/start', {user : req.user});
+      //res.render('users/choose', {user : req.user}); juste pour faire mes tests... :)
     });
   });
 });

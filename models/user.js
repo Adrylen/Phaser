@@ -38,7 +38,8 @@ var userSchema = new Schema({
   solar_system : { type: ObjectId },
   play: Boolean,
   over: Boolean,
-  won: Boolean
+  won: Boolean,
+	animal: String
 });
 
 userSchema.plugin(uniqueValidator);

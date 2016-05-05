@@ -17,7 +17,7 @@ var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
 var host = process.env.VCAP_APP_HOST || process.env.HOST || '0.0.0.0';
-var port = process.env.VCAP_APP_PORT || process.env.PORT || 8080;
+var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
 
 
 mongoose.connect('mongodb://localhost/erkma');
@@ -48,6 +48,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
@@ -74,7 +77,7 @@ passport.use(new Strategy(
   }));
 // Configure Passport authenticated session persistence.
 passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+  cb(null, user._id);
 });
 passport.deserializeUser(function(id, cb) {
   User.find({ _id : id }, function(err, user){

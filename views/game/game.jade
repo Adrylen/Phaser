@@ -1,16 +1,16 @@
 extends ../layouts/layoutgame
-
 h1= title
 
 block libs
-	script(src='../javascripts/jquery.min.js')
-	script(src='../javascripts/socket.io.js')
+	//script(src='../javascripts/jquery.min.js')
+	//script(src='../javascripts/socket.io.js')
 
 block script
 	// Server
 	script(type='text/javascript').
 
 		username = '#{username}'; // all variable might be global so no "var"
+		console.log('username = ' + username);
 		solar_system = !{JSON.stringify(solar_system)};
 		for (i in solar_system.users) {
 			if (solar_system.users[i].username == '#{username}') {
@@ -87,8 +87,6 @@ block content
 			ul.pure-menu-list#planets
 			span.pure-menu-heading my ressources
 			ul.pure-menu-list#ressources
-
-				//li.pure-menu-heading my ressources
 				
 				
 			br
