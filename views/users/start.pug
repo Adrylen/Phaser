@@ -1,0 +1,43 @@
+extends ../layouts/layout.pug
+
+block content
+  script(src='../javascripts/jquery.min.js')
+  script(src='../javascripts/socket.io.js')
+  script(src='/javascripts/jquery.loading.min.js')
+  link(rel='stylesheet', href='/stylesheets/jquery.loading.min.css')
+  //script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+  //script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(type='text/javascript').
+    var username='#{user.username}';
+
+    $('body').loading({
+      message: 'En recherche de joueur...',
+      theme: 'dark',
+      stoppable: true
+    });
+    var ready = false;
+    var socket = io();
+    if(!ready){
+      socket.emit('start', username );
+      socket.on('user connected', function(usernames){
+        $('.pure-menu-list').empty();  //  make sure the list is empty
+        for(i in usernames) {
+          $('.pure-menu-list').append($('<li class="pure-menu-item"></li>')).append($('<a href="#" class="pure-menu-link"></a>').text(usernames[i]));
+        }
+      })
+      socket.on('user disconnected', function(){
+        $('.pure-menu-list').empty();
+        socket.emit('start', username);
+      })
+    }
+    socket.on('start ready', function(){
+      ready = true;
+      if(!$('.button-success pure-button').length){
+        $('body').append($('<a class="button-success pure-button" href="/game/game">Start game!</a>'))
+        $('body').loading('stop');
+      }
+    })
+
+  .pure-menu.custom-restricted-width
+    span.pure-menu-heading Joueurs connectés
+      ul.pure-menu-list

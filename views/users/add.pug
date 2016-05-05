@@ -1,0 +1,10 @@
+extends ../layouts/layout.pug
+
+block content
+  div.b1
+    form.pure-form.pure-form-stacked(name="add", method="post", action="/users/add")
+      h1= title
+      fieldset
+        input(type="text", placeholder="username", name="username")
+        input(type="password", placeholder="password", name="password")
+        button.pure-button.pure-button-primary(type="submit") submit
