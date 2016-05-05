@@ -1,12 +1,10 @@
 extends ../layouts/layoutgame
-h1= title
 
 block libs
-	//script(src='../javascripts/jquery.min.js')
-	//script(src='../javascripts/socket.io.js')
+	script(src='../javascripts/jquery.min.js')
+	script(src='../javascripts/socket.io.js')
 
 block script
-	// Server
 	script(type='text/javascript').
 
 		username = '#{username}'; // all variable might be global so no "var"
