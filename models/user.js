@@ -36,9 +36,9 @@ var userSchema = new Schema({
   messages : [{ type : ObjectId, ref: 'message' }],
   planets : [{ type : ObjectId, ref: 'planet' }],
   solar_system : { type: ObjectId },
-  play: Boolean,
-  over: Boolean,
-  won: Boolean,
+  play: { type: Boolean, default: false },
+  over: { type: Boolean, default: false },
+  won: { type: Boolean, default: false },
 	animal: String
 });
 

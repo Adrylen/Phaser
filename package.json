@@ -25,7 +25,7 @@
     "morgan": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "pug": "latest",
+    "pug": "^2.0.0-alpha6",
     "purecss": "latest",
     "randomstring": "^1.1.4",
     "serve-favicon": "latest",
