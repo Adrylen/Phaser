@@ -28,8 +28,8 @@ Planets.prototype.init = function () {
 	var planets = null;
 	var circle;
 
-	var nb_of_planet = 0;
-	var planet_selected = -1;
+	var nb_of_planet = null;
+	var planet_selected = null;
 	// ressources
 };
 
@@ -38,8 +38,12 @@ Planets.prototype.preload = function () {
 	demi_axes = [];
 	sens = [];
 
+	nb_of_planet = 0;
+	planet_selected = -1;
+
 	planet_list = [];
 	planet_text = 0;
+
 	// Background
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
 

@@ -62,10 +62,10 @@ City.prototype.create = function () {
 	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
 
 	factory = this.addBuilding(277, 90, 140, 190, 0, 'factory');
+	factory.events.onInputDown.add(function () { factory.hitbox = false; upgrade.display(); }, this);
 		//factory.inputEnabled=true;
 		//factory.events.onInputOver.add(function () { factoryHitbox = true; }, this);
 		//factory.events.onInputOut.add(function () { factoryHitbox = false; }, this);
-		//factory.events.onInputDown.add(function () { factoryHitbox = false; upgrade.display(); }, this);
 		//factoryHitbox = false;
 		//game.physics.arcade.enable(factory);
 
@@ -88,6 +88,7 @@ City.prototype.update = function () {
 };
 
 City.prototype.render = function () {
+	console.log(factory.hitbox);
 	/* Display Pop-Up */
 	if(upgrade.popUp() == false) {
 		if(war.hitbox == true)
@@ -115,8 +116,8 @@ City.prototype.addBuilding = function (x, y, width, height, angle, name) {
 	building.hitbox = false;
 
 	building.inputEnabled = true;
-	building.event.onInputOver.add(function () { building.hitbox = true; }, this);
-	building.event.onInputOut.add(function () { building.hitbox = false; }, this);
+	building.events.onInputOver.add(function () { building.hitbox = true; }, this);
+	building.events.onInputOut.add(function () { building.hitbox = false; }, this);
 
 	game.physics.arcade.enable(building);
 
