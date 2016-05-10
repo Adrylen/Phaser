@@ -39,6 +39,7 @@ City.prototype.preload = function () {
 	// this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
 	game.iso.anchor.setTo(0.5, -0.40);
 
+	formation.preload();
 	upgrade.preload();
 };
 
@@ -51,6 +52,7 @@ City.prototype.create = function () {
 
 	/* Building display */
 	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
+	war.events.onInputDown.add(function () { war.hitbox = false; formation.display(); }, this);
 		////warHitbox = false;
 		//war.inputEnabled=true;
 		//war.events.onInputOver.add(function () { warHitbox = true; }, this);
@@ -79,6 +81,7 @@ City.prototype.create = function () {
 	text.height = 33;
 
 	/* Pop-Up */
+	formation.create();
 	upgrade.create();
 };
 
@@ -88,9 +91,8 @@ City.prototype.update = function () {
 };
 
 City.prototype.render = function () {
-	console.log(factory.hitbox);
 	/* Display Pop-Up */
-	if(upgrade.popUp() == false) {
+	if(upgrade.popUp() == false && formation.popUp() == false) {
 		if(war.hitbox == true)
 			game.debug.body(war, "rgba(255, 0, 0, 1)", false);
 		else

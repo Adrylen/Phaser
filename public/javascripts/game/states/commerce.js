@@ -20,7 +20,7 @@ var data = {
 
 
 Commerce.prototype.preload = function() {
-	game.load.spritesheet('start', '../../images/buttons/startButton.png', 204, 160);
+	game.load.spritesheet('start', '../images/buttons/startButton.png', 204, 160);
 
 };
 
@@ -39,7 +39,7 @@ var p2ressource_select_button = [];
 Commerce.prototype.create = function() {
 
 
-	confirm_button = game.add.button(game.world.centerX-50, 450, 'confirm', confirm, this, 1, 0, 2);
+	confirm_button = game.add.button(game.world.centerX-50, 450, 'start', confirm, this, 1, 0, 2);
 	confirm_button.height = 100;
 	confirm_button.width = 100;
 
