@@ -9,7 +9,7 @@
     * Commerce
     * gestionnaire de message
   * bonus
-   
+
 
 * Fait:
   * Envoyer un objet solar au client
@@ -40,7 +40,7 @@
 
   * Arthur
   	* tester commerce coté serveur
-  	* tester lose coté serveur
+		* tester lose client-serveur
   	* tester win coté serveur
   	* message coté serveur
 
