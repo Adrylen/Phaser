@@ -1,58 +1,76 @@
 var Commerce = function(game) {};
 
-var from_user_id_args;
-var ask_for_args = {ressource : "", amount : 0};
-var to_user_id_args;
-var against_args = {ressource : "", amount : 0};
+/* ARTHUR */
+/*
+Attention "ask_for" et "against" sont des objets de la forme:
+var o = { ressource : nom_de_la_ressource, amount: quantite };
+*/
+var data = {
+	from_user_id : null,
+	ask_for : {
+		ressources : null,
+		amount : 0
+	},
+	to_user_id : null,
+	against : {
+		ressources : null,
+		amount : 0
+	}
+};
+
 
 Commerce.prototype.preload = function() {
 	game.load.spritesheet('start', '../../images/buttons/startButton.png', 204, 160);
 
 };
 
-var button;
-var background;
+var confirm_button;
+var title;
+var quantity_for;
+var quantity_against;
+var player_1;
+var player_2;
+var p1plus_button = [];
+var p1moins_button = [];
+var p2plus_button = [];
+var p2moins_button = [];
+var p1ressource_select_button = [];
+var p2ressource_select_button = [];
 Commerce.prototype.create = function() {
 
-	game.stage.backgroundColor = '#182d3b';
 
-	start = game.add.button(game.world.centerX - 102, 250, 'start', this.actionOnClick, this, 1, 0, 2);
-	start.height *= 0.2;
-	start.width *= 0.5;
+	confirm_button = game.add.button(game.world.centerX-50, 450, 'confirm', confirm, this, 1, 0, 2);
+	confirm_button.height = 100;
+	confirm_button.width = 100;
 
 	// -----
 
-	bouh = game.add.text(32, 0, player.ressources.kaga, {font: "bold 26px Century Schoolbook L", fill: "#005c70"});
-	bouh.height = 33;
-	//confirmer = game.add.button(game.world.centerX - 95, 400, confirmed, this);
-	//button = game.add.button(game.world.centerX - 95, 400, 'button', confirmed, this, 2, 1, 0);
+	title = game.add.text(game.world.centerX, 0, "Commerce", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	title.height = 50;
+
+	quantity_for = game.add.text(game.world.centerX-200, 500, "0", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	quantity_against = game.add.text(game.world.centerX+200, 500, "0", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
 
 };
 
 
-function confirmed() {
-	/* ARTHUR */
-	/*
-	Attention "ask_for" et "against" sont des objets de la forme:
-	var o = { ressource : nom_de_la_ressource, amount: quantite };
-	*/
+function confirm() {
+
 	console.log("yolo!");
-	var data = {
-		from_user_id : from_user_id,
-		ask_for : ask_for,
-		to_user_id : to_user_id,
-		against : against
-	};
-	//socket.emit('AskCommerce', data);
+	if(data.from_user_id !== null && data.ask_for.ressources !== null && data.to_user_id !== null && data.against.ressources !== null){
+		/* ARTHUR */
+		socket.emit('AskCommerce', data);
+	}
+	data.from_user_id = null;
+	data.ask_for.ressources = null;
+	data.to_user_id = null;
+	data.against.ressources = null;
 }
 
+
+
+/*
 Commerce.prototype.update = function () {
-	/* ARTHUR */
-	var data = [
-		from_user_id = from_user_id_args,
-		ask_for = ask_for_args,
-		to_user_id = to_user_id_args,
-		against = against_args
-	];
-	socket.emit('AskCommerce', data);
+
 };
+*/
