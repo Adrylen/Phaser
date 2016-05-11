@@ -129,7 +129,7 @@ Game.prototype.event = function(io){
            */
 
       })
-			//data = { planet_id, building_id }
+			//data = { user_id, planet_id, building_id }
 			socket.on('buildingUpgrade', function(data){
 				console.log('-----------------------------------');
 				console.log(JSON.stringify(data, null, 4));
