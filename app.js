@@ -116,12 +116,19 @@ function realTime(){
 }
 //          Update data
 realTime();
-
+/*
 User.findOne( {username: 'caramba'}, function(err, user){
 	if (err) console.log(err);
 	user.planets = [];
 	user.save();
 })
+
+User.findOne( {username: 'caramba'}, function(err, user){
+	if (err) console.log(err);
+	for(var i )
+	user.planets = [];
+	user.save();
+})*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

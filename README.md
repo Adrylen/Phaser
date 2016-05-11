@@ -40,9 +40,10 @@
 
   * Arthur
   	* tester commerce coté serveur
-		* tester lose client-serveur
+    * tester lose client-serveur
   	* tester win coté serveur
   	* message coté serveur
+		* update batiment
 
 
 ## Structure de donnée utilisée:
