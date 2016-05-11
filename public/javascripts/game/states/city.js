@@ -17,9 +17,16 @@ City.prototype.init = function () {
 /* Loading of images */
 City.prototype.preload = function () {
 	/* General interface */
-	game.load.image('tile', '../images/backgrounds/grass.png');
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
 	game.load.image('coin', '../images/assets/coin.png');
+
+	/* Map */
+	game.load.image('tile', '../images/backgrounds/grass.png');
+	game.load.image('road', '../images/backgrounds/road.png');
+	game.load.image('roadN', '../images/backgrounds/roadN.png');
+	game.load.image('roadW', '../images/backgrounds/roadW.png');
+	game.load.image('roadE', '../images/backgrounds/roadE.png');
+	game.load.image('roadS', '../images/backgrounds/roadS.png');
 
 	//Buildings
 	game.load.image('factory', '../images/building/factory.png');
@@ -126,11 +133,15 @@ City.prototype.spawnTiles = function () {
         for (var xx = min; xx < size - max; xx++) {
             // Create a tile using the new game.add.isoSprite factory method at the specified position.
             // The last parameter is the group you want to add it to (just like game.add.sprite)
-			tile = game.add.isoSprite(xx*38, yy*38, 0, 'tile', 0, isoGroup);
+			if(map[yy][xx] == 0) tile = game.add.isoSprite(xx*38, yy*38, 0, 'tile', 0, isoGroup);
+			if(map[yy][xx] == 1) { tile = game.add.isoSprite(xx*38, yy*38, 0, 'tile', 0, isoGroup); tile.tint = 0x86bfda; }
+			if(map[yy][xx] == 2) tile = game.add.isoSprite(xx*38, yy*38, 0, 'road', 0, isoGroup);
+			if(map[yy][xx] == 3) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadN', 0, isoGroup);
+			if(map[yy][xx] == 4) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadW', 0, isoGroup);
+			if(map[yy][xx] == 5) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadE', 0, isoGroup);
+			if(map[yy][xx] == 6) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadS', 0, isoGroup);
+
 			tile.anchor.set(0.5, 0);
-			if(map[yy][xx] == 1) {
-				tile.tint = 0x86bfda;
-			}
-        }
-    }
+		}
+	}
 };
