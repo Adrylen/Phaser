@@ -20,7 +20,18 @@ var data = {
 
 
 Commerce.prototype.preload = function() {
-	game.load.spritesheet('start', '../images/buttons/startButton.png', 204, 160);
+	game.load.spritesheet('confirm', '../images/buttons/confirm.png', 200, 150);
+	for (var i = 0; i < 3; i++) {
+		var a = 1;
+		for (var q = 0; q < i; q++) {
+			a*=10;
+		}
+		var text1 = '+'.concat((a).toString());
+		var text2 = '-'.concat((a).toString());
+		game.load.spritesheet( text1, '../images/buttons/' + text1 +'.png', 120,72);
+		game.load.spritesheet( text2,'../images/buttons/'+ text2 +'.png',120,72);
+	}
+	game.load.spritesheet('select', '../images/buttons/CHOIX1.png', 150, 100);
 
 };
 
@@ -55,59 +66,87 @@ Commerce.prototype.create = function() {
 	}
 	// -----
 
-	confirm_button = game.add.button(game.world.centerX, 450, 'start', confirm, this, 1, 0, 2);
+	confirm_button = game.add.button(game.world.centerX, 450, 'confirm', confirm, this, 1, 0, 2);
 	confirm_button.height = 100;
 	confirm_button.width = 100;
 
 	for (var i = 0; i < 3; i++) {
-
-		p1plus_button[i] = game.add.button(game.world.centerX-200+(20*i + 10*(i+1)*i/2 ), 400, 'start', p1plus, {'i': i}, 1, 0, 2);
+		a = 1;
+		for (var q = 0; q < i; q++) {
+			a*=10;
+		}
+		p1plus_button[i] = game.add.button(game.world.centerX-200+(50*i), 400, '+'.concat((a).toString()), p1plus, {'a': a}, 0, 0, 0);
 		p1plus_button[i].height = 20;
-		p1plus_button[i].width = 10 + 10*(i+1);
+		p1plus_button[i].width = 40;
 
-		p1moins_button[i] = game.add.button(game.world.centerX-200+(20*i + 10*(i+1)*i/2), 500, 'start', p1moins, {'i': i}, 1, 0, 2);
+		p1moins_button[i] = game.add.button(game.world.centerX-200+(50*i), 500, '-'.concat((a).toString()), p1moins, {'a': a}, 0, 0, 0);
 		p1moins_button[i].height = 20;
-		p1moins_button[i].width = 10 + 10*(i+1);
+		p1moins_button[i].width = 40;
 
-		p2plus_button[i] = game.add.button(game.world.centerX+200+(20*i + 10*(i+1)*i/2), 400, 'start', p2plus, {'i': i}, 1, 0, 2);
+		p2plus_button[i] = game.add.button(game.world.centerX+200+(50*i), 400, '+'.concat((a).toString()), p2plus, {'a': a}, 0, 0, 0);
 		p2plus_button[i].height = 20;
-		p2plus_button[i].width = 10 + 10*(i+1);
+		p2plus_button[i].width = 40;
 
-		p2moins_button[i] = game.add.button(game.world.centerX+200+(20*i + 10*(i+1)*i/2), 500, 'start', p2moins, {'i': i}, 1, 0, 2);
+		p2moins_button[i] = game.add.button(game.world.centerX+200+(50*i), 500, '-'.concat((a).toString()), p2moins, {'a': a}, 0, 0, 0);
 		p2moins_button[i].height = 20;
-		p2moins_button[i].width = 10 + 10*(i+1);
+		p2moins_button[i].width = 40;
 
 	}
 
 	for (var j = 0; j < 7; j++) {
 
-		p1ressource_select_button[j] = game.add.button(game.world.centerX-200, 50*(j+1), 'start', p1ressource_select, {'j': j}, 1, 0, 2);
-		p1ressource_select_button[j].height = 20;
-		p1ressource_select_button[j].width = 50;
+		p1ressource_select_button[j] = game.add.button(game.world.centerX-200, 50*(j+1), 'select', p1ressource_select, {'j': j}, 1, 0, 2);
+		p1ressource_select_button[j].height = 40;
+		p1ressource_select_button[j].width = 100;
 
-		p2ressource_select_button[j] = game.add.button(game.world.centerX+200, 50*(j+1), 'start', p2ressource_select, {'j': j}, 1, 0, 2);
-		p2ressource_select_button[j].height = 20;
-		p2ressource_select_button[j].width = 50;
+		p2ressource_select_button[j] = game.add.button(game.world.centerX+200, 50*(j+1), 'select', p2ressource_select, {'j': j}, 1, 0, 2);
+		p2ressource_select_button[j].height = 40;
+		p2ressource_select_button[j].width = 100;
 
 	}
 };
 
 function p1plus() {
-
+	data.ask_for.amount += this.a;
+	p1_quantity.text = data.ask_for.amount;
 }
 
 function p1moins() {
-
+	if(data.ask_for.amount>this.a){
+		data.ask_for.amount -= this.a;
+	}else {
+		data.ask_for.amount = 0;
+	}
+	p1_quantity.text = data.ask_for.amount;
 }
 
 function p2plus() {
-
+	data.against.amount += this.a;
+	p2_quantity.text = data.against.amount;
 }
 
 function p2moins() {
-
+	if(data.against.amount>this.a){
+		data.against.amount -= this.a;
+	}else {
+		data.against.amount = 0;
+	}
+	p2_quantity.text = data.against.amount;
 }
-
+/*
+var data = {
+	from_user_id : null,
+	ask_for : {
+		ressources : null,
+		amount : 0
+	},
+	to_user_id : null,
+	against : {
+		ressources : null,
+		amount : 0
+	}
+};
+*/
 function p1ressource_select() {
 
 }
