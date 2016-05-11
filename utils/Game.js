@@ -129,14 +129,15 @@ Game.prototype.event = function(io){
            */
 
       })
-    })
-
-    socket.on('buildingUpgrade', function(data){
-      console.log('---------------------------------------------');
-      console.log('');
-      console.log(data);
-      console.log('');
-      console.log('---------------------------------------------');
+			//data = { user_id, planet_id, building_id }
+			socket.on('buildingUpgrade', function(data){
+				console.log('-----------------------------------');
+				console.log(JSON.stringify(data, null, 4));
+				console.log('-----------------------------------');
+				Planet.findById(data.planet_id, function(err, planet){
+					planet.upgradeBuilding(data.building_id);
+				})
+      })
     })
 }
 
@@ -188,9 +189,6 @@ Game.prototype.iWin = function(user){
 }
 
 Game.prototype.iLoose = function(user){
-    console.log('--------------------------------------------------');
-    console.log('did ' + user.username + ' lose?');
-    console.log('--------------------------------------------------');
     if (user != undefined) {
       if(user.play == true){
         if (user.planets.length == 0) {
