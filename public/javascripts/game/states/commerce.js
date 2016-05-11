@@ -21,7 +21,7 @@ var data = {
 
 Commerce.prototype.preload = function() {
 	game.load.spritesheet('confirm', '../images/buttons/confirm.png', 200, 150);
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 4; i++) {
 		var a = 1;
 		for (var q = 0; q < i; q++) {
 			a*=10;
@@ -50,44 +50,49 @@ var p2moins_button = [];
 var p1ressource_select_button = [];
 var p2ressource_select_button = [];
 Commerce.prototype.create = function() {
-	title = game.add.text(game.world.centerX, 0, "Commerce", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	title = game.add.text(game.world.centerX-75, 0, "Commerce", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
 	title.height = 50;
+	title.width = 150;
 
-	p1_quantity = game.add.text(game.world.centerX-200, 450, "0", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	p1_quantity = game.add.text(game.world.centerX-200, 435, "0", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
 
-	p2_quantity = game.add.text(game.world.centerX+200, 450, "0", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	p2_quantity = game.add.text(game.world.centerX+110, 435, "0", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
 
-	player_1 = game.add.text(game.world.centerX-200, 0, "player1", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	player_1 = game.add.text(game.world.centerX-250, 0, "player1", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	player_1.width = 100;
 
-	player_2 = game.add.text(game.world.centerX+200, 0, "player2", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	player_2 = game.add.text(game.world.centerX+150, 0, "player2", {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+	player_2.width = 100;
 
 	for (var a = 0; a < 7; a++) {
-		ressources_text[a]=game.add.text(game.world.centerX-20, 50*(a+1), 'ressource'.concat((a+1).toString()), {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+		ressources_text[a] = game.add.text(game.world.centerX-75, 50*(a+1), 'ressource'.concat((a+1).toString()), {font: "bold 26px Century Schoolbook L", fill: "#00a802"});
+		ressources_text[a].width = 150;
 	}
 	// -----
 
-	confirm_button = game.add.button(game.world.centerX, 450, 'confirm', confirm, this, 1, 0, 2);
+	confirm_button = game.add.button(game.world.centerX-50, 400, 'confirm', confirm, this, 1, 0, 2);
 	confirm_button.height = 100;
 	confirm_button.width = 100;
 
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 4; i++) {
 		a = 1;
 		for (var q = 0; q < i; q++) {
 			a*=10;
 		}
-		p1plus_button[i] = game.add.button(game.world.centerX-200+(50*i), 400, '+'.concat((a).toString()), p1plus, {'a': a}, 0, 0, 0);
+
+		p1plus_button[i] = game.add.button(game.world.centerX-250+(50*i), 400, '+'.concat((a).toString()), p1plus, {'a': a}, 0, 0, 0);
 		p1plus_button[i].height = 20;
 		p1plus_button[i].width = 40;
 
-		p1moins_button[i] = game.add.button(game.world.centerX-200+(50*i), 500, '-'.concat((a).toString()), p1moins, {'a': a}, 0, 0, 0);
+		p1moins_button[i] = game.add.button(game.world.centerX-250+(50*i), 480, '-'.concat((a).toString()), p1moins, {'a': a}, 0, 0, 0);
 		p1moins_button[i].height = 20;
 		p1moins_button[i].width = 40;
 
-		p2plus_button[i] = game.add.button(game.world.centerX+200+(50*i), 400, '+'.concat((a).toString()), p2plus, {'a': a}, 0, 0, 0);
+		p2plus_button[i] = game.add.button(game.world.centerX+60+(50*i), 400, '+'.concat((a).toString()), p2plus, {'a': a}, 0, 0, 0);
 		p2plus_button[i].height = 20;
 		p2plus_button[i].width = 40;
 
-		p2moins_button[i] = game.add.button(game.world.centerX+200+(50*i), 500, '-'.concat((a).toString()), p2moins, {'a': a}, 0, 0, 0);
+		p2moins_button[i] = game.add.button(game.world.centerX+60+(50*i), 480, '-'.concat((a).toString()), p2moins, {'a': a}, 0, 0, 0);
 		p2moins_button[i].height = 20;
 		p2moins_button[i].width = 40;
 
@@ -95,11 +100,11 @@ Commerce.prototype.create = function() {
 
 	for (var j = 0; j < 7; j++) {
 
-		p1ressource_select_button[j] = game.add.button(game.world.centerX-200, 50*(j+1), 'select', p1ressource_select, {'j': j}, 1, 0, 2);
+		p1ressource_select_button[j] = game.add.button(game.world.centerX-250, 50*(j+1), 'select', p1ressource_select, {'j': j}, 0, 0, 0);
 		p1ressource_select_button[j].height = 40;
 		p1ressource_select_button[j].width = 100;
 
-		p2ressource_select_button[j] = game.add.button(game.world.centerX+200, 50*(j+1), 'select', p2ressource_select, {'j': j}, 1, 0, 2);
+		p2ressource_select_button[j] = game.add.button(game.world.centerX+150, 50*(j+1), 'select', p2ressource_select, {'j': j}, 0, 0, 0);
 		p2ressource_select_button[j].height = 40;
 		p2ressource_select_button[j].width = 100;
 
@@ -164,8 +169,12 @@ function confirm() {
 	}
 	data.from_user_id = null;
 	data.ask_for.ressources = null;
+	data.against.amount = 0;
 	data.to_user_id = null;
 	data.against.ressources = null;
+	data.ask_for.amount = 0;
+	p1_quantity.text = data.ask_for.amount;
+	p2_quantity.text = data.against.amount;
 }
 
 
