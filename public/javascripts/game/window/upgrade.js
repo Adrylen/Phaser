@@ -39,8 +39,19 @@ Upgrade.prototype = {
 		/* Upgrade Kaga */
 		upgrade_coin = game.add.sprite(100, 100, 'upgrade_coin');
 		upgrade_coin.inputEnabled=true;
-		upgrade_coin.events.onInputDown.add(function() { this.upgrade("Coin Upgrade"); }, this);
 		upgrade_coin.visible = false;
+		upgrade_coin.events.onInputDown.add(function() {
+			var building;
+			for (i in player.planets[0].buildings) {
+				if (player.planets[0].buildings[i].type = 'factory') {
+					building = player.planets[0].buildings[i]._id;
+					break;
+				}
+			}
+
+			var data = { planet_id: player.planets[0]._id, building_id: building };
+			this.upgrade(data);
+		}, this);
 
 		popUp = false;
 	},
