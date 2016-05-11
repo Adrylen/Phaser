@@ -112,11 +112,23 @@ Game.prototype.initialize(io);
 Game.prototype.sendData(io);
 var a;
 function realTime(){
-  a = setInterval(Game.prototype.updateGames, 10000);
+  a = setInterval(Game.prototype.updateGames, 1000);
 }
 //          Update data
 realTime();
-// socket event
+/*
+User.findOne( {username: 'caramba'}, function(err, user){
+	if (err) console.log(err);
+	user.planets = [];
+	user.save();
+})
+
+User.findOne( {username: 'caramba'}, function(err, user){
+	if (err) console.log(err);
+	for(var i )
+	user.planets = [];
+	user.save();
+})*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

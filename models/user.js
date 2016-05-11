@@ -96,6 +96,15 @@ userSchema.methods.editRessource = function(type, amount){
     this.save();
 }
 
+userSchema.methods.deletePlanet = function(planet_id){
+	/*function findPlanetById(planet, planet_id){
+		return planet._id === planet_id;
+	}
+	this.planets.find(findPlanetById);*/
+	this.planets = [];
+	this.save();
+}
+
 
 userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');

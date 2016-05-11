@@ -9,7 +9,7 @@
     * Commerce
     * gestionnaire de message
   * bonus
-   
+
 
 * Fait:
   * Envoyer un objet solar au client
@@ -39,6 +39,11 @@
 	  * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
+  	* tester commerce coté serveur
+    * tester lose client-serveur
+  	* tester win coté serveur
+  	* message coté serveur
+		* update batiment
 
 
 ## Structure de donnée utilisée:
