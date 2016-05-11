@@ -29,5 +29,14 @@ var planetSchema = new Schema({
   owner: { type: ObjectId, ref: 'user' }
 });
 
+planetSchema.methods.upgradeBuilding = function(building_id){
+	for(var i in this.buildings){
+		if(this.buildings[i]._id == building_id){
+			this.buildings[i].level++;
+		}
+	}
+  this.save();
+}
+
 var Planet = mongoose.model('planet', planetSchema);
 module.exports = Planet;
