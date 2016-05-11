@@ -7,7 +7,6 @@ City.prototype.init = function () {
 	/* Buildings */
 	var war = null;
 	var townHome = null;
-	var house = null;
 	var factory = null;
 
 	/* Hitboxes */
@@ -24,7 +23,6 @@ City.prototype.preload = function () {
 
 	//Buildings
 	game.load.image('factory', '../images/building/factory.png');
-	game.load.image('house', '../images/building/maison.png');
 	game.load.image('townHome', '../images/building/mairie.png');
 	game.load.image('war', '../images/building/guerre.png');
 
@@ -53,23 +51,12 @@ City.prototype.create = function () {
 	/* Building display */
 	war = this.addBuilding(825, 65, 186, 155, 0, 'war');
 	war.events.onInputDown.add(function () { war.hitbox = false; formation.display(); }, this);
-		////warHitbox = false;
-		//war.inputEnabled=true;
-		//war.events.onInputOver.add(function () { warHitbox = true; }, this);
-		//war.events.onInputOut.add(function () { warHitbox = false; }, this);
-		//game.physics.arcade.enable(war);
 
-	mairie = this.addBuilding(500, 170, 220, 350, 0, 'townHome');
-
-	//house = this.addBuilding(400, 200, 128, 190, 0, 'house');
+	townHome = this.addBuilding(500, 170, 220, 350, 0, 'townHome');
+	townHome.events.onInputDown.add(function () { townHome.hitbox = false; rapport.display(); }, this);
 
 	factory = this.addBuilding(277, 90, 140, 190, 0, 'factory');
 	factory.events.onInputDown.add(function () { factory.hitbox = false; upgrade.display(); }, this);
-		//factory.inputEnabled=true;
-		//factory.events.onInputOver.add(function () { factoryHitbox = true; }, this);
-		//factory.events.onInputOut.add(function () { factoryHitbox = false; }, this);
-		//factoryHitbox = false;
-		//game.physics.arcade.enable(factory);
 
     // Provide a 3D position for the cursor
     cursorPos = new Phaser.Plugin.Isometric.Point3();
@@ -93,15 +80,14 @@ City.prototype.update = function () {
 City.prototype.render = function () {
 	/* Display Pop-Up */
 	if(upgrade.popUp() == false && formation.popUp() == false) {
-		if(war.hitbox == true)
-			game.debug.body(war, "rgba(255, 0, 0, 1)", false);
-		else
-			game.debug.body(war, "rgba(0, 0, 0, 0)", false);
+		if(townHome.hitbox == true) game.debug.body(townHome, "rgba(255, 0, 0, 1)", false);
+		else game.debug.body(townHome, "rgba(0, 0, 0, 0)", false);
 
-		if(factory.hitbox == true)
-			game.debug.body(factory, "rgba(255, 0, 0, 1)", false);
-		else
-			game.debug.body(factory, "rgba(0, 0, 0, 0)", false);
+		if(factory.hitbox == true) game.debug.body(factory, "rgba(255, 0, 0, 1)", false);
+		else game.debug.body(factory, "rgba(0, 0, 0, 0)", false);
+
+		if(war.hitbox == true) game.debug.body(war, "rgba(255, 0, 0, 1)", false);
+		else game.debug.body(war, "rgba(0, 0, 0, 0)", false);
 	}
 	else {
 		game.debug.body(war, "rgba(0, 0, 0, 0)", false);

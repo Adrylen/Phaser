@@ -14,36 +14,43 @@ block libs
 
 block content
 	h1 Choice of the species
-	table(border='0', name='choisir', align='center')
-		tr
-		td(rowspan='3', align='center')
-			a#bouton(href='../images/buttons/CHOIX1', type='button', name='valid', onClick='receive();')
-			td(align='center')
-				img#Glurps(src='../images/characters/Glurps.png')
-			td(align='center')
-				img#Hatburg(src='../images/characters/Hatburg.png')
-			td(align='center')
-				img#Laistar(src='../images/characters/Laistar.png')
-		tr
-			td(align='center')
-				img#Larva(src='../images/characters/Larva.png')
-			td(align='center')
-				img#MrMustach(src='../images/characters/MrMustach.png')
-			td(align='center')
-				img#Mrsur(src='../images/characters/Mrsur.png')
-		tr
-			td(align='center')
-				img#Orzren(src='../images/characters/Orzren.png')
-			td(align='center')
-				img#Runorpox(src='../images/characters/Runorpox.png')
-			td(align='center')
-				img#Vaex(src='../images/characters/Vaex.png')
+	form(name='personnage')
+		table(border='0', name='choisir', align='center')
+			tr
+			td(rowspan='3', align='center')
+				a#bouton(href='../images/buttons/CHOIX1', type='button', name='valid', onClick='receive();')
+				td(align='center')
+					img#Glurps(src='../images/characters/Glurps.png')
+					td(align='center')
+					img#Hatburg(src='../images/characters/Hatburg.png')
+					td(align='center')
+					img#Laistar(src='../images/characters/Laistar.png')
+					tr
+					td(align='center')
+					img#Larva(src='../images/characters/Larva.png')
+					td(align='center')
+					img#MrMustach(src='../images/characters/MrMustach.png')
+					td(align='center')
+					img#Mrsur(src='../images/characters/Mrsur.png')
+					tr
+					td(align='center')
+					img#Orzren(src='../images/characters/Orzren.png')
+					td(align='center')
+					img#Runorpox(src='../images/characters/Runorpox.png')
+					td(align='center')
+					img#Vaex(src='../images/characters/Vaex.png')
 
 	script.
-		function receive(){
-			var select = $(this).attr("id"); // IDEA: recuperation de l'id n'est pas réussi
-			alert(selected);
+
+	function controle(personnage){
+		var receive = document.personnage.name;
+		if (receive = null) {
+			receive.open("GET", "game.pug",true);
+			receive.send(null);
+			alert(receive);
 		}
+	}
+
 		var selected = null;
 		$(function() {
 			$('aside').hide();
