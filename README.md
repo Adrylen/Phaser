@@ -40,9 +40,8 @@
 
   * Arthur
   	* message coté serveur
-    * tester lose client
-  	* tester win client
   	* tester commerce coté serveur
+    * attaquer coté serveur
 
 
 ## Structure de donnée utilisée:
