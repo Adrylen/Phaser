@@ -41,7 +41,6 @@ planetSchema.methods.upgradeBuilding = function(building_id, user_id){
 				console.log(user);
 			})*/
 			Planet.findById(this._id).populate('owner').exec(function(err, planet){
-				console.log(- (level*level * 100));
 				planet.owner.editKaga(- (level*level * 100));
 			})
 		}
