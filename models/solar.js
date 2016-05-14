@@ -10,6 +10,8 @@ var planets = Moniker.generator([Moniker.planet]);  //  initialize planets gener
 var User = require('../models/user');
 var Planet = require('../models/planet');
 
+console.log(Planet);
+
 var solarSchema = new Schema({
   name: String,
   users: [{ type : ObjectId, ref: 'user' }]

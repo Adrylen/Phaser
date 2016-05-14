@@ -102,12 +102,12 @@ userSchema.methods.editRessource = function(type, user_id, level){
 		console.log(user);
 	})
 }
-
-userSchema.methods.editRessource = function(type, amount){
-    this.ressources.type += amount;
+*/
+userSchema.methods.editKaga = function(amount){
+    this.ressources.kaga += amount;
     this.save();
 }
-
+/*
 userSchema.methods.deletePlanet = function(planet_id){
 	/*function findPlanetById(planet, planet_id){
 		return planet._id === planet_id;
