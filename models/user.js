@@ -85,10 +85,22 @@ userSchema.methods.setWon = function(bool){
   this.save();
 }
 
+userSchema.methods.setPlay = function(bool){
+  this.play = bool;
+  this.save();
+}
+
 userSchema.methods.addMessage = function(type, data){
     nMessage = new Message({type: type, data: data});
     this.messages.push(nMessage);
     this.save();
+}
+/*
+userSchema.methods.editRessource = function(type, user_id, level){
+	User.findById(user_id, function(err, user){
+		userSchema.methods.editRessource('kaga', - (Math.exp(level) * 1000));
+		console.log(user);
+	})
 }
 
 userSchema.methods.editRessource = function(type, amount){
@@ -101,9 +113,9 @@ userSchema.methods.deletePlanet = function(planet_id){
 		return planet._id === planet_id;
 	}
 	this.planets.find(findPlanetById);*/
-	this.planets = [];
+	/*this.planets = [];
 	this.save();
-}
+}*/
 
 
 userSchema.methods.getSolar = function(callback){
@@ -114,7 +126,7 @@ userSchema.methods.getSolar = function(callback){
     if (err) throw err;
     //console.log(JSON.stringify(solar, null, 4));
     if(solar == undefined){
-        callback(mySolar, false); //  unAuthorized to ask for the page
+      callback(mySolar, false); //  unAuthorized to ask for the page
     }
     for(var i in solar.users) {
       solar.users[i].password = ''; //  otherwise security breach

@@ -4,14 +4,14 @@ var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
+var Planet = require('../models/planet');
 var User = require('../models/user');
+var Solar = require('../models/solar');
+var Message = require('../models/message');
 
 var buildingSchema = new Schema({
   type: String,
   level: Number
-  /*
-  mine iron, generator watt, farm food, factory , lumberjack, pump
-  */
 })
 
 /*
@@ -29,10 +29,20 @@ var planetSchema = new Schema({
   owner: { type: ObjectId, ref: 'user' }
 });
 
-planetSchema.methods.upgradeBuilding = function(building_id){
+planetSchema.methods.upgradeBuilding = function(building_id, user_id){
+	console.log('planetSchema');
 	for(var i in this.buildings){
 		if(this.buildings[i]._id == building_id){
 			this.buildings[i].level++;
+			//User.methods.editRessource('kaga', user_id, this.buildings[i].level)
+			/*User.findById(user_id, function(err, user){
+				//userSchema.methods.editRessource('kaga', - (Math.exp(level) * 1000));
+				console.log(user);
+			})*/
+			User.find({}, function(err, Users){
+				console.log(Users);
+			})
+			console.log(this.buildings[i].level);
 		}
 	}
   this.save();

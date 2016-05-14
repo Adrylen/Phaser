@@ -73,6 +73,7 @@ Upgrade.prototype = {
 	},
 	//data = { user_id, planet_id, building_id }
 	upgrade: function(data) {
+		console.log('buildingUpgrade');
 		socket.emit('buildingUpgrade', data);
 	}
 };

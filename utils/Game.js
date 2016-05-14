@@ -69,15 +69,12 @@ Game.prototype.initialize = function (io) {
             }
         })
 
-        socket.on('AskCommerce', function(building_id){
-
-        })
+				Game.prototype.event(socket);
 
     });
 }
 
-Game.prototype.event = function(io){
-    socket.on('connection', function(socket, req){
+Game.prototype.event = function(socket){
         socket.on('AskCommerce', function(data){
               /**
                * var data = {
@@ -131,14 +128,11 @@ Game.prototype.event = function(io){
       })
 			//data = { user_id, planet_id, building_id }
 			socket.on('buildingUpgrade', function(data){
-				console.log('-----------------------------------');
-				console.log(JSON.stringify(data, null, 4));
-				console.log('-----------------------------------');
+				console.log('buildingUpgrade');
 				Planet.findById(data.planet_id, function(err, planet){
-					planet.upgradeBuilding(data.building_id);
+					planet.upgradeBuilding(data.building_id, data.user_id);	// 	upgrade level of the building and user pay
 				})
       })
-    })
 }
 
 Game.prototype.updateGames = function(){
@@ -174,13 +168,14 @@ Game.prototype.sendData = function(io){
 }
 
 Game.prototype.iWin = function(user){
-    console.log('--------------------------------------------------');
-    console.log('did ' + user.username + ' win?');
-    console.log('--------------------------------------------------');
+    //console.log('--------------------------------------------------');
+    //console.log('did ' + user.username + ' win?');
+    //console.log('--------------------------------------------------');
     if (user != undefined) {
       if(user.play == true){
         if (user.planets.length == 6) {
           user.setWon(true);
+					user.setPlay(false);
         }else{
           user.setWon(false);
         }
@@ -193,6 +188,7 @@ Game.prototype.iLoose = function(user){
       if(user.play == true){
         if (user.planets.length == 0) {
           user.setOver(true);
+					user.setPlay(false);
         }else{
           user.setOver(false);
         }
