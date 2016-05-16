@@ -21,6 +21,7 @@ City.prototype.preload = function () {
 
 	/* Map */
 	game.load.image('tile', '../images/backgrounds/grass.png');
+	game.load.image('grass', '../images/backgrounds/herbe.png');
 	game.load.image('road', '../images/backgrounds/road.png');
 	game.load.image('roadN', '../images/backgrounds/roadN.png');
 	game.load.image('roadW', '../images/backgrounds/roadW.png');
@@ -142,6 +143,7 @@ City.prototype.spawnTiles = function () {
 			if(map[yy][xx] == 4) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadW', 0, isoGroup);
 			if(map[yy][xx] == 5) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadE', 0, isoGroup);
 			if(map[yy][xx] == 6) tile = game.add.isoSprite(xx*38, yy*38, 0, 'roadS', 0, isoGroup);
+			if(map[yy][xx] == 7) { tile = game.add.isoSprite(xx*38, yy*38, 0, 'tile', 0, isoGroup); herbe = game.add.isoSprite((xx-1)*38, (yy-1)*38, 0, 'grass', 0, isoGroup); }
 
 			tile.anchor.set(0.5, 0);
 		}
