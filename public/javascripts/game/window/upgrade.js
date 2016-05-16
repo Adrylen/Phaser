@@ -47,8 +47,11 @@ Upgrade.prototype = {
 					building = player.planets[0].buildings[i]._id;
 					break;
 				}
-			}
+
+
 			var data = { user_id: player._id, planet_id: player.planets[0]._id, building_id: building };
+			//var data = { planet_id: player.planets[0]._id, building_id: building };
+
 			this.upgrade(data);
 		}, this);
 
@@ -77,6 +80,7 @@ Upgrade.prototype = {
 	},
 	//data = { user_id, planet_id, building_id }
 	upgrade: function(data) {
+		console.log('buildingUpgrade');
 		socket.emit('buildingUpgrade', data);
 	}
 };

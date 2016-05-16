@@ -28,8 +28,9 @@ var Schema = mongoose.Schema;
 //    models
 var User = require('./models/user');
 var Solar = require('./models/solar');
-
+var Planet = require('./models/planet');
 var Game = require('./utils/Game');
+
 
 //    routes
 var game = require('./routes/game');
@@ -116,19 +117,6 @@ function realTime(){
 }
 //          Update data
 realTime();
-/*
-User.findOne( {username: 'caramba'}, function(err, user){
-	if (err) console.log(err);
-	user.planets = [];
-	user.save();
-})
-
-User.findOne( {username: 'caramba'}, function(err, user){
-	if (err) console.log(err);
-	for(var i )
-	user.planets = [];
-	user.save();
-})*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

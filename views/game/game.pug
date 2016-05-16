@@ -11,6 +11,11 @@ block script
 		solar_system = !{JSON.stringify(solar_system)};
 		for (i in solar_system.users) {
 			if (solar_system.users[i].username == '#{username}') {
+			  if( solar_system.users[i].won == true ){   // redirection vers les page win ou end
+			    window.location.assign('/game/win');
+			  }else if( solar_system.users[i].over == true ){
+			    window.location.assign('/game/end');
+			  }
 				player = solar_system.users[i];
 				id_user = i;
 			}

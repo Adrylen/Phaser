@@ -39,11 +39,9 @@
 	  * Ajouter des patches définitifs (musiques et bruitages)
 
   * Arthur
-  	* tester commerce coté serveur
-    * tester lose client-serveur
-  	* tester win coté serveur
   	* message coté serveur
-		* update batiment
+  	* tester commerce coté serveur
+    * attaquer coté serveur
 
 
 ## Structure de donnée utilisée:
