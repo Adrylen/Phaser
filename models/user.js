@@ -8,12 +8,10 @@ var Planet = require('../models/planet');
 var Solar = require('../models/solar');
 var Message = require('../models/message');
 
-var spaceshipSchema = new Schema({
-  spaceship_dammage: Number,
-  human_dammage: Number,
-  defence: Number,
-  cost: Number,
-  name: String
+var forcesSchema = new Schema({
+  fantassin: Number,
+  blinde: Number,
+  vaisseau: Number
 });
 
 var ressourceSchema = new Schema({
@@ -32,7 +30,7 @@ var userSchema = new Schema({
   ressources: ressourceSchema,
   created_at: Date,
   updated_at: Date,
-  spaceships: [spaceshipSchema],
+  forces: forcesSchema,
   messages : [{ type : ObjectId, ref: 'message' }],
   planets : [{ type : ObjectId, ref: 'planet' }],
   solar_system : { type: ObjectId },
@@ -58,13 +56,11 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
     tool: 10000,
     lumber: 10000
   };
-  this.spaceships.push ({
-    spaceship_dammage: 0,
-    human_dammage: 0,
-    defence: 100,
-    cost: 1000,
-    name: 'space cruiser 1'
-  });
+  this.forces = {
+    fantassin: 1,
+    blinde: 1,
+    vaisseau: 1
+  }
   this.planets.push(planet_id);
   this.solar_system = solar_system_id;
 
@@ -127,9 +123,10 @@ userSchema.methods.getSolar = function(callback){
     //console.log(JSON.stringify(solar, null, 4));
     if(solar == undefined){
       callback(mySolar, false); //  unAuthorized to ask for the page
-    }
-    for(var i in solar.users) {
-      solar.users[i].password = ''; //  otherwise security breach
+    }else{
+      for(var i in solar.users) {
+        solar.users[i].password = ''; //  otherwise security breach
+      }
     }
     var mySolar = JSON.parse(JSON.stringify(solar, err));  // copy object instead of reference
     callback(mySolar, true);
