@@ -8,6 +8,7 @@ var Planet = require('../models/planet');
 var User = require('../models/user');
 var Solar = require('../models/solar');
 var Message = require('../models/message');
+var numbers = require('numbers');
 
 function Game(){
   this.coeff = 10;
@@ -195,5 +196,21 @@ Game.prototype.iLoose = function(user){
       }
     }
 }
+
+Game.prototype.heterogene = function(coeffFantassin, coeffBlinde, coeffVaisseau){
+  return Math.sqrt( (Math.abs(coeffFantassin - (1/3) ) + Math.abs(coeffBlinde - (1/3) ) + Math.abs(coeffVaisseau - (1/3) )) )
+}
+
+Game.prototype.normalDist = function(x, sig){
+  sig = typeof sig !== 'undefined' ? sig : Math.sqrt(0.9);
+  console.log(sig);
+  return (1.0/(sig*Math.sqrt(2.0*Math.PI)))*(Math.exp(-(x*x)/(2.0*sig*sig)))
+}
+
+
+console.log('heteroworst', Game.prototype.heterogene(0.0, 0.0, 1.0));
+console.log('heterobest', Game.prototype.heterogene(1/3, 1/3, 1/3));
+console.log('normalworst', Game.prototype.normalDist (Game.prototype.heterogene(0.0, 0.0, 1.0) ) );
+console.log('normalbest', Game.prototype.normalDist (Game.prototype.heterogene(1/3, 1/3, 1/3) ) );
 
 module.exports = Game;
