@@ -207,10 +207,28 @@ Game.prototype.normalDist = function(x, sig){
   return (1.0/(sig*Math.sqrt(2.0*Math.PI)))*(Math.exp(-(x*x)/(2.0*sig*sig)))
 }
 
+Game.prototype.battle = function (user1, user2) {
+  nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
+  nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
+  coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
+  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+  coeffTotal = coeffUser1 + coeffUser2;
+  probaUser1 = coeffUser1 / coeffTotal;
+  probaUser2 = coeffUser2 / coeffTotal;
+  rd = Math.random();
+  console.log('rd ', rd);
+  if (probaUser1 > rd){
+    console.log('p1:', probaUser1);
+    console.log('user1 won');
+  }else{
+    console.log('p2:', probaUser2);
+    console.log('user2 won');
+  }
+}
 
-console.log('heteroworst', Game.prototype.heterogene(0.0, 0.0, 1.0));
-console.log('heterobest', Game.prototype.heterogene(1/3, 1/3, 1/3));
-console.log('normalworst', Game.prototype.normalDist (Game.prototype.heterogene(0.0, 0.0, 1.0) ) );
-console.log('normalbest', Game.prototype.normalDist (Game.prototype.heterogene(1/3, 1/3, 1/3) ) );
+Game.prototype.battle(
+  {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
+  {forces:{fantassin: 6, blinde: 0, vaisseau: 0}});
+
 
 module.exports = Game;
