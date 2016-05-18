@@ -98,8 +98,32 @@ block content
 			button.pure-button(id="attaque", onclick="start('attaque');") Attaque
 			br
 			button.pure-button(id="commerce", onclick="start('commerce');") Commerce
-			//script(type="text/javascript").
-				document.getElementById('attaque').style.visibility = "hidden";
+
+			script(type="text/javascript").
+				if(player_the_second==null || player._id == player_the_second._id){
+					document.getElementById('commerce').style.visibility = "hidden";
+				}else{
+					document.getElementById('commerce').style.visibility = "visible";
+				}
+
+				if(planet_the_first==null){
+					document.getElementById('attaque').style.visibility = "hidden";
+					document.getElementById('city').style.visibility = "hidden";
+				}else{
+					var is_mine = false;
+					for (var i in player.planets) {
+						if (player.planets[i]._id == planet_the_first._id) {
+							is_mine =true;
+						}
+					}
+					if(is_mine){
+						document.getElementById('attaque').style.visibility = "hidden";
+						document.getElementById('city').style.visibility = "visible";
+					}else{
+						document.getElementById('attaque').style.visibility = "visible";
+						document.getElementById('city').style.visibility = "hidden";
+					}
+				}
 
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')

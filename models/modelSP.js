@@ -6,11 +6,49 @@ var ObjectId = Schema.ObjectId;
 
 var Moniker = require('../utils/moniker');
 var planets = Moniker.generator([Moniker.planet]);  //  initialize planets generator
-
 var User = require('../models/user');
-var Planet = require('../models/planet');
+var Message = require('../models/message');
 
-console.log(Planet);
+
+var buildingSchema = new Schema({
+  type: String,
+  level: Number
+})
+
+/*
+* Mongoose assigns each of your schemas an id virtual getter
+* by default which returns the documents _id field cast to a string,
+* or in the case of ObjectIds, its hexString.
+*/
+var planetSchema = new Schema({
+  name: String,
+  pop: Number,
+  buildings: [buildingSchema],
+  coeff: Number,  //  demis grands axes de l'ellipse
+  direction: Boolean, // sens horaire ou sens trigo
+  img: Number,  // img de la planete
+  owner: { type: ObjectId, ref: 'user' }
+});
+
+planetSchema.methods.upgradeBuilding = function(building_id, user_id){
+	console.log('planetSchema');
+	for(var i in this.buildings){
+		if(this.buildings[i]._id == building_id){
+			var level = this.buildings[i].level++;
+			//User.methods.editRessource('kaga', user_id, this.buildings[i].level)
+			/*User.findById(user_id, function(err, user){
+				//userSchema.methods.editRessource('kaga', - (Math.exp(level) * 1000));
+				console.log(user);
+			})*/
+			Planet.findById(this._id).populate('owner').exec(function(err, planet){
+				planet.owner.editKaga(- (level*level * 100));
+			})
+		}
+	}
+  this.save();
+}
+
+var Planet = mongoose.model('planet', planetSchema);
 
 var solarSchema = new Schema({
   name: String,
@@ -33,7 +71,6 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
   //console.log(JSON.stringify(users, null, 4));
   planetNames = [];
-  try {
     for(var i = 0; i < maxPlayer; i++){
       do {
         var pName = planets.choose();
@@ -61,9 +98,6 @@ solarSchema.methods.initialize = function(users, maxPlayer) {
       this.users.push(users[i]._id);
       users[i].initialize(motherPlanet._id, this._id);
     }
-  } catch (e) {
-    console.log("users is not defined");
-  }
   this.save();
 }
 
@@ -106,4 +140,5 @@ solarSchema.methods.update = function (coeff) {
 // we need to create a model using it
 var Solar = mongoose.model('solar', solarSchema);
 // make this available to our users in our Node applications
-module.exports = Solar;
+var modelSP = { Solar: Solar, Planet: Planet};
+module.exports = modelSP;

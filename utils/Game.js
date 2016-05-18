@@ -3,11 +3,16 @@
 * Contains erverything about initialization and updating of the game
 */
 
-var app = require ('../app');
-var Planet = require('../models/planet');
+//var app = require ('../app');
 var User = require('../models/user');
-var Solar = require('../models/solar');
+var modelSP = require('../models/modelSP.js');
 var Message = require('../models/message');
+var Solar = modelSP.Solar;
+var Planet = modelSP.Planet;
+
+//console.log('Game User', User);
+console.log('Game Solar', Solar);
+//console.log('Game Message', Message);
 
 function Game(){
   this.coeff = 10;
@@ -43,7 +48,7 @@ Game.prototype.initialize = function (io) {
                 socket.broadcast.emit('user disconnected');
             })
 
-            var maxPlayer = 3;
+            var maxPlayer = 6;
             if(usernames.length == maxPlayer) {
               console.log("C'EST PARTI LES GARS!");
               console.log('usernames', usernames);
@@ -145,7 +150,7 @@ Game.prototype.updateGames = function(){
    * Check if player is defeated
    * Check if player won
    */
-  Solar.find({}).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solars) {
+  modelSP.Solar.find({}).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solars) {
     if (err) throw err;
     for(var i in solars){
 
