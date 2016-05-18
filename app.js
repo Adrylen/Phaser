@@ -80,6 +80,7 @@ passport.use(new Strategy(
 passport.serializeUser(function(user, cb) {
   cb(null, user._id);
 });
+
 passport.deserializeUser(function(id, cb) {
   User.find({ _id : id }, function(err, user){
     //console.log(JSON.stringify(user,null, 4));

@@ -8,7 +8,6 @@ var Planet = require('../models/planet');
 var User = require('../models/user');
 var Solar = require('../models/solar');
 var Message = require('../models/message');
-var numbers = require('numbers');
 
 function Game(){
   this.coeff = 10;
@@ -44,8 +43,10 @@ Game.prototype.initialize = function (io) {
                 socket.broadcast.emit('user disconnected');
             })
 
-            var maxPlayer = 2;
+            var maxPlayer = 3;
             if(usernames.length == maxPlayer) {
+              console.log("C'EST PARTI LES GARS!");
+              console.log('usernames', usernames);
                 socket.emit('start ready');
                 socket.broadcast.emit('start ready');
 
@@ -54,10 +55,12 @@ Game.prototype.initialize = function (io) {
                 var users = [];
                 for(var i in usernames){
                     User.findOne({ username: usernames[i] }, function(err, user){
+                      console.log(JSON.stringify(user, null, 4));
                         try {
                             users.push(user);
                             if(user.username == usernames[usernames.length-1]){
                                 solar.initialize(users, maxPlayer); // create mother planet and so on...
+                                console.log('solar.initialize(users, maxPlayer)');
                                 return;
                             }
                         } catch (e) {

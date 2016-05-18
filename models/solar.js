@@ -27,7 +27,7 @@ function inTab(tab, item){
 }
 
 solarSchema.methods.initialize = function(users, maxPlayer) {
-
+  console.log('users', users);
   this.name = randomstring.generate({length: 3, charset: 'alphabetic' });
   this.name += ' ';
   this.name += randomstring.generate({ length: 4, charset: 'numeric' });
