@@ -45,7 +45,10 @@ Planets.prototype.preload = function () {
 	planet_list = [];
 	planet_text = 0;
 	player_by_planet = [];
+
+	planet_the_first = null;
 	player_the_second = null;
+
 
 	// Background
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
@@ -80,7 +83,7 @@ Planets.prototype.create = function () {
 	galaxy.width = 1087;
 	galaxy.height = 620;
 
-	sun = game.add.image(game.width/2-35, (game.height-30)/2-15, 'sun'); sun.width = 90; sun.height = 90;
+	sun = game.add.image(game.width/2-20, (game.height-30)/2-15, 'sun'); sun.width = 110; sun.height = 110;
 
 	//*************************
 	for (var i = 0; i < nb_of_planet; i++) {
@@ -130,8 +133,34 @@ Planets.prototype.create = function () {
 Planets.prototype.listener = function () {
 	planet_selected = this.i;
 	planet_text.text = planet_list[this.i].name;
+	planet_the_first = planet_list[this.i];
 	player_the_second = player_by_planet[this.i];
-	//console.log(this.i);
+	
+	if(player_the_second===null || player._id == player_the_second._id)
+		document.getElementById('commerce').style.visibility = "hidden";
+	else
+		document.getElementById('commerce').style.visibility = "visible";
+
+
+	if(planet_the_first===null){
+		document.getElementById('attaque').style.visibility = "hidden";
+		document.getElementById('city').style.visibility = "hidden";
+	}else{
+		var is_mine = false;
+		for (var j in player.planets){
+			if (player.planets[j]._id == planet_the_first._id)
+				is_mine =true;
+		}
+
+		if(is_mine){
+			document.getElementById('attaque').style.visibility = "hidden";
+			document.getElementById('city').style.visibility = "visible";
+		}else{
+			document.getElementById('attaque').style.visibility = "visible";
+			document.getElementById('city').style.visibility = "hidden";
+		}
+	}
+
 };
 
 Planets.prototype.update = function () {

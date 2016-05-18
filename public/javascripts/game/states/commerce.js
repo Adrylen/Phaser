@@ -6,7 +6,7 @@ Attention "ask_for" et "against" sont des objets de la forme:
 var o = { ressource : nom_de_la_ressource, amount: quantite };
 */
 var data = {
-	from_user_id : player._id,
+	from_user_id : null,
 	ask_for : {
 		ressources : null,
 		amount : 0
@@ -22,7 +22,6 @@ var data = {
 
 
 Commerce.prototype.preload = function() {
-
 	game.load.image('commerce_bg', '../images/backgrounds/commerce.png');
 	game.load.spritesheet('confirm', '../images/buttons/confirm.png', 200, 150);
 
@@ -84,7 +83,10 @@ Commerce.prototype.create = function() {
 
 	player_1 = player.username;
 	player_2 = player_the_second.username;
+
+	data.from_user_id = player._id;
 	data.to_user_id = player_the_second._id;
+
 
 	title = game.add.text(0, 0, "Commerce", {font: "bold 30px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
 	title.setTextBounds(game.world.centerX-75, 0, 150, 50);
@@ -106,8 +108,8 @@ Commerce.prototype.create = function() {
 
 	// -----
 
-	confirm_button = game.add.button(game.world.centerX-50, 400, 'confirm', confirm, this, 1, 0, 2);
-	confirm_button.height = 100;
+	confirm_button = game.add.button(game.world.centerX-50, 425, 'confirm', confirm, this, 1, 0, 2);
+	confirm_button.height = 75;
 	confirm_button.width = 100;
 
 	var a = 1;

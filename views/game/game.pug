@@ -6,21 +6,19 @@ block libs
 
 block script
 	script(type='text/javascript').
-
 		username = '#{username}'; // all variable might be global so no "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		for (i in solar_system.users) {
 			if (solar_system.users[i].username == '#{username}') {
-			  if( solar_system.users[i].won == true ){   // redirection vers les page win ou end
-			    window.location.assign('/game/win');
-			  }else if( solar_system.users[i].over == true ){
-			    window.location.assign('/game/end');
-			  }
+				if( solar_system.users[i].won == true ){   // redirection vers les page win ou end
+					window.location.assign('/game/win');
+				}else if( solar_system.users[i].over == true ){
+					window.location.assign('/game/end');
+				}
 				player = solar_system.users[i];
 				id_user = i;
 			}
 		}
-
 		// start connection to the server
 		var socket = io();
 		function askUpdate() {
@@ -30,7 +28,6 @@ block script
 		function realTime(){
 			a = setInterval(askUpdate, 1000);
 		}
-
 		function displayMenu(id) {
 			player = solar_system.users[id];
 			var s1 = '';
@@ -55,9 +52,7 @@ block script
 			$('#ressources').html(s2);
 			$('#player').html('<li class="pure-menu-item list">' + username + '</li>');
 		}
-
 		realTime();
-
 		socket.on('gameSend', function(new_solar_system){
 			solar_system = new_solar_system;
 			displayMenu(id_user);
@@ -98,8 +93,11 @@ block content
 			button.pure-button(id="attaque", onclick="start('attaque');") Attaque
 			br
 			button.pure-button(id="commerce", onclick="start('commerce');") Commerce
+
 			script(type="text/javascript").
+				document.getElementById('commerce').style.visibility = "hidden";
 				document.getElementById('attaque').style.visibility = "hidden";
+				document.getElementById('city').style.visibility = "hidden";
 
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')
