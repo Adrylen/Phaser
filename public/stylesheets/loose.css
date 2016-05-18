@@ -1,13 +1,13 @@
 #loose{
   width: 1000px;
-  height: 600px;
-  margin-left: 10%;
+  height: 560px;
+  margin-left: 3%;
   margin-top: 3%;
 }
 
 p{
   color: white;
-  font-size: 28px;
+  font-size: 20px;
   margin-left: 2%;
   float: right;
 }
@@ -19,8 +19,8 @@ p{
 }
 
 #planete1{
-  width: 200px;
-  height: 125px;
+  width: 100px;
+  height: 75px;
   float: right;
 }
 

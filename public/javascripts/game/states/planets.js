@@ -9,6 +9,7 @@ var demi_axes = [1.00, 0.84];
 var demi_axes = [];
 var sens = [];
 var planet_list = [];
+var player_by_planet = [];
 var planet_text;
 //*************************
 
@@ -43,6 +44,8 @@ Planets.prototype.preload = function () {
 
 	planet_list = [];
 	planet_text = 0;
+	player_by_planet = [];
+	player_the_second = null;
 
 	// Background
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
@@ -59,6 +62,7 @@ Planets.prototype.preload = function () {
 			else
 				sens.push(-1);
 			planet_list.push(solar_system.users[i].planets[j]);
+			player_by_planet.push(solar_system.users[i]);
 			nb_of_planet++;
 		}
 	}
@@ -126,8 +130,9 @@ Planets.prototype.create = function () {
 Planets.prototype.listener = function () {
 	planet_selected = this.i;
 	planet_text.text = planet_list[this.i].name;
+	player_the_second = player_by_planet[this.i];
 	//console.log(this.i);
-}
+};
 
 Planets.prototype.update = function () {
 	//*************************
