@@ -94,7 +94,7 @@ City.prototype.update = function () {
 	text.text = player.ressources.kaga;
 
 	/* Information */
-	if(upgrade.popUp() == true)
+	if(upgrade.popUp() == true || formation.popUp() == true)
 		info.visible = false;
 	if (info.visible) {
 		info.x = game.input.activePointer.x;
@@ -114,7 +114,7 @@ City.prototype.addBuilding = function (x, y, width, height, angle, name) {
 	building.angle = angle;
 
 	building.inputEnabled = true;
-	building.events.onInputOver.add(function () { building.alpha = 1; info.visible = true; }, this);
+	building.events.onInputOver.add(function () { if(!(upgrade.popUp() || formation.popUp())) building.alpha = 1; info.visible = true; }, this);
 	building.events.onInputOut.add(function () { building.alpha = 0.75; info.visible = false; }, this);
 
 	game.physics.arcade.enable(building);

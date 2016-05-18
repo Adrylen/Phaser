@@ -1,9 +1,8 @@
 var Upgrade = function(game) {
-	var cadre = null;
 	var cross = null;
 	var background = null;
-
-	var kaga_upgrade = null;
+	var backgroundCadre = null;
+	var groupUpgrades = null;
 
 	var popUp = null;
 };
@@ -11,9 +10,18 @@ var Upgrade = function(game) {
 Upgrade.prototype = {
 	// Display
 	preload: function() {
+		game.load.image('backgroundCadre', '../images/backgrounds/backgroundCadre.png');
 		game.load.image('quit', '../images/buttons/quit.png');
-		game.load.image('coin', '../images/assets/coin.png');
+
 		game.load.image('cadre', '../images/assets/cadre.png');
+
+		game.load.image('coin', '../images/assets/more.png');
+		game.load.image('iron', '../images/assets/iron.png');
+		game.load.image('energy', '../images/assets/power.png');
+		game.load.image('food', '../images/assets/food.png');
+		game.load.image('water', '../images/assets/water.png');
+		game.load.image('tool', '../images/assets/tool.png');
+		game.load.image('lumber', '../images/assets/lumber.png');
 	},
 
 	create: function() {
@@ -21,53 +29,68 @@ Upgrade.prototype = {
 		cross = game.add.sprite(1000, 45, 'quit');
 		cross.inputEnabled=true;
 		cross.events.onInputDown.add(function () {
-			kaga_upgrade.visible = false;
+			groupUpgrades.visible = false;
 			popUp = false;
 		}, this);
 
 		/* Pop Up */
-		background = game.add.graphics(45, 25);
+		backgroundCadre = game.add.sprite(45, 50, 'backgroundCadre');
+		backgroundCadre.width = 1000;
+		backgroundCadre.height = 575;
 
-		background.beginFill(0x061452, 0.7);
-		background.moveTo(0,25);
-		background.lineTo(1000,25);
-		background.lineTo(1000,600);
-		background.lineTo(0,600);
-		background.lineTo(0,25);
+		background = game.add.graphics(120, 113);
+		background.beginFill(0x000000, 0.7);
+		background.lineTo(852,0);
+		background.lineTo(852,451);
+		background.lineTo(0,451);
+		background.lineTo(0,0);
 		background.endFill();
 
-		/* Upgrade Kaga */
+		/* Group PopUp Declaration */
+		groupUpgrades = game.add.group();
 
-		upgrade_coin = game.add.sprite(102, 102, 'coin');
-		upgrade_coin.inputEnabled=true;
-		upgrade_coin.events.onInputDown.add(function() {
-			var building;
-			for (i in player.planets[0].buildings) {
-				if (player.planets[0].buildings[i].type = 'factory') {
-					building = player.planets[0].buildings[i]._id;
-					break;
-				}
+		groupUpgrades.add(backgroundCadre);
+		groupUpgrades.add(background);
+		groupUpgrades.add(cross);
 
+		groupUpgrades.add(this.newGroup(0, "Doubler la production d'argent", 'coin', 'ambassade'));					// Upgrade Kaga
+		groupUpgrades.add(this.newGroup(1, "Doubler la production de fer", 'iron', 'mine'));						// Upgrade Iron
+		groupUpgrades.add(this.newGroup(2, "Doubler la production d'énergie", 'energy', 'generator'));				// Upgrade Energy
+		groupUpgrades.add(this.newGroup(3, "Doubler la production de nourriture", 'food', 'farm'));						// Upgrade Water
+		groupUpgrades.add(this.newGroup(4, "Doubler la production d'eau", 'water', 'pump'));						// Upgrade Water
+		groupUpgrades.add(this.newGroup(5, "Doubler la production d'outils", 'tool', 'factory'));					// Upgrade Tool
+		groupUpgrades.add(this.newGroup(6, "Doubler la production de planches de bois", 'lumber', 'lumberjack'));	// Upgrade Lumber
 
-			var data = { user_id: player._id, planet_id: player.planets[0]._id, building_id: building };
-			//var data = { planet_id: player.planets[0]._id, building_id: building };
-
-			this.upgrade(data);
-		}, this);
-
-		kaga_upgrade = game.add.group();
-		kaga_upgrade.add(background);
-		kaga_upgrade.add(cross);
-		kaga_upgrade.create(100, 100, 'cadre');
-		kaga_upgrade.add(upgrade_coin);
-		kaga_upgrade.visible = false;
+		groupUpgrades.visible = false;
 
 		popUp = false;
 	},
 
 	display: function() {
-		kaga_upgrade.visible = true;
+		groupUpgrades.visible = true;
 		popUp = true;
+	},
+
+	newGroup: function(nb, text, resource, building) {
+		var group = game.add.group();
+		group.create(130, 130 + nb*40, 'cadre');
+		group.add(game.add.text(170, 132 + nb*40, text, {font: "15px Purisa", fill: "#ffffff"}));
+
+		var newUpgrade = game.add.sprite(132, 132 + nb*40, resource);
+		newUpgrade.inputEnabled=true;
+		newUpgrade.events.onInputDown.add(function() {
+			var dbBuilding;
+			for (i in player.planets[0].buildings) {
+				if (player.planets[0].buildings[i].type == building) {
+					dbBuilding = player.planets[0].buildings[i]._id; break; }
+			}
+			var data = { user_id: player._id, planet_id: player.planets[0]._id, building_id: dbBuilding };
+			console.log(building + ' : ' + dbBuilding);
+			this.upgrade(data);
+		}, this);
+		group.add(newUpgrade);
+
+		return group;
 	},
 
 	popUp: function() { return popUp; },
@@ -80,7 +103,7 @@ Upgrade.prototype = {
 	},
 	//data = { user_id, planet_id, building_id }
 	upgrade: function(data) {
-		console.log('buildingUpgrade');
+		//console.log('buildingUpgrade');
 		socket.emit('buildingUpgrade', data);
 	}
 };

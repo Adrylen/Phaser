@@ -1,6 +1,9 @@
 var Formation = function(game) {
-	var cadre = null;
+	var background = null;
+	var backgroundCadre = null;
     var cross = null;
+
+	var displayManager =  null;
 
     var popUp = null;
 };
@@ -8,6 +11,7 @@ var Formation = function(game) {
 Formation.prototype = {
 	preload: function() {
 		game.load.image('quit', '../images/buttons/quit.png');
+		game.load.image('backgroundCadre', '../images/backgrounds/backgroundCadre.png');
 	},
 
 	create: function() {
@@ -15,28 +19,34 @@ Formation.prototype = {
 		cross = game.add.sprite(1000, 45, 'quit');
 		cross.inputEnabled=true;
 		cross.events.onInputDown.add(function () {
-			cadre.visible = false;
-			cross.visible = false;
+			this.displayManager.visible = false;
 			popUp = false;
 		}, this);
-		cross.visible = false;
 
 		/* Pop Up */
-		cadre = game.add.graphics(45, 25);
-		cadre.visible = false;
+		backgroundCadre = game.add.sprite(45, 50, 'backgroundCadre');
+		backgroundCadre.width = 1000;
+		backgroundCadre.height = 575;
 
-		cadre.beginFill(0x061452, 0.7);
-		cadre.moveTo(0,25);
-		cadre.lineTo(1000,25);
-		cadre.lineTo(1000,600);
-		cadre.lineTo(0,600);
-		cadre.lineTo(0,25);
-		cadre.endFill();
+		background = game.add.graphics(120, 113);
+		background.beginFill(0x000000, 0.7);
+		background.lineTo(852,0);
+		background.lineTo(852,451);
+		background.lineTo(0,451);
+		background.lineTo(0,0);
+		background.endFill();
+
+		this.displayManager = game.add.group();
+		this.displayManager.add(background);
+		this.displayManager.add(backgroundCadre);
+		this.displayManager.add(cross);
+		this.displayManager.visible = false;
+
+		popUp = false;
 	},
 
 	display: function() {
-		cadre.visible = true;
-		cross.visible = true;
+		this.displayManager.visible = true;
 		popUp = true;
 	},
 

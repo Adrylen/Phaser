@@ -7,11 +7,11 @@ var Rapport = function(game) {
 
 Rapport.prototype = {
 	preload: function() {
-
+		game.load.image('cadre', '../images/background/backgroundCadre.png');
 	},
 
 	create: function() {
-
+		cadre = game.add.sprite();
 	},
 
 	display: function() {
