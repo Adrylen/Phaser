@@ -46,8 +46,6 @@ Game.prototype.initialize = function (io) {
 
             var maxPlayer = 6;
             if(usernames.length == maxPlayer) {
-              console.log("C'EST PARTI LES GARS!");
-              console.log('usernames', usernames);
                 socket.emit('start ready');
                 socket.broadcast.emit('start ready');
 
@@ -59,7 +57,6 @@ Game.prototype.initialize = function (io) {
                       users.push(user);
                       if(users.length == maxPlayer){
                           solar.initialize(users, maxPlayer); // create mother planet and so on...)');
-                          console.log('users ', users);
                           return;
                       }
                     })
@@ -130,6 +127,13 @@ Game.prototype.event = function(socket){
 				Planet.findById(data.planet_id, function(err, planet){
 					planet.upgradeBuilding(data.building_id, data.user_id);	// 	upgrade level of the building and user pay
 				})
+      })
+
+      //data = { user_id, soldier: soldier, tank: tank, ship: ship }
+      socket.on('buy', function(data){
+        User.findById(user_id, function(err, user){
+          user.buy(data);
+        })
       })
 }
 

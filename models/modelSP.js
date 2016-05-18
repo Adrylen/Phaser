@@ -155,9 +155,9 @@ var messageSchema = new Schema({
 });
 
 var forcesSchema = new Schema({
-  fantassin: Number,
-  blinde: Number,
-  vaisseau: Number
+  soldier: Number,
+  tank: Number,
+  ship: Number
 });
 
 var ressourceSchema = new Schema({
@@ -203,9 +203,9 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
     lumber: 10000
   };
   this.forces = {
-    fantassin: 1,
-    blinde: 1,
-    vaisseau: 1
+    soldier: 1,
+    tank: 1,
+    ship: 1
   }
   this.planets.push(planet_id);
   this.solar_system = solar_system_id;
@@ -233,10 +233,28 @@ userSchema.methods.setPlay = function(bool){
 }
 
 userSchema.methods.addMessage = function(type, data){
-    nMessage = new Message({type: type, data: data});
+    nMessage = {type: type, data: data};
     this.messages.push(nMessage);
     this.save();
 }
+
+userSchema.methods.buy = function(data){
+  this.forces.soldier += data.soldier;
+  this.forces.tank += data.tank;
+  this.forces.ship += data.ship;
+
+  this.ressources.food -= data.soldier * 100;
+  this.ressources.water -= data.soldier * 100;
+
+  this.ressources.iron -= data.tank * 100;
+  this.ressources.watt -= data.tank * 100;
+
+  this.ressources.tool -= data.tanke * 100;
+  this.ressources.lumber -= data.tanke * 100;
+
+  this.save();
+}
+
 /*
 userSchema.methods.editRessource = function(type, user_id, level){
 	User.findById(user_id, function(err, user){
