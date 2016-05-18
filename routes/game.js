@@ -17,6 +17,8 @@ router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login')
 router.get('/game', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
   req.user.getSolar(function(solar, authorized){
     if(authorized){
+      console.log('req.user.username', req.user.username);
+      console.log('solar', solar);
       res.render('game/game', { username: req.user.username, solar_system : solar });
       return;
     }else{

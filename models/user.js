@@ -7,7 +7,6 @@ var ObjectId = Schema.ObjectId;
 var modelSP = require('../models/modelSP');
 var Message = require('../models/message');
 
-console.log('users modelSP', modelSP);
 
 
 var forcesSchema = new Schema({

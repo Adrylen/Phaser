@@ -10,9 +10,6 @@ var Message = require('../models/message');
 var Solar = modelSP.Solar;
 var Planet = modelSP.Planet;
 
-//console.log('Game User', User);
-console.log('Game Solar', Solar);
-//console.log('Game Message', Message);
 
 function Game(){
   this.coeff = 10;
@@ -61,18 +58,18 @@ Game.prototype.initialize = function (io) {
                 for(var i in usernames){
                     User.findOne({ username: usernames[i] }, function(err, user){
                       console.log(JSON.stringify(user, null, 4));
-                        try {
+                        //try {
                             users.push(user);
                             if(user.username == usernames[usernames.length-1]){
                                 solar.initialize(users, maxPlayer); // create mother planet and so on...
                                 console.log('solar.initialize(users, maxPlayer)');
                                 return;
                             }
-                        } catch (e) {
+                        /*} catch (e) {
                             console.log('-----------------------------');
                             console.log(e);
                             console.log('-----------------------------');
-                        }
+                        }*/
                     })
                 }
             }
