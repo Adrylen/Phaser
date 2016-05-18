@@ -4,11 +4,10 @@
 */
 
 //var app = require ('../app');
-var User = require('../models/user');
 var modelSP = require('../models/modelSP.js');
-var Message = require('../models/message');
 var Solar = modelSP.Solar;
 var Planet = modelSP.Planet;
+var User = modelSP.User;
 
 
 function Game(){
@@ -55,21 +54,14 @@ Game.prototype.initialize = function (io) {
                 solar = new Solar({});
                 solar.save();
                 var users = [];
-                for(var i in usernames){
+                for(var i=0; i < maxPlayer; i++){
                     User.findOne({ username: usernames[i] }, function(err, user){
-                      console.log(JSON.stringify(user, null, 4));
-                        //try {
-                            users.push(user);
-                            if(user.username == usernames[usernames.length-1]){
-                                solar.initialize(users, maxPlayer); // create mother planet and so on...
-                                console.log('solar.initialize(users, maxPlayer)');
-                                return;
-                            }
-                        /*} catch (e) {
-                            console.log('-----------------------------');
-                            console.log(e);
-                            console.log('-----------------------------');
-                        }*/
+                      users.push(user);
+                      if(users.length == maxPlayer){
+                          solar.initialize(users, maxPlayer); // create mother planet and so on...)');
+                          console.log('users ', users);
+                          return;
+                      }
                     })
                 }
             }
@@ -230,10 +222,10 @@ Game.prototype.battle = function (user1, user2) {
     console.log('user2 won');
   }
 }
-
+/*
 Game.prototype.battle(
   {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
   {forces:{fantassin: 6, blinde: 0, vaisseau: 0}});
-
+*/
 
 module.exports = Game;

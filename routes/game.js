@@ -3,7 +3,6 @@ var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var modelSP = require('../models/modelSP');
-var User = require('../models/user');
 var Game = require('../utils/Game.js');
 
 /* GET home page. */

@@ -6,11 +6,9 @@ var ObjectId = Schema.ObjectId;
 
 var Moniker = require('../utils/moniker');
 var planets = Moniker.generator([Moniker.planet]);  //  initialize planets generator
-var User = require('../models/user');
-var Message = require('../models/message');
 
-console.log('modelSP User', User);
 
+//////////////////////////////////////////////////////////////////Planet//////////////////////////////////////////////////////////////////
 
 var buildingSchema = new Schema({
   type: String,
@@ -51,6 +49,11 @@ planetSchema.methods.upgradeBuilding = function(building_id, user_id){
 }
 
 var Planet = mongoose.model('planet', planetSchema);
+
+//////////////////////////////////////////////////////////////////end Planet//////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////Solar//////////////////////////////////////////////////////////////////
+
 
 var solarSchema = new Schema({
   name: String,
@@ -141,8 +144,15 @@ solarSchema.methods.update = function (coeff) {
 
 // we need to create a model using it
 var Solar = mongoose.model('solar', solarSchema);
+//////////////////////////////////////////////////////////////////end Solar//////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////User//////////////////////////////////////////////////////////////////
 
+var messageSchema = new Schema({
+  type: String, // victory, defeat, commerce, battle, alliance
+  data: Object,
+  owner: { type: ObjectId, ref: 'user' }
+});
 
 var forcesSchema = new Schema({
   fantassin: Number,
@@ -167,7 +177,7 @@ var userSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   forces: forcesSchema,
-  messages : [{ type : ObjectId, ref: 'message' }],
+  messages : [messageSchema],
   planets : [{ type : ObjectId, ref: 'planet' }],
   solar_system : { type: ObjectId },
   play: { type: Boolean, default: false },
@@ -254,7 +264,7 @@ userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');
   console.log('                getSolar');
   console.log('-----------------------------------------');
-  modelSP.Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
+  Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
     if (err) throw err;
     //console.log(JSON.stringify(solar, null, 4));
     if(solar == undefined){
@@ -270,7 +280,7 @@ userSchema.methods.getSolar = function(callback){
 }
 
 var User = mongoose.model('user', userSchema); // we need to create a model using it
+//////////////////////////////////////////////////////////////////end User//////////////////////////////////////////////////////////////////
 
-// make this available to our users in our Node applications
 var modelSP = { Solar: Solar, Planet: Planet, User: User};
 module.exports = modelSP;
