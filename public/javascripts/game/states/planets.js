@@ -45,7 +45,10 @@ Planets.prototype.preload = function () {
 	planet_list = [];
 	planet_text = 0;
 	player_by_planet = [];
+
+	planet_the_first = null;
 	player_the_second = null;
+
 
 	// Background
 	game.load.image('galaxy', '../images/backgrounds/galaxy.jpg');
@@ -130,6 +133,7 @@ Planets.prototype.create = function () {
 Planets.prototype.listener = function () {
 	planet_selected = this.i;
 	planet_text.text = planet_list[this.i].name;
+	planet_the_first = planet_list[this.i];
 	player_the_second = player_by_planet[this.i];
 	//console.log(this.i);
 };
