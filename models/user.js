@@ -4,9 +4,11 @@ var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var Planet = require('../models/planet');
-var Solar = require('../models/solar');
+var modelSP = require('../models/modelSP');
 var Message = require('../models/message');
+
+console.log('users modelSP', modelSP);
+
 
 var forcesSchema = new Schema({
   fantassin: Number,
@@ -118,7 +120,7 @@ userSchema.methods.getSolar = function(callback){
   console.log('-----------------------------------------');
   console.log('                getSolar');
   console.log('-----------------------------------------');
-  Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
+  modelSP.Solar.findById(this.solar_system).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solar) {
     if (err) throw err;
     //console.log(JSON.stringify(solar, null, 4));
     if(solar == undefined){

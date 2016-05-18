@@ -3,11 +3,16 @@
 * Contains erverything about initialization and updating of the game
 */
 
-var app = require ('../app');
-var Planet = require('../models/planet');
+//var app = require ('../app');
 var User = require('../models/user');
-var Solar = require('../models/solar');
+var modelSP = require('../models/modelSP.js');
 var Message = require('../models/message');
+var Solar = modelSP.Solar;
+var Planet = modelSP.Planet;
+
+//console.log('Game User', User);
+console.log('Game Solar', Solar);
+//console.log('Game Message', Message);
 
 function Game(){
   this.coeff = 10;
@@ -43,8 +48,10 @@ Game.prototype.initialize = function (io) {
                 socket.broadcast.emit('user disconnected');
             })
 
-            var maxPlayer = 2;
+            var maxPlayer = 6;
             if(usernames.length == maxPlayer) {
+              console.log("C'EST PARTI LES GARS!");
+              console.log('usernames', usernames);
                 socket.emit('start ready');
                 socket.broadcast.emit('start ready');
 
@@ -53,10 +60,12 @@ Game.prototype.initialize = function (io) {
                 var users = [];
                 for(var i in usernames){
                     User.findOne({ username: usernames[i] }, function(err, user){
+                      console.log(JSON.stringify(user, null, 4));
                         try {
                             users.push(user);
                             if(user.username == usernames[usernames.length-1]){
                                 solar.initialize(users, maxPlayer); // create mother planet and so on...
+                                console.log('solar.initialize(users, maxPlayer)');
                                 return;
                             }
                         } catch (e) {
@@ -141,7 +150,7 @@ Game.prototype.updateGames = function(){
    * Check if player is defeated
    * Check if player won
    */
-  Solar.find({}).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solars) {
+  modelSP.Solar.find({}).populate({path: 'users', populate:{path: 'planets', model: 'planet'}}).populate('planets').exec(function(err, solars) {
     if (err) throw err;
     for(var i in solars){
 
@@ -195,5 +204,39 @@ Game.prototype.iLoose = function(user){
       }
     }
 }
+
+Game.prototype.heterogene = function(coeffFantassin, coeffBlinde, coeffVaisseau){
+  return Math.sqrt( (Math.abs(coeffFantassin - (1/3) ) + Math.abs(coeffBlinde - (1/3) ) + Math.abs(coeffVaisseau - (1/3) )) )
+}
+
+Game.prototype.normalDist = function(x, sig){
+  sig = typeof sig !== 'undefined' ? sig : Math.sqrt(0.9);
+  console.log(sig);
+  return (1.0/(sig*Math.sqrt(2.0*Math.PI)))*(Math.exp(-(x*x)/(2.0*sig*sig)))
+}
+
+Game.prototype.battle = function (user1, user2) {
+  nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
+  nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
+  coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
+  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+  coeffTotal = coeffUser1 + coeffUser2;
+  probaUser1 = coeffUser1 / coeffTotal;
+  probaUser2 = coeffUser2 / coeffTotal;
+  rd = Math.random();
+  console.log('rd ', rd);
+  if (probaUser1 > rd){
+    console.log('p1:', probaUser1);
+    console.log('user1 won');
+  }else{
+    console.log('p2:', probaUser2);
+    console.log('user2 won');
+  }
+}
+
+Game.prototype.battle(
+  {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
+  {forces:{fantassin: 6, blinde: 0, vaisseau: 0}});
+
 
 module.exports = Game;

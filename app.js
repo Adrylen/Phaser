@@ -27,8 +27,7 @@ var Schema = mongoose.Schema;
 
 //    models
 var User = require('./models/user');
-var Solar = require('./models/solar');
-var Planet = require('./models/planet');
+var modelSP = require('./models/modelSP');
 var Game = require('./utils/Game');
 
 
@@ -80,6 +79,7 @@ passport.use(new Strategy(
 passport.serializeUser(function(user, cb) {
   cb(null, user._id);
 });
+
 passport.deserializeUser(function(id, cb) {
   User.find({ _id : id }, function(err, user){
     //console.log(JSON.stringify(user,null, 4));

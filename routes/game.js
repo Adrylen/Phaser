@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
-var Solar = require('../models/solar');
+var modelSP = require('../models/modelSP');
 var User = require('../models/user');
 var Game = require('../utils/Game.js');
 
