@@ -23,6 +23,7 @@ block script
 		var socket = io();
 		function askUpdate() {
 			socket.emit('game', solar_system._id);
+			doIFinish();
 		}
 		var a;
 		function realTime(){
@@ -58,6 +59,19 @@ block script
 			displayMenu(id_user);
 			//console.log(JSON.stringify(player.ressources.kaga, null, 4));
 		})
+		doIFinish = function(){
+			console.log('test do i finish');
+			for(var i in solar_system.users){
+				if(username == solar_system.users[i].username){
+					if(solar_system.users[i].planets.length == 0){
+						console.log('pouet');
+						location.assign(document.domain+':'+document.location.port+'/game/end');
+					}else if (solar_system.users[i].planets.length == 6){
+						location.assign(document.domain+':'+document.location.port+'/game/win');
+					}
+				}
+			}
+		}
 
 	// Phaser
 	script(src='../javascripts/phaser/phaser.min.js')
