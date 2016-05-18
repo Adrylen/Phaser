@@ -108,8 +108,8 @@ Commerce.prototype.create = function() {
 
 	// -----
 
-	confirm_button = game.add.button(game.world.centerX-50, 400, 'confirm', confirm, this, 1, 0, 2);
-	confirm_button.height = 100;
+	confirm_button = game.add.button(game.world.centerX-50, 425, 'confirm', confirm, this, 1, 0, 2);
+	confirm_button.height = 75;
 	confirm_button.width = 100;
 
 	var a = 1;
