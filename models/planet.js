@@ -5,10 +5,8 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var User = require('../models/user');
-var Solar = require('../models/solar');
+//var Solar = require('../models/solar');
 var Message = require('../models/message');
-
-//console.log(User);
 
 var buildingSchema = new Schema({
   type: String,

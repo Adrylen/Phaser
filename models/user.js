@@ -8,6 +8,7 @@ var Planet = require('../models/planet');
 var Solar = require('../models/solar');
 var Message = require('../models/message');
 
+
 var forcesSchema = new Schema({
   fantassin: Number,
   blinde: Number,

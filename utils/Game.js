@@ -3,11 +3,16 @@
 * Contains erverything about initialization and updating of the game
 */
 
-var app = require ('../app');
+//var app = require ('../app');
 var Planet = require('../models/planet');
 var User = require('../models/user');
 var Solar = require('../models/solar');
 var Message = require('../models/message');
+
+console.log('Game User', User);
+console.log('Game Planet', Planet);
+console.log('Game Solar', Solar);
+console.log('Game Message', Message);
 
 function Game(){
   this.coeff = 10;

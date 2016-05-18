@@ -19,7 +19,7 @@
     "kerberos": "latest",
     "mocha": "latest",
     "mongodb": "latest",
-    "mongoose": "latest",
+    "mongoose": "4.4.1",
     "mongoose-unique-validator": "^1.0.0",
     "moniker": "^0.1.2",
     "morgan": "latest",
