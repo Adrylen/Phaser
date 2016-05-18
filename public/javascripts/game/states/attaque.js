@@ -10,6 +10,7 @@ Attaque.prototype.init = function () {
 	var vaisseau = null;
 
 	var button = null;
+	var retour = null;
 };
 
 Attaque.prototype.preload = function () {
@@ -23,7 +24,8 @@ Attaque.prototype.preload = function () {
 	game.load.image('Blinder', '../images/characters/blinder.jpg');
 	game.load.image('Vaisseau', '../images/building/fusee.png');
 	// Boutons
-	game.load.image('attaque', '../image/buttons/attck.png');
+	game.load.spritesheet('attaque', '../images/buttons/attackButton.jpg',204,160);
+	game.load.spritesheet('retour', '../images/buttons/backButton.png',204,160);
 };
 
 Attaque.prototype.create = function () {
@@ -35,9 +37,13 @@ Attaque.prototype.create = function () {
 	blinder = this.groupes('Blinder', 50, 300);
 	vaisseau = this.groupes('Vaisseau', 50, 400);
 
-	button = game.add.button(500, 250, 'attaque',attaque , 10, 2, 1, 0);
+	button = game.add.button(700, 200, 'attaque',this.attaque , this, 2, 0, 1);
 	button.width = 150;
 	button.height = 100;
+
+	retour = game.add.button(928,550, 'retour',this.retour,this, 2,0,1);
+	retour.width = 150;
+	retour.height = 100;
 };
 
 Attaque.prototype.update = function () {
@@ -64,7 +70,11 @@ Attaque.prototype.groupes = function (name, positionX, positionY){
 
 Attaque.prototype.attaque = function (){
 
-}
+};
+
+Attaque.prototype.retour = function (){
+	start('planets');
+};
 
 
 /*
