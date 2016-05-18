@@ -4,7 +4,6 @@
 
 * A faire:
   * URGENT
-    * Acheter vaisseau
     * Attaquer
     * Commerce
   * bonus
@@ -38,6 +37,7 @@
   	* message coté serveur
   	* tester commerce coté serveur
     * attaquer coté serveur
+    * Acheter vaisseau
 
 
 ## Structure de donnée utilisée:
