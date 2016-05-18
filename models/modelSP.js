@@ -255,6 +255,14 @@ userSchema.methods.buy = function(data){
   this.save();
 }
 
+userSchema.methods.invade = function(planets){
+  this.planets = this.planets.concat(planets);
+  this.save();
+}
+
+userSchema.methods.capitulate = function(){
+  this.planets = [];
+}
 /*
 userSchema.methods.editRessource = function(type, user_id, level){
 	User.findById(user_id, function(err, user){

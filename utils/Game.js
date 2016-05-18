@@ -119,6 +119,11 @@ Game.prototype.event = function(socket){
               attacked_ships = attacked_ships
           }
            */
+          User.findById({attacker_id}, function(err, user1){
+            User.findById({attacked_id}, function(err, user2){
+              Game.prototype.battle(user1, user2);
+            })
+          })
 
       })
 			//data = { user_id, planet_id, building_id }
@@ -211,21 +216,29 @@ Game.prototype.normalDist = function(x, sig){
 Game.prototype.battle = function (user1, user2) {
   nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
   nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
+
   coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
   coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+
   coeffTotal = coeffUser1 + coeffUser2;
   probaUser1 = coeffUser1 / coeffTotal;
   probaUser2 = coeffUser2 / coeffTotal;
+
   rd = Math.random();
   console.log('rd ', rd);
   if (probaUser1 > rd){
     console.log('p1:', probaUser1);
     console.log('user1 won');
+    user1.invade( user2.planets );
+    user2.capitulate();
   }else{
     console.log('p2:', probaUser2);
     console.log('user2 won');
+    user2.invade( user1.planets );
+    user1.capitulate();
   }
 }
+
 /*
 Game.prototype.battle(
   {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
