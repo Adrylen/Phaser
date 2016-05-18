@@ -6,7 +6,6 @@ block libs
 
 block script
 	script(type='text/javascript').
-
 		username = '#{username}'; // all variable might be global so no "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		for (i in solar_system.users) {
@@ -20,7 +19,6 @@ block script
 				id_user = i;
 			}
 		}
-
 		// start connection to the server
 		var socket = io();
 		function askUpdate() {
@@ -30,7 +28,6 @@ block script
 		function realTime(){
 			a = setInterval(askUpdate, 1000);
 		}
-
 		function displayMenu(id) {
 			player = solar_system.users[id];
 			var s1 = '';
@@ -55,9 +52,7 @@ block script
 			$('#ressources').html(s2);
 			$('#player').html('<li class="pure-menu-item list">' + username + '</li>');
 		}
-
 		realTime();
-
 		socket.on('gameSend', function(new_solar_system){
 			solar_system = new_solar_system;
 			displayMenu(id_user);
@@ -100,30 +95,9 @@ block content
 			button.pure-button(id="commerce", onclick="start('commerce');") Commerce
 
 			script(type="text/javascript").
-				if(player_the_second==null || player._id == player_the_second._id){
-					document.getElementById('commerce').style.visibility = "hidden";
-				}else{
-					document.getElementById('commerce').style.visibility = "visible";
-				}
-
-				if(planet_the_first==null){
-					document.getElementById('attaque').style.visibility = "hidden";
-					document.getElementById('city').style.visibility = "hidden";
-				}else{
-					var is_mine = false;
-					for (var i in player.planets) {
-						if (player.planets[i]._id == planet_the_first._id) {
-							is_mine =true;
-						}
-					}
-					if(is_mine){
-						document.getElementById('attaque').style.visibility = "hidden";
-						document.getElementById('city').style.visibility = "visible";
-					}else{
-						document.getElementById('attaque').style.visibility = "visible";
-						document.getElementById('city').style.visibility = "hidden";
-					}
-				}
+				document.getElementById('commerce').style.visibility = "hidden";
+				document.getElementById('attaque').style.visibility = "hidden";
+				document.getElementById('city').style.visibility = "hidden";
 
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')
