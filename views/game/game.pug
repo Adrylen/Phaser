@@ -6,31 +6,29 @@ block libs
 
 block script
 	script(type='text/javascript').
-
 		username = '#{username}'; // all variable might be global so no "var"
 		solar_system = !{JSON.stringify(solar_system)};
 		for (i in solar_system.users) {
 			if (solar_system.users[i].username == '#{username}') {
-			  if( solar_system.users[i].won == true ){   // redirection vers les page win ou end
-			    window.location.assign('/game/win');
-			  }else if( solar_system.users[i].over == true ){
-			    window.location.assign('/game/end');
-			  }
+				if( solar_system.users[i].won == true ){   // redirection vers les page win ou end
+					window.location.assign('/game/win');
+				}else if( solar_system.users[i].over == true ){
+					window.location.assign('/game/end');
+				}
 				player = solar_system.users[i];
 				id_user = i;
 			}
 		}
-
 		// start connection to the server
 		var socket = io();
 		function askUpdate() {
 			socket.emit('game', solar_system._id);
+			doIFinish();
 		}
 		var a;
 		function realTime(){
 			a = setInterval(askUpdate, 1000);
 		}
-
 		function displayMenu(id) {
 			player = solar_system.users[id];
 			var s1 = '';
@@ -55,14 +53,25 @@ block script
 			$('#ressources').html(s2);
 			$('#player').html('<li class="pure-menu-item list">' + username + '</li>');
 		}
-
 		realTime();
-
 		socket.on('gameSend', function(new_solar_system){
 			solar_system = new_solar_system;
 			displayMenu(id_user);
 			//console.log(JSON.stringify(player.ressources.kaga, null, 4));
 		})
+		doIFinish = function(){
+			console.log('test do i finish');
+			for(var i in solar_system.users){
+				if(username == solar_system.users[i].username){
+					if(solar_system.users[i].planets.length == 0){
+						console.log('pouet');
+						location.assign(document.domain+':'+document.location.port+'/game/end');
+					}else if (solar_system.users[i].planets.length == 6){
+						location.assign(document.domain+':'+document.location.port+'/game/win');
+					}
+				}
+			}
+		}
 
 	// Phaser
 	script(src='../javascripts/phaser/phaser.min.js')
@@ -98,35 +107,11 @@ block content
 			button.pure-button(id="attaque", onclick="start('attaque');") Attaque
 			br
 			button.pure-button(id="commerce", onclick="start('commerce');") Commerce
+
 			script(type="text/javascript").
-				if(player_the_second==null || player._id == player_the_second._id){
-					document.getElementById('commerce').style.visibility = "hidden";
-				}else{
-					document.getElementById('commerce').style.visibility = "visible";
-				}
+				document.getElementById('commerce').style.visibility = "hidden";
 				document.getElementById('attaque').style.visibility = "hidden";
 				document.getElementById('city').style.visibility = "hidden";
-
-				/*
-				if(planet_the_first==null){
-					document.getElementById('attaque').style.visibility = "hidden";
-					document.getElementById('city').style.visibility = "hidden";
-				}else{
-					var is_mine = false;
-					for (var i in player.planets) {
-						if (player.planets[i]._id == planet_the_first._id) {
-							is_mine =true;
-						}
-					}
-					if(is_mine){
-						document.getElementById('attaque').style.visibility = "hidden";
-						document.getElementById('city').style.visibility = "visible";
-					}else{
-						document.getElementById('attaque').style.visibility = "visible";
-						document.getElementById('city').style.visibility = "hidden";
-					}
-				}
-				*/
 
 	// WebPd
 	script(src='../javascripts/webpd/loadPatches.js')

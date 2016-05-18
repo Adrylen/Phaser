@@ -26,8 +26,8 @@ var db = mongoose.connection;
 var Schema = mongoose.Schema;
 
 //    models
-var User = require('./models/user');
 var modelSP = require('./models/modelSP');
+var User = modelSP.User;
 var Game = require('./utils/Game');
 
 

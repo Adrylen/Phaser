@@ -3,14 +3,11 @@ var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var modelSP = require('../models/modelSP');
-var User = require('../models/user');
 var Game = require('../utils/Game.js');
 
 /* GET home page. */
 
 router.get('/', require('connect-ensure-login').ensureLoggedIn('../users/login'), function(req, res){
-  console.log(req.user._id);
-  //console.log(Game.prototype.iWin(req.user._id));
   res.redirect('game/game');
 });
 

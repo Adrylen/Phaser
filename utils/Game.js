@@ -4,15 +4,11 @@
 */
 
 //var app = require ('../app');
-var User = require('../models/user');
 var modelSP = require('../models/modelSP.js');
-var Message = require('../models/message');
 var Solar = modelSP.Solar;
 var Planet = modelSP.Planet;
+var User = modelSP.User;
 
-//console.log('Game User', User);
-console.log('Game Solar', Solar);
-//console.log('Game Message', Message);
 
 function Game(){
   this.coeff = 10;
@@ -50,29 +46,19 @@ Game.prototype.initialize = function (io) {
 
             var maxPlayer = 6;
             if(usernames.length == maxPlayer) {
-              console.log("C'EST PARTI LES GARS!");
-              console.log('usernames', usernames);
                 socket.emit('start ready');
                 socket.broadcast.emit('start ready');
 
                 solar = new Solar({});
                 solar.save();
                 var users = [];
-                for(var i in usernames){
+                for(var i=0; i < maxPlayer; i++){
                     User.findOne({ username: usernames[i] }, function(err, user){
-                      console.log(JSON.stringify(user, null, 4));
-                        try {
-                            users.push(user);
-                            if(user.username == usernames[usernames.length-1]){
-                                solar.initialize(users, maxPlayer); // create mother planet and so on...
-                                console.log('solar.initialize(users, maxPlayer)');
-                                return;
-                            }
-                        } catch (e) {
-                            console.log('-----------------------------');
-                            console.log(e);
-                            console.log('-----------------------------');
-                        }
+                      users.push(user);
+                      if(users.length == maxPlayer){
+                          solar.initialize(users, maxPlayer); // create mother planet and so on...)');
+                          return;
+                      }
                     })
                 }
             }
@@ -133,6 +119,11 @@ Game.prototype.event = function(socket){
               attacked_ships = attacked_ships
           }
            */
+          User.findById({attacker_id}, function(err, user1){
+            User.findById({attacked_id}, function(err, user2){
+              Game.prototype.battle(user1, user2);
+            })
+          })
 
       })
 			//data = { user_id, planet_id, building_id }
@@ -141,6 +132,13 @@ Game.prototype.event = function(socket){
 				Planet.findById(data.planet_id, function(err, planet){
 					planet.upgradeBuilding(data.building_id, data.user_id);	// 	upgrade level of the building and user pay
 				})
+      })
+
+      //data = { user_id, soldier: soldier, tank: tank, ship: ship }
+      socket.on('buy', function(data){
+        User.findById(user_id, function(err, user){
+          user.buy(data);
+        })
       })
 }
 
@@ -218,25 +216,33 @@ Game.prototype.normalDist = function(x, sig){
 Game.prototype.battle = function (user1, user2) {
   nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
   nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
+
   coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
   coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+
   coeffTotal = coeffUser1 + coeffUser2;
   probaUser1 = coeffUser1 / coeffTotal;
   probaUser2 = coeffUser2 / coeffTotal;
+
   rd = Math.random();
   console.log('rd ', rd);
   if (probaUser1 > rd){
     console.log('p1:', probaUser1);
     console.log('user1 won');
+    user1.invade( user2.planets );
+    user2.capitulate();
   }else{
     console.log('p2:', probaUser2);
     console.log('user2 won');
+    user2.invade( user1.planets );
+    user1.capitulate();
   }
 }
 
+/*
 Game.prototype.battle(
   {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
   {forces:{fantassin: 6, blinde: 0, vaisseau: 0}});
-
+*/
 
 module.exports = Game;

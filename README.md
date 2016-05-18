@@ -4,10 +4,8 @@
 
 * A faire:
   * URGENT
-    * Acheter vaisseau
     * Attaquer
     * Commerce
-    * gestionnaire de message
   * bonus
 
 
@@ -28,20 +26,18 @@
 	* Réflechir ce qu'il doit faire :p
 
   * Gaëtane
-	* Placements des bâtiments
-	* Refaire les personnages
-	* Liens entre les parties
-	* Intérieur de help et de option
 
 
   * Adrien
 	  * Switch entre planètes/cités avec envoi de données
 	  * Ajouter des patches définitifs (musiques et bruitages)
+    * gestionnaire de message
 
   * Arthur
   	* message coté serveur
   	* tester commerce coté serveur
     * attaquer coté serveur
+    * Acheter vaisseau
 
 
 ## Structure de donnée utilisée:
