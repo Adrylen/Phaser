@@ -135,7 +135,16 @@ Planets.prototype.listener = function () {
 	planet_text.text = planet_list[this.i].name;
 	planet_the_first = planet_list[this.i];
 	player_the_second = player_by_planet[this.i];
-	//console.log(this.i);
+
+	var is_mine = false;
+	for (var j in player.planets) {
+		if (player.planets[j]._id == planet_the_first._id)
+			is_mine = true;
+	}
+	if(is_mine)
+		document.getElementById('city').style.visibility = "visible";
+	else
+		document.getElementById('city').style.visibility = "hidden";
 };
 
 Planets.prototype.update = function () {
