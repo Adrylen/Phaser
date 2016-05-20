@@ -68,8 +68,14 @@ Attaque.prototype.groupes = function (name, positionX, positionY){
 	return group
 };
 
-Attaque.prototype.attaque = function (){
-
+/**
+ * fonction devant être appelée pour attaquer une planete
+ * data est un objet de la forme: data = { attacker_id : attacker_id, attacked_id: aattacked_id }
+ */
+Attaque.prototype.attaque = function (data){
+  if(data.attacker_id !== null && data.attacked_id !== null){
+		socket.emit('attack', data);
+	}
 };
 
 Attaque.prototype.retour = function (){
