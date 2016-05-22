@@ -3,7 +3,10 @@ var Attaque = function(game) {};
 Attaque.prototype.init = function () {
 	var texte = null;
 	var unite = null;
-	var image = null;
+	var image0 = null;
+	var image1 = null;
+	var image2 = null;
+
 
 	var fantassin = null;
 	var blinder = null;
@@ -13,16 +16,14 @@ Attaque.prototype.init = function () {
 	var retour = null;
 };
 
+
+
 Attaque.prototype.preload = function () {
 	// Background
 	game.load.image('background', '../images/backgrounds/attaque.png')
+	game.load.image('barre', '../images/backgrounds/aideAttaque.png')
 	// Bars
 	game.load.image('topBar', '../images/bars/top_bar.jpg');
-	game.load.image('coin', '../images/assets/coin.png');
-	// Armee
-	game.load.image('Fantassins', '../images/characters/fantassin.jpg');
-	game.load.image('Blinder', '../images/characters/blinder.jpg');
-	game.load.image('Vaisseau', '../images/building/fusee.png');
 	// Boutons
 	game.load.spritesheet('attaque', '../images/buttons/attackButton.jpg',204,160);
 	game.load.spritesheet('retour', '../images/buttons/backButton.png',204,160);
@@ -32,12 +33,31 @@ Attaque.prototype.create = function () {
 	var background = game.add.image(0, 30, 'background');
 	background.width = 1079;
 	background.height = 620;
+	background.alpha = 0.95;
 
-	fantassin = this.groupes('Fantassins', 50, 200);
-	blinder = this.groupes('Blinder', 50, 300);
-	vaisseau = this.groupes('Vaisseau', 50, 400);
+	var image0 = game.add.image( 50, 270, "barre");
+	image0.width = 1079;
+	image0.height = 50;
+	image0.alpha = 0.7;
 
-	button = game.add.button(700, 200, 'attaque',this.attaque , this, 2, 0, 1);
+	var image1 = game.add.image( 50, 370, "barre");
+	image1.width = 1079;
+	image1.height = 50;
+	image1.alpha = 0.7;
+
+	var image2 = game.add.image( 50, 470, "barre");
+	image2.width = 1079;
+	image2.height = 50;
+	image2.alpha = 0.7;
+
+	title = game.add.text(0, 0, "Attack", {font: "bold 45px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
+	title.setTextBounds(game.world.centerX-75, 33, 150, 50);
+
+	fantassin = this.groupes('Fantassins', 50, 270);
+	blinder = this.groupes('Blinder', 50, 370);
+	vaisseau = this.groupes('Vaisseau', 50, 470);
+
+	button = game.add.button(700, 550, 'attaque',this.attaque , this, 2, 0, 1);
 	button.width = 150;
 	button.height = 100;
 
@@ -56,15 +76,12 @@ Attaque.prototype.render = function () {
 
 Attaque.prototype.groupes = function (name, positionX, positionY){
 	var group = game.add.group();
-	texte = game.add.text(positionX , positionY, name, {font: "34px Purisa"});
-	unite = game.add.text(positionX + 200 , positionY + 12, "12" ); // attente du serveur
-	image = game.add.image( positionX + 300, positionY - 25, name);
-	image.width = 150;
-	image.height = 100;
+	texte = game.add.text(positionX , positionY, name, {font: "38px Purisa ",fill: "#FFFFFF"});
+	unite = game.add.text(positionX + 300 , positionY + 12, "12", {fill:"#FFFFFF"} ); // attente du serveur
+
 
 	group.add(texte);
 	group.add(unite);
-	group.add(image);
 	return group
 };
 
