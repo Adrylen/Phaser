@@ -37,8 +37,8 @@ Commerce.prototype.preload = function() {
 		game.load.spritesheet( text1, '../images/buttons/' + text1 +'.png', 120,72);
 		game.load.spritesheet( text2,'../images/buttons/'+ text2 +'.png',120,72);
 	}
-	game.load.spritesheet('select', '../images/buttons/CHOIX1.png', 150, 100);
-	game.load.spritesheet('selected', '../images/buttons/CHOIX2.png', 150, 100);
+	game.load.spritesheet('select', '../images/buttons/check1.png', 100, 100);
+	game.load.spritesheet('selected', '../images/buttons/check2.png', 100, 100);
 };
 
 var title;
@@ -88,7 +88,7 @@ Commerce.prototype.create = function() {
 	data.to_user_id = player_the_second._id;
 
 
-	title = game.add.text(0, 0, "Commerce", {font: "bold 30px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
+	title = game.add.text(0, 0, "Trude", {font: "bold 30px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
 	title.setTextBounds(game.world.centerX-75, 0, 150, 50);
 
 	p1_quantity = game.add.text(0, 0, "0", {font: "bold 26px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
@@ -108,7 +108,7 @@ Commerce.prototype.create = function() {
 
 	// -----
 
-	confirm_button = game.add.button(game.world.centerX-50, 425, 'confirm', confirm, this, 1, 0, 2);
+	confirm_button = game.add.button(game.world.centerX-50, 415, 'confirm', confirm, this, 1, 0, 2);
 	confirm_button.height = 75;
 	confirm_button.width = 100;
 
@@ -136,28 +136,28 @@ Commerce.prototype.create = function() {
 
 	for (var j = 0; j < 7; j++) {
 
-		p1ressource_select_button[j] = game.add.button(game.world.centerX-250, 50*(j+1), 'select', p1ressource_select, {'j': j}, 0, 0, 0);
+		p1ressource_select_button[j] = game.add.button(game.world.centerX-220, 50*(j+1), 'select', p1ressource_select, {'j': j}, 0, 0, 0);
 		p1ressource_select_button[j].height = 40;
-		p1ressource_select_button[j].width = 100;
+		p1ressource_select_button[j].width = 40;
 
 		ressources_text[j] = game.add.text(0, 0, ressource[j], {font: "bold 26px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
 
 		ressources_text[j].setTextBounds(game.world.centerX-75, 50*(j+1), 150, 50);
 
-		p2ressource_select_button[j] = game.add.button(game.world.centerX+150, 50*(j+1), 'select', p2ressource_select, {'j': j}, 0, 0, 0);
+		p2ressource_select_button[j] = game.add.button(game.world.centerX+180, 50*(j+1), 'select', p2ressource_select, {'j': j}, 0, 0, 0);
 		p2ressource_select_button[j].height = 40;
-		p2ressource_select_button[j].width = 100;
+		p2ressource_select_button[j].width = 40;
 
 	}
 
-	p1ressource_selected_sprite = game.add.button(game.world.centerX-250, 50, 'selected');
+	p1ressource_selected_sprite = game.add.button(game.world.centerX-220, 50, 'selected');
 	p1ressource_selected_sprite.height = 40;
-	p1ressource_selected_sprite.width = 100;
+	p1ressource_selected_sprite.width = 40;
 	p1ressource_selected_sprite.visible = false;
 
-	p2ressource_selected_sprite = game.add.button(game.world.centerX+150, 50, 'selected');
+	p2ressource_selected_sprite = game.add.button(game.world.centerX+180, 50, 'selected');
 	p2ressource_selected_sprite.height = 40;
-	p2ressource_selected_sprite.width = 100;
+	p2ressource_selected_sprite.width = 40;
 	p2ressource_selected_sprite.visible = false;
 
 };
