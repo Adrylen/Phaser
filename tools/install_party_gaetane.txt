@@ -1,0 +1,8 @@
+curl -sL https://rpm.nodesource.com/setup_5.x | sudo -E bash -
+sudo yum install -y nodejs
+node -v
+sudo npm install npm -g
+npm -v
+sudo yum update
+npm install (Dans ton dossier phaser)
+npm start

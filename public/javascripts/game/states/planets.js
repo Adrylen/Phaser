@@ -1,13 +1,17 @@
-var Planets = function(game) {};
+var Planets = function(game) {
+	var planet = null;
+	var demi_axes = null;
+	var sens = null;
+
+	var nb_of_planet = null;
+	var planet_selected = null;
+	// ressources
+};
 
 var theta = [];
 var a = 520, b = 290; //	demi grand axe de l'ellipse
 
 //*************************
-var planet = [];
-var demi_axes = [1.00, 0.84];
-var demi_axes = [];
-var sens = [];
 var planet_list = [];
 var player_by_planet = [];
 var planet_text;
@@ -24,15 +28,6 @@ confirmer	reset
 
 
 //console.log(JSON.stringify(solar_system,null, 4));	// you're no able to use the object solar_system
-
-Planets.prototype.init = function () {
-	var planets = null;
-	var circle;
-
-	var nb_of_planet = null;
-	var planet_selected = null;
-	// ressources
-};
 
 Planets.prototype.preload = function () {
 	planet = [];
@@ -76,6 +71,8 @@ Planets.prototype.preload = function () {
 
 	// Selection
 	game.load.image('selection', '../images/assets/planetSelected.png');
+
+	notif.preload();
 };
 
 Planets.prototype.create = function () {
@@ -128,6 +125,8 @@ Planets.prototype.create = function () {
 	selection.visible = false;
 	//console.log(selection.width);
 	planet_text = game.add.text(0, 0, '', { fill: '#ffffff' });
+
+	notif.create();
 };
 
 Planets.prototype.listener = function () {

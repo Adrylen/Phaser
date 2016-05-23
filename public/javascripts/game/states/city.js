@@ -79,13 +79,19 @@ City.prototype.create = function () {
 	upgrade.create();
 
 	/* Information */
-	info = game.add.graphics(0, 0);
-	info.beginFill(0x000, 0.7);
-	info.lineTo(100,0);
-	info.lineTo(100,100);
-	info.lineTo(0,100);
-	info.lineTo(0,0);
-	info.endFill();
+	var info_graph = game.add.graphics(0, 0);
+	info_graph.beginFill(0x000, 0.7);
+	info_graph.lineTo(220,0);
+	info_graph.lineTo(220,30);
+	info_graph.lineTo(0,30);
+	info_graph.lineTo(0,0);
+	info_graph.endFill();
+
+	var info_text = game.add.text(7, 2, "Test", {font: "15px Purisa", fill: "#eee"});
+
+	info = game.add.group();
+	info.add(info_graph);
+	info.add(info_text);
 	info.visible = false;
 };
 
@@ -94,8 +100,9 @@ City.prototype.update = function () {
 	text.text = player.ressources.kaga;
 
 	/* Information */
-	if(upgrade.popUp() == true || formation.popUp() == true)
+	if(upgrade.popUp() == true || formation.popUp() == true) {
 		info.visible = false;
+	}
 	if (info.visible) {
 		info.x = game.input.activePointer.x;
 		info.y = game.input.activePointer.y;
@@ -110,12 +117,18 @@ City.prototype.addBuilding = function (x, y, width, height, angle, name) {
 
 	building.width = width;
 	building.height = height;
-	building.alpha = 0.75;
+	building.alpha = 0.8;
 	building.angle = angle;
 
 	building.inputEnabled = true;
-	building.events.onInputOver.add(function () { if(!(upgrade.popUp() || formation.popUp())) building.alpha = 1; info.visible = true; }, this);
-	building.events.onInputOut.add(function () { building.alpha = 0.75; info.visible = false; }, this);
+	building.events.onInputOver.add(function () {
+		if(!(upgrade.popUp() || formation.popUp()))
+			building.alpha = 1;
+			info.visible = true;
+			if(name == 'factory') info.getAt(1).text = "Increase your production";
+			if(name == 'war') info.getAt(1).text = "Enroll your army !";
+	}, this);
+	building.events.onInputOut.add(function () { building.alpha = 0.8; info.visible = false; }, this);
 
 	game.physics.arcade.enable(building);
 
