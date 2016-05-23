@@ -50,8 +50,8 @@ Attaque.prototype.create = function () {
 	image2.height = 50;
 	image2.alpha = 0.7;
 
-	title = game.add.text(0, 0, "Attack", {font: "bold 45px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
-	title.setTextBounds(game.world.centerX-75, 33, 150, 50);
+	title = game.add.text(0, 0, "Attack", {font: "bold 75px Purisa", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
+	title.setTextBounds(game.world.centerX-75, 50, 150, 50);
 
 	fantassin = this.groupes('Fantassins', 50, 270);
 	blinder = this.groupes('Blinder', 50, 370);

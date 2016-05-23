@@ -83,7 +83,7 @@ Planets.prototype.create = function () {
 	galaxy.width = 1087;
 	galaxy.height = 620;
 
-	sun = game.add.image(game.width/2-20, (game.height-30)/2-15, 'sun'); sun.width = 110; sun.height = 110;
+	sun = game.add.image(game.width/2-70, (game.height-30)/2-19, 'sun'); sun.width = 110; sun.height = 110;
 
 	//*************************
 	for (var i = 0; i < nb_of_planet; i++) {
