@@ -110,13 +110,11 @@ Game.prototype.event = function(socket){
               user.addMessage("ResCommerce", data);
           });
       });
-      socket.on('DeclareWar', function(data){
+      socket.on('attack', function(data){
           /**
           var data = {
               attacker_id: attacker_id,
-              attacked_id: attacked_id,
-              attacker_ships = attacker_ships,
-              attacked_ships = attacked_ships
+              attacked_id: attacked_id
           }
            */
           User.findById({attacker_id}, function(err, user1){

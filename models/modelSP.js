@@ -151,7 +151,8 @@ var Solar = mongoose.model('solar', solarSchema);
 var messageSchema = new Schema({
   type: String, // victory, defeat, commerce, battle, alliance
   data: Object,
-  owner: { type: ObjectId, ref: 'user' }
+  owner: { type: ObjectId, ref: 'user' },
+  read: { type: Boolean, default: false }
 });
 
 var forcesSchema = new Schema({
