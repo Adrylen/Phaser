@@ -239,6 +239,16 @@ userSchema.methods.addMessage = function(type, data){
     this.save();
 }
 
+userSchema.methods.readMessage = function(message_id){
+    this.messages
+    for(var i=0; i < this.messages.length; i++){
+      if(this.messages[i]._id == message_id){
+        this.messages[i].read = true;
+      }
+    }
+    this.save();
+}
+
 userSchema.methods.buy = function(data){
   this.forces.soldier += data.soldier;
   this.forces.tank += data.tank;

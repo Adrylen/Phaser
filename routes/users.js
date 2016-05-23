@@ -13,11 +13,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next){
-  res.render('users/add', { title : 'Rentre dans nos rangs!'});
+  res.render('users/add', { title : 'Join us!'});
 })
 
 router.get('/login', function(req, res, next){
-  res.render('users/login', { title : 'Reviens coloniser la galaxie!'});
+  res.render('users/login', { title : 'Come back settle the galaxy!'});
 })
 
 router.get('/all', function(req, res) {
@@ -29,7 +29,7 @@ router.get('/all', function(req, res) {
 });
 
 router.get('/choose', function(req, res, next){
-    res.render('users/choose',{title : 'Choisis ton espèce !'});
+    res.render('users/choose',{title : 'Choose your alien!'});
 })
 
 router.get('/logout',
@@ -68,7 +68,7 @@ router.post('/add', function(req, res){
     newUser.save(function(err) {
       if (err) {
 				console.log(err);
-        res.render('users/add', { title : "username existant" });
+        res.render('users/add', { title : "username already exist" });
       }
     });
     req.login(newUser, function(err){
