@@ -117,12 +117,12 @@ Game.prototype.event = function(socket){
               attacked_id: attacked_id
           }
            */
-          console.log("pouet");
-          User.findById({data.attacker_id}, function(err, user1){
+          console.log(data);
+          /*User.findById({data.attacker_id}, function(err, user1){
             User.findById({data.attacked_id}, function(err, user2){
               Game.prototype.battle(user1, user2);
             })
-          })
+          })*/
 
       })
 			//data = { user_id, planet_id, building_id }
