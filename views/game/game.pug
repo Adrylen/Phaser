@@ -2,7 +2,12 @@ extends ../layouts/layoutgame.pug
 
 block libs
 	script(src='../javascripts/jquery.min.js')
+	script(src='../javascripts/libs/pnotify.custom.min.js')
 	script(src='../javascripts/socket.io.js')
+
+block style
+	link(rel='stylesheet', href='/stylesheets/animate.css')
+	link(rel='stylesheet', href='/stylesheets/pnotify.custom.min.css')
 
 block script
 	script(type='text/javascript').
@@ -82,11 +87,12 @@ block script
 	script(src='../javascripts/game/db/map.js')
 	script(src='../javascripts/game/boot.js')
 	script(src='../javascripts/game/window/formation.js')
+	script(src='../javascripts/game/window/rapport.js')
 	script(src='../javascripts/game/window/upgrade.js')
 	script(src='../javascripts/game/states/city.js')
+	script(src='../javascripts/game/states/commerce.js')
 	script(src='../javascripts/game/states/planets.js')
 	script(src='../javascripts/game/states/attaque.js')
-	script(src='../javascripts/game/states/commerce.js')
 	script(src='../javascripts/game/game.js')
 
 block content
