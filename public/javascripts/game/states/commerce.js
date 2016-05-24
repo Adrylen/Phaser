@@ -211,7 +211,7 @@ function confirm() {
 		/* ARTHUR */
 		socket.emit('AskCommerce', data);
 
-		createNotif('Command request send', 'You have to wait until the player accept or decline your request.', 'confirm');
+		createNotif('Command request send', 'You have to wait until the player accept or decline your request.', 'alert');
 
 		start('planets');
 	}
