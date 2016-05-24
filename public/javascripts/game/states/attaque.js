@@ -14,6 +14,8 @@ Attaque.prototype.init = function () {
 
 	var button = null;
 	var retour = null;
+
+	var data = null;
 };
 
 
@@ -30,40 +32,46 @@ Attaque.prototype.preload = function () {
 };
 
 Attaque.prototype.create = function () {
-	var background = game.add.image(0, 30, 'background');
-	background.width = 1079;
-	background.height = 620;
+	var background = game.add.image(0, 0, 'background');
+	background.width = 1089;
+	background.height = 680;
 	background.alpha = 0.95;
 
 	var image0 = game.add.image( 50, 270, "barre");
-	image0.width = 1079;
+	image0.width = 1070;
 	image0.height = 50;
 	image0.alpha = 0.7;
 
 	var image1 = game.add.image( 50, 370, "barre");
-	image1.width = 1079;
+	image1.width = 1070;
 	image1.height = 50;
 	image1.alpha = 0.7;
 
 	var image2 = game.add.image( 50, 470, "barre");
-	image2.width = 1079;
+	image2.width = 1070;
 	image2.height = 50;
 	image2.alpha = 0.7;
 
-	title = game.add.text(0, 0, "Attack", {font: "bold 45px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
-	title.setTextBounds(game.world.centerX-75, 33, 150, 50);
+	title = game.add.text(0, 0, "Attack", {font: "bold 75px Purisa", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
+	title.setTextBounds(game.world.centerX-75, 50, 150, 50);
 
-	fantassin = this.groupes('Fantassins', 50, 270);
-	blinder = this.groupes('Blinder', 50, 370);
-	vaisseau = this.groupes('Vaisseau', 50, 470);
+	fantassin = this.groupes('soldier', 50, 270);
+	blinder = this.groupes('tank', 50, 370);
+	vaisseau = this.groupes('ship', 50, 470);
 
-	button = game.add.button(700, 550, 'attaque',this.attaque , this, 2, 0, 1);
+	data = {
+		attacker_id: player._id,
+		attacked_id: player_the_second._id
+	};
+	button = game.add.button(700, 550, 'attaque',this.attaque(data) , this, 2, 0, 1);
 	button.width = 150;
 	button.height = 100;
 
 	retour = game.add.button(928,550, 'retour',this.retour,this, 2,0,1);
 	retour.width = 150;
 	retour.height = 100;
+
+
 };
 
 Attaque.prototype.update = function () {
@@ -75,9 +83,18 @@ Attaque.prototype.render = function () {
 };
 
 Attaque.prototype.groupes = function (name, positionX, positionY){
+	console.log(player.forces);
 	var group = game.add.group();
 	texte = game.add.text(positionX , positionY, name, {font: "38px Purisa ",fill: "#FFFFFF"});
-	unite = game.add.text(positionX + 300 , positionY + 12, "12", {fill:"#FFFFFF"} ); // attente du serveur
+	if (name == 'soldier'){
+		unite = game.add.text(positionX + 300 , positionY + 12, player.forces.soldier, {fill:"#FFFFFF"} ); // attente du serveur
+	}
+	if (name == 'ship'){
+		unite = game.add.text(positionX + 300 , positionY + 12, player.forces.ship, {fill:"#FFFFFF"} ); // attente du serveur
+	}
+	if (name == 'tank'){
+		unite = game.add.text(positionX + 300 , positionY + 12, player.forces.tank, {fill:"#FFFFFF"} ); // attente du serveur
+	}
 
 
 	group.add(texte);

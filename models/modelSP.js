@@ -151,7 +151,8 @@ var Solar = mongoose.model('solar', solarSchema);
 var messageSchema = new Schema({
   type: String, // victory, defeat, commerce, battle, alliance
   data: Object,
-  owner: { type: ObjectId, ref: 'user' }
+  owner: { type: ObjectId, ref: 'user' },
+  read: { type: Boolean, default: false }
 });
 
 var forcesSchema = new Schema({
@@ -235,6 +236,16 @@ userSchema.methods.setPlay = function(bool){
 userSchema.methods.addMessage = function(type, data){
     nMessage = {type: type, data: data};
     this.messages.push(nMessage);
+    this.save();
+}
+
+userSchema.methods.readMessage = function(message_id){
+    this.messages
+    for(var i=0; i < this.messages.length; i++){
+      if(this.messages[i]._id == message_id){
+        this.messages[i].read = true;
+      }
+    }
     this.save();
 }
 
