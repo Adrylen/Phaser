@@ -206,7 +206,6 @@ Game.prototype.heterogene = function(coeffFantassin, coeffBlinde, coeffVaisseau)
 
 Game.prototype.normalDist = function(x, sig){
   sig = typeof sig !== 'undefined' ? sig : Math.sqrt(0.9);
-  console.log(sig);
   return (1.0/(sig*Math.sqrt(2.0*Math.PI)))*(Math.exp(-(x*x)/(2.0*sig*sig)))
 }
 
@@ -218,15 +217,17 @@ Game.prototype.battle = function (user1, user2) {
   nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
   nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
 
+  console.log(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
   coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
   coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+
+  console.log('coeffUser1', typeof coeffUser1);
+  console.log('coeffUser2', typeof coeffUser2);
 
   coeffTotal = coeffUser1 + coeffUser2;
   probaUser1 = coeffUser1 / coeffTotal;
   probaUser2 = coeffUser2 / coeffTotal;
-  
-  console.log('probaUser1', probaUser1);
-  console.log('probaUser2', probaUser2);
+
 
   rd = Math.random();
   console.log('rd ', rd);
