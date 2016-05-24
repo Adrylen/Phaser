@@ -273,6 +273,7 @@ userSchema.methods.invade = function(planets){
 
 userSchema.methods.capitulate = function(){
   this.planets = [];
+  this.save();
 }
 /*
 userSchema.methods.editRessource = function(type, user_id, level){

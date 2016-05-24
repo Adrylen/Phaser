@@ -211,8 +211,10 @@ Game.prototype.normalDist = function(x, sig){
 }
 
 Game.prototype.battle = function (user1, user2) {
+
   console.log(JSON.stringify(user1, null, 4));
   console.log(JSON.stringify(user2, null, 4));
+
   nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
   nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
 
@@ -222,6 +224,9 @@ Game.prototype.battle = function (user1, user2) {
   coeffTotal = coeffUser1 + coeffUser2;
   probaUser1 = coeffUser1 / coeffTotal;
   probaUser2 = coeffUser2 / coeffTotal;
+  
+  console.log('probaUser1', probaUser1);
+  console.log('probaUser2', probaUser2);
 
   rd = Math.random();
   console.log('rd ', rd);
