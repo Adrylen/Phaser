@@ -88,7 +88,7 @@ Commerce.prototype.create = function() {
 	data.to_user_id = player_the_second._id;
 
 
-	title = game.add.text(0, 0, "Trude", {font: "bold 30px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
+	title = game.add.text(0, 0, "Trade", {font: "bold 30px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
 	title.setTextBounds(game.world.centerX-75, 0, 150, 50);
 
 	p1_quantity = game.add.text(0, 0, "0", {font: "bold 26px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
