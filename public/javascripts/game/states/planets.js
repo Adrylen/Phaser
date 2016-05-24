@@ -71,8 +71,6 @@ Planets.prototype.preload = function () {
 
 	// Selection
 	game.load.image('selection', '../images/assets/planetSelected.png');
-
-	notif.preload();
 };
 
 Planets.prototype.create = function () {
@@ -125,8 +123,6 @@ Planets.prototype.create = function () {
 	selection.visible = false;
 	//console.log(selection.width);
 	planet_text = game.add.text(0, 0, '', { fill: '#ffffff' });
-
-	notif.create();
 };
 
 Planets.prototype.listener = function () {

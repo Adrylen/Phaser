@@ -210,7 +210,14 @@ function confirm() {
 	if(data.from_user_id !== null && data.ask_for.ressources !== null && data.to_user_id !== null && data.against.ressources !== null){
 		/* ARTHUR */
 		socket.emit('AskCommerce', data);
+
+		createNotif('Command request send', 'You have to wait until the player accept or decline your request.', 'confirm');
+
+		start('planets');
 	}
+
+
+
 	data.ask_for.ressources = null;
 	data.against.amount = 0;
 	data.against.ressources = null;
@@ -220,6 +227,7 @@ function confirm() {
 	p2_quantity.text = "0";
 	p2ressource_selected_sprite.visible = false;
 	p1ressource_selected_sprite.visible = false;
+
 }
 
 
