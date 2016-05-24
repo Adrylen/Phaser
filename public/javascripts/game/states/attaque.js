@@ -59,6 +59,10 @@ Attaque.prototype.create = function () {
 	blinder = this.groupes('tank', 50, 370);
 	vaisseau = this.groupes('ship', 50, 470);
 
+	data = {
+		attacker_id: player._id,
+		attacked_id: player_the_second._id
+	};
 	button = game.add.button(700, 550, 'attaque',this.attaque(data) , this, 2, 0, 1);
 	button.width = 150;
 	button.height = 100;
@@ -67,10 +71,6 @@ Attaque.prototype.create = function () {
 	retour.width = 150;
 	retour.height = 100;
 
-	data = {
-		attacker_id: player._id,
-		attacked_id: player_the_second._id
-	};
 
 };
 
