@@ -74,6 +74,8 @@ Planets.prototype.preload = function () {
 };
 
 Planets.prototype.create = function () {
+	this.refresh();
+
 	var galaxy = game.add.image(0, 30, 'galaxy');
 	galaxy.width = 1087;
 	galaxy.height = 620;
@@ -123,6 +125,12 @@ Planets.prototype.create = function () {
 	selection.visible = false;
 	//console.log(selection.width);
 	planet_text = game.add.text(0, 0, '', { fill: '#ffffff' });
+};
+
+Planets.prototype.refresh = function () {
+	document.getElementById('commerce').style.visibility = "hidden";
+	document.getElementById('attaque').style.visibility = "hidden";
+	document.getElementById('city').style.visibility = "hidden";
 };
 
 Planets.prototype.listener = function () {

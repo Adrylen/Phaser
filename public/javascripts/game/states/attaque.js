@@ -63,15 +63,14 @@ Attaque.prototype.create = function () {
 		attacker_id: player._id,
 		attacked_id: player_the_second._id
 	};
-	button = game.add.button(700, 550, 'attaque',this.attaque(data) , this, 2, 0, 1);
+
+	button = game.add.button(700, 550, 'attaque',this.attaque , this, 2, 0, 1);
 	button.width = 150;
 	button.height = 100;
 
 	retour = game.add.button(928,550, 'retour',this.retour,this, 2,0,1);
 	retour.width = 150;
 	retour.height = 100;
-
-
 };
 
 Attaque.prototype.update = function () {
@@ -106,9 +105,14 @@ Attaque.prototype.groupes = function (name, positionX, positionY){
  * fonction devant être appelée pour attaquer une planete
  * data est un objet de la forme: data = { attacker_id : attacker_id, attacked_id: aattacked_id }
  */
-Attaque.prototype.attaque = function (data){
+Attaque.prototype.attaque = function (){
+
   if(data.attacker_id !== null && data.attacked_id !== null){
 		socket.emit('attack', data);
+
+		createNotif("You attack an opponent !", '', 'alert');
+
+		start('planets');
 	}
 };
 
