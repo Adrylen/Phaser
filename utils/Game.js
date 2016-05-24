@@ -115,7 +115,6 @@ Game.prototype.event = function(socket){
               attacker_id: attacker_id,
               attacked_id: attacked_id
           }*/
-          console.log(data);
           User.findById(data.attacker_id, function(err, user1){
             User.findById(data.attacked_id, function(err, user2){
               Game.prototype.battle(user1, user2);
@@ -125,7 +124,6 @@ Game.prototype.event = function(socket){
       })
 			//data = { user_id, planet_id, building_id }
 			socket.on('buildingUpgrade', function(data){
-				console.log('buildingUpgrade');
 				Planet.findById(data.planet_id, function(err, planet){
 					planet.upgradeBuilding(data.building_id, data.user_id);	// 	upgrade level of the building and user pay
 				})
@@ -211,15 +209,8 @@ Game.prototype.normalDist = function(x, sig){
 
 Game.prototype.battle = function (user1, user2) {
 
-  //console.log(JSON.stringify(user1, null, 4));
-  //console.log(JSON.stringify(user2, null, 4));
-
   nForceUser1 = user1.forces.soldier + user1.forces.tank + user1.forces.ship;
   nForceser2 = user2.forces.soldier + user2.forces.tank + user2.forces.ship;
-
-  console.log('user1.forces.soldier', user1.forces.soldier);
-  console.log('user1.forces.tank', user1.forces.tank);
-  console.log('user1.forces.ship', user1.forces.ship);
 
   coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.soldier/nForceUser1, user1.forces.tank/nForceUser1, user1.forces.ship/nForceUser1));
   coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.soldier/nForceser2, user2.forces.tank/nForceser2, user2.forces.ship/nForceser2));
@@ -230,15 +221,13 @@ Game.prototype.battle = function (user1, user2) {
 
 
   rd = Math.random();
-  console.log('rd ', rd);
   if (probaUser1 > rd){
-    console.log('p1:', probaUser1);
-    console.log('user1 won');
     user1.invade( user2.planets );
     user2.capitulate();
+    user1.loss(probaUser1); // reduce the number of troop
   }else{
-    console.log('p2:', probaUser2);
-    console.log('user2 won');
+    user1.loss(probaUser1); // reduce the number of troop
+    user2.loss(probaUser2);
   }
 }
 
