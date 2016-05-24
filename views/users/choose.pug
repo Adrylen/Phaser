@@ -56,7 +56,8 @@ block content
 			$('aside').hide();
 			$('#bouton').hide();
 			$('img:not(#full-screen-background-image)').click(function(){
-				console.log($(this).attr("id"));
+				//console.log($(this).attr("id"));
+				location.assign(document.domain+':'+document.location.port+'/user/start');
 				$('img:not(#full-screen-background-image)').not($($(this).attr("id"))).css({
 					width:'150px',
 					height:'150px'

@@ -117,6 +117,7 @@ Game.prototype.event = function(socket){
               attacked_id: attacked_id
           }
            */
+          console.log("pouet");
           User.findById({attacker_id}, function(err, user1){
             User.findById({attacked_id}, function(err, user2){
               Game.prototype.battle(user1, user2);
