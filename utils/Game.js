@@ -200,8 +200,8 @@ Game.prototype.iLoose = function(user){
     }
 }
 
-Game.prototype.heterogene = function(coeffFantassin, coeffBlinde, coeffVaisseau){
-  return Math.sqrt( (Math.abs(coeffFantassin - (1/3) ) + Math.abs(coeffBlinde - (1/3) ) + Math.abs(coeffVaisseau - (1/3) )) )
+Game.prototype.heterogene = function(coeffsoldier, coefftank, coeffship){
+  return Math.sqrt( (Math.abs(coeffsoldier - (1/3) ) + Math.abs(coefftank - (1/3) ) + Math.abs(coeffship - (1/3) )) )
 }
 
 Game.prototype.normalDist = function(x, sig){
@@ -211,18 +211,18 @@ Game.prototype.normalDist = function(x, sig){
 
 Game.prototype.battle = function (user1, user2) {
 
-  console.log(JSON.stringify(user1, null, 4));
-  console.log(JSON.stringify(user2, null, 4));
+  //console.log(JSON.stringify(user1, null, 4));
+  //console.log(JSON.stringify(user2, null, 4));
 
-  nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
-  nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
+  nForceUser1 = user1.forces.soldier + user1.forces.tank + user1.forces.ship;
+  nForceser2 = user2.forces.soldier + user2.forces.tank + user2.forces.ship;
 
-  console.log(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
-  coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
-  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+  console.log('user1.forces.soldier', user1.forces.soldier);
+  console.log('user1.forces.tank', user1.forces.tank);
+  console.log('user1.forces.ship', user1.forces.ship);
 
-  console.log('coeffUser1', typeof coeffUser1);
-  console.log('coeffUser2', typeof coeffUser2);
+  coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.soldier/nForceUser1, user1.forces.tank/nForceUser1, user1.forces.ship/nForceUser1));
+  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.soldier/nForceser2, user2.forces.tank/nForceser2, user2.forces.ship/nForceser2));
 
   coeffTotal = coeffUser1 + coeffUser2;
   probaUser1 = coeffUser1 / coeffTotal;
@@ -239,15 +239,13 @@ Game.prototype.battle = function (user1, user2) {
   }else{
     console.log('p2:', probaUser2);
     console.log('user2 won');
-    user2.invade( user1.planets );
-    user1.capitulate();
   }
 }
 
 /*
 Game.prototype.battle(
-  {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
-  {forces:{fantassin: 6, blinde: 0, vaisseau: 0}});
+  {forces:{soldier: 2, tank: 2, ship: 2}},
+  {forces:{soldier: 6, tank: 0, ship: 0}});
 */
 
 module.exports = Game;
