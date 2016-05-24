@@ -111,18 +111,16 @@ Game.prototype.event = function(socket){
           });
       });
       socket.on('attack', function(data){
-          /**
-          var data = {
+          /**var data = {
               attacker_id: attacker_id,
               attacked_id: attacked_id
-          }
-           */
+          }*/
           console.log(data);
-          /*User.findById({data.attacker_id}, function(err, user1){
-            User.findById({data.attacked_id}, function(err, user2){
+          User.findById(data.attacker_id, function(err, user1){
+            User.findById(data.attacked_id, function(err, user2){
               Game.prototype.battle(user1, user2);
             })
-          })*/
+          })
 
       })
 			//data = { user_id, planet_id, building_id }
@@ -213,6 +211,8 @@ Game.prototype.normalDist = function(x, sig){
 }
 
 Game.prototype.battle = function (user1, user2) {
+  console.log(JSON.stringify(user1, null, 4));
+  console.log(JSON.stringify(user2, null, 4));
   nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
   nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
 
