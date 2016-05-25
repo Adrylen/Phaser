@@ -1,4 +1,11 @@
-function createNotif(title, text, type) {
+function createNotif(title, text, type, sendData = null) {
+	var data = {
+		res: 1,
+		from_user_id: sendData.from_user_id,
+		ask_for: sendData.ask_for,
+		to_user_id: sendData.to_user_id,
+		against: sendData.against
+	};
 	var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
 
 	var accept = {
@@ -41,10 +48,18 @@ function createNotif(title, text, type) {
 				confirm: true,
 				buttons: [{
 					text: 'Accept',
-					click: function(notice) { notice.update(accept); }
+					click: function(notice) {
+						notice.update(accept);
+						data.res = 1;
+						//socket.emit("", data);
+					}
 				}, {
 					text: 'Decline',
-					click: function(notice) { notice.update(decline); }
+					click: function(notice) {
+						notice.update(decline);
+						data.res = 0;
+						//socket.emit("", data);
+					}
 				}]
 			},
 			buttons: {
