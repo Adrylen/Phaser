@@ -268,11 +268,29 @@ userSchema.methods.buy = function(data){
 
 userSchema.methods.invade = function(planets){
   this.planets = this.planets.concat(planets);
+  for(var i in this.planets){
+    for(var j in this.planets){
+      if((i != j) && this.planets[i] == this.planets[j]){
+        console.log(this.planets[i], '==', this.planets[j]);
+        this.planets = this.planets.splice(j, 1);
+      }
+    }
+  }
+  this.save();
+}
+
+userSchema.methods.loss = function(coeff){
+
+  this.forces.soldier = Math.round( this.forces.soldier*coeff );
+  this.forces.tank = Math.round( this.forces.tank*coeff );
+  this.forces.ship = Math.round( this.forces.ship*coeff );
+
   this.save();
 }
 
 userSchema.methods.capitulate = function(){
   this.planets = [];
+  this.save();
 }
 /*
 userSchema.methods.editRessource = function(type, user_id, level){

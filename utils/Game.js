@@ -115,7 +115,6 @@ Game.prototype.event = function(socket){
               attacker_id: attacker_id,
               attacked_id: attacked_id
           }*/
-          console.log(data);
           User.findById(data.attacker_id, function(err, user1){
             User.findById(data.attacked_id, function(err, user2){
               Game.prototype.battle(user1, user2);
@@ -125,7 +124,6 @@ Game.prototype.event = function(socket){
       })
 			//data = { user_id, planet_id, building_id }
 			socket.on('buildingUpgrade', function(data){
-				console.log('buildingUpgrade');
 				Planet.findById(data.planet_id, function(err, planet){
 					planet.upgradeBuilding(data.building_id, data.user_id);	// 	upgrade level of the building and user pay
 				})
@@ -200,48 +198,43 @@ Game.prototype.iLoose = function(user){
     }
 }
 
-Game.prototype.heterogene = function(coeffFantassin, coeffBlinde, coeffVaisseau){
-  return Math.sqrt( (Math.abs(coeffFantassin - (1/3) ) + Math.abs(coeffBlinde - (1/3) ) + Math.abs(coeffVaisseau - (1/3) )) )
+Game.prototype.heterogene = function(coeffsoldier, coefftank, coeffship){
+  return Math.sqrt( (Math.abs(coeffsoldier - (1/3) ) + Math.abs(coefftank - (1/3) ) + Math.abs(coeffship - (1/3) )) )
 }
 
 Game.prototype.normalDist = function(x, sig){
   sig = typeof sig !== 'undefined' ? sig : Math.sqrt(0.9);
-  console.log(sig);
   return (1.0/(sig*Math.sqrt(2.0*Math.PI)))*(Math.exp(-(x*x)/(2.0*sig*sig)))
 }
 
 Game.prototype.battle = function (user1, user2) {
-  console.log(JSON.stringify(user1, null, 4));
-  console.log(JSON.stringify(user2, null, 4));
-  nForceUser1 = user1.forces.fantassin + user1.forces.blinde + user1.forces.vaisseau;
-  nForceser2 = user2.forces.fantassin + user2.forces.blinde + user2.forces.vaisseau;
 
-  coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.fantassin, user1.forces.blinde, user1.forces.vaisseau));
-  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.fantassin, user2.forces.blinde, user2.forces.vaisseau));
+  nForceUser1 = user1.forces.soldier + user1.forces.tank + user1.forces.ship;
+  nForceser2 = user2.forces.soldier + user2.forces.tank + user2.forces.ship;
+
+  coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.soldier/nForceUser1, user1.forces.tank/nForceUser1, user1.forces.ship/nForceUser1));
+  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.soldier/nForceser2, user2.forces.tank/nForceser2, user2.forces.ship/nForceser2));
 
   coeffTotal = coeffUser1 + coeffUser2;
   probaUser1 = coeffUser1 / coeffTotal;
   probaUser2 = coeffUser2 / coeffTotal;
 
+
   rd = Math.random();
-  console.log('rd ', rd);
   if (probaUser1 > rd){
-    console.log('p1:', probaUser1);
-    console.log('user1 won');
     user1.invade( user2.planets );
     user2.capitulate();
+    user1.loss(probaUser1); // reduce the number of troop
   }else{
-    console.log('p2:', probaUser2);
-    console.log('user2 won');
-    user2.invade( user1.planets );
-    user1.capitulate();
+    user1.loss(probaUser1); // reduce the number of troop
+    user2.loss(probaUser2);
   }
 }
 
 /*
 Game.prototype.battle(
-  {forces:{fantassin: 2, blinde: 2, vaisseau: 2}},
-  {forces:{fantassin: 6, blinde: 0, vaisseau: 0}});
+  {forces:{soldier: 2, tank: 2, ship: 2}},
+  {forces:{soldier: 6, tank: 0, ship: 0}});
 */
 
 module.exports = Game;

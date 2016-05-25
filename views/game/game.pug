@@ -70,9 +70,9 @@ block script
 				if(username == solar_system.users[i].username){
 					if(solar_system.users[i].planets.length == 0){
 						console.log('pouet');
-						location.assign(document.domain+':'+document.location.port+'/game/end');
+						location.assign('http://'+document.domain+':'+document.location.port+'/game/end');
 					}else if (solar_system.users[i].planets.length == 6){
-						location.assign(document.domain+':'+document.location.port+'/game/win');
+						location.assign('http://'+document.domain+':'+document.location.port+'/game/win');
 					}
 				}
 			}
