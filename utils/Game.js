@@ -84,6 +84,13 @@ Game.prototype.event = function(socket){
            });
        });
 
+       socket.on('messageRead', function(data){
+         // user_id, message_id
+         User.findById(data.user_id, function(err, user){
+           users.read(data.message_id);
+         });
+       })
+
        socket.on('ResCommerce', function(data){
              /**
               * var data = {
@@ -110,6 +117,7 @@ Game.prototype.event = function(socket){
               user.addMessage("ResCommerce", data);
           });
       });
+
       socket.on('attack', function(data){
           /**var data = {
               attacker_id: attacker_id,

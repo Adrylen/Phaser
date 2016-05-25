@@ -41,7 +41,9 @@ planetSchema.methods.upgradeBuilding = function(building_id, user_id){
 				console.log(user);
 			})*/
 			Planet.findById(this._id).populate('owner').exec(function(err, planet){
-				planet.owner.editKaga(- (level*level * 100));
+        if(planet.owner.ressources.kaga >= (level*level * 100)){
+  				planet.owner.editKaga(- (level*level * 100));
+        }
 			})
 		}
 	}
@@ -239,7 +241,7 @@ userSchema.methods.addMessage = function(type, data){
     this.save();
 }
 
-userSchema.methods.readMessage = function(message_id){
+userSchema.methods.read = function(message_id){
     this.messages
     for(var i=0; i < this.messages.length; i++){
       if(this.messages[i]._id == message_id){
@@ -250,19 +252,28 @@ userSchema.methods.readMessage = function(message_id){
 }
 
 userSchema.methods.buy = function(data){
-  this.forces.soldier += data.soldier;
-  this.forces.tank += data.tank;
-  this.forces.ship += data.ship;
 
-  this.ressources.food -= data.soldier * 100;
-  this.ressources.water -= data.soldier * 100;
+  if(
+    this.ressources.food >= data.soldier * 100 &&
+    this.ressources.water >= data.soldier * 100 &&
+    this.ressources.iron >= data.tank * 100 &&
+    this.ressources.watt >= data.tank * 100 &&
+    this.ressources.tool >= data.ship * 100 &&
+    this.ressources.lumber >= data.ship * 100
+  ){
+    this.forces.soldier += data.soldier;
+    this.forces.tank += data.tank;
+    this.forces.ship += data.ship;
 
-  this.ressources.iron -= data.tank * 100;
-  this.ressources.watt -= data.tank * 100;
+    this.ressources.food -= data.soldier * 100;
+    this.ressources.water -= data.soldier * 100;
 
-  this.ressources.tool -= data.tanke * 100;
-  this.ressources.lumber -= data.tanke * 100;
+    this.ressources.iron -= data.tank * 100;
+    this.ressources.watt -= data.tank * 100;
 
+    this.ressources.tool -= data.ship * 100;
+    this.ressources.lumber -= data.ship * 100;
+  }
   this.save();
 }
 

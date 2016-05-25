@@ -52,13 +52,18 @@ Formation.prototype = {
 
 	popUp: function() { return popUp; },
 
-	update: function(user_id, building_id) {
-		/* Serveur */
-	},
+	buy: function(data){
+    /*
+        var data = {
+        user_id: varuser_id,
+        nb_soldier: vara,
+        nb_tank: varb,
+        nb_ship: varc
+      }
+     */
+     socket.emit('buy', data);
 
-	upgrade: function(data) {
-		/* Serveur */
-	}
+  }
 };
 
 var formation = new Formation(game);
