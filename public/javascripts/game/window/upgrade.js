@@ -74,9 +74,14 @@ Upgrade.prototype = {
 	newGroup: function(nb, text, resource, building) {
 		var group = game.add.group();
 		group.create(130, 130 + nb*40, 'cadre');
-		group.add(game.add.text(170, 132 + nb*40, text, {font: "15px Purisa", fill: "#ffffff"}));
+		cadre.height = 35;
+		cadre.width = 35;
+
+		group.add(game.add.text(200, 132 + nb*40, text, {font: "17px Purisa", fill: "#ffffff"}));
 
 		var newUpgrade = game.add.sprite(132, 132 + nb*40, resource);
+		newUpgrade.width = 30;
+		newUpgrade.height = 30;
 		newUpgrade.inputEnabled=true;
 		newUpgrade.events.onInputDown.add(function() {
 			var dbBuilding;
