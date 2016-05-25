@@ -36,8 +36,9 @@ block script
 				{
 					var data = {user_id: player._id, message_id: player.messages[i]._id};
 					socket.emit('messageRead', data);
-					console.log(player.messages[i].read);
-					createNotif('You\'ve received an exchange request', 'Resume', 'confirm', player.messages[i].data);
+					var str = "Ask for : " + player.messages[i].data.ask_for.amount + " " + player.messages[i].data.ask_for.ressources;
+					str += "\n Against : " + player.messages[i].data.against.amount + " " + player.messages[i].data.against.ressources;
+					createNotif('You\'ve received an exchange request', str, 'confirm', player.messages[i].data);
 				}
 			}
 		}

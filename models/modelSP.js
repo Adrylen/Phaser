@@ -303,14 +303,14 @@ userSchema.methods.capitulate = function(){
   this.planets = [];
   this.save();
 }
-/*
+
 userSchema.methods.editRessource = function(type, user_id, level){
 	User.findById(user_id, function(err, user){
 		userSchema.methods.editRessource('kaga', - (Math.exp(level) * 1000));
 		console.log(user);
 	})
 }
-*/
+
 userSchema.methods.editKaga = function(amount){
     this.ressources.kaga += amount;
     this.save();
