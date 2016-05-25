@@ -15,9 +15,9 @@ Upgrade.prototype = {
 
 		game.load.image('cadre', '../images/assets/cadre.png');
 
-		game.load.image('coin', '../images/assets/more.png');
+		game.load.image('kaga', '../images/assets/more.png');
 		game.load.image('iron', '../images/assets/iron.png');
-		game.load.image('energy', '../images/assets/power.png');
+		game.load.image('watt', '../images/assets/power.png');
 		game.load.image('food', '../images/assets/food.png');
 		game.load.image('water', '../images/assets/water.png');
 		game.load.image('tool', '../images/assets/tool.png');
