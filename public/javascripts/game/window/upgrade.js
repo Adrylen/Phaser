@@ -53,7 +53,7 @@ Upgrade.prototype = {
 		groupUpgrades.add(background);
 		groupUpgrades.add(cross);
 
-		groupUpgrades.add(this.newGroup(0, "Increase by 1 your COIN production", 'coin', 'ambassade'));					// Upgrade Kaga
+		groupUpgrades.add(this.newGroup(0, "Increase by 1 your COIN production", 'kaga', 'ambassade'));					// Upgrade Kaga
 		groupUpgrades.add(this.newGroup(1, "Increase by 1 your IRON production", 'iron', 'mine'));						// Upgrade Iron
 		groupUpgrades.add(this.newGroup(2, "Increase by 1 your ENERGY generator", 'watt', 'generator'));				// Upgrade Energy
 		groupUpgrades.add(this.newGroup(3, "Increase by 1 your FOOD production", 'food', 'farm'));						// Upgrade Water

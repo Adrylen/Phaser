@@ -62,7 +62,7 @@ var p1ressource_selected_sprite;
 var p2ressource_select_button = [];
 var p2ressource_selected_sprite;
 
-var ressource = ["kaga", "iron", "watt", "food", "water", "tools", "lumber"];
+var ressource = ["kaga", "iron", "watt", "food", "water", "tool", "lumber"];
 
 
 Commerce.prototype.create = function() {
