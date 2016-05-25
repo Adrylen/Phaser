@@ -305,6 +305,7 @@ userSchema.methods.capitulate = function(){
 }
 
 userSchema.methods.editRessource = function(type, user_id, level){
+  console.log('editRessource');
 	User.findById(user_id, function(err, user){
 		userSchema.methods.editRessource('kaga', - (Math.exp(level) * 1000));
 		console.log(user);

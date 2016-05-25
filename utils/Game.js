@@ -102,6 +102,7 @@ Game.prototype.event = function(socket){
               }
               */
              if(data.res){
+               console.log('data.res');
                  // l'aquiesceur
                  User.findById(data.to_user_id, function(err, user){
                      user.editRessource(data.ask_for.type, -data.ask_for.amount); // on retire
