@@ -84,6 +84,13 @@ Game.prototype.event = function(socket){
            });
        });
 
+       socket.on('messageRead', function(data){
+         // user_id, message_id
+         User.findById(data.user_id, function(err, user){
+           user.read(data.message_id);
+         });
+       })
+
        socket.on('ResCommerce', function(data){
              /**
               * var data = {
@@ -95,21 +102,24 @@ Game.prototype.event = function(socket){
               }
               */
              if(data.res){
+               console.log('data.res');
                  // l'aquiesceur
+                 console.log(JSON.stringify(data, null, 4));
                  User.findById(data.to_user_id, function(err, user){
-                     user.editRessource(ask_for.type, -ask_for.amount); // on retire
-                     user.editRessource(against.type, against.amount);  // on ajoute
+                     user.editRessource(data.ask_for.ressources, -data.ask_for.amount); // on retire
+                     user.editRessource(data.against.ressources, data.against.amount);  // on ajoute
                  });
                  // le demandeur
                  User.findById(data.from_user_id, function(err, user){
-                     user.editRessource(against.type, -against.amount); // on retire
-                     user.editRessource(ask_for.type, ask_for.amount);  // on ajoute
+                     user.editRessource(data.against.ressources, -data.against.amount); // on retire
+                     user.editRessource(data.ask_for.ressources, data.ask_for.amount);  // on ajoute
                  });
              }
           User.findById(data.from_user_id, function(err, user){
               user.addMessage("ResCommerce", data);
           });
       });
+
       socket.on('attack', function(data){
           /**var data = {
               attacker_id: attacker_id,

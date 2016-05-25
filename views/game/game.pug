@@ -30,9 +30,22 @@ block script
 			socket.emit('game', solar_system._id);
 			doIFinish();
 		}
-		var a;
+		function notifUpdate() {
+			for(i in player.messages) {
+				if(player.messages[i].read == false && player.messages[i].type == "AskCommerce")
+				{
+					var data = {user_id: player._id, message_id: player.messages[i]._id};
+					socket.emit('messageRead', data);
+					var str = "Ask for : " + player.messages[i].data.ask_for.amount + " " + player.messages[i].data.ask_for.ressources;
+					str += "\n Against : " + player.messages[i].data.against.amount + " " + player.messages[i].data.against.ressources;
+					createNotif('You\'ve received an exchange request', str, 'confirm', player.messages[i].data);
+				}
+			}
+		}
+		var a,b;
 		function realTime(){
 			a = setInterval(askUpdate, 1000);
+			b = setInterval(notifUpdate, 2000);
 		}
 		function displayMenu(id) {
 			player = solar_system.users[id];
@@ -65,11 +78,11 @@ block script
 			//console.log(JSON.stringify(player.ressources.kaga, null, 4));
 		})
 		doIFinish = function(){
-			console.log('test do i finish');
+			//console.log('test do i finish');
 			for(var i in solar_system.users){
 				if(username == solar_system.users[i].username){
 					if(solar_system.users[i].planets.length == 0){
-						console.log('pouet');
+						//console.log('pouet');
 						location.assign('http://'+document.domain+':'+document.location.port+'/game/end');
 					}else if (solar_system.users[i].planets.length == 6){
 						location.assign('http://'+document.domain+':'+document.location.port+'/game/win');
@@ -77,7 +90,7 @@ block script
 				}
 			}
 		}
-		console.log(JSON.stringify(solar_system, null, 4));
+		//console.log(JSON.stringify(solar_system, null, 4));
 
 	// Phaser
 	script(src='../javascripts/phaser/phaser.min.js')

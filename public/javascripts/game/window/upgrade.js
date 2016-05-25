@@ -15,9 +15,9 @@ Upgrade.prototype = {
 
 		game.load.image('cadre', '../images/assets/cadre.png');
 
-		game.load.image('coin', '../images/assets/more.png');
+		game.load.image('kaga', '../images/assets/more.png');
 		game.load.image('iron', '../images/assets/iron.png');
-		game.load.image('energy', '../images/assets/power.png');
+		game.load.image('watt', '../images/assets/power.png');
 		game.load.image('food', '../images/assets/food.png');
 		game.load.image('water', '../images/assets/water.png');
 		game.load.image('tool', '../images/assets/tool.png');
@@ -53,9 +53,9 @@ Upgrade.prototype = {
 		groupUpgrades.add(background);
 		groupUpgrades.add(cross);
 
-		groupUpgrades.add(this.newGroup(0, "Increase by 1 your COIN production", 'coin', 'ambassade'));					// Upgrade Kaga
+		groupUpgrades.add(this.newGroup(0, "Increase by 1 your COIN production", 'kaga', 'ambassade'));					// Upgrade Kaga
 		groupUpgrades.add(this.newGroup(1, "Increase by 1 your IRON production", 'iron', 'mine'));						// Upgrade Iron
-		groupUpgrades.add(this.newGroup(2, "Increase by 1 your ENERGY generator", 'energy', 'generator'));				// Upgrade Energy
+		groupUpgrades.add(this.newGroup(2, "Increase by 1 your ENERGY generator", 'watt', 'generator'));				// Upgrade Energy
 		groupUpgrades.add(this.newGroup(3, "Increase by 1 your FOOD production", 'food', 'farm'));						// Upgrade Water
 		groupUpgrades.add(this.newGroup(4, "Increase by 1 your WATER extraction", 'water', 'pump'));						// Upgrade Water
 		groupUpgrades.add(this.newGroup(5, "Increase by 1 your TOOLS production", 'tool', 'factory'));					// Upgrade Tool

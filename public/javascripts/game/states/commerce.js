@@ -62,7 +62,7 @@ var p1ressource_selected_sprite;
 var p2ressource_select_button = [];
 var p2ressource_selected_sprite;
 
-var ressource = ["kaga", "iron", "energy", "food", "water", "tools", "lumber"];
+var ressource = ["kaga", "iron", "watt", "food", "water", "tool", "lumber"];
 
 
 Commerce.prototype.create = function() {
@@ -177,31 +177,31 @@ function p2ressource_select() {
 	}
 
 function p1plus() {
-	data.ask_for.amount += this.a;
-	p1_quantity.text = data.ask_for.amount;
+	data.against.amount += this.a;
+	p1_quantity.text = data.against.amount;
 }
 
 function p1moins() {
-	if(data.ask_for.amount>this.a){
-		data.ask_for.amount -= this.a;
-	}else {
-		data.ask_for.amount = 0;
-	}
-	p1_quantity.text = data.ask_for.amount;
-}
-
-function p2plus() {
-	data.against.amount += this.a;
-	p2_quantity.text = data.against.amount;
-}
-
-function p2moins() {
 	if(data.against.amount>this.a){
 		data.against.amount -= this.a;
 	}else {
 		data.against.amount = 0;
 	}
-	p2_quantity.text = data.against.amount;
+	p1_quantity.text = data.against.amount;
+}
+
+function p2plus() {
+	data.ask_for.amount += this.a;
+	p2_quantity.text = data.ask_for.amount;
+}
+
+function p2moins() {
+	if(data.ask_for.amount>this.a){
+		data.ask_for.amount -= this.a;
+	}else {
+		data.ask_for.amount = 0;
+	}
+	p2_quantity.text = data.ask_for.amount;
 }
 
 

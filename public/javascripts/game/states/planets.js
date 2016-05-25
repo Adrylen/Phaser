@@ -169,7 +169,7 @@ Planets.prototype.update = function () {
 	//*************************
 	for (var i = 0; i < planet.length; i++) {
 		//console.log(sens[i]);
-		theta[i] += 0.01; //	vitesse radian/frame
+		theta[i] += 0.005; //	vitesse radian/frame
 		planet[i].x = this.moveX(planet[i].width, a*demi_axes[i], sens[i] * (theta[i]+1)*demi_axes[5-i]);
 		planet[i].y = this.moveY(planet[i].height, b*demi_axes[i], sens[i] * (theta[i]+1)*demi_axes[5-i]);
 	}
