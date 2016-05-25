@@ -34,16 +34,18 @@ block script
 			for(i in player.messages) {
 				if(player.messages[i].read == false && player.messages[i].type == "AskCommerce")
 				{
-					//user_id, message_id
+					var data = {user_id: player._id, message_id: player.messages[i]._id};
 					socket.emit('messageRead', data);
-					createNotif('You\'ve received an exchange request', 'Resume', 'confirm', player.messages[i].data);
+					var str = "Ask for : " + player.messages[i].data.ask_for.amount + " " + player.messages[i].data.ask_for.ressources;
+					str += "\n Against : " + player.messages[i].data.against.amount + " " + player.messages[i].data.against.ressources;
+					createNotif('You\'ve received an exchange request', str, 'confirm', player.messages[i].data);
 				}
 			}
 		}
 		var a,b;
 		function realTime(){
 			a = setInterval(askUpdate, 1000);
-			//b = setInterval(notifUpdate, 100);
+			b = setInterval(notifUpdate, 2000);
 		}
 		function displayMenu(id) {
 			player = solar_system.users[id];
