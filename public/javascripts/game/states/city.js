@@ -121,14 +121,15 @@ City.prototype.addBuilding = function (x, y, width, height, angle, name) {
 	building.angle = angle;
 
 	building.inputEnabled = true;
-	building.events.onInputOver.add(function () {
-		if(!(upgrade.popUp() || formation.popUp()))
-			building.alpha = 1;
-			info.visible = true;
-			if(name == 'factory') info.getAt(1).text = "Increase your production";
-			if(name == 'war') info.getAt(1).text = "Enroll your army !";
-	}, this);
 	building.events.onInputOut.add(function () { building.alpha = 0.8; info.visible = false; }, this);
+	if(name != 'townHome')
+		building.events.onInputOver.add(function () {
+			if(!(upgrade.popUp() || formation.popUp()))
+				building.alpha = 1;
+				info.visible = true;
+				if(name == 'factory') info.getAt(1).text = "Increase your production";
+				if(name == 'war') info.getAt(1).text = "Enroll your army !";
+		}, this);
 
 	game.physics.arcade.enable(building);
 
