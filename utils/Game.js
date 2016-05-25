@@ -87,7 +87,7 @@ Game.prototype.event = function(socket){
        socket.on('messageRead', function(data){
          // user_id, message_id
          User.findById(data.user_id, function(err, user){
-           users.read(data.message_id);
+           user.read(data.message_id);
          });
        })
 
