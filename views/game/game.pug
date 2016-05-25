@@ -34,7 +34,7 @@ block script
 			for(i in player.messages) {
 				if(player.messages[i].read == false && player.messages[i].type == "AskCommerce")
 				{
-          //user_id, message_id
+					//user_id, message_id
 					socket.emit('messageRead', data);
 					createNotif('You\'ve received an exchange request', 'Resume', 'confirm', player.messages[i].data);
 				}
