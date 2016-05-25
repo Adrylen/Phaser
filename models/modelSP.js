@@ -304,12 +304,13 @@ userSchema.methods.capitulate = function(){
   this.save();
 }
 
-userSchema.methods.editRessource = function(type, user_id, level){
+userSchema.methods.editRessource = function(type, amount){
   console.log('editRessource');
-	User.findById(user_id, function(err, user){
-		userSchema.methods.editRessource('kaga', - (Math.exp(level) * 1000));
-		console.log(user);
-	})
+  console.log(type);
+  console.log(amount);
+  console.log(this.ressources[type]);
+	this.ressources[type] += amount;
+  this.save();
 }
 
 userSchema.methods.editKaga = function(amount){
