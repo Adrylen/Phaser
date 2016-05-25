@@ -25,11 +25,11 @@ Formation.prototype = {
 	preload: function() {
 		game.load.image('quit', '../images/buttons/quit.png');
 		game.load.image('backgroundCadre', '../images/backgrounds/backgroundCadre.png');
-		game.load.image('vaisseauImg', '../images/attaque/fusee.png');
-		game.load.image('blinderImg','../images/attaque/Tank.png');
-		game.load.image('fantassinImg','../images/attaque/Fantassin.png');
+		game.load.image('vaisseauImg', '../images/Attaque/fusee.png');
+		game.load.image('blinderImg','../images/Attaque/Tank.png');
+		game.load.image('fantassinImg','../images/Attaque/Fantassin.png');
 
-		game.load.spritesheet('plus','../images/attaque/+.png');
+		game.load.spritesheet('plus','../images/Attaque/+.png');
 	},
 
 	create: function() {
@@ -73,7 +73,7 @@ Formation.prototype = {
 		this.displayManager.add(cross);
 		this.displayManager.add(fantassinImg);
 		this.displayManager.add(fantassinText);
-		this.displayManager.add(blinderTexte);
+		this.displayManager.add(blinderText);
 		this.displayManager.add(blinderImg);
 		this.displayManager.add(vaisseauImg);
 		this.displayManager.add(vaisseauText);
@@ -103,18 +103,18 @@ Formation.prototype = {
      */
      socket.emit('buy', data);
 
-  }
+ },
 	add: function (){
 		if (player!=null) {
 			player.forces.soldier+=1
 		}
-	}
+	},
 
 	add1: function (){
 		if (player!=null) {
 			player.forces.tank+=1
 		}
-	}
+	},
 	add2: function (){
 		if (player!=null) {
 			player.forces.ship+=1

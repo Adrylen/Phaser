@@ -74,8 +74,6 @@ Upgrade.prototype = {
 	newGroup: function(nb, text, resource, building) {
 		var group = game.add.group();
 		group.create(130, 130 + nb*40, 'cadre');
-		cadre.height = 35;
-		cadre.width = 35;
 
 		group.add(game.add.text(200, 132 + nb*40, text, {font: "17px Purisa", fill: "#ffffff"}));
 
