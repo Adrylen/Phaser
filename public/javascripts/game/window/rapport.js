@@ -51,14 +51,14 @@ function createNotif(title, text, type, sendData = null) {
 					click: function(notice) {
 						notice.update(accept);
 						data.res = 1;
-						//socket.emit("", data);
+						socket.emit("ResCommerce", data);
 					}
 				}, {
 					text: 'Decline',
 					click: function(notice) {
 						notice.update(decline);
 						data.res = 0;
-						//socket.emit("", data);
+						socket.emit("ResCommerce", data);
 					}
 				}]
 			},

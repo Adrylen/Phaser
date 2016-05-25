@@ -198,11 +198,11 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
 
   this.ressources = {
     kaga: 10000,
-    iron: 10000,
+    iron: 20000,
     watt: 10000,
-    food: 10000,
+    food: 20000,
     water: 10000,
-    tool: 10000,
+    tool: 20000,
     lumber: 10000
   };
   this.forces = {
