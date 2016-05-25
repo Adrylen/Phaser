@@ -104,7 +104,7 @@ Game.prototype.event = function(socket){
              if(data.res){
                  // l'aquiesceur
                  User.findById(data.to_user_id, function(err, user){
-                     user.editRessource(ask_for.type, -ask_for.amount); // on retire
+                     user.editRessource(data.ask_for.type, -data.ask_for.amount); // on retire
                      user.editRessource(against.type, against.amount);  // on ajoute
                  });
                  // le demandeur
