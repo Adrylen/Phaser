@@ -23,7 +23,7 @@
 * Qui travaille sur quoi:
 
   * Kenneth
-	* Réflechir ce qu'il doit faire :p
+  
 
   * Gaëtane
 

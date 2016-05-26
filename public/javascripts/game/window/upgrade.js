@@ -15,9 +15,9 @@ Upgrade.prototype = {
 
 		game.load.image('cadre', '../images/assets/cadre.png');
 
-		game.load.image('coin', '../images/assets/more.png');
+		game.load.image('kaga', '../images/assets/more.png');
 		game.load.image('iron', '../images/assets/iron.png');
-		game.load.image('energy', '../images/assets/power.png');
+		game.load.image('watt', '../images/assets/power.png');
 		game.load.image('food', '../images/assets/food.png');
 		game.load.image('water', '../images/assets/water.png');
 		game.load.image('tool', '../images/assets/tool.png');
@@ -74,9 +74,12 @@ Upgrade.prototype = {
 	newGroup: function(nb, text, resource, building) {
 		var group = game.add.group();
 		group.create(130, 130 + nb*40, 'cadre');
-		group.add(game.add.text(170, 132 + nb*40, text, {font: "15px Purisa", fill: "#ffffff"}));
+
+		group.add(game.add.text(200, 132 + nb*40, text, {font: "17px Purisa", fill: "#ffffff"}));
 
 		var newUpgrade = game.add.sprite(132, 132 + nb*40, resource);
+		newUpgrade.width = 30;
+		newUpgrade.height = 30;
 		newUpgrade.inputEnabled=true;
 		newUpgrade.events.onInputDown.add(function() {
 			var dbBuilding;
