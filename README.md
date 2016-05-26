@@ -23,7 +23,7 @@
 * Qui travaille sur quoi:
 
   * Kenneth
-	* Réflechir ce qu'il doit faire :p
+  
 
   * Gaëtane
 
@@ -34,9 +34,6 @@
     * gestionnaire de message
 
   * Arthur
-  	* message coté serveur
-  	* tester commerce coté serveur
-    * attaquer coté serveur
     * Acheter vaisseau
 
 
