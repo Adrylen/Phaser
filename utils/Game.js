@@ -222,6 +222,16 @@ Game.prototype.normalDist = function(x, sig){
 
 Game.prototype.battle = function (user1, user2) {
 
+  if(user1.forces.soldier == 0 || user1.forces.tank == 0 || user1.forces.ship == 0){
+    user2.invade( user1.planets );
+    user1.capitulate();
+    return;
+  }
+  if(user2.forces.soldier == 0 || user2.forces.tank == 0 || user2.forces.ship == 0){
+    user1.invade( user2.planets );
+    user2.capitulate();
+    return;
+  }
   nForceUser1 = user1.forces.soldier + user1.forces.tank + user1.forces.ship;
   nForceUser2 = user2.forces.soldier + user2.forces.tank + user2.forces.ship;
   nForcesTotal = nForceUser1 + nForceUser2;
