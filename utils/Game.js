@@ -141,7 +141,10 @@ Game.prototype.event = function(socket){
 
       //data = { user_id, soldier: soldier, tank: tank, ship: ship }
       socket.on('buy', function(data){
-        User.findById(user_id, function(err, user){
+        console.log('buy');
+        console.log(JSON.stringify(data, null, 4));
+        User.findById(data.user_id, function(err, user){
+          console.log(JSON.stringify(user, null, 4));
           user.buy(data);
         })
       })
