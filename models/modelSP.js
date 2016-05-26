@@ -197,13 +197,13 @@ userSchema.methods.initialize = function(planet_id, solar_system_id){
   console.log('---------------------------------------------------');
 
   this.ressources = {
-    kaga: 10000,
-    iron: 20000,
-    watt: 10000,
-    food: 20000,
-    water: 10000,
-    tool: 20000,
-    lumber: 10000
+    kaga: 1000,
+    iron: 1000,
+    watt: 1000,
+    food: 1000,
+    water: 1000,
+    tool: 1000,
+    lumber: 1000
   };
   this.forces = {
     soldier: 1,
@@ -252,27 +252,28 @@ userSchema.methods.read = function(message_id){
 }
 
 userSchema.methods.buy = function(data){
-
+  console.log("user schema");
   if(
-    this.ressources.food >= data.soldier * 100 &&
-    this.ressources.water >= data.soldier * 100 &&
-    this.ressources.iron >= data.tank * 100 &&
-    this.ressources.watt >= data.tank * 100 &&
-    this.ressources.tool >= data.ship * 100 &&
-    this.ressources.lumber >= data.ship * 100
+    this.ressources.food >= data.nb_soldier * 100 &&
+    this.ressources.water >= data.nb_soldier * 100 &&
+    this.ressources.iron >= data.nb_tank * 100 &&
+    this.ressources.watt >= data.nb_tank * 100 &&
+    this.ressources.tool >= data.nb_ship * 100 &&
+    this.ressources.lumber >= data.nb_ship * 100
   ){
-    this.forces.soldier += data.soldier;
-    this.forces.tank += data.tank;
-    this.forces.ship += data.ship;
+    console.log('pouet');
+    this.forces.soldier += data.nb_soldier;
+    this.forces.tank += data.nb_tank;
+    this.forces.ship += data.nb_ship;
 
-    this.ressources.food -= data.soldier * 100;
-    this.ressources.water -= data.soldier * 100;
+    this.ressources.food -= data.nb_soldier * 100;
+    this.ressources.water -= data.nb_soldier * 100;
 
-    this.ressources.iron -= data.tank * 100;
-    this.ressources.watt -= data.tank * 100;
+    this.ressources.iron -= data.nb_tank * 100;
+    this.ressources.watt -= data.nb_tank * 100;
 
-    this.ressources.tool -= data.ship * 100;
-    this.ressources.lumber -= data.ship * 100;
+    this.ressources.tool -= data.nb_ship * 100;
+    this.ressources.lumber -= data.nb_ship * 100;
   }
   this.save();
 }
