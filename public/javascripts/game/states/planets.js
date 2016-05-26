@@ -157,9 +157,11 @@ Planets.prototype.listener = function () {
 
 		if(is_mine){
 			document.getElementById('attaque').style.visibility = "hidden";
+			document.getElementById('commerce').style.visibility = "hidden";
 			document.getElementById('city').style.visibility = "visible";
 		}else{
 			document.getElementById('attaque').style.visibility = "visible";
+			document.getElementById('commerce').style.visibility = "visible";
 			document.getElementById('city').style.visibility = "hidden";
 		}
 	}

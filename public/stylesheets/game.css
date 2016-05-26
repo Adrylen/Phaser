@@ -40,3 +40,15 @@ button
 	color: rgb(134, 134, 134);
 	margin-left: 2em;
 }
+
+#attaque, #city, #commerce, #planet
+{
+	display: block;
+	margin: 5% 0% 5% 10%;
+	width: 80%;
+}
+
+#attaque
+{
+	margin-top: -16%;
+}
