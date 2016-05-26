@@ -82,7 +82,7 @@ Attaque.prototype.render = function () {
 };
 
 Attaque.prototype.groupes = function (name, positionX, positionY){
-	console.log(player.forces);
+	//console.log(player.forces);
 	var group = game.add.group();
 	texte = game.add.text(positionX , positionY, name, {font: "38px Purisa ",fill: "#FFFFFF"});
 	if (name == 'soldier'){
