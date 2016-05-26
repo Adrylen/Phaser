@@ -51,6 +51,11 @@ block script
 			player = solar_system.users[id];
 			var s1 = '';
 			var s2 = '';
+			var s3 = '';
+			s3 += '<li class="pure-menu-item list">Soldiers : ' + player.forces.soldier + '</li>';
+			s3 += '<li class="pure-menu-item list">Tanks : ' + player.forces.tank + '</li>';
+			s3 += '<li class="pure-menu-item list">Ships : ' + player.forces.ship + '</li>';
+
 			for(i in player.planets) { s1 += '<li class="pure-menu-item list">'+player.planets[i].name+'</li>'; }
 			for(i in player.ressources) {
 				var str;
@@ -69,6 +74,7 @@ block script
 			}
 			$('#planets').html(s1);
 			$('#ressources').html(s2);
+			$('#army').html(s3);
 			$('#player').html('<li class="pure-menu-item list">' + username + '</li>');
 		}
 		realTime();
@@ -119,6 +125,8 @@ block content
 			ul.pure-menu-list#planets
 			span.pure-menu-heading my ressources
 			ul.pure-menu-list#ressources
+			span.pure-menu-heading my army
+			ul.pure-menu-list#army
 			br
 			br
 			button.pure-button(id="planet", onclick="start('planets');") Planets
