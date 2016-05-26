@@ -29,7 +29,7 @@ Formation.prototype = {
 		game.load.image('blinderImg','../images/Attaque/Tank.png');
 		game.load.image('fantassinImg','../images/Attaque/Fantassin.png');
 
-		game.load.spritesheet('plus','../images/Attaque/+.png');
+		game.load.spritesheet('plus','../images/Attaque/+.png',300,300);
 	},
 
 	create: function() {
@@ -55,17 +55,37 @@ Formation.prototype = {
 		background.endFill();
 
 		//formations :
-		fantassinText = game.add.text(100,100,'100 water & 100 food',{font: " 25px Purisa", fill: "#FFFFFF"});
-		fantassinImg = game.add.image(100,150,'fantassinImg');
-		plus1 = game.add.button(100,150, 'plus',this.add , this, 1, 0, 2);
+		fantassinText = game.add.text(140,125,'100 water & 100 food',{font: " 15px Purisa", fill: "#FFFFFF"});
+		fantassinImg = game.add.image(160,250,'fantassinImg');
+		fantassinImg.width = 200;
+		fantassinImg.height = 200;
 
-		blinderText = game.add.text(200,100,'100 water & 100 food',{font: " 25px Purisa", fill: "#FFFFFF"});
-		blinderImg = game.add.image(200,150,'blinderImg');
-		plus2 = game.add.button(200, 150, 'plus',this.add1 , this, 1, 0, 2);
+		plus1 = game.add.button(100,200, 'plus',this.add , this, 1, 0, 2);
+		plus1.width = 300;
+		plus1.height = 300;
+		plus1.alpha = 0.7;
 
-		vaisseauText = game.add.text(200,100,'100 water & 100 food',{font: " 25px Purisa", fill: "#FFFFFF"});
-		vaisseauImg = game.add.image(200,150,'vaisseauImg');
-		plus3 = game.add.button(200, 150, 'plus',this.add2 , this, 1, 0, 2);
+		blinderText = game.add.text(460,125,'100 iron & 100 watt',{font: " 15px Purisa", fill: "#FFFFFF"});
+		blinderImg = game.add.image(370,150,'blinderImg');
+		blinderImg.width = 400;
+		blinderImg.height = 400;
+
+
+		plus2 = game.add.button(400, 200, 'plus',this.add1 , this, 1, 0, 2);
+		plus2.width = 300;
+		plus2.height = 300;
+		plus2.alpha = 0.7;
+
+		vaisseauText = game.add.text(750,125,'100 tool & 100 lumber',{font: " 15px Purisa", fill: "#FFFFFF"});
+		vaisseauImg = game.add.image(760,150,'vaisseauImg');
+		vaisseauImg.width = 200;
+		vaisseauImg.height = 400;
+
+		plus3 = game.add.button(700, 200, 'plus',this.add2 , this, 1, 0, 2);
+		plus3.width = 300;
+		plus3.height = 300;
+		plus3.alpha = 0.7;
+
 
 		this.displayManager = game.add.group();
 		this.displayManager.add(background);
@@ -93,32 +113,45 @@ Formation.prototype = {
 	popUp: function() { return popUp; },
 
 	buy: function(data){
-    /*
-        var data = {
-        user_id: varuser_id,
-        nb_soldier: vara,
-        nb_tank: varb,
-        nb_ship: varc
-      }
-     */
-     socket.emit('buy', data);
-
- },
-	add: function (){
-		if (player!=null) {
-			player.forces.soldier+=1
+		/*
+        	var data = {
+        		user_id: varuser_id,
+        		nb_soldier: vara,
+        		nb_tank: varb,
+        		nb_ship: varc
 		}
+		*/
+		socket.emit('buy', data);
+	},
+
+	add: function (){
+		var data = {
+			user_id: player._id,
+			nb_soldier: 1,
+			nb_tank: 0,
+			nb_ship: 0
+		};
+		this.buy(data);
 	},
 
 	add1: function (){
-		if (player!=null) {
-			player.forces.tank+=1
-		}
+		var data = {
+			user_id: player._id,
+			nb_soldier: 0,
+			nb_tank: 1,
+			nb_ship: 0
+		};
+		this.buy(data);
 	},
+
 	add2: function (){
-		if (player!=null) {
-			player.forces.ship+=1
-		}
+		var data = {
+			user_id: player._id,
+			nb_soldier: 0,
+			nb_tank: 0,
+			nb_ship: 1
+		};
+		this.buy(data);
 	}
 };
 

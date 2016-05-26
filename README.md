@@ -34,9 +34,6 @@
     * gestionnaire de message
 
   * Arthur
-  	* message coté serveur
-  	* tester commerce coté serveur
-    * attaquer coté serveur
     * Acheter vaisseau
 
 
