@@ -223,17 +223,23 @@ Game.prototype.normalDist = function(x, sig){
 Game.prototype.battle = function (user1, user2) {
 
   nForceUser1 = user1.forces.soldier + user1.forces.tank + user1.forces.ship;
-  nForceser2 = user2.forces.soldier + user2.forces.tank + user2.forces.ship;
+  nForceUser2 = user2.forces.soldier + user2.forces.tank + user2.forces.ship;
+  nForcesTotal = nForceUser1 + nForceUser2;
 
   coeffUser1 = Game.prototype.normalDist(Game.prototype.heterogene(user1.forces.soldier/nForceUser1, user1.forces.tank/nForceUser1, user1.forces.ship/nForceUser1));
-  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.soldier/nForceser2, user2.forces.tank/nForceser2, user2.forces.ship/nForceser2));
+  coeffUser2 = Game.prototype.normalDist(Game.prototype.heterogene(user2.forces.soldier/nForceUser2, user2.forces.tank/nForceUser2, user2.forces.ship/nForceUser2));
 
   coeffTotal = coeffUser1 + coeffUser2;
-  probaUser1 = coeffUser1 / coeffTotal;
-  probaUser2 = coeffUser2 / coeffTotal;
-
+  console.log('nForcesTotal', nForcesTotal);
+  probaUser1 = ((coeffUser1 / coeffTotal) + 5*(nForceUser1 / nForcesTotal)) / 6;
+  probaUser2 = ((coeffUser2 / coeffTotal) + 5*(nForceUser2 / nForcesTotal)) / 6;
 
   rd = Math.random();
+
+  console.log('probaUser1', probaUser1);
+  console.log('probaUser2', probaUser2);
+  console.log('rd', rd);
+
   if (probaUser1 > rd){
     user1.invade( user2.planets );
     user2.capitulate();
