@@ -5,7 +5,7 @@ var Commerce = function(game) {};
 Attention "ask_for" et "against" sont des objets de la forme:
 var o = { ressource : nom_de_la_ressource, amount: quantite };
 */
-var data = {
+var dataTrade = {
 	from_user_id : null,
 	ask_for : {
 		ressources : null,
@@ -84,8 +84,8 @@ Commerce.prototype.create = function() {
 	player_1 = player.username;
 	player_2 = player_the_second.username;
 
-	data.from_user_id = player._id;
-	data.to_user_id = player_the_second._id;
+	dataTrade.from_user_id = player._id;
+	dataTrade.to_user_id = player_the_second._id;
 
 
 	title = game.add.text(0, 0, "Trade", {font: "bold 30px Century Schoolbook L", fill: "#FFFFFF", boundsAlignH: "center", boundsAlignV: "middle"});
@@ -166,50 +166,50 @@ function p1ressource_select() {
 	p1ressource_selected_sprite.y =  50*(this.j+1);
 	p1ressource_selected_sprite.visible = true;
 	game.world.bringToTop(p1ressource_selected_sprite);
-	data.against.ressources = ressource[this.j];
+	dataTrade.against.ressources = ressource[this.j];
 }
 
 function p2ressource_select() {
 	p2ressource_selected_sprite.y =  50*(this.j+1);
 	p2ressource_selected_sprite.visible = true;
 	game.world.bringToTop(p2ressource_selected_sprite);
-	data.ask_for.ressources = ressource[this.j];
+	dataTrade.ask_for.ressources = ressource[this.j];
 	}
 
 function p1plus() {
-	data.against.amount += this.a;
-	p1_quantity.text = data.against.amount;
+	dataTrade.against.amount += this.a;
+	p1_quantity.text = dataTrade.against.amount;
 }
 
 function p1moins() {
-	if(data.against.amount>this.a){
-		data.against.amount -= this.a;
+	if(dataTrade.against.amount>this.a){
+		dataTrade.against.amount -= this.a;
 	}else {
-		data.against.amount = 0;
+		dataTrade.against.amount = 0;
 	}
-	p1_quantity.text = data.against.amount;
+	p1_quantity.text = dataTrade.against.amount;
 }
 
 function p2plus() {
-	data.ask_for.amount += this.a;
-	p2_quantity.text = data.ask_for.amount;
+	dataTrade.ask_for.amount += this.a;
+	p2_quantity.text = dataTrade.ask_for.amount;
 }
 
 function p2moins() {
-	if(data.ask_for.amount>this.a){
-		data.ask_for.amount -= this.a;
+	if(dataTrade.ask_for.amount>this.a){
+		dataTrade.ask_for.amount -= this.a;
 	}else {
-		data.ask_for.amount = 0;
+		dataTrade.ask_for.amount = 0;
 	}
-	p2_quantity.text = data.ask_for.amount;
+	p2_quantity.text = dataTrade.ask_for.amount;
 }
 
 
 function confirm() {
 
-	if(data.from_user_id !== null && data.ask_for.ressources !== null && data.to_user_id !== null && data.against.ressources !== null){
+	if(dataTrade.from_user_id !== null && dataTrade.ask_for.ressources !== null && dataTrade.to_user_id !== null && dataTrade.against.ressources !== null){
 		/* ARTHUR */
-		socket.emit('AskCommerce', data);
+		socket.emit('AskCommerce', dataTrade);
 
 		createNotif('Command request send', 'You have to wait until the player accept or decline your request.', 'alert');
 
@@ -218,10 +218,10 @@ function confirm() {
 
 
 
-	data.ask_for.ressources = null;
-	data.against.amount = 0;
-	data.against.ressources = null;
-	data.ask_for.amount = 0;
+	dataTrade.ask_for.ressources = null;
+	dataTrade.against.amount = 0;
+	dataTrade.against.ressources = null;
+	dataTrade.ask_for.amount = 0;
 
 	p1_quantity.text = "0";
 	p2_quantity.text = "0";
