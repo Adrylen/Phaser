@@ -23,17 +23,15 @@
   * Acheter vaisseau
   * Switch entre planètes/cités avec envoi de données
   * Ajouter des patches définitifs (musiques et bruitages)
+  * gestionnaire de message
 
 * Qui travaille sur quoi:
 
   * Kenneth
 
-
   * Gaëtane
 
-
   * Adrien
-    * gestionnaire de message
 
   * Arthur
 
