@@ -42,6 +42,10 @@
 
 
   ## Installation
+  
+  Le développement du projet s'est effectué sous la version v2.6.12 de MongoDB et la version v5.6.0 de Node.js. Je ne garantie pas que le projet fonctionnera sous d'autres versions.
+
+edit: Le guide suivant est destiné à mes camarades de projet.
 
   Je peux vous installer le projet, ou alors vous pouvez essayer par vous meme en suivant ce petit guide.
 
