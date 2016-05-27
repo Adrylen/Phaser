@@ -4,8 +4,7 @@
 
 * A faire:
   * URGENT
-    * Attaquer
-    * Commerce
+
   * bonus
 
 
@@ -19,22 +18,25 @@
   * Update des ressources en temps réel
   * ajouter infos sur le joueur dans la sidebar
   * Planete dynamique
+  * Attaquer
+  * Commerce
+  * Acheter vaisseau
+  * Switch entre planètes/cités avec envoi de données
+  * Ajouter des patches définitifs (musiques et bruitages)
 
 * Qui travaille sur quoi:
 
   * Kenneth
-  
+
 
   * Gaëtane
 
 
   * Adrien
-	  * Switch entre planètes/cités avec envoi de données
-	  * Ajouter des patches définitifs (musiques et bruitages)
     * gestionnaire de message
 
   * Arthur
-    * Acheter vaisseau
+
 
 
 ## Structure de donnée utilisée:

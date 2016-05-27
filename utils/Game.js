@@ -260,10 +260,5 @@ Game.prototype.battle = function (user1, user2) {
   }
 }
 
-/*
-Game.prototype.battle(
-  {forces:{soldier: 2, tank: 2, ship: 2}},
-  {forces:{soldier: 6, tank: 0, ship: 0}});
-*/
 
 module.exports = Game;
